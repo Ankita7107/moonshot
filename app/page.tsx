@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Globe, Settings, Cloud, ChevronRight } from "lucide-react";
 
@@ -34,6 +36,27 @@ const whyUs = [
 ];
 
 export default function HomePage() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {/* Hero */}
@@ -58,12 +81,15 @@ export default function HomePage() {
       </section>
 
       {/* Stats */}
-      <section className="py-16 border-b border-slate-100">
-        <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map((s, i) => (
-            <div key={s.label} className="animate-fade-up" style={{ animationDelay: `${i * 0.15}s` }}>
-              <p className="text-4xl font-extrabold text-sky-500">{s.value}</p>
-              <p className="text-sm text-slate-500 uppercase tracking-wide mt-1">{s.label}</p>
+      <section ref={sectionRef} className="py-20 border-b border-slate-100 bg-white">
+        <div className={`max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-12 text-center ${isVisible ? "reveal-stagger active" : "reveal-stagger"}`}>
+          {stats.map((s) => (
+            <div key={s.label} className="reveal-item group">
+              <p className="text-5xl font-extrabold text-sky-500 mb-2 group-hover:scale-110 transition-transform duration-300">
+                {s.value}
+              </p>
+              <div className="w-8 h-1 bg-sky-100 mx-auto mb-3 rounded-full group-hover:w-12 group-hover:bg-sky-500 transition-all duration-300" />
+              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">{s.label}</p>
             </div>
           ))}
         </div>
