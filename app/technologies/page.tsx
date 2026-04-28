@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { Globe, Settings, Database, Cloud } from "lucide-react";
+import { motion } from "framer-motion";
 
 const techCategories = [
   {
@@ -26,6 +28,19 @@ const techCategories = [
 
 const partners = ["AWS", "GOOGLE CLOUD", "MICROSOFT AZURE", "DIGITALOCEAN"];
 
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
 export default function TechnologiesPage() {
   return (
     <>
@@ -38,9 +53,15 @@ export default function TechnologiesPage() {
 
       {/* Tech Cards */}
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-6">
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-6"
+        >
           {techCategories.map((cat) => (
-            <div key={cat.title} className="card hover:shadow-md transition-shadow">
+            <motion.div variants={fadeIn} key={cat.title} className="card card-hover">
               <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
                 {cat.icon}
               </div>
@@ -50,19 +71,27 @@ export default function TechnologiesPage() {
                   <span key={tag} className="badge text-xs">{tag}</span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Cloud Partners */}
       <section className="py-16 border-y border-slate-100">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <p className="section-label mb-6">CERTIFIED CLOUD PARTNERS</p>
-          <div className="flex flex-col sm:flex-row items-center justify-around gap-8">
-            {partners.map((p) => (
-              <span key={p} className="text-2xl font-extrabold text-slate-300 tracking-wider">{p}</span>
-            ))}
+        <div className="max-w-7xl mx-auto px-4 text-center overflow-hidden">
+          <p className="section-label mb-10">CERTIFIED CLOUD PARTNERS</p>
+          <div className="relative flex overflow-x-hidden">
+            <motion.div 
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+              className="flex items-center justify-start gap-16 min-w-max pr-16"
+            >
+              {[...partners, ...partners].map((p, i) => (
+                <span key={`${p}-${i}`} className="text-2xl font-extrabold text-slate-300 tracking-wider">
+                  {p}
+                </span>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>

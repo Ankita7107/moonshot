@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import { Globe, Settings, Cloud, Zap, Shield, Smartphone, CheckCircle, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -43,6 +45,19 @@ const steps = [
   { num: "04", title: "Launch", desc: "Deploying your solution and providing ongoing support." },
 ];
 
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
 export default function ServicesPage() {
   return (
     <>
@@ -56,9 +71,15 @@ export default function ServicesPage() {
       </section>
 
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8"
+        >
           {services.map((s) => (
-            <div key={s.title} className="card hover:shadow-md transition-shadow">
+            <motion.div variants={fadeIn} key={s.title} className="card card-hover">
               <div className="flex gap-5">
                 <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center shrink-0">
                   {s.icon}
@@ -78,9 +99,9 @@ export default function ServicesPage() {
                   </Link>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* How We Work */}
@@ -88,15 +109,21 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-3">How We Work</h2>
           <p className="text-sky-200 mb-12">Our structured approach ensures project success every time.</p>
-          <div className="grid md:grid-cols-4 gap-6">
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-4 gap-6"
+          >
             {steps.map((step) => (
-              <div key={step.num} className="bg-white/10 rounded-2xl p-6 text-left border border-white/10">
+              <motion.div variants={fadeIn} key={step.num} className="bg-white/10 rounded-2xl p-6 text-left border border-white/10 transition-transform hover:-translate-y-1 hover:shadow-lg">
                 <p className="text-5xl font-extrabold text-white/20 mb-3">{step.num}</p>
                 <h4 className="font-bold text-white mb-2">{step.title}</h4>
                 <p className="text-sky-200 text-sm">{step.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

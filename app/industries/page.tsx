@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const industries = [
   {
@@ -33,29 +35,57 @@ const industries = [
 
 const tags = ["Digital Transformation", "Regulatory Compliance", "Process Automation"];
 
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
 export default function IndustriesPage() {
   return (
     <>
       {/* Hero */}
       <section className="py-20 text-center">
-        <div className="max-w-2xl mx-auto px-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-2xl mx-auto px-4"
+        >
           <p className="section-label">GLOBAL REACH</p>
           <h1 className="text-5xl font-extrabold text-slate-900 mb-4">Industries We Serve</h1>
           <p className="text-slate-500">
             Deep domain expertise across various verticals, delivering mission-critical solutions that drive growth.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Industry Cards Grid */}
       <section className="pb-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8"
+        >
           {industries.map((ind) => (
-            <div key={ind.title} className="card p-0 overflow-hidden hover:shadow-lg transition-shadow">
+            <motion.div variants={fadeIn} key={ind.title} className="card p-0 overflow-hidden card-hover group">
               {/* Image / Banner */}
-              <div className={`bg-gradient-to-br ${ind.bg} h-52 flex flex-col items-center justify-center`}>
-                <div className="text-5xl mb-2">{ind.emoji}</div>
-                <p className="text-white/80 text-xs font-bold tracking-widest">{ind.label}</p>
+              <div className={`bg-gradient-to-br ${ind.bg} h-52 flex flex-col items-center justify-center relative overflow-hidden`}>
+                <motion.div 
+                  className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-125"
+                >
+                  {ind.emoji}
+                </motion.div>
+                <p className="text-white/80 text-xs font-bold tracking-widest relative z-10">{ind.label}</p>
               </div>
               {/* Content */}
               <div className="p-6">
@@ -67,9 +97,9 @@ export default function IndustriesPage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* CTA */}
