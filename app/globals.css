@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { color: #0F172A; background: #ffffff; }
+
+@layer components {
+  .badge { @apply inline-block px-3 py-1 text-sm rounded-full border border-slate-200 text-slate-600 bg-white; }
+  .section-label { @apply text-xs font-semibold tracking-widest text-sky-500 uppercase mb-2; }
+  .btn-primary { @apply bg-sky-500 hover:bg-sky-600 text-white px-5 py-2.5 rounded-lg font-semibold transition-colors; }
+  .btn-outline { @apply border border-sky-500 text-sky-500 hover:bg-sky-50 px-5 py-2.5 rounded-lg font-semibold transition-colors; }
+  .card { @apply bg-white rounded-2xl border border-slate-100 shadow-sm p-6; }
+}
