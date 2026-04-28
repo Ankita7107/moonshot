@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import {
   Globe,
@@ -205,6 +206,9 @@ const staggerContainer = {
 };
 
 export default function ServicesPage() {
+  const [showAll, setShowAll] = useState(false);
+  const displayedServices = showAll ? services : services.slice(0, 6);
+
   return (
     <>
       <section className="bg-gradient-to-br from-sky-50 to-white py-20 text-center">
@@ -220,16 +224,13 @@ export default function ServicesPage() {
       </section>
 
       <section className="py-20">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8"
-        >
-          {services.map((s) => (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+          {displayedServices.map((s, index) => (
             <motion.div
-              variants={fadeIn}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
               key={s.title}
               className="card card-hover"
             >
@@ -262,7 +263,22 @@ export default function ServicesPage() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
+        {services.length > 6 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-16 flex justify-center"
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+            >
+              {showAll ? "Show Less" : "View All Services"}
+            </button>
+          </motion.div>
+        )}
       </section>
 
       {/* Finance Products */}
