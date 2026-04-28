@@ -1,6 +1,6 @@
+"use client";
 import { Target, Lightbulb } from "lucide-react";
-
-const stats = [
+import { motion } from "framer-motion";const stats = [
   { value: "10+", label: "Years" },
   { value: "20+", label: "Projects" },
   { value: "20", label: "Global Offices" },
@@ -12,6 +12,21 @@ const values = [
   { icon: "🎯", title: "Extreme Ownership", desc: "We treat your product as our own." },
   { icon: "💬", title: "Radical Candor", desc: "Honest communication at every stage." },
 ];
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
 
 export default function AboutPage() {
   return (
@@ -26,14 +41,20 @@ export default function AboutPage() {
             <p className="text-slate-500 text-sm">
               Founded in 2024 and headquartered in Craigieburn, Victoria, we specialize in architecting sophisticated software solutions that drive innovation, enhance efficiency, and create sustainable competitive advantages for enterprises across diverse industries.
             </p>
-            <div className="flex gap-10 mt-8">
+            <motion.div 
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="flex gap-10 mt-8"
+            >
               {stats.map((s) => (
-                <div key={s.label}>
-                  <p className="text-3xl font-extrabold text-sky-500">{s.value}</p>
+                <motion.div variants={fadeIn} key={s.label}>
+                  <p className="text-3xl font-extrabold text-sky-500 mb-1">{s.value}</p>
                   <p className="text-xs text-slate-400 uppercase tracking-widest">{s.label}</p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
           <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-sky-900 h-72 flex items-center justify-center">
             <div className="text-center text-white/70">
