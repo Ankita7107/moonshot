@@ -39,7 +39,9 @@ const staggerContainer = {
 export default function WhyUsPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-sky-50 to-white py-20">
+      <section className="relative bg-gradient-to-br from-sky-50 to-white py-20 overflow-hidden animated-grid-bg">
+        <div className="absolute top-10 left-[10%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-10 right-[12%] h-24 w-24 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -55,7 +57,7 @@ export default function WhyUsPage() {
             <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="w-48 h-48 bg-sky-100 rounded-full flex items-center justify-center shadow-lg"
+              className="w-48 h-48 bg-sky-100 rounded-full flex items-center justify-center shadow-lg animate-pulse-glow"
             >
               <span className="text-7xl">⚡</span>
             </motion.div>
@@ -73,7 +75,7 @@ export default function WhyUsPage() {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-6"
         >
           {features.map((f) => (
-            <motion.div variants={fadeIn} key={f.title} className="card card-hover text-center">
+            <motion.div variants={fadeIn} key={f.title} className="card card-hover text-center hover-shine">
               <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl">
                 {f.icon}
               </div>
@@ -107,7 +109,7 @@ export default function WhyUsPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             whileHover={{ y: -10 }}
-            className="bg-gradient-to-br from-slate-800 to-blue-900 rounded-2xl p-10 text-center text-white shadow-xl transition-transform"
+            className="bg-gradient-to-br from-slate-800 to-blue-900 rounded-2xl p-10 text-center text-white shadow-xl transition-transform hover-shine"
           >
             <div className="text-6xl mb-4">🔐</div>
             <div className="bg-white/20 rounded-lg px-6 py-3 inline-block text-lg tracking-widest font-mono">
@@ -126,7 +128,7 @@ export default function WhyUsPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             whileHover={{ y: -10 }}
-            className="bg-gradient-to-br from-sky-200 to-slate-300 rounded-2xl h-64 flex items-center justify-center shadow-xl transition-transform"
+            className="bg-gradient-to-br from-sky-200 to-slate-300 rounded-2xl h-64 flex items-center justify-center shadow-xl transition-transform hover-shine"
           >
             <span className="text-7xl">🤝</span>
           </motion.div>

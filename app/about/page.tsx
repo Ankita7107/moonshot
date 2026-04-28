@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Target, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";const stats = [
   { value: "10+", label: "Years" },
@@ -11,6 +12,36 @@ const values = [
   { icon: "📚", title: "Always Learning", desc: "Staying at the edge of the tech curve." },
   { icon: "🎯", title: "Extreme Ownership", desc: "We treat your product as our own." },
   { icon: "💬", title: "Radical Candor", desc: "Honest communication at every stage." },
+];
+
+const trustMetrics = [
+  { value: "95%", label: "Client Retention" },
+  { value: "40%", label: "Faster Delivery Cycles" },
+  { value: "99.9%", label: "Uptime Architectures" },
+  { value: "24/7", label: "Support Availability" },
+];
+
+const processSteps = [
+  {
+    num: "01",
+    title: "Discover",
+    desc: "We align on business goals, users, and technical constraints before writing a single line of code.",
+  },
+  {
+    num: "02",
+    title: "Architect",
+    desc: "We design scalable system architecture and a realistic roadmap with milestone-driven execution.",
+  },
+  {
+    num: "03",
+    title: "Build",
+    desc: "Agile sprints, continuous QA, and transparent updates keep quality high and timelines predictable.",
+  },
+  {
+    num: "04",
+    title: "Scale",
+    desc: "After launch, we optimize performance, strengthen reliability, and support long-term growth.",
+  },
 ];
 
 const fadeIn = {
@@ -31,7 +62,9 @@ const staggerContainer = {
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-sky-50 to-white py-20">
+      <section className="relative bg-gradient-to-br from-sky-50 to-white py-20 overflow-hidden animated-grid-bg">
+        <div className="absolute top-10 left-[10%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-10 right-[10%] h-24 w-24 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-5xl font-extrabold text-slate-900 leading-tight mb-6">Engineering Excellence</h1>
@@ -56,7 +89,7 @@ export default function AboutPage() {
               ))}
             </motion.div>
           </div>
-          <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-sky-900 h-72 flex items-center justify-center">
+          <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-sky-900 h-72 flex items-center justify-center hover-shine">
             <div className="text-center text-white/70">
               <div className="text-7xl mb-3">🥽</div>
               <p className="text-sm font-medium">Future-Forward Tech</p>
@@ -67,7 +100,7 @@ export default function AboutPage() {
 
       <section className="py-20">
         <div className="max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8">
-          <div className="card">
+          <div className="card card-hover">
             <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
               <Target className="w-6 h-6 text-sky-500" />
             </div>
@@ -76,7 +109,7 @@ export default function AboutPage() {
               To empower organizations with robust digital infrastructure and innovative software that fosters sustainable growth and solves complex global challenges.
             </p>
           </div>
-          <div className="card">
+          <div className="card card-hover">
             <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
               <Lightbulb className="w-6 h-6 text-sky-500" />
             </div>
@@ -94,12 +127,115 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12">What Drives Us</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {values.map((v) => (
-              <div key={v.title}>
+              <motion.div
+                key={v.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45 }}
+                className="card card-hover p-4 md:p-5"
+              >
                 <div className="text-4xl mb-3">{v.icon}</div>
                 <h4 className="font-semibold text-slate-800 mb-1">{v.title}</h4>
                 <p className="text-slate-500 text-xs">{v.desc}</p>
-              </div>
+              </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="section-label">TRUST IN NUMBERS</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Measured Impact, Not Just Promises</h2>
+          </div>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-5"
+          >
+            {trustMetrics.map((item) => (
+              <motion.div key={item.label} variants={fadeIn} className="card card-hover text-center">
+                <p className="text-3xl md:text-4xl font-extrabold text-sky-500 mb-2">{item.value}</p>
+                <p className="text-sm text-slate-500">{item.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="section-label">HOW WE WORK</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Our Delivery Framework</h2>
+          </div>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-4 gap-6"
+          >
+            {processSteps.map((step) => (
+              <motion.div key={step.num} variants={fadeIn} className="card card-hover">
+                <p className="text-4xl font-extrabold text-sky-200 mb-3">{step.num}</p>
+                <h3 className="text-lg font-bold text-slate-800 mb-2">{step.title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20">
+        <div className="max-w-5xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-3xl border border-sky-100 bg-gradient-to-br from-white to-sky-50 p-8 md:p-12"
+          >
+            <p className="section-label">CASE STUDY SNAPSHOT</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-5">
+              FinTech Platform Modernization
+            </h3>
+            <div className="grid md:grid-cols-3 gap-5">
+              <div className="card bg-white/80">
+                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">Problem</p>
+                <p className="text-sm text-slate-600">Legacy monolith slowed releases and caused frequent downtime during peak transactions.</p>
+              </div>
+              <div className="card bg-white/80">
+                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">Solution</p>
+                <p className="text-sm text-slate-600">Re-architected into scalable services, implemented CI/CD, and added automated test coverage.</p>
+              </div>
+              <div className="card bg-white/80">
+                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">Result</p>
+                <p className="text-sm text-slate-600">Release velocity increased by 40% and platform reliability improved to 99.9% uptime.</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="pb-24">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="bg-sky-500 rounded-3xl p-10 md:p-12 text-center text-white">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Let&apos;s Build Your Next Growth Engine</h2>
+            <p className="text-sky-100 max-w-2xl mx-auto mb-8">
+              Talk to our team about your roadmap, architecture, and execution goals. We&apos;ll help shape the right strategy.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link href="/contact" className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-sky-600 font-semibold hover:bg-sky-50 transition-colors">
+                Book a Free Strategy Call
+              </Link>
+              <Link href="/services" className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-white/70 text-white font-semibold hover:bg-white/10 transition-colors">
+                Explore Services
+              </Link>
+            </div>
           </div>
         </div>
       </section>

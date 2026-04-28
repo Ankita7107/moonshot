@@ -137,7 +137,9 @@ export default function TechnologiesPage() {
   return (
     <>
       {/* HEADER */}
-      <section className="bg-[#0F172A] py-20 text-center">
+      <section className="relative bg-[#0F172A] py-20 text-center overflow-hidden">
+        <div className="absolute top-8 left-[14%] h-24 w-24 rounded-full bg-sky-400/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-8 right-[14%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-delay" />
         <div className="max-w-3xl mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             Our Modern Tech Stack
@@ -162,7 +164,7 @@ export default function TechnologiesPage() {
             <motion.div
               variants={fadeIn}
               key={cat.title}
-              className="card card-hover"
+              className="card card-hover hover-shine"
             >
               <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
                 {cat.icon}
@@ -181,7 +183,7 @@ export default function TechnologiesPage() {
       </section>
 
       {/* CLOUD PARTNERS */}
-      <section className="py-16 border-y border-slate-100">
+      <section className="py-16 border-y border-slate-100 bg-white/70 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 text-center overflow-hidden">
           <p className="section-label mb-10">CERTIFIED CLOUD PARTNERS</p>
           <div className="relative flex overflow-x-hidden">
@@ -206,7 +208,7 @@ export default function TechnologiesPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-sky-50 border border-sky-100 rounded-3xl p-12 text-center">
+          <div className="bg-sky-50 border border-sky-100 rounded-3xl p-12 text-center hover-shine">
             <h2 className="text-2xl font-bold text-slate-900 mb-4">
               Need a specific technology?
             </h2>
@@ -215,7 +217,7 @@ export default function TechnologiesPage() {
               picking the right tool for the job. Whether it&apos;s legacy
               modernization or greenfield development, we have the expertise.
             </p>
-            <Link href="/contact" className="btn-outline">
+            <Link href="/contact" className="btn-outline hover-shine">
               Discuss Architecture
             </Link>
           </div>

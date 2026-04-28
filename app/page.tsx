@@ -55,7 +55,9 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-slate-50 via-white to-sky-50 py-32 text-center overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-white to-sky-50 py-32 text-center overflow-hidden animated-grid-bg">
+        <div className="absolute top-24 left-[12%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-24 right-[12%] h-28 w-28 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         {/* Floating Background Elements */}
         <motion.div 
           animate={{ y: [0, -20, 0] }} 
@@ -103,7 +105,7 @@ export default function HomePage() {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Link href="/contact" className="btn-primary flex items-center justify-center gap-2 text-lg">
+            <Link href="/contact" className="btn-primary hover-shine flex items-center justify-center gap-2 text-lg">
               Start Your Project <ArrowRight size={18} />
             </Link>
             <Link href="/services" className="btn-outline flex items-center justify-center gap-2 text-lg bg-white/50 backdrop-blur-sm">

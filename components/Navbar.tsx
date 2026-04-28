@@ -18,11 +18,11 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <header className="sticky top-0 z-50 border-b border-slate-100/80 bg-white/85 backdrop-blur-xl shadow-sm shadow-slate-200/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[72px]">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg">
-          <div className="w-8 h-8 bg-sky-500 rounded-lg flex items-center justify-center">
+        <Link href="/" className="group flex items-center gap-3 font-bold text-lg">
+          <div className="w-9 h-9 bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl flex items-center justify-center shadow-lg shadow-sky-500/25 transition-transform duration-300 group-hover:-translate-y-0.5 hover-shine">
             <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
@@ -34,38 +34,42 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-2 rounded-full border border-slate-100 bg-white/80 px-2 py-2 shadow-sm">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-sky-500 ${
-                pathname === link.href ? "text-sky-500 font-semibold" : "text-slate-600"
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                pathname === link.href
+                  ? "bg-sky-50 text-sky-600 shadow-sm"
+                  : "text-slate-600 hover:text-sky-500 hover:bg-slate-50"
               }`}
             >
               {link.label}
             </Link>
           ))}
-          <Link href="/contact" className="btn-primary text-sm">
+          <Link href="/contact" className="btn-primary ml-2 text-sm hover-shine">
             Get Started
           </Link>
         </nav>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-slate-700" onClick={() => setOpen(!open)}>
+        <button className="md:hidden text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition-colors" onClick={() => setOpen(!open)}>
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden bg-white border-t border-slate-100 px-4 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-white/95 backdrop-blur border-t border-slate-100 px-4 py-4 flex flex-col gap-2">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className={`text-sm font-medium ${pathname === link.href ? "text-sky-500" : "text-slate-700"}`}
+              className={`text-sm font-medium px-3 py-2 rounded-lg ${
+                pathname === link.href ? "text-sky-600 bg-sky-50" : "text-slate-700"
+              }`}
             >
               {link.label}
             </Link>

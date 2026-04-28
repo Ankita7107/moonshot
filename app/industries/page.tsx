@@ -140,7 +140,9 @@ export default function IndustriesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="py-20 text-center">
+      <section className="relative py-20 text-center overflow-hidden animated-grid-bg">
+        <div className="absolute top-12 left-[15%] h-20 w-20 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-6 right-[15%] h-20 w-20 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -168,13 +170,18 @@ export default function IndustriesPage() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
               key={ind.title}
-              className="card p-0 overflow-hidden card-hover group"
+              className="card p-0 overflow-hidden card-hover group border-slate-100 hover:border-sky-200"
             >
               {/* Image / Banner */}
               <div
                 className={`bg-gradient-to-br ${ind.bg} h-52 flex flex-col items-center justify-center relative overflow-hidden`}
               >
-                <motion.div className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-125">
+                <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.25),transparent_60%)] transition-opacity duration-500 group-hover:opacity-50" />
+                <motion.div
+                  whileHover={{ y: -4, rotate: 2 }}
+                  transition={{ duration: 0.25 }}
+                  className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110"
+                >
                   {ind.emoji}
                 </motion.div>
                 <p className="text-white/80 text-xs font-bold tracking-widest relative z-10">
@@ -207,7 +214,7 @@ export default function IndustriesPage() {
           >
             <button
               onClick={() => setShowAll(!showAll)}
-              className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+              className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover-shine"
             >
               {showAll ? "Show Less" : "View All Industries"}
             </button>
@@ -226,7 +233,7 @@ export default function IndustriesPage() {
             engineering team can adapt our methodologies to suit your unique
             challenges.
           </p>
-          <Link href="/contact" className="btn-primary">
+          <Link href="/contact" className="btn-primary hover-shine">
             Request Industry Case Study
           </Link>
         </div>

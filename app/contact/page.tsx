@@ -5,7 +5,9 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-sky-50 py-16 text-center">
+      <section className="relative bg-sky-50 py-16 text-center overflow-hidden animated-grid-bg">
+        <div className="absolute -top-10 left-1/4 h-24 w-24 rounded-full bg-sky-300/25 blur-2xl animate-float-slow" />
+        <div className="absolute -bottom-10 right-1/4 h-24 w-24 rounded-full bg-sky-200/25 blur-2xl animate-float-delay" />
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -140,7 +142,7 @@ export default function ContactPage() {
               <motion.button 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="mt-8 w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-sky-500/25"
+                className="mt-8 w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-sky-500/25 hover-shine"
               >
                 Send Message
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

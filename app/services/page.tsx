@@ -211,7 +211,9 @@ export default function ServicesPage() {
 
   return (
     <>
-      <section className="bg-gradient-to-br from-sky-50 to-white py-20 text-center">
+      <section className="relative bg-gradient-to-br from-sky-50 to-white py-20 text-center overflow-hidden animated-grid-bg">
+        <div className="absolute top-8 left-[14%] h-20 w-20 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-6 right-[14%] h-20 w-20 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-3xl mx-auto px-4">
           <h1 className="text-5xl font-extrabold text-slate-900 mb-4">
             Our Services & Solutions
@@ -273,7 +275,7 @@ export default function ServicesPage() {
           >
             <button
               onClick={() => setShowAll(!showAll)}
-              className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+              className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover-shine"
             >
               {showAll ? "Show Less" : "View All Services"}
             </button>
