@@ -136,7 +136,7 @@ export default function TechnologiesPage() {
               {[...partners, ...partners].map((p, i) => (
                 <span
                   key={`${p}-${i}`}
-                  className="text-2xl font-extrabold text-slate-300 tracking-wider"
+                  className="text-2xl font-extrabold text-black tracking-wider"
                 >
                   {p}
                 </span>
