@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -59,6 +60,58 @@ const industries = [
     emoji: "✈️",
     label: "TRAVEL",
   },
+
+  // 🆕 NEW INDUSTRIES ADDED
+
+  {
+    title: "Banking & Insurance",
+    desc: "Core banking systems, insurance automation, fraud detection, and financial risk platforms.",
+    bg: "from-indigo-900 to-slate-900",
+    emoji: "🏦",
+    label: "BFSI",
+  },
+  {
+    title: "Cybersecurity",
+    desc: "Threat detection systems, identity management, SOC dashboards, and data protection solutions.",
+    bg: "from-red-900 to-slate-900",
+    emoji: "🛡️",
+    label: "SECURITY",
+  },
+  {
+    title: "Telecom",
+    desc: "Network management, 5G systems, billing platforms, and customer support automation.",
+    bg: "from-purple-800 to-slate-900",
+    emoji: "📡",
+    label: "TELECOM",
+  },
+  {
+    title: "Automotive",
+    desc: "EV systems, connected car platforms, fleet management, and smart mobility solutions.",
+    bg: "from-gray-800 to-slate-900",
+    emoji: "🚗",
+    label: "AUTOMOTIVE",
+  },
+  {
+    title: "Media & Entertainment",
+    desc: "OTT platforms, streaming systems, content delivery networks, and recommendation engines.",
+    bg: "from-pink-800 to-slate-900",
+    emoji: "🎬",
+    label: "MEDIA",
+  },
+  {
+    title: "Food & Restaurant Tech",
+    desc: "Food delivery apps, POS systems, restaurant management, and inventory tracking solutions.",
+    bg: "from-orange-800 to-slate-900",
+    emoji: "🍔",
+    label: "FOOD TECH",
+  },
+  {
+    title: "Government & Public Sector",
+    desc: "e-Governance systems, digital identity platforms, tax portals, and citizen services.",
+    bg: "from-green-900 to-slate-900",
+    emoji: "🏛️",
+    label: "GOVERNMENT",
+  },
 ];
 
 const tags = [
@@ -81,6 +134,9 @@ const staggerContainer = {
 };
 
 export default function IndustriesPage() {
+  const [showAll, setShowAll] = useState(false);
+  const displayedIndustries = showAll ? industries : industries.slice(0, 6);
+
   return (
     <>
       {/* Hero */}
@@ -104,16 +160,13 @@ export default function IndustriesPage() {
 
       {/* Industry Cards Grid */}
       <section className="pb-20">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8"
-        >
-          {industries.map((ind) => (
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+          {displayedIndustries.map((ind, index) => (
             <motion.div
-              variants={fadeIn}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
               key={ind.title}
               className="card p-0 overflow-hidden card-hover group"
             >
@@ -144,7 +197,22 @@ export default function IndustriesPage() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
+        {industries.length > 6 && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-16 flex justify-center"
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+            >
+              {showAll ? "Show Less" : "View All Industries"}
+            </button>
+          </motion.div>
+        )}
       </section>
 
       {/* CTA */}
