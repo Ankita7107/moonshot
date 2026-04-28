@@ -32,8 +32,7 @@ const techCategories = [
     tags: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"],
   },
 
-  // ⭐ NEW ADDED SECTIONS
-
+  // ⭐ Existing Added Sections
   {
     icon: <Settings className="w-6 h-6 text-sky-500" />,
     title: "Tools & Platforms",
@@ -58,6 +57,64 @@ const techCategories = [
     icon: <Globe className="w-6 h-6 text-sky-500" />,
     title: "Mobile Development",
     tags: ["React Native", "Flutter", "Kotlin", "Swift"],
+  },
+
+  // 🚀 NEW HIGH-LEVEL INDUSTRY STACK ADDED
+
+  {
+    icon: <Globe className="w-6 h-6 text-sky-500" />,
+    title: "AI / LLM Systems",
+    tags: [
+      "GPT-4",
+      "OpenAI API",
+      "LangChain",
+      "RAG",
+      "Vector DB",
+      "Hugging Face",
+    ],
+  },
+  {
+    icon: <Cloud className="w-6 h-6 text-sky-500" />,
+    title: "Microservices",
+    tags: ["Docker", "Kubernetes", "Kafka", "RabbitMQ", "gRPC", "API Gateway"],
+  },
+  {
+    icon: <Settings className="w-6 h-6 text-sky-500" />,
+    title: "Authentication",
+    tags: ["JWT", "OAuth2", "SSO", "Keycloak", "Auth0", "OpenID Connect"],
+  },
+  {
+    icon: <Database className="w-6 h-6 text-sky-500" />,
+    title: "Data Engineering",
+    tags: ["Spark", "Kafka", "Airflow", "ETL", "Snowflake", "BigQuery"],
+  },
+  {
+    icon: <Cloud className="w-6 h-6 text-sky-500" />,
+    title: "Advanced Cloud",
+    tags: [
+      "Serverless",
+      "AWS Lambda",
+      "Cloud Functions",
+      "Edge Computing",
+      "CI/CD",
+    ],
+  },
+  {
+    icon: <Settings className="w-6 h-6 text-sky-500" />,
+    title: "Testing & QA",
+    tags: ["Jest", "Cypress", "Selenium", "Playwright", "Load Testing"],
+  },
+  {
+    icon: <Globe className="w-6 h-6 text-sky-500" />,
+    title: "Blockchain",
+    tags: [
+      "Ethereum",
+      "Solidity",
+      "Smart Contracts",
+      "Web3.js",
+      "NFT",
+      "Metamask",
+    ],
   },
 ];
 
