@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ArrowRight, Globe, Settings, Cloud, ChevronRight } from "lucide-react";
 
 const stats = [
-  { value: "300", label: "Successful Projects" },
+  { value: "300+", label: "Successful Projects" },
   { value: "20+", label: "Global Offices" },
-  { value: "200", label: "Tech Experts" },
+  { value: "200+", label: "Tech Experts" },
   { value: "4.9/5", label: "Customer Rating" },
 ];
 
@@ -37,16 +37,16 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-sky-50 via-white to-sky-50 py-24 text-center">
+      <section className="bg-gradient-to-br from-sky-50 via-white to-sky-50 py-24 text-center overflow-hidden">
         <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
+          <h1 className="animate-fade-down delay-200 text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6">
             Innovation Through{" "}
             <span className="text-sky-500">Moonshot</span> Engineering
           </h1>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-10">
+          <p className="animate-fade-down delay-400 text-lg text-slate-500 max-w-2xl mx-auto mb-10">
             Transforming complex business challenges into sleek, scalable software solutions. We partner with visionaries to build the future of tech.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="animate-fade-up delay-600 flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" className="btn-primary flex items-center justify-center gap-2">
               Start Your Project <ArrowRight size={16} />
             </Link>
@@ -60,8 +60,8 @@ export default function HomePage() {
       {/* Stats */}
       <section className="py-16 border-b border-slate-100">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map((s) => (
-            <div key={s.label}>
+          {stats.map((s, i) => (
+            <div key={s.label} className="animate-fade-up" style={{ animationDelay: `${i * 0.15}s` }}>
               <p className="text-4xl font-extrabold text-sky-500">{s.value}</p>
               <p className="text-sm text-slate-500 uppercase tracking-wide mt-1">{s.label}</p>
             </div>
@@ -78,8 +78,8 @@ export default function HomePage() {
             <div className="w-12 h-1 bg-sky-500 mx-auto mt-4 rounded-full" />
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {services.map((s) => (
-              <div key={s.title} className="card hover:shadow-md transition-shadow">
+            {services.map((s, i) => (
+              <div key={s.title} className="card card-hover animate-fade-up" style={{ animationDelay: `${i * 0.15}s` }}>
                 <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
                   {s.icon}
                 </div>
@@ -103,8 +103,8 @@ export default function HomePage() {
               We build tech that scales with your ambition
             </h2>
             <ul className="space-y-6">
-              {whyUs.map((item) => (
-                <li key={item.title} className="flex gap-4">
+              {whyUs.map((item, i) => (
+                <li key={item.title} className="flex gap-4 animate-fade-up" style={{ animationDelay: `${i * 0.15}s` }}>
                   <div className="w-10 h-10 bg-sky-50 rounded-lg flex items-center justify-center text-lg shrink-0">
                     {item.icon}
                   </div>
@@ -116,7 +116,7 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900 h-80 flex items-center justify-center">
+          <div className="animate-scale-up delay-300 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900 h-80 flex items-center justify-center">
             <div className="text-center text-white/60 p-8">
               <div className="text-6xl mb-4">🔐</div>
               <p className="text-sm">Enterprise-grade Security</p>
@@ -128,7 +128,7 @@ export default function HomePage() {
       {/* CTA Banner */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-sky-500 rounded-3xl p-12 text-center text-white">
+          <div className="animate-scale-up delay-200 bg-sky-500 rounded-3xl p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to launch your next mission?</h2>
             <p className="text-sky-100 mb-8">
               Join dozens of industry leaders who trust us with their critical infrastructure and software innovation.
