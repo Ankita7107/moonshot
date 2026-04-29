@@ -2,13 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Globe, Settings, Cloud, ChevronRight, Code, Database, Smartphone } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const stats = [
-  { value: "300+", label: "Successful Projects" },
-  { value: "20+", label: "Global Offices" },
-  { value: "200+", label: "Tech Experts" },
-  { value: "4.9/5", label: "Customer Rating" },
+  { target: 300, suffix: "+", label: "Successful Projects" },
+  { target: 20, suffix: "+", label: "Global Offices" },
+  { target: 200, suffix: "+", label: "Tech Experts" },
+  { target: 4.9, suffix: "/5", decimalPlaces: 1, label: "Customer Rating" },
 ];
 
 const services = [
@@ -50,6 +50,51 @@ const staggerContainer = {
     }
   }
 };
+
+function AnimatedStatValue({
+  target,
+  suffix = "",
+  decimalPlaces = 0,
+}: {
+  target: number;
+  suffix?: string;
+  decimalPlaces?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const duration = 1400;
+    const start = performance.now();
+    let animationFrame = 0;
+
+    const updateValue = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      setValue(target * easedProgress);
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(updateValue);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(updateValue);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isInView, target]);
+
+  const formattedValue =
+    decimalPlaces > 0 ? value.toFixed(decimalPlaces) : Math.round(value).toString();
+
+  return (
+    <span ref={ref}>
+      {formattedValue}
+      {suffix}
+    </span>
+  );
+}
 
 export default function HomePage() {
   return (
@@ -130,7 +175,11 @@ export default function HomePage() {
           {stats.map((s) => (
             <motion.div variants={fadeIn} key={s.label} className="group cursor-default">
               <p className="text-5xl font-extrabold text-sky-500 mb-2 group-hover:scale-110 transition-transform duration-300">
-                {s.value}
+                <AnimatedStatValue
+                  target={s.target}
+                  suffix={s.suffix}
+                  decimalPlaces={s.decimalPlaces}
+                />
               </p>
               <div className="w-8 h-1 bg-sky-100 mx-auto mb-3 rounded-full group-hover:w-12 group-hover:bg-sky-500 transition-all duration-300" />
               <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">{s.label}</p>
