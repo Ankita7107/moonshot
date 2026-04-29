@@ -131,6 +131,7 @@ export default function ContactPage() {
                     <option>AI & Machine Learning</option>
                     <option>Cybersecurity</option>
                     <option>Mobile App Development</option>
+                    <option>Others</option>
                   </select>
                 </div>
               </div>
