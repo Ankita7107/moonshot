@@ -214,7 +214,12 @@ export default function ServicesPage() {
       <section className="relative bg-gradient-to-br from-sky-50 to-white py-20 text-center overflow-hidden animated-grid-bg">
         <div className="absolute top-8 left-[14%] h-20 w-20 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
         <div className="absolute bottom-6 right-[14%] h-20 w-20 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
-        <div className="max-w-3xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl mx-auto px-4"
+        >
           <h1 className="text-5xl font-extrabold text-slate-900 mb-4">
             Our Services & Solutions
           </h1>
@@ -222,7 +227,7 @@ export default function ServicesPage() {
             We provide end-to-end software development services using the latest
             technologies to help your business achieve digital excellence.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       <section className="py-20">
@@ -234,6 +239,7 @@ export default function ServicesPage() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
               key={s.title}
+              whileHover={{ y: -8, scale: 1.01 }}
               className="card card-hover"
             >
               <div className="flex gap-5">
@@ -273,12 +279,14 @@ export default function ServicesPage() {
             animate={{ opacity: 1 }}
             className="mt-16 flex justify-center"
           >
-            <button
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => setShowAll(!showAll)}
               className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover-shine"
             >
               {showAll ? "Show Less" : "View All Services"}
-            </button>
+            </motion.button>
           </motion.div>
         )}
       </section>
@@ -305,6 +313,7 @@ export default function ServicesPage() {
               <motion.div
                 variants={fadeIn}
                 key={f.title}
+                whileHover={{ y: -8, scale: 1.02 }}
                 className="card card-hover"
               >
                 <div
@@ -351,6 +360,7 @@ export default function ServicesPage() {
               <motion.div
                 variants={fadeIn}
                 key={step.num}
+                whileHover={{ y: -8, scale: 1.02 }}
                 className="bg-white/10 rounded-2xl p-6 text-left border border-white/10 transition-transform hover:-translate-y-1 hover:shadow-lg"
               >
                 <p className="text-5xl font-extrabold text-white/20 mb-3">

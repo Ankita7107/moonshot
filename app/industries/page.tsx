@@ -162,13 +162,17 @@ export default function IndustriesPage() {
 
       {/* Industry Cards Grid */}
       <section className="pb-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8"
+        >
           {displayedIndustries.map((ind, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
+              variants={fadeIn}
+              whileHover={{ y: -9, scale: 1.01 }}
               key={ind.title}
               className="card p-0 overflow-hidden card-hover group border-slate-100 hover:border-sky-200"
             >
@@ -177,6 +181,7 @@ export default function IndustriesPage() {
                 className={`bg-gradient-to-br ${ind.bg} h-52 flex flex-col items-center justify-center relative overflow-hidden`}
               >
                 <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.25),transparent_60%)] transition-opacity duration-500 group-hover:opacity-50" />
+                <div className="absolute -top-16 -right-14 h-32 w-32 rounded-full bg-white/10 blur-2xl transition-transform duration-500 group-hover:scale-110" />
                 <motion.div
                   whileHover={{ y: -4, rotate: 2 }}
                   transition={{ duration: 0.25 }}
@@ -204,7 +209,7 @@ export default function IndustriesPage() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {industries.length > 6 && (
           <motion.div 
@@ -212,19 +217,26 @@ export default function IndustriesPage() {
             animate={{ opacity: 1 }}
             className="mt-16 flex justify-center"
           >
-            <button
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => setShowAll(!showAll)}
               className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover-shine"
             >
               {showAll ? "Show Less" : "View All Industries"}
-            </button>
+            </motion.button>
           </motion.div>
         )}
       </section>
 
       {/* CTA */}
       <section className="py-20 bg-sky-50">
-        <div className="max-w-2xl mx-auto px-4 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-2xl mx-auto px-4 text-center"
+        >
           <h2 className="text-2xl font-bold text-slate-900 mb-4">
             Looking for a tailored industry solution?
           </h2>
@@ -233,10 +245,12 @@ export default function IndustriesPage() {
             engineering team can adapt our methodologies to suit your unique
             challenges.
           </p>
-          <Link href="/contact" className="btn-primary hover-shine">
+          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
+            <Link href="/contact" className="btn-primary hover-shine">
             Request Industry Case Study
-          </Link>
-        </div>
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
     </>
   );

@@ -140,7 +140,12 @@ export default function TechnologiesPage() {
       <section className="relative bg-[#0F172A] py-20 text-center overflow-hidden">
         <div className="absolute top-8 left-[14%] h-24 w-24 rounded-full bg-sky-400/20 blur-2xl animate-float-slow" />
         <div className="absolute bottom-8 right-[14%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-delay" />
-        <div className="max-w-3xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl mx-auto px-4"
+        >
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             Our Modern Tech Stack
           </h1>
@@ -148,7 +153,7 @@ export default function TechnologiesPage() {
             We leverage the most powerful tools in the industry to build
             future-proof solutions.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* TECH CARDS */}
@@ -163,6 +168,7 @@ export default function TechnologiesPage() {
           {techCategories.map((cat) => (
             <motion.div
               variants={fadeIn}
+              whileHover={{ y: -8, scale: 1.015 }}
               key={cat.title}
               className="card card-hover hover-shine"
             >
@@ -172,9 +178,9 @@ export default function TechnologiesPage() {
               <h3 className="font-bold text-slate-800 mb-4">{cat.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {cat.tags.map((tag) => (
-                  <span key={tag} className="badge text-xs">
+                  <motion.span whileHover={{ y: -2 }} key={tag} className="badge text-xs">
                     {tag}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </motion.div>
@@ -208,7 +214,13 @@ export default function TechnologiesPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-sky-50 border border-sky-100 rounded-3xl p-12 text-center hover-shine">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+            className="bg-sky-50 border border-sky-100 rounded-3xl p-12 text-center hover-shine"
+          >
             <h2 className="text-2xl font-bold text-slate-900 mb-4">
               Need a specific technology?
             </h2>
@@ -217,10 +229,12 @@ export default function TechnologiesPage() {
               picking the right tool for the job. Whether it&apos;s legacy
               modernization or greenfield development, we have the expertise.
             </p>
-            <Link href="/contact" className="btn-outline hover-shine">
-              Discuss Architecture
-            </Link>
-          </div>
+            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
+              <Link href="/contact" className="btn-outline hover-shine">
+                Discuss Architecture
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </>

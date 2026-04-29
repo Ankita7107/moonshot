@@ -42,6 +42,7 @@ export default function WhyUsPage() {
       <section className="relative bg-gradient-to-br from-sky-50 to-white py-20 overflow-hidden animated-grid-bg">
         <div className="absolute top-10 left-[10%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
         <div className="absolute bottom-10 right-[12%] h-24 w-24 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
+        <div className="absolute top-1/2 right-[24%] h-16 w-16 rounded-full border border-sky-200/60 animate-float-slow" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -75,7 +76,12 @@ export default function WhyUsPage() {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-6"
         >
           {features.map((f) => (
-            <motion.div variants={fadeIn} key={f.title} className="card card-hover text-center hover-shine">
+            <motion.div
+              variants={fadeIn}
+              whileHover={{ y: -8, scale: 1.015 }}
+              key={f.title}
+              className="card card-hover text-center hover-shine"
+            >
               <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl">
                 {f.icon}
               </div>
@@ -109,7 +115,7 @@ export default function WhyUsPage() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             whileHover={{ y: -10 }}
-            className="bg-gradient-to-br from-slate-800 to-blue-900 rounded-2xl p-10 text-center text-white shadow-xl transition-transform hover-shine"
+              className="bg-gradient-to-br from-slate-800 to-blue-900 rounded-2xl p-10 text-center text-white shadow-xl transition-transform hover-shine"
           >
             <div className="text-6xl mb-4">🔐</div>
             <div className="bg-white/20 rounded-lg px-6 py-3 inline-block text-lg tracking-widest font-mono">
@@ -123,7 +129,7 @@ export default function WhyUsPage() {
       {/* Transparent Partnership */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
-          <motion.div 
+            <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
