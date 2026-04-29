@@ -345,15 +345,29 @@ export default function ServicesPage() {
       {/* How We Work */}
       <section className="py-20 bg-[#1E3A5F]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-3">How We Work</h2>
-          <p className="text-sky-200 mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl font-bold text-white mb-3"
+          >
+            How We Work
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="text-sky-200 mb-12"
+          >
             Our structured approach ensures project success every time.
-          </p>
+          </motion.p>
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-60px" }}
             className="grid md:grid-cols-4 gap-6"
           >
             {steps.map((step) => (
