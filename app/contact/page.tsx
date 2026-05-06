@@ -9,7 +9,7 @@ export default function ContactPage() {
       <section className="relative bg-sky-50 py-16 text-center overflow-hidden animated-grid-bg">
         <div className="absolute -top-10 left-1/4 h-24 w-24 rounded-full bg-sky-300/25 blur-2xl animate-float-slow" />
         <div className="absolute -bottom-10 right-1/4 h-24 w-24 rounded-full bg-sky-200/25 blur-2xl animate-float-delay" />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -31,9 +31,9 @@ export default function ContactPage() {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-center">
-            
+
             {/* Left: Contact Info (Vibrant theme) */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -43,7 +43,7 @@ export default function ContactPage() {
               {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full pointer-events-none"></div>
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-tr-full pointer-events-none"></div>
-              
+
               <div className="relative z-10">
                 <h2 className="text-2xl font-bold mb-8">Contact Information</h2>
                 <ul className="space-y-8">
@@ -73,7 +73,7 @@ export default function ContactPage() {
                     <div>
                       <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Visit Us</p>
                       <p className="text-base text-white leading-relaxed">92 Hotly Drive, Craigieburn, Victoria 3064, Australia</p>
-                      <p className="text-base text-white leading-relaxed mt-2">7 Business Square, Modal Colony, Shivaji Nagar, Pune</p>
+
                     </div>
                   </li>
                 </ul>
@@ -93,7 +93,7 @@ export default function ContactPage() {
             </motion.div>
 
             {/* Right: Form */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -133,7 +133,7 @@ export default function ContactPage() {
                 <textarea rows={5} placeholder="Tell us about your project..."
                   className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm resize-none" />
               </div>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="mt-8 w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-sky-500/25 hover-shine"
@@ -148,7 +148,7 @@ export default function ContactPage() {
 
       {/* Map */}
       <section className="pb-20 bg-slate-50">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

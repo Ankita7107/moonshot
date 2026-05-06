@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail, Linkedin, Twitter, Github } from "lucide-react";
 
+import Image from "next/image";
+
 export default function Footer() {
   const footerLinks = {
     company: [
@@ -27,28 +29,31 @@ export default function Footer() {
     <footer className="relative bg-slate-950 border-t border-slate-800 pt-16 pb-8">
       {/* Background gradient */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-transparent" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 mb-12">
           {/* Brand Section - spans 4 columns */}
           <div className="md:col-span-4 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9 bg-gradient-to-br from-sky-500 to-sky-600 rounded-lg flex items-center justify-center shadow-lg shadow-sky-500/25">
-                <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                </svg>
+            <div className="flex items-center">
+              <div className="relative w-16 h-16 bg-white rounded-xl shadow-sm overflow-hidden">
+                <Image
+                  src="/moonshot_images/logo.png"
+                  alt="Moonshot Minds Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
-              <span className="text-xl font-bold">
+              <span className="text-xl font-bold ml-2">
                 <span className="text-white">Moonshot</span>
                 <span className="text-sky-500">Minds</span>
               </span>
             </div>
-            
+
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
               Empowering global enterprises with scalable software solutions and innovative technologies.
             </p>
-            
+
             {/* Social Links */}
             <div className="flex gap-2 pt-2">
               {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -72,8 +77,8 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.company.map((item) => (
                 <li key={item.label}>
-                  <Link 
-                    href={item.href} 
+                  <Link
+                    href={item.href}
                     className="text-slate-400 hover:text-sky-400 text-sm transition-colors duration-200"
                   >
                     {item.label}
@@ -91,8 +96,8 @@ export default function Footer() {
             <ul className="space-y-2">
               {footerLinks.expertise.map((item) => (
                 <li key={item.label}>
-                  <Link 
-                    href={item.href} 
+                  <Link
+                    href={item.href}
                     className="text-slate-400 hover:text-sky-400 text-sm transition-colors duration-200"
                   >
                     {item.label}
@@ -112,10 +117,10 @@ export default function Footer() {
                 <MapPin size={18} className="text-sky-500 shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <p>-92 Hotly Drive, Craigieburn, Victoria 3064</p>
-                  <p>-7 Business Square, Modal Colony, Shivaji Nagar, Pune</p>
+
                 </div>
               </div>
-              
+
               <div className="flex gap-3 text-slate-400 text-sm">
                 <Phone size={18} className="text-sky-500 shrink-0 mt-0.5" />
                 <div className="space-y-1">
@@ -123,7 +128,7 @@ export default function Footer() {
                   <p>+91 98765 43210</p>
                 </div>
               </div>
-              
+
               <div className="flex gap-3 text-slate-400 text-sm">
                 <Mail size={18} className="text-sky-500 shrink-0 mt-0.5" />
                 <a href="mailto:moonshotminds@gmail.com" className="hover:text-sky-400 transition-colors">

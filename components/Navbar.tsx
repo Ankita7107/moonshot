@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
+import Image from "next/image";
+
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -19,15 +21,19 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-100/80 bg-white/85 backdrop-blur-xl shadow-sm shadow-slate-200/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[72px]">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 flex items-center justify-between h-[80px]">
         {/* Logo */}
-        <Link href="/" className="group flex items-center gap-3 font-bold text-lg">
-          <div className="w-9 h-9 bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl flex items-center justify-center shadow-lg shadow-sky-500/25 transition-transform duration-300 group-hover:-translate-y-0.5 hover-shine">
-            <svg viewBox="0 0 24 24" fill="white" className="w-5 h-5">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
+        <Link href="/" className="group flex items-center font-bold text-lg">
+          <div className="relative w-20 h-20 transition-transform duration-300 group-hover:scale-105">
+            <Image
+              src="/moonshot_images/logo.png"
+              alt="Moonshot Minds Logo"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
-          <span>
+          <span className="-ml-2">
             <span className="text-slate-800">Moonshot</span>
             <span className="text-sky-500">Minds</span>
           </span>
