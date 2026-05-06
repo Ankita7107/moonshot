@@ -345,7 +345,10 @@ export default function AboutPage() {
               FinTech Platform Modernization
             </h3>
             <div className="grid md:grid-cols-3 gap-5">
-              <div className="card bg-white/80">
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="card bg-white/80 shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
                 <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">
                   Problem
                 </p>
@@ -353,8 +356,11 @@ export default function AboutPage() {
                   Legacy monolith slowed releases and caused frequent downtime
                   during peak transactions.
                 </p>
-              </div>
-              <div className="card bg-white/80">
+              </motion.div>
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="card bg-white/80 shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
                 <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">
                   Solution
                 </p>
@@ -362,8 +368,11 @@ export default function AboutPage() {
                   Re-architected into scalable services, implemented CI/CD, and
                   added automated test coverage.
                 </p>
-              </div>
-              <div className="card bg-white/80">
+              </motion.div>
+              <motion.div 
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="card bg-white/80 shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
                 <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">
                   Result
                 </p>
@@ -371,7 +380,7 @@ export default function AboutPage() {
                   Release velocity increased by 40% and platform reliability
                   improved to 99.9% uptime.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
