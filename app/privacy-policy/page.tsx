@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
         >
           {/* ── Teal gradient header INSIDE card ── */}
           <div
-            className="px-10 py-10 text-center bg-gradient-to-br from-sky-500 to-sky-600"
+            className="px-10 py-6 text-center bg-gradient-to-br from-sky-500 to-sky-600"
           >
             <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 tracking-tight">
               Privacy Policy

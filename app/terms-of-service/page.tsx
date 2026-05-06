@@ -25,7 +25,7 @@ export default function TermsOfServicePage() {
         >
           {/* Gradient header inside card */}
           <div
-            className="px-10 py-10 text-center bg-gradient-to-br from-sky-500 to-sky-600"
+            className="px-10 py-6 text-center bg-gradient-to-br from-sky-500 to-sky-600"
           >
             <p className="text-indigo-200 text-xs font-semibold uppercase tracking-widest mb-2">
               Legal Agreement
