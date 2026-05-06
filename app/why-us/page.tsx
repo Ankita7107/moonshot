@@ -1,6 +1,7 @@
 "use client";
 import { CheckCircle, Clock, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const features = [
   { icon: "🚀", title: "Proven Expertise", desc: "Over 10+ years of experience delivering 200+ successful projects globally." },
@@ -53,15 +54,24 @@ export default function WhyUsPage() {
               We go beyond coding. We become your strategic technology partner, ensuring every decision supports your long-term business goals.
             </p>
           </motion.div>
-          <div className="flex justify-center">
+          <div className="relative">
             <motion.div
-              animate={{ y: [0, -15, 0] }}
-              
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="w-48 h-48 bg-sky-100 rounded-full flex items-center justify-center shadow-lg animate-pulse-glow"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50 aspect-video"
             >
-              <span className="text-7xl">⚡</span>
+              <Image
+                src="/moonshot_images/whypartners.png"
+                alt="Why Partners Choose Us"
+                fill
+                className="object-cover"
+                priority
+              />
             </motion.div>
+            
+            {/* Decorative background element */}
+            <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full bg-sky-200/30 rounded-3xl blur-xl" />
           </div>
         </div>
       </section>
