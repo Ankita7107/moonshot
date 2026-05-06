@@ -9,20 +9,20 @@ export default function Footer() {
       { label: "About Us", href: "/about" },
       { label: "Services", href: "/services" },
       { label: "Why Choose Us", href: "/why-us" },
-      { label: "Contact", href: "/contact" }
+      { label: "Contact", href: "/contact" },
     ],
     expertise: [
       { label: "Web Development", href: "#" },
       { label: "Enterprise Software", href: "#" },
       { label: "Cloud & DevOps", href: "#" },
-      { label: "AI & Data Science", href: "#" }
-    ]
+      { label: "AI & Data Science", href: "#" },
+    ],
   };
 
   const socialLinks = [
     { icon: Linkedin, href: "#", label: "LinkedIn" },
     { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Github, href: "#", label: "GitHub" }
+    { icon: Github, href: "#", label: "GitHub" },
   ];
 
   return (
@@ -51,7 +51,8 @@ export default function Footer() {
             </div>
 
             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              Empowering global enterprises with scalable software solutions and innovative technologies.
+              Empowering global enterprises with scalable software solutions and
+              innovative technologies.
             </p>
 
             {/* Social Links */}
@@ -116,8 +117,7 @@ export default function Footer() {
               <div className="flex gap-3 text-slate-400 text-sm">
                 <MapPin size={18} className="text-sky-500 shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <p>-92 Hothly Drive, Craigieburn, Victoria 3064</p>
-
+                  <p>92 Hothly Drive, Craigieburn, Victoria 3064</p>
                 </div>
               </div>
 
@@ -131,7 +131,10 @@ export default function Footer() {
 
               <div className="flex gap-3 text-slate-400 text-sm">
                 <Mail size={18} className="text-sky-500 shrink-0 mt-0.5" />
-                <a href="mailto:moonshotminds@gmail.com" className="hover:text-sky-400 transition-colors">
+                <a
+                  href="mailto:moonshotminds@gmail.com"
+                  className="hover:text-sky-400 transition-colors"
+                >
                   moonshotminds@gmail.com
                 </a>
               </div>
@@ -145,10 +148,16 @@ export default function Footer() {
             © 2026 Moonshot Minds Tech. All rights reserved.
           </p>
           <div className="flex gap-6 order-1 sm:order-2">
-            <Link href="/privacy-policy" className="text-slate-500 hover:text-sky-400 transition-colors text-sm">
+            <Link
+              href="/privacy-policy"
+              className="text-slate-500 hover:text-sky-400 transition-colors text-sm"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="text-slate-500 hover:text-sky-400 transition-colors text-sm">
+            <Link
+              href="/terms-of-service"
+              className="text-slate-500 hover:text-sky-400 transition-colors text-sm"
+            >
               Terms of Service
             </Link>
           </div>
