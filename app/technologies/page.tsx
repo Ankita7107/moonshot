@@ -137,19 +137,19 @@ export default function TechnologiesPage() {
   return (
     <>
       {/* HEADER */}
-      <section className="relative bg-[#0F172A] py-20 text-center overflow-hidden">
-        <div className="absolute top-8 left-[14%] h-24 w-24 rounded-full bg-sky-400/20 blur-2xl animate-float-slow" />
-        <div className="absolute bottom-8 right-[14%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-delay" />
+      <section className="relative bg-gradient-to-br from-sky-50 to-white py-20 text-center overflow-hidden animated-grid-bg">
+        <div className="absolute top-8 left-[14%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-8 right-[14%] h-24 w-24 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="max-w-3xl mx-auto px-4"
         >
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
             Our Modern Tech Stack
           </h1>
-          <p className="text-slate-400">
+          <p className="text-slate-600">
             We leverage the most powerful tools in the industry to build
             future-proof solutions.
           </p>
