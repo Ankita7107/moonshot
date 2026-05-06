@@ -172,7 +172,7 @@ export default function TermsOfServicePage() {
               </section>
 
               <div className="text-center text-sm text-slate-500 pt-8">
-                <p>© 2026 Moonshot Minds.</p>
+                <p>© 2024 Moonshot Minds.</p>
                 <div className="mt-2 flex justify-center gap-4">
                   <Link href="/privacy-policy" className="text-indigo-600 hover:underline">Privacy</Link>
                   <Link href="/contact" className="text-indigo-600 hover:underline">Contact</Link>

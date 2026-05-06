@@ -117,7 +117,7 @@ export default function Footer() {
               <div className="flex gap-3 text-slate-400 text-sm">
                 <MapPin size={18} className="text-sky-500 shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <p>92 Hothly Drive, Craigieburn, Victoria 3064</p>
+                  <p>92 Hothly Drive, Craigieburn, Victoria-3064, Australia</p>
                 </div>
               </div>
 
@@ -125,7 +125,7 @@ export default function Footer() {
                 <Phone size={18} className="text-sky-500 shrink-0 mt-0.5" />
                 <div className="space-y-1">
                   <p>+61 412 345 678</p>
-                  <p>+91 98765 43210</p>
+                  {/* <p>+91 98765 43210</p> */}
                 </div>
               </div>
 
@@ -145,7 +145,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
           <p className="text-slate-500 order-2 sm:order-1">
-            © 2026 Moonshot Minds Tech. All rights reserved.
+            © 2024 Moonshot Minds Tech. All rights reserved.
           </p>
           <div className="flex gap-6 order-1 sm:order-2">
             <Link

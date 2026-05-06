@@ -4,10 +4,26 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const features = [
-  { icon: "🚀", title: "Proven Expertise", desc: "Over 10+ years of experience delivering 200+ successful projects globally." },
-  { icon: "📊", title: "Agile Methodology", desc: "Fast iterations, transparent communication, and continuous delivery cycles." },
-  { icon: "👥", title: "Customer Centric", desc: "We don't just build software; we build solutions that solve real-world problems." },
-  { icon: "🔒", title: "Security First", desc: "Every line of code is written with security best practices to protect your data." },
+  {
+    icon: "🚀",
+    title: "Proven Expertise",
+    desc: "Over 10+ years of experience delivering 200+ successful projects globally.",
+  },
+  {
+    icon: "📊",
+    title: "Agile Methodology",
+    desc: "Fast iterations, transparent communication, and continuous delivery cycles.",
+  },
+  {
+    icon: "👥",
+    title: "Customer Centric",
+    desc: "We don't just build software; we build solutions that solve real-world problems.",
+  },
+  {
+    icon: "🔒",
+    title: "Security First",
+    desc: "Every line of code is written with security best practices to protect your data.",
+  },
 ];
 
 const securityPoints = [
@@ -26,15 +42,15 @@ const partnerPoints = [
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
+    transition: { staggerChildren: 0.15 },
+  },
 };
 
 export default function WhyUsPage() {
@@ -49,9 +65,12 @@ export default function WhyUsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl font-extrabold text-slate-900 leading-tight mb-6">Why Partners Choose Us</h1>
+            <h1 className="text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+              Why Partners Choose Us
+            </h1>
             <p className="text-slate-600 text-lg">
-              We go beyond coding. We become your strategic technology partner, ensuring every decision supports your long-term business goals.
+              We go beyond coding. We become your strategic technology partner,
+              ensuring every decision supports your long-term business goals.
             </p>
           </motion.div>
           <div className="relative">
@@ -62,14 +81,14 @@ export default function WhyUsPage() {
               className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50 aspect-video"
             >
               <Image
-                src="/moonshot_images/whypartners.png"
+                src="/moonshot_images/transperentpartnership.png"
                 alt="Why Partners Choose Us"
                 fill
                 className="object-cover"
                 priority
               />
             </motion.div>
-            
+
             {/* Decorative background element */}
             <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full bg-sky-200/30 rounded-3xl blur-xl" />
           </div>
@@ -86,7 +105,11 @@ export default function WhyUsPage() {
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-6"
         >
           {features.map((f) => (
-            <motion.div variants={fadeIn} key={f.title} className="card card-hover text-center hover-shine">
+            <motion.div
+              variants={fadeIn}
+              key={f.title}
+              className="card card-hover text-center hover-shine"
+            >
               <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl">
                 {f.icon}
               </div>
@@ -101,16 +124,35 @@ export default function WhyUsPage() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Security & Reliability</h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                Security & Reliability
+              </h2>
               <p className="text-slate-500 mb-8">
-                In the digital age, trust is the primary currency. We implement rigorous security protocols from day one, ensuring your intellectual property and user data are always protected.
+                In the digital age, trust is the primary currency. We implement
+                rigorous security protocols from day one, ensuring your
+                intellectual property and user data are always protected.
               </p>
             </motion.div>
-            <motion.ul variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-3">
+            <motion.ul
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-3"
+            >
               {securityPoints.map((p) => (
-                <motion.li variants={fadeIn} key={p} className="flex items-center gap-3 text-slate-600">
-                  <CheckCircle size={18} className="text-sky-500 shrink-0" /> {p}
+                <motion.li
+                  variants={fadeIn}
+                  key={p}
+                  className="flex items-center gap-3 text-slate-600"
+                >
+                  <CheckCircle size={18} className="text-sky-500 shrink-0" />{" "}
+                  {p}
                 </motion.li>
               ))}
             </motion.ul>
@@ -152,7 +194,7 @@ export default function WhyUsPage() {
             {/* Main Image: Collaborative Team */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white">
               <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+                src="/moonshot_images/whypartners.png"
                 alt="Team Collaboration"
                 className="w-full h-[400px] object-cover transition-transform duration-500 hover:scale-105"
               />
@@ -163,15 +205,33 @@ export default function WhyUsPage() {
 
           {/* TEXT SIDE */}
           <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Transparent Partnership</h2>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                Transparent Partnership
+              </h2>
               <p className="text-slate-500 mb-8">
-                No black boxes. You get full visibility into our development process via shared Jira boards, Slack channels, and weekly sprint reviews.
+                No black boxes. You get full visibility into our development
+                process via shared Jira boards, Slack channels, and weekly
+                sprint reviews.
               </p>
             </motion.div>
-            <motion.ul variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }} className="space-y-3">
+            <motion.ul
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-3"
+            >
               {partnerPoints.map((p) => (
-                <motion.li variants={fadeIn} key={p} className="flex items-center gap-3 text-slate-600">
+                <motion.li
+                  variants={fadeIn}
+                  key={p}
+                  className="flex items-center gap-3 text-slate-600"
+                >
                   <Clock size={18} className="text-sky-500 shrink-0" /> {p}
                 </motion.li>
               ))}

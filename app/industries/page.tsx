@@ -9,7 +9,7 @@ const industries = [
     title: "FinTech",
     desc: "Secure, compliant, and high-frequency trading platforms and digital banking solutions.",
     bg: "from-slate-900 to-blue-900",
-    image: "/moonshot_images/Fintech.jpg", 
+    image: "/moonshot_images/Fintech.jpg",
   },
   {
     title: "Healthcare",
@@ -33,7 +33,7 @@ const industries = [
     title: "Real Estate",
     desc: "End-to-end property management platforms, listing portals, and smart building automation solutions.",
     bg: "from-amber-800 to-orange-700",
-    image: "/moonshot_images/real-estate.jpeg",
+    image: "/moonshot_images/real-estate.png",
   },
   {
     title: "Education",
@@ -161,9 +161,7 @@ export default function IndustriesPage() {
                     whileHover={{ y: -4, rotate: 2 }}
                     transition={{ duration: 0.25 }}
                     className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110"
-                  >
-                    
-                  </motion.div>
+                  ></motion.div>
                 </div>
               </div>
 
@@ -186,7 +184,7 @@ export default function IndustriesPage() {
         </div>
 
         {industries.length > 6 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="mt-16 flex justify-center"

@@ -19,7 +19,8 @@ export default function ContactPage() {
             Let&apos;s Build Something Great
           </h1>
           <p className="text-slate-500">
-            Ready to start your digital transformation? Get in touch with our solution architects today.
+            Ready to start your digital transformation? Get in touch with our
+            solution architects today.
           </p>
         </motion.div>
       </section>
@@ -31,7 +32,6 @@ export default function ContactPage() {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-center">
-
             {/* Left: Contact Info (Vibrant theme) */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -52,8 +52,12 @@ export default function ContactPage() {
                       <Mail className="w-5 h-5 text-white group-hover:text-sky-500 transition-colors" />
                     </div>
                     <div>
-                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Email Us</p>
-                      <p className="text-base text-white">moonshotminds@gmail.com</p>
+                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">
+                        Email Us
+                      </p>
+                      <p className="text-base text-white">
+                        moonshotminds@gmail.com
+                      </p>
                     </div>
                   </li>
                   <li className="flex gap-4 items-start group">
@@ -61,9 +65,13 @@ export default function ContactPage() {
                       <Phone className="w-5 h-5 text-white group-hover:text-sky-500 transition-colors" />
                     </div>
                     <div>
-                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Call Us</p>
+                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">
+                        Call Us
+                      </p>
                       <p className="text-base text-white">+61 412 345 678</p>
-                      <p className="text-base text-white mt-2">+91 98765 43210</p>
+                      <p className="text-base text-white mt-2">
+                        +91 98765 43210
+                      </p>
                     </div>
                   </li>
                   <li className="flex gap-4 items-start group">
@@ -71,17 +79,18 @@ export default function ContactPage() {
                       <MapPin className="w-5 h-5 text-white group-hover:text-sky-500 transition-colors" />
                     </div>
                     <div>
-                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Visit Us</p>
-                      <p className="text-base text-white leading-relaxed">92 Hothly Drive,
-Craigieburn,
-Victoria-3064, Australia</p>
-
+                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">
+                        Visit Us
+                      </p>
+                      <p className="text-base text-white leading-relaxed">
+                        92 Hothly Drive, Craigieburn, Victoria-3064, Australia
+                      </p>
                     </div>
                   </li>
                 </ul>
               </div>
 
-              <div className="mt-auto pt-8 border-t border-white/20 relative z-10">
+              {/* <div className="mt-auto pt-8 border-t border-white/20 relative z-10">
                 <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-4">Follow Our Journey</p>
                 <div className="flex gap-4">
                   <a href="#" className="w-10 h-10 bg-white/20 hover:bg-white rounded-lg flex items-center justify-center transition-colors group">
@@ -91,7 +100,7 @@ Victoria-3064, Australia</p>
                     <Twitter className="w-5 h-5 text-white group-hover:text-sky-500" />
                   </a>
                 </div>
-              </div>
+              </div> */}
             </motion.div>
 
             {/* Right: Form */}
@@ -104,22 +113,39 @@ Victoria-3064, Australia</p>
             >
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Full Name</label>
-                  <input type="text" placeholder="FULL NAME"
-                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm" />
+                  <label className="block text-sm font-bold text-slate-700 mb-2">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="FULL NAME"
+                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Work Email</label>
-                  <input type="email" placeholder="abc@company.com"
-                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm" />
+                  <label className="block text-sm font-bold text-slate-700 mb-2">
+                    Work Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="abc@company.com"
+                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Company Name</label>
-                  <input type="text" placeholder="ABC"
-                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm" />
+                  <label className="block text-sm font-bold text-slate-700 mb-2">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="ABC"
+                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">Interest</label>
+                  <label className="block text-sm font-bold text-slate-700 mb-2">
+                    Interest
+                  </label>
                   <select className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm appearance-none">
                     <option>Web Development</option>
                     <option>Enterprise Software</option>
@@ -131,9 +157,14 @@ Victoria-3064, Australia</p>
                 </div>
               </div>
               <div className="mt-6">
-                <label className="block text-sm font-bold text-slate-700 mb-2">How can we help you?</label>
-                <textarea rows={5} placeholder="Tell us about your project..."
-                  className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm resize-none" />
+                <label className="block text-sm font-bold text-slate-700 mb-2">
+                  How can we help you?
+                </label>
+                <textarea
+                  rows={5}
+                  placeholder="Tell us about your project..."
+                  className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm resize-none"
+                />
               </div>
               <motion.button
                 whileHover={{ scale: 1.02 }}
