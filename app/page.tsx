@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Globe, Settings, Cloud, ChevronRight, Code, Database, Smartphone, Zap, Sparkles, ShieldCheck, Rocket } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -115,7 +116,6 @@ export default function HomePage() {
     <div className="overflow-hidden">
       {/* Hero */}
       <motion.section 
-        style={{ opacity: heroOpacity, scale: heroScale }}
         className="relative bg-gradient-to-br from-slate-50 via-white to-sky-50 py-32 text-center overflow-hidden"
       >
         {/* Enhanced floating particles */}
@@ -371,48 +371,14 @@ export default function HomePage() {
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, type: "spring" }}
-            className="rounded-3xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-950 h-96 flex items-center justify-center relative shadow-2xl"
+            className="rounded-3xl overflow-hidden bg-slate-900 h-96 flex items-center justify-center relative shadow-2xl"
           >
-            {/* Animated background lines for security card */}
-            <motion.div 
-              className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
-              animate={{ backgroundPosition: ["0px 0px", "24px 24px"] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            <img
+              src="/moonshot_images/whymoonshot.png"
+              alt="Why Moonshot Minds"
+              className="w-full h-full object-cover"
             />
-            
-            {/* Pulsing rings */}
-            <motion.div 
-          className="absolute inset-0 flex items-center justify-center"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        >
-          <div className="w-64 h-64 rounded-full border border-sky-500/20 absolute" />
-          <div className="w-48 h-48 rounded-full border border-sky-500/30 absolute" />
-          <div className="w-32 h-32 rounded-full border border-sky-500/40 absolute" />
-        </motion.div>
-        
-        <motion.div 
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          className="text-center text-white/90 p-8 relative z-10"
-        >
-          <motion.div 
-            className="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-sm border border-white/20"
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <motion.span 
-              className="text-5xl"
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-            >
-              🔐
-            </motion.span>
           </motion.div>
-          <h3 className="text-2xl font-bold mb-2">Enterprise Security</h3>
-          <p className="text-slate-400">Military-grade protection for your data.</p>
-        </motion.div>
-      </motion.div>
         </div>
       </section>
 
