@@ -156,7 +156,7 @@ export default function IndustriesPage() {
                   className={`absolute inset-0 bg-gradient-to-br ${ind.bg} opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-40`}
                 />
                 {/* Visual Content Overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center relative z-10">
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
                   <motion.div
                     whileHover={{ y: -4, rotate: 2 }}
                     transition={{ duration: 0.25 }}
