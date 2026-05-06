@@ -367,17 +367,26 @@ export default function HomePage() {
             </ul>
           </motion.div>
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, type: "spring" }}
-            className="rounded-3xl overflow-hidden bg-slate-900 h-96 flex items-center justify-center relative shadow-2xl"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative rounded-3xl h-96 overflow-hidden hover-shine bg-gradient-to-br from-slate-800 to-slate-950 shadow-2xl"
           >
-            <img
-              src="/moonshot_images/whymoonshot.png"
-              alt="Why Moonshot Minds"
-              className="w-full h-full object-cover"
-            />
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full h-full"
+            >
+              <Image
+                src="/moonshot_images/whymoonshot.png"
+                alt="Why Moonshot Minds"
+                fill
+                priority
+                unoptimized
+                className="object-cover"
+              />
+            </motion.div>
           </motion.div>
         </div>
       </section>
