@@ -72,7 +72,9 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Visit Us</p>
-                      <p className="text-base text-white leading-relaxed">92 Hotly Drive, Craigieburn, Victoria 3064, Australia</p>
+                      <p className="text-base text-white leading-relaxed">92 Hothly Drive,
+Craigieburn,
+Victoria-3064, Australia</p>
 
                     </div>
                   </li>

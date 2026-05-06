@@ -55,7 +55,7 @@ export default function Footer() {
             </p>
 
             {/* Social Links */}
-            <div className="flex gap-2 pt-2">
+            {/* <div className="flex gap-2 pt-2">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -66,7 +66,7 @@ export default function Footer() {
                   <Icon size={18} />
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Company Links - spans 2 columns */}
@@ -116,7 +116,7 @@ export default function Footer() {
               <div className="flex gap-3 text-slate-400 text-sm">
                 <MapPin size={18} className="text-sky-500 shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <p>-92 Hotly Drive, Craigieburn, Victoria 3064</p>
+                  <p>-92 Hothly Drive, Craigieburn, Victoria 3064</p>
 
                 </div>
               </div>
