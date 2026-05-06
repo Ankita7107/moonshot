@@ -66,9 +66,9 @@ export default function PrivacyPolicyPage() {
                 </h2>
               </div>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Moonshot Minds is committed to safeguarding your personal
-                information. This policy details how we collect and protect your
-                data across our platforms.
+                Moonshot Minds ("we", "our", or "us") is committed to safeguarding your personal
+                information. This Privacy Policy details how we collect, use, and protect your
+                data across our platforms, websites, and services. By using our services, you consent to the data practices described in this policy.
               </p>
             </section>
 
@@ -79,20 +79,25 @@ export default function PrivacyPolicyPage() {
                   2. Information Collection
                 </h2>
               </div>
-              <div className="grid md:grid-cols-2 gap-4 text-sm text-slate-600">
+              <div className="grid md:grid-cols-2 gap-4 text-sm text-slate-600 mb-3">
                 <div className="border-l-4 border-sky-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
                   <p className="font-bold text-slate-800 mb-2">Personal Data</p>
-                  <p>• Name &amp; Work Email</p>
+                  <p>• Name, Job Title &amp; Company Name</p>
+                  <p>• Work Email &amp; Phone Number</p>
                   <p>• Billing &amp; Payment Info</p>
                 </div>
                 <div className="border-l-4 border-teal-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
                   <p className="font-bold text-slate-800 mb-2">
                     Technical Data
                   </p>
-                  <p>• IP &amp; Device IDs</p>
-                  <p>• Browsing Analytics</p>
+                  <p>• IP Addresses &amp; Device IDs</p>
+                  <p>• Browser Type &amp; Version</p>
+                  <p>• Browsing Analytics &amp; Log Data</p>
                 </div>
               </div>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                We collect this information when you interact with our website, request a consultation, or engage our services. We may also receive information from third-party partners and public sources.
+              </p>
             </section>
 
             {/* 3. Data Usage */}
@@ -102,12 +107,17 @@ export default function PrivacyPolicyPage() {
                   3. Data Usage
                 </h2>
               </div>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                We use the collected information for various professional and operational purposes, including:
+              </p>
               <div className="grid sm:grid-cols-2 gap-3 text-sm text-slate-600">
                 {[
-                  "Maintain Services",
-                  "Process Payments",
-                  "Fraud Prevention",
-                  "Legal Compliance",
+                  "Delivering & Maintaining Services",
+                  "Processing Transactions & Payments",
+                  "Improving User Experience & Analytics",
+                  "Customer Support & Communication",
+                  "Fraud Prevention & Security",
+                  "Legal & Regulatory Compliance",
                 ].map((u) => (
                   <div key={u} className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-sky-500 shrink-0" />
@@ -117,13 +127,40 @@ export default function PrivacyPolicyPage() {
               </div>
             </section>
 
-            {/* 4. Data Security */}
+            {/* 4. Cookies & Tracking Technologies */}
+            <section id="cookies">
+              <div className="border-l-4 border-sky-500 pl-4 mb-3">
+                <h2 className="text-lg font-bold text-sky-600">
+                  4. Cookies & Tracking Technologies
+                </h2>
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Our website uses cookies, web beacons, and similar tracking technologies to enhance your browsing experience, analyze site traffic, and personalize content. You can control cookie preferences through your browser settings, though disabling them may limit some site functionalities.
+              </p>
+            </section>
+
+            {/* 5. Third-Party Sharing */}
+            <section id="third-party">
+              <div className="border-l-4 border-sky-500 pl-4 mb-3">
+                <h2 className="text-lg font-bold text-sky-600">
+                  5. Information Sharing & Disclosure
+                </h2>
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                We do not sell your personal data. We may share your information with trusted third-party service providers (such as hosting, payment processing, and analytics partners) strictly for the purpose of operating our business. These parties are contractually obligated to keep your data secure. We may also disclose data if required by law or to protect our legal rights.
+              </p>
+            </section>
+
+            {/* 6. Data Security */}
             <section id="security">
               <div className="border-l-4 border-sky-500 pl-4 mb-3">
                 <h2 className="text-lg font-bold text-sky-600">
-                  4. Data Security
+                  6. Data Security
                 </h2>
               </div>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, or disclosure.
+              </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="border-l-4 border-sky-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
                   <Shield className="w-4 h-4 text-sky-500 mb-1" />
@@ -131,49 +168,72 @@ export default function PrivacyPolicyPage() {
                     SSL Encryption
                   </p>
                   <p className="text-xs text-slate-500">
-                    256-bit secure transmission
+                    256-bit secure data transmission
                   </p>
                 </div>
                 <div className="border-l-4 border-teal-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
                   <Server className="w-4 h-4 text-teal-500 mb-1" />
                   <p className="text-sm font-medium text-slate-800">
-                    ISO Facilities
+                    ISO Certified Facilities
                   </p>
                   <p className="text-xs text-slate-500">
-                    Certified data storage
+                    Secure and compliant data storage
                   </p>
                 </div>
               </div>
             </section>
 
-            {/* 5. Your Rights */}
-            <section id="rights">
+            {/* 7. Data Retention */}
+            <section id="retention">
               <div className="border-l-4 border-sky-500 pl-4 mb-3">
                 <h2 className="text-lg font-bold text-sky-600">
-                  5. Your Rights
+                  7. Data Retention
                 </h2>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                You have the right to access, correct, or delete your personal
-                data and opt-out of marketing at any time.
+              <p className="text-slate-600 text-sm leading-relaxed">
+                We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law (such as for tax, legal, or accounting purposes).
               </p>
             </section>
 
-            {/* 6. Contact */}
+            {/* 8. Your Rights */}
+            <section id="rights">
+              <div className="border-l-4 border-sky-500 pl-4 mb-3">
+                <h2 className="text-lg font-bold text-sky-600">
+                  8. Your Rights & Choices
+                </h2>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed mb-3">
+                Depending on your location, you may have specific rights regarding your personal data:
+              </p>
+              <ul className="list-disc list-inside text-sm text-slate-600 space-y-1 mb-3">
+                <li>Right to access, update, or correct your information.</li>
+                <li>Right to request deletion of your personal data.</li>
+                <li>Right to restrict or object to certain data processing.</li>
+                <li>Right to opt-out of marketing communications at any time.</li>
+              </ul>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                To exercise any of these rights, please contact us using the information provided below.
+              </p>
+            </section>
+
+            {/* 9. Contact */}
             <section id="contact">
               <div className="border-l-4 border-sky-500 pl-4 mb-3">
-                <h2 className="text-lg font-bold text-sky-600">6. Contact</h2>
+                <h2 className="text-lg font-bold text-sky-600">9. Contact Us</h2>
               </div>
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                If you have questions or concerns about this Privacy Policy or our data practices, please reach out to us:
+              </p>
               <div className="border-l-4 border-sky-300 pl-4 py-3 bg-slate-50 rounded-r-lg text-sm text-slate-700 space-y-1">
-                <p>Email: moonshotminds@gmail.com</p>
-                <p>AU: +61 412 345 678</p>
-                <p>Craigieburn, VIC 3064, AU</p>
+                <p><strong>Email:</strong> moonshotminds@gmail.com</p>
+                <p><strong>Phone:</strong> +61 412 345 678</p>
+                <p><strong>Address:</strong> Craigieburn, VIC 3064, AU</p>
               </div>
             </section>
 
             {/* Footer inside card */}
             <div className="pt-6 border-t border-slate-100 text-center text-xs text-slate-400">
-              © 2026 Moonshot Minds. All rights reserved.
+              © {new Date().getFullYear()} Moonshot Minds. All rights reserved.
             </div>
           </div>
         </motion.div>
