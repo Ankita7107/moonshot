@@ -32,44 +32,46 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-center">
             
-            {/* Left: Contact Info (dark, overlapping) */}
+            {/* Left: Contact Info (Vibrant theme) */}
             <motion.div 
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="bg-[#0F172A] text-white p-10 md:p-12 lg:w-[400px] shrink-0 flex flex-col gap-10 rounded-3xl shadow-2xl z-20 lg:-mr-16 lg:my-8 w-full relative"
+              className="bg-gradient-to-br from-sky-500 to-sky-600 text-white p-10 md:p-12 lg:w-[400px] shrink-0 flex flex-col gap-10 rounded-3xl shadow-2xl z-20 lg:-mr-16 lg:my-8 w-full relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-sky-500/10 rounded-bl-full pointer-events-none"></div>
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-tr-full pointer-events-none"></div>
               
-              <div>
+              <div className="relative z-10">
                 <h2 className="text-2xl font-bold mb-8">Contact Information</h2>
                 <ul className="space-y-8">
                   <li className="flex gap-4 items-start group">
-                    <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-sky-500 transition-colors">
-                      <Mail className="w-5 h-5 text-sky-400 group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-white transition-colors">
+                      <Mail className="w-5 h-5 text-white group-hover:text-sky-500 transition-colors" />
                     </div>
                     <div>
-                      <p className="text-sky-300 text-xs uppercase tracking-widest font-semibold mb-1">Email Us</p>
+                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Email Us</p>
                       <p className="text-base text-white">moonshotminds@gmail.com</p>
                     </div>
                   </li>
                   <li className="flex gap-4 items-start group">
-                    <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-sky-500 transition-colors">
-                      <Phone className="w-5 h-5 text-sky-400 group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-white transition-colors">
+                      <Phone className="w-5 h-5 text-white group-hover:text-sky-500 transition-colors" />
                     </div>
                     <div>
-                      <p className="text-sky-300 text-xs uppercase tracking-widest font-semibold mb-1">Call Us</p>
+                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Call Us</p>
                       <p className="text-base text-white">+61 412 345 678</p>
                       <p className="text-base text-white mt-2">+91 98765 43210</p>
                     </div>
                   </li>
                   <li className="flex gap-4 items-start group">
-                    <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-sky-500 transition-colors">
-                      <MapPin className="w-5 h-5 text-sky-400 group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-white transition-colors">
+                      <MapPin className="w-5 h-5 text-white group-hover:text-sky-500 transition-colors" />
                     </div>
                     <div>
-                      <p className="text-sky-300 text-xs uppercase tracking-widest font-semibold mb-1">Visit Us</p>
+                      <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-1">Visit Us</p>
                       <p className="text-base text-white leading-relaxed">92 Hotly Drive, Craigieburn, Victoria 3064, Australia</p>
                       <p className="text-base text-white leading-relaxed mt-2">7 Business Square, Modal Colony, Shivaji Nagar, Pune</p>
                     </div>
@@ -77,14 +79,14 @@ export default function ContactPage() {
                 </ul>
               </div>
 
-              <div className="mt-auto pt-8 border-t border-white/10">
-                <p className="text-sky-300 text-xs uppercase tracking-widest font-semibold mb-4">Follow Our Journey</p>
+              <div className="mt-auto pt-8 border-t border-white/20 relative z-10">
+                <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-4">Follow Our Journey</p>
                 <div className="flex gap-4">
-                  <a href="#" className="w-10 h-10 bg-white/10 hover:bg-sky-500 rounded-lg flex items-center justify-center transition-colors">
-                    <Linkedin className="w-5 h-5 text-white" />
+                  <a href="#" className="w-10 h-10 bg-white/20 hover:bg-white rounded-lg flex items-center justify-center transition-colors group">
+                    <Linkedin className="w-5 h-5 text-white group-hover:text-sky-500" />
                   </a>
-                  <a href="#" className="w-10 h-10 bg-white/10 hover:bg-sky-500 rounded-lg flex items-center justify-center transition-colors">
-                    <Twitter className="w-5 h-5 text-white" />
+                  <a href="#" className="w-10 h-10 bg-white/20 hover:bg-white rounded-lg flex items-center justify-center transition-colors group">
+                    <Twitter className="w-5 h-5 text-white group-hover:text-sky-500" />
                   </a>
                 </div>
               </div>
