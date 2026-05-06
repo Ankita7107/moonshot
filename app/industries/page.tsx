@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image"; // 1. Added Import
 import { motion } from "framer-motion";
 
 const industries = [
@@ -8,109 +9,91 @@ const industries = [
     title: "FinTech",
     desc: "Secure, compliant, and high-frequency trading platforms and digital banking solutions.",
     bg: "from-slate-900 to-blue-900",
-    emoji: "💹",
-    label: "FINTECH",
+    image: "/moonshot_images/Fintech.jpg", 
   },
   {
     title: "Healthcare",
     desc: "HIPAA-compliant patient portals, telemedicine apps, and electronic health records.",
     bg: "from-blue-800 to-cyan-700",
-    emoji: "🏥",
-    label: "HEALTHCARE",
+    image: "/moonshot_images/healthcare.webp",
   },
   {
     title: "E-Commerce",
     desc: "Omnichannel retail platforms with advanced inventory management and AI recommendations.",
     bg: "from-slate-900 to-indigo-900",
-    emoji: "🛒",
-    label: "E-COMMERCE",
+    image: "/moonshot_images/E-commerce.jpeg",
   },
   {
     title: "Logistics",
     desc: "Real-time tracking, warehouse automation, and route optimization systems.",
     bg: "from-sky-700 to-slate-800",
-    emoji: "🚢",
-    label: "LOGISTICS",
+    image: "/moonshot_images/logistics.jpg",
   },
   {
     title: "Real Estate",
     desc: "End-to-end property management platforms, listing portals, and smart building automation solutions.",
     bg: "from-amber-800 to-orange-700",
-    emoji: "🏢",
-    label: "REAL ESTATE",
+    image: "/moonshot_images/real-estate.jpeg",
   },
   {
     title: "Education",
     desc: "Interactive LMS platforms, virtual classrooms, and AI-powered personalized learning experiences.",
     bg: "from-emerald-800 to-teal-700",
-    emoji: "🎓",
-    label: "EDTECH",
+    image: "/moonshot_images/education.jpeg",
   },
   {
     title: "Manufacturing",
     desc: "IoT-enabled factory automation, predictive maintenance, and supply chain visibility systems.",
     bg: "from-zinc-800 to-slate-700",
-    emoji: "🏭",
-    label: "MANUFACTURING",
+    image: "/moonshot_images/manufacturing.webp",
   },
   {
     title: "Travel & Hospitality",
     desc: "Booking engines, dynamic pricing tools, and guest experience platforms for hotels and airlines.",
     bg: "from-sky-800 to-cyan-900",
-    emoji: "✈️",
-    label: "TRAVEL",
+    image: "/moonshot_images/Travel & Hospitality.png",
   },
-
-  // 🆕 NEW INDUSTRIES ADDED
-
   {
     title: "Banking & Insurance",
     desc: "Core banking systems, insurance automation, fraud detection, and financial risk platforms.",
     bg: "from-indigo-900 to-slate-900",
-    emoji: "🏦",
-    label: "BFSI",
+    image: "/moonshot_images/banking.jpeg",
   },
   {
     title: "Cybersecurity",
     desc: "Threat detection systems, identity management, SOC dashboards, and data protection solutions.",
     bg: "from-red-900 to-slate-900",
-    emoji: "🛡️",
-    label: "SECURITY",
+    image: "/moonshot_images/Cybersecurity.webp",
   },
   {
     title: "Telecom",
     desc: "Network management, 5G systems, billing platforms, and customer support automation.",
     bg: "from-purple-800 to-slate-900",
-    emoji: "📡",
-    label: "TELECOM",
+    image: "/moonshot_images/telecom.jpg",
   },
   {
     title: "Automotive",
     desc: "EV systems, connected car platforms, fleet management, and smart mobility solutions.",
     bg: "from-gray-800 to-slate-900",
-    emoji: "🚗",
-    label: "AUTOMOTIVE",
+    image: "/moonshot_images/Automotive.jpg",
   },
   {
     title: "Media & Entertainment",
     desc: "OTT platforms, streaming systems, content delivery networks, and recommendation engines.",
     bg: "from-pink-800 to-slate-900",
-    emoji: "🎬",
-    label: "MEDIA",
+    image: "/moonshot_images/Media & Entertainment.webp",
   },
   {
     title: "Food & Restaurant Tech",
     desc: "Food delivery apps, POS systems, restaurant management, and inventory tracking solutions.",
     bg: "from-orange-800 to-slate-900",
-    emoji: "🍔",
-    label: "FOOD TECH",
+    image: "/moonshot_images/Food & Restaurant Tech.jpg",
   },
   {
     title: "Government & Public Sector",
     desc: "e-Governance systems, digital identity platforms, tax portals, and citizen services.",
     bg: "from-green-900 to-slate-900",
-    emoji: "🏛️",
-    label: "GOVERNMENT",
+    image: "/moonshot_images/Government & Public Sector.jpg",
   },
 ];
 
@@ -119,19 +102,6 @@ const tags = [
   "Regulatory Compliance",
   "Process Automation",
 ];
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
 
 export default function IndustriesPage() {
   const [showAll, setShowAll] = useState(false);
@@ -172,22 +142,31 @@ export default function IndustriesPage() {
               key={ind.title}
               className="card p-0 overflow-hidden card-hover group border-slate-100 hover:border-sky-200"
             >
-              {/* Image / Banner */}
-              <div
-                className={`bg-gradient-to-br ${ind.bg} h-52 flex flex-col items-center justify-center relative overflow-hidden`}
-              >
-                <div className="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.25),transparent_60%)] transition-opacity duration-500 group-hover:opacity-50" />
-                <motion.div
-                  whileHover={{ y: -4, rotate: 2 }}
-                  transition={{ duration: 0.25 }}
-                  className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110"
-                >
-                  {ind.emoji}
-                </motion.div>
-                <p className="text-white/80 text-xs font-bold tracking-widest relative z-10">
-                  {ind.label}
-                </p>
+              {/* 3. Updated Image / Banner Logic */}
+              <div className="h-52 relative overflow-hidden">
+                {/* Background Image */}
+                <Image
+                  src={ind.image}
+                  alt={ind.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                {/* Gradient Overlay (using your existing ind.bg) */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${ind.bg} opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-40`}
+                />
+                {/* Visual Content Overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center relative z-10">
+                  <motion.div
+                    whileHover={{ y: -4, rotate: 2 }}
+                    transition={{ duration: 0.25 }}
+                    className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110"
+                  >
+                    
+                  </motion.div>
+                </div>
               </div>
+
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-xl font-bold text-slate-800 mb-2">

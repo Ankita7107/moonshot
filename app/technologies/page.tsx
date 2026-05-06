@@ -140,7 +140,12 @@ export default function TechnologiesPage() {
       <section className="relative bg-[#0F172A] py-20 text-center overflow-hidden">
         <div className="absolute top-8 left-[14%] h-24 w-24 rounded-full bg-sky-400/20 blur-2xl animate-float-slow" />
         <div className="absolute bottom-8 right-[14%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-delay" />
-        <div className="max-w-3xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl mx-auto px-4"
+        >
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             Our Modern Tech Stack
           </h1>
@@ -148,7 +153,7 @@ export default function TechnologiesPage() {
             We leverage the most powerful tools in the industry to build
             future-proof solutions.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* TECH CARDS */}
@@ -158,23 +163,34 @@ export default function TechnologiesPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-6"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-auto pb-2 md:pb-0 flex md:grid md:grid-cols-4 gap-6 snap-x snap-mandatory md:snap-none md:overflow-visible"
         >
           {techCategories.map((cat) => (
             <motion.div
               variants={fadeIn}
+              whileHover={{ y: -8, scale: 1.015, rotateX: 6, rotateY: 10 }}
+              transition={{ type: "spring", stiffness: 260, damping: 18 }}
               key={cat.title}
-              className="card card-hover hover-shine"
+              className="card card-hover hover-shine min-w-[260px] md:min-w-0 snap-start md:snap-start"
+              style={{ transformPerspective: 900 }}
             >
-              <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
+              <motion.div
+                whileHover={{ rotate: -8, y: -2, scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4"
+              >
                 {cat.icon}
-              </div>
+              </motion.div>
               <h3 className="font-bold text-slate-800 mb-4">{cat.title}</h3>
               <div className="flex flex-wrap gap-2">
                 {cat.tags.map((tag) => (
-                  <span key={tag} className="badge text-xs">
+                  <motion.span
+                    whileHover={{ y: -2 }}
+                    key={tag}
+                    className="badge text-xs"
+                  >
                     {tag}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </motion.div>
@@ -208,7 +224,13 @@ export default function TechnologiesPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="bg-sky-50 border border-sky-100 rounded-3xl p-12 text-center hover-shine">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+            className="bg-sky-50 border border-sky-100 rounded-3xl p-12 text-center hover-shine"
+          >
             <h2 className="text-2xl font-bold text-slate-900 mb-4">
               Need a specific technology?
             </h2>
@@ -217,10 +239,12 @@ export default function TechnologiesPage() {
               picking the right tool for the job. Whether it&apos;s legacy
               modernization or greenfield development, we have the expertise.
             </p>
-            <Link href="/contact" className="btn-outline hover-shine">
-              Discuss Architecture
-            </Link>
-          </div>
+            <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}>
+              <Link href="/contact" className="btn-outline hover-shine">
+                Discuss Architecture
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
     </>

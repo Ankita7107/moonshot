@@ -1,5 +1,5 @@
 "use client";
-import { CheckCircle, Clock } from "lucide-react";
+import { CheckCircle, Clock, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 const features = [
@@ -43,7 +43,7 @@ export default function WhyUsPage() {
         <div className="absolute top-10 left-[10%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
         <div className="absolute bottom-10 right-[12%] h-24 w-24 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -54,8 +54,9 @@ export default function WhyUsPage() {
             </p>
           </motion.div>
           <div className="flex justify-center">
-            <motion.div 
+            <motion.div
               animate={{ y: [0, -15, 0] }}
+              
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="w-48 h-48 bg-sky-100 rounded-full flex items-center justify-center shadow-lg animate-pulse-glow"
             >
@@ -67,7 +68,7 @@ export default function WhyUsPage() {
 
       {/* Feature Cards */}
       <section className="py-20">
-        <motion.div 
+        <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -104,18 +105,23 @@ export default function WhyUsPage() {
               ))}
             </motion.ul>
           </div>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+
+          {/* IMAGE SECTION */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            whileHover={{ y: -10 }}
-            className="bg-gradient-to-br from-slate-800 to-blue-900 rounded-2xl p-10 text-center text-white shadow-xl transition-transform hover-shine"
+            className="relative"
           >
-            <div className="text-6xl mb-4">🔐</div>
-            <div className="bg-white/20 rounded-lg px-6 py-3 inline-block text-lg tracking-widest font-mono">
-              **********
-            </div>
-            <p className="mt-4 font-semibold text-lg">Security And Reliability</p>
+            {/* Decorative background element */}
+            <div className="absolute -inset-4 bg-sky-100/50 rounded-3xl -rotate-2" />
+
+            {/* Main Image */}
+            <img
+              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"
+              alt="Security Interface"
+              className="relative rounded-2xl shadow-2xl border border-slate-200 object-cover w-full h-[400px]"
+            />
           </motion.div>
         </div>
       </section>
@@ -123,15 +129,29 @@ export default function WhyUsPage() {
       {/* Transparent Partnership */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+          {/* IMAGE SIDE */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            whileHover={{ y: -10 }}
-            className="bg-gradient-to-br from-sky-200 to-slate-300 rounded-2xl h-64 flex items-center justify-center shadow-xl transition-transform hover-shine"
+            className="relative"
           >
-            <span className="text-7xl">🤝</span>
+            {/* Decorative Gradient Background */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-sky-100 to-slate-200 rounded-3xl rotate-1 opacity-70" />
+
+            {/* Main Image: Collaborative Team */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white">
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=800"
+                alt="Team Collaboration"
+                className="w-full h-[400px] object-cover transition-transform duration-500 hover:scale-105"
+              />
+              {/* Overlay Gradient for depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+            </div>
           </motion.div>
+
+          {/* TEXT SIDE */}
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h2 className="text-3xl font-bold text-slate-900 mb-4">Transparent Partnership</h2>

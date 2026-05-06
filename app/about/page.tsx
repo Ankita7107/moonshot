@@ -1,17 +1,36 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { Target, Lightbulb } from "lucide-react";
-import { motion } from "framer-motion";const stats = [
+import { motion } from "framer-motion";
+
+const stats = [
   { value: "10+", label: "Years" },
-  { value: "20+", label: "Projects" },
+  { value: "300+", label: "Projects" },
   { value: "20", label: "Global Offices" },
 ];
 
 const values = [
-  { icon: "🚀", title: "Quality First", desc: "No compromises on code standards." },
-  { icon: "📚", title: "Always Learning", desc: "Staying at the edge of the tech curve." },
-  { icon: "🎯", title: "Extreme Ownership", desc: "We treat your product as our own." },
-  { icon: "💬", title: "Radical Candor", desc: "Honest communication at every stage." },
+  {
+    icon: "🚀",
+    title: "Quality First",
+    desc: "No compromises on code standards.",
+  },
+  {
+    icon: "📚",
+    title: "Always Learning",
+    desc: "Staying at the edge of the tech curve.",
+  },
+  {
+    icon: "🎯",
+    title: "Extreme Ownership",
+    desc: "We treat your product as our own.",
+  },
+  {
+    icon: "💬",
+    title: "Radical Candor",
+    desc: "Honest communication at every stage.",
+  },
 ];
 
 const trustMetrics = [
@@ -46,7 +65,7 @@ const processSteps = [
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const staggerContainer = {
@@ -54,9 +73,9 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 export default function AboutPage() {
@@ -67,14 +86,38 @@ export default function AboutPage() {
         <div className="absolute bottom-10 right-[10%] h-24 w-24 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h1 className="text-5xl font-extrabold text-slate-900 leading-tight mb-6">Engineering Excellence</h1>
-            <p className="text-slate-600 mb-4">
-              Moonshot Minds Tech was founded on a simple premise: that software should be beautiful, scalable, and inherently useful.
-            </p>
-            <p className="text-slate-500 text-sm">
-              Founded in 2024 and headquartered in Craigieburn, Victoria, we specialize in architecting sophisticated software solutions that drive innovation, enhance efficiency, and create sustainable competitive advantages for enterprises across diverse industries.
-            </p>
-            <motion.div 
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-5xl font-extrabold text-slate-900 leading-tight mb-6"
+            >
+              Engineering Excellence
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="text-slate-600 mb-4"
+            >
+              Moonshot Minds Tech was founded on a simple premise: that software
+              should be beautiful, scalable, and inherently useful.
+            </motion.p>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="text-slate-500 text-sm"
+            >
+              Founded in 2024 and headquartered in Craigieburn, Victoria, we
+              specialize in architecting sophisticated software solutions that
+              drive innovation, enhance efficiency, and create sustainable
+              competitive advantages for enterprises across diverse industries.
+            </motion.p>
+            
+            <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
@@ -83,18 +126,41 @@ export default function AboutPage() {
             >
               {stats.map((s) => (
                 <motion.div variants={fadeIn} key={s.label}>
-                  <p className="text-3xl font-extrabold text-sky-500 mb-1">{s.value}</p>
-                  <p className="text-xs text-slate-400 uppercase tracking-widest">{s.label}</p>
+                  <p className="text-3xl font-extrabold text-sky-500 mb-1">
+                    {s.value}
+                  </p>
+                  <p className="text-xs text-slate-400 uppercase tracking-widest">
+                    {s.label}
+                  </p>
                 </motion.div>
               ))}
             </motion.div>
           </div>
-          <div className="rounded-2xl bg-gradient-to-br from-slate-800 to-sky-900 h-72 flex items-center justify-center hover-shine">
-            <div className="text-center text-white/70">
-              <div className="text-7xl mb-3">🥽</div>
-              <p className="text-sm font-medium">Future-Forward Tech</p>
-            </div>
-          </div>
+          
+          {/* Image with SAME animation as Engineering Excellence text */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative rounded-2xl h-72 overflow-hidden hover-shine bg-gradient-to-br from-slate-800 to-sky-900"
+          >
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity, delay: 2 }}
+              className="relative w-full h-full"
+            >
+              <Image 
+                src="/moonshot_images/engineering-excellence.png" 
+                alt="Engineering Excellence"
+                fill
+                className="object-cover"
+                onError={(e) => {
+                  console.error("Image failed to load");
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -104,18 +170,26 @@ export default function AboutPage() {
             <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
               <Target className="w-6 h-6 text-sky-500" />
             </div>
-            <h3 className="text-xl font-bold text-slate-800 mb-3">Our Mission</h3>
+            <h3 className="text-xl font-bold text-slate-800 mb-3">
+              Our Mission
+            </h3>
             <p className="text-slate-500 text-sm leading-relaxed">
-              To empower organizations with robust digital infrastructure and innovative software that fosters sustainable growth and solves complex global challenges.
+              To empower organizations with robust digital infrastructure and
+              innovative software that fosters sustainable growth and solves
+              complex global challenges.
             </p>
           </div>
           <div className="card card-hover">
             <div className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4">
               <Lightbulb className="w-6 h-6 text-sky-500" />
             </div>
-            <h3 className="text-xl font-bold text-slate-800 mb-3">Our Vision</h3>
+            <h3 className="text-xl font-bold text-slate-800 mb-3">
+              Our Vision
+            </h3>
             <p className="text-slate-500 text-sm leading-relaxed">
-              To be the world&apos;s most trusted partner for engineering digital transformations, recognized for our commitment to quality, integrity, and future-proof innovation.
+              To be the world&apos;s most trusted partner for engineering
+              digital transformations, recognized for our commitment to quality,
+              integrity, and future-proof innovation.
             </p>
           </div>
         </div>
@@ -124,7 +198,9 @@ export default function AboutPage() {
       <section className="py-20 bg-slate-50">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <p className="section-label">THE MOONSHOT WAY</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12">What Drives Us</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12">
+            What Drives Us
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {values.map((v) => (
               <motion.div
@@ -148,7 +224,9 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-10">
             <p className="section-label">TRUST IN NUMBERS</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Measured Impact, Not Just Promises</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+              Measured Impact, Not Just Promises
+            </h2>
           </div>
           <motion.div
             variants={staggerContainer}
@@ -158,8 +236,14 @@ export default function AboutPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-5"
           >
             {trustMetrics.map((item) => (
-              <motion.div key={item.label} variants={fadeIn} className="card card-hover text-center">
-                <p className="text-3xl md:text-4xl font-extrabold text-sky-500 mb-2">{item.value}</p>
+              <motion.div
+                key={item.label}
+                variants={fadeIn}
+                className="card card-hover text-center"
+              >
+                <p className="text-3xl md:text-4xl font-extrabold text-sky-500 mb-2">
+                  {item.value}
+                </p>
                 <p className="text-sm text-slate-500">{item.label}</p>
               </motion.div>
             ))}
@@ -171,7 +255,9 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <p className="section-label">HOW WE WORK</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Our Delivery Framework</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+              Our Delivery Framework
+            </h2>
           </div>
           <motion.div
             variants={staggerContainer}
@@ -181,10 +267,20 @@ export default function AboutPage() {
             className="grid md:grid-cols-4 gap-6"
           >
             {processSteps.map((step) => (
-              <motion.div key={step.num} variants={fadeIn} className="card card-hover">
-                <p className="text-4xl font-extrabold text-sky-200 mb-3">{step.num}</p>
-                <h3 className="text-lg font-bold text-slate-800 mb-2">{step.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
+              <motion.div
+                key={step.num}
+                variants={fadeIn}
+                className="card card-hover"
+              >
+                <p className="text-4xl font-extrabold text-sky-200 mb-3">
+                  {step.num}
+                </p>
+                <h3 className="text-lg font-bold text-slate-800 mb-2">
+                  {step.title}
+                </h3>
+                <p className="text-sm text-slate-500 leading-relaxed">
+                  {step.desc}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -205,16 +301,31 @@ export default function AboutPage() {
             </h3>
             <div className="grid md:grid-cols-3 gap-5">
               <div className="card bg-white/80">
-                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">Problem</p>
-                <p className="text-sm text-slate-600">Legacy monolith slowed releases and caused frequent downtime during peak transactions.</p>
+                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">
+                  Problem
+                </p>
+                <p className="text-sm text-slate-600">
+                  Legacy monolith slowed releases and caused frequent downtime
+                  during peak transactions.
+                </p>
               </div>
               <div className="card bg-white/80">
-                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">Solution</p>
-                <p className="text-sm text-slate-600">Re-architected into scalable services, implemented CI/CD, and added automated test coverage.</p>
+                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">
+                  Solution
+                </p>
+                <p className="text-sm text-slate-600">
+                  Re-architected into scalable services, implemented CI/CD, and
+                  added automated test coverage.
+                </p>
               </div>
               <div className="card bg-white/80">
-                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">Result</p>
-                <p className="text-sm text-slate-600">Release velocity increased by 40% and platform reliability improved to 99.9% uptime.</p>
+                <p className="text-xs tracking-widest uppercase text-slate-400 mb-2">
+                  Result
+                </p>
+                <p className="text-sm text-slate-600">
+                  Release velocity increased by 40% and platform reliability
+                  improved to 99.9% uptime.
+                </p>
               </div>
             </div>
           </motion.div>
@@ -224,15 +335,24 @@ export default function AboutPage() {
       <section className="pb-24">
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-sky-500 rounded-3xl p-10 md:p-12 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Let&apos;s Build Your Next Growth Engine</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Let&apos;s Build Your Next Growth Engine
+            </h2>
             <p className="text-sky-100 max-w-2xl mx-auto mb-8">
-              Talk to our team about your roadmap, architecture, and execution goals. We&apos;ll help shape the right strategy.
+              Talk to our team about your roadmap, architecture, and execution
+              goals. We&apos;ll help shape the right strategy.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/contact" className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-sky-600 font-semibold hover:bg-sky-50 transition-colors">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-sky-600 font-semibold hover:bg-sky-50 transition-colors"
+              >
                 Book a Free Strategy Call
               </Link>
-              <Link href="/services" className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-white/70 text-white font-semibold hover:bg-white/10 transition-colors">
+              <Link
+                href="/services"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-white/70 text-white font-semibold hover:bg-white/10 transition-colors"
+              >
                 Explore Services
               </Link>
             </div>

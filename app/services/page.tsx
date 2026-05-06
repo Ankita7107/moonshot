@@ -13,11 +13,11 @@ import {
   Banknote,
   ShieldCheck,
   TrendingUp,
-  DollarSign,
   Home,
   BarChart2,
+  IndianRupee,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const services = [
   {
@@ -132,7 +132,7 @@ const financeServices = [
     link: "/mutual-fund",
   },
   {
-    icon: <DollarSign className="w-6 h-6" />,
+    icon: <IndianRupee className="w-6 h-6" />,
     iconColor: "text-violet-600",
     iconBg: "bg-violet-100",
     badge: "Stocks & Bonds",
@@ -215,57 +215,81 @@ export default function ServicesPage() {
         <div className="absolute top-8 left-[14%] h-20 w-20 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
         <div className="absolute bottom-6 right-[14%] h-20 w-20 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-3xl mx-auto px-4">
-          <h1 className="text-5xl font-extrabold text-slate-900 mb-4">
+          {/* Animated Heading */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-5xl font-extrabold text-slate-900 mb-4"
+          >
             Our Services & Solutions
-          </h1>
-          <p className="text-slate-500">
+          </motion.h1>
+          
+          {/* Animated Paragraph */}
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-slate-500"
+          >
             We provide end-to-end software development services using the latest
             technologies to help your business achieve digital excellence.
-          </p>
+          </motion.p>
         </div>
       </section>
 
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
-          {displayedServices.map((s, index) => (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
-              key={s.title}
-              className="card card-hover"
-            >
-              <div className="flex gap-5">
-                <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center shrink-0">
-                  {s.icon}
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {displayedServices.map((s, index) => (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
+                key={s.title}
+                className="card card-hover"
+              >
+                <div className="flex gap-5">
+                  <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center shrink-0">
+                    {s.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-slate-800 text-lg mb-2">
+                      {s.title}
+                    </h3>
+                    <p className="text-slate-500 text-sm mb-4">{s.desc}</p>
+                    <ul className="space-y-1 mb-4">
+                      {features.map((f) => (
+                        <li
+                          key={f}
+                          className="flex items-center gap-2 text-sm text-slate-500"
+                        >
+                          <CheckCircle size={14} className="text-sky-500" /> {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href="/contact"
+                      className="text-sky-500 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
+                    >
+                      Inquire for Quote <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-slate-800 text-lg mb-2">
-                    {s.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm mb-4">{s.desc}</p>
-                  <ul className="space-y-1 mb-4">
-                    {features.map((f) => (
-                      <li
-                        key={f}
-                        className="flex items-center gap-2 text-sm text-slate-500"
-                      >
-                        <CheckCircle size={14} className="text-sky-500" /> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href="/contact"
-                    className="text-sky-500 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
-                  >
-                    Inquire for Quote <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {services.length > 6 && (
           <motion.div
@@ -304,6 +328,7 @@ export default function ServicesPage() {
             {financeServices.map((f) => (
               <motion.div
                 variants={fadeIn}
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
                 key={f.title}
                 className="card card-hover"
               >
@@ -322,7 +347,7 @@ export default function ServicesPage() {
                 </h3>
                 <p className="text-slate-500 text-sm mb-4">{f.desc}</p>
                 <Link
-                  href={f.link}
+                  href="/contact"
                   className="text-sky-500 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
                 >
                   Explore <ArrowRight size={14} />
@@ -350,6 +375,7 @@ export default function ServicesPage() {
             {steps.map((step) => (
               <motion.div
                 variants={fadeIn}
+                whileHover={{ scale: 1.05 }}
                 key={step.num}
                 className="bg-white/10 rounded-2xl p-6 text-left border border-white/10 transition-transform hover:-translate-y-1 hover:shadow-lg"
               >
