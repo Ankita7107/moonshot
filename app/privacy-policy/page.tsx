@@ -1,23 +1,23 @@
 "use client";
 import { motion } from "framer-motion";
-import { 
-  Shield, Lock, Eye, Database, Cookie, Mail, Clock, Globe, 
-  CheckCircle, AlertCircle, FileText, Users, Server, Trash2 
+import {
+  Shield, Lock, Eye, Database, Cookie, Mail, Clock, Globe,
+  CheckCircle, AlertCircle, FileText, Users, Server, Trash2
 } from "lucide-react";
 import Link from "next/link";
 
 export default function PrivacyPolicyPage() {
   const lastUpdated = "January 15, 2026";
   const navItems = ["Introduction", "Collection", "Usage", "Sharing", "Security", "Rights", "Cookies", "Contact"];
-  
+
   return (
     <>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 text-center overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />
         <div className="absolute -top-10 left-1/4 h-32 w-32 rounded-full bg-sky-500/20 blur-3xl animate-float-slow" />
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-4xl mx-auto px-4 relative z-10"
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
 
             {/* Main Content Sections */}
             <motion.div className="lg:col-span-3 space-y-12">
-              
+
               <section id="introduction" className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center shrink-0"><Globe className="text-sky-600" /></div>
@@ -139,7 +139,7 @@ export default function PrivacyPolicyPage() {
                   <div>
                     <h2 className="text-2xl font-bold text-slate-900 mb-4">Contact</h2>
                     <div className="bg-white rounded-xl p-4 text-sm text-slate-700 space-y-1">
-                      <p>Email: legal@moonshotminds.com</p>
+                      <p>Email: moonshotminds@gmail.com</p>
                       <p>AU: +61 412 345 678 | IN: +91 98765 43210</p>
                       <p>Craigieburn, VIC 3064, AU | Shivaji Nagar, Pune, IN</p>
                     </div>

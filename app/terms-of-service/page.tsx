@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { 
-  Scale, FileText, AlertCircle, CheckCircle, Shield, Users, Globe, BookOpen, Trash2, Zap, IndianRupee 
+import {
+  Scale, FileText, AlertCircle, CheckCircle, Shield, Users, Globe, BookOpen, Trash2, Zap, IndianRupee
 } from "lucide-react";
 import Link from "next/link";
 
@@ -16,7 +16,7 @@ export default function TermsOfServicePage() {
       <section className="relative bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-900 py-20 text-center overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />
         <div className="absolute -top-10 left-1/4 h-32 w-32 rounded-full bg-indigo-500/20 blur-3xl animate-float-slow" />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-4xl mx-auto px-4 relative z-10"
@@ -51,7 +51,7 @@ export default function TermsOfServicePage() {
 
             {/* Main Content Sections */}
             <motion.div className="lg:col-span-3 space-y-8">
-              
+
               {/* Section 1 */}
               <section id="agreement" className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
                 <div className="flex items-start gap-4">
@@ -165,7 +165,7 @@ export default function TermsOfServicePage() {
                     <p className="text-slate-600 text-sm">These terms are governed by the laws of Victoria, Australia. Disputes are subject to the exclusive jurisdiction of Victorian courts.</p>
                     <div className="mt-6 pt-6 border-t border-slate-200 text-xs text-slate-500">
                       <p className="font-bold mb-1">Contact Legal:</p>
-                      <p>legal@moonshotminds.com | Craigieburn, VIC 3064, AU</p>
+                      <p>moonshotminds@gmail.com | Craigieburn, VIC 3064, AU</p>
                     </div>
                   </div>
                 </div>
