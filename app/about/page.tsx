@@ -1,8 +1,53 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Target, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
+
+// Animated counter component
+const AnimatedCounter = ({ value, suffix = "", className = "" }: { value: string; suffix?: string; className?: string }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLParagraphElement>(null);
+  const numericValue = parseFloat(value.replace(/[^0-9.]/g, ""));
+  const hasPlus = value.includes("+");
+  const hasPercent = value.includes("%");
+  const isDecimal = value.includes(".");
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let start = 0;
+          const duration = 2000;
+          const increment = numericValue / (duration / 16);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= numericValue) {
+              setCount(numericValue);
+              clearInterval(timer);
+            } else {
+              setCount(start);
+            }
+          }, 16);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [numericValue]);
+  
+  const displayValue = isDecimal ? count.toFixed(1) : Math.floor(count);
+  
+  return (
+    <span ref={ref} className={className}>
+      {displayValue}{hasPlus ? "+" : ""}{hasPercent ? "%" : ""}{suffix}
+    </span>
+  );
+};
 
 const stats = [
   { value: "10+", label: "Years" },
@@ -127,7 +172,7 @@ export default function AboutPage() {
               {stats.map((s) => (
                 <motion.div variants={fadeIn} key={s.label}>
                   <p className="text-3xl font-extrabold text-sky-500 mb-1">
-                    {s.value}
+                    <AnimatedCounter value={s.value} />
                   </p>
                   <p className="text-xs text-slate-400 uppercase tracking-widest">
                     {s.label}
@@ -242,7 +287,7 @@ export default function AboutPage() {
                 className="card card-hover text-center"
               >
                 <p className="text-3xl md:text-4xl font-extrabold text-sky-500 mb-2">
-                  {item.value}
+                  <AnimatedCounter value={item.value} />
                 </p>
                 <p className="text-sm text-slate-500">{item.label}</p>
               </motion.div>
