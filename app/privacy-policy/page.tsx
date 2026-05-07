@@ -154,17 +154,18 @@ export default function PrivacyPolicyPage() {
                   6. Data Security
                 </h2>
               </div>
-              <p className="text-slate-600 text-sm leading-relaxed mb-4">
-                We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, or disclosure.
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                We implement a multi-layered security strategy to protect your personal information from unauthorized access, alteration, or disclosure. Our security-first culture ensures that data protection is integrated into every stage of our operations.
               </p>
-              <div className="grid sm:grid-cols-2 gap-4">
+              
+              <div className="grid sm:grid-cols-2 gap-4 mb-6">
                 <div className="border-l-4 border-sky-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
                   <Shield className="w-4 h-4 text-sky-500 mb-1" />
                   <p className="text-sm font-medium text-slate-800">
                     SSL Encryption
                   </p>
                   <p className="text-xs text-slate-500">
-                    256-bit secure data transmission
+                    256-bit secure data transmission for all traffic.
                   </p>
                 </div>
                 <div className="border-l-4 border-teal-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
@@ -173,9 +174,51 @@ export default function PrivacyPolicyPage() {
                     ISO Certified Facilities
                   </p>
                   <p className="text-xs text-slate-500">
-                    Secure and compliant data storage
+                    Secure and compliant data storage in tier-1 data centers.
                   </p>
                 </div>
+                <div className="border-l-4 border-indigo-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
+                  <Lock className="w-4 h-4 text-indigo-500 mb-1" />
+                  <p className="text-sm font-medium text-slate-800">
+                    MFA & PoLP
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Multi-factor authentication and strict access controls.
+                  </p>
+                </div>
+                <div className="border-l-4 border-blue-300 pl-4 py-3 bg-slate-50 rounded-r-lg">
+                  <Users className="w-4 h-4 text-blue-500 mb-1" />
+                  <p className="text-sm font-medium text-slate-800">
+                    Employee Training
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Regular security and privacy awareness programs.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-sky-50 border border-sky-100 rounded-xl p-5">
+                <h3 className="text-sm font-bold text-sky-800 mb-3 flex items-center gap-2">
+                  <Database className="w-4 h-4" /> Comprehensive Security Framework
+                </h3>
+                <ul className="grid md:grid-cols-2 gap-x-6 gap-y-2 text-xs text-sky-700/80">
+                  <li className="flex items-start gap-2">
+                    <span className="text-sky-500 font-bold">•</span>
+                    Regular vulnerability assessments & penetration testing.
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-sky-500 font-bold">•</span>
+                    End-to-end encryption for sensitive data at rest.
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-sky-500 font-bold">•</span>
+                    Strict Non-Disclosure Agreements (NDAs) for all staff.
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-sky-500 font-bold">•</span>
+                    24/7 monitoring and rapid incident response protocols.
+                  </li>
+                </ul>
               </div>
             </section>
 
