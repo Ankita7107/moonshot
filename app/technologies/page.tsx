@@ -72,7 +72,7 @@ const ICON_SLUGS: Record<string, string> = {
   BigQuery: "googlebigquery",
   // Cloud Advanced
   Serverless: "serverless",
-  "AWS Lambda": "awslambda",
+  "AWS Lambda": "amazonaws",
   // Testing
   Jest: "jest",
   Cypress: "cypress",
@@ -81,7 +81,7 @@ const ICON_SLUGS: Record<string, string> = {
   // Blockchain
   Ethereum: "ethereum",
   Solidity: "solidity",
-  Metamask: "metamask",
+  Metamask: "ethereum",
 };
 
 function TechLogo({ name }: { name: string }) {
@@ -89,7 +89,7 @@ function TechLogo({ name }: { name: string }) {
   if (!slug) return null;
   return (
     <img
-      src={`https://cdn.simpleicons.org/${slug}`}
+      src={`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`}
       alt={name}
       width={14}
       height={14}
@@ -269,7 +269,7 @@ export default function TechnologiesPage() {
                 >
                   {headerSlug ? (
                     <img
-                      src={`https://cdn.simpleicons.org/${headerSlug}`}
+                      src={`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${headerSlug}.svg`}
                       alt={cat.title}
                       width={28}
                       height={28}
