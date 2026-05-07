@@ -198,6 +198,7 @@ export default function AboutPage() {
                 src="/moonshot_images/engineering-excellence.png" 
                 alt="Engineering Excellence"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
                 onError={(e) => {
                   console.error("Image failed to load");
