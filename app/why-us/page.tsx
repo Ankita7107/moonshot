@@ -84,6 +84,7 @@ export default function WhyUsPage() {
                 src="/moonshot_images/transperentpartnership.png"
                 alt="Why Partners Choose Us"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />
