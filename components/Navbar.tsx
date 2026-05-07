@@ -29,6 +29,7 @@ export default function Navbar() {
               src="/moonshot_images/logo.png"
               alt="Moonshot Minds Logo"
               fill
+              sizes="80px"
               className="object-contain"
               priority
             />
