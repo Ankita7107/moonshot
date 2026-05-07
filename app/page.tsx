@@ -401,25 +401,31 @@ export default function HomePage() {
             className="bg-gradient-to-r from-sky-500 to-sky-600 rounded-3xl p-12 text-center text-white relative overflow-hidden"
           >
             {/* Animated background particles */}
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-white/30 rounded-full"
-                initial={{ x: Math.random() * 400 - 200, y: Math.random() * 300 - 150 }}
-                animate={{ 
-                  y: [0, -100, 0],
-                  opacity: [0, 0.5, 0],
-                  scale: [0, 1, 0]
-                }}
-                transition={{ 
-                  duration: 3 + Math.random() * 2, 
-                  repeat: Infinity, 
-                  delay: i * 0.5,
-                  ease: "easeOut"
-                }}
-                style={{ left: `${20 + Math.random() * 60}%`, top: `${20 + Math.random() * 60}%` }}
-              />
-            ))}
+            {[...Array(6)].map((_, i) => {
+              const xOffsets = [-150, 100, -50, 180, -200, 50];
+              const yOffsets = [-100, 50, -150, 120, -50, 100];
+              const leftPositions = [25, 65, 35, 75, 45, 80];
+              const topPositions = [30, 40, 70, 25, 60, 50];
+              return (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-white/30 rounded-full"
+                  initial={{ x: xOffsets[i], y: yOffsets[i] }}
+                  animate={{ 
+                    y: [0, -100, 0],
+                    opacity: [0, 0.5, 0],
+                    scale: [0, 1, 0]
+                  }}
+                  transition={{ 
+                    duration: 3 + (i % 3), 
+                    repeat: Infinity, 
+                    delay: i * 0.5,
+                    ease: "easeOut"
+                  }}
+                  style={{ left: `${leftPositions[i]}%`, top: `${topPositions[i]}%` }}
+                />
+              );
+            })}
             
             <motion.h2 
               className="text-3xl md:text-4xl font-bold mb-4 relative z-10"
