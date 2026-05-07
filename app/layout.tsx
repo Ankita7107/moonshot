@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "Moonshot Minds Tech | Innovation & Scalability",
   description: "Transforming complex business challenges into sleek, scalable software solutions.",
+  icons: {
+    icon: "/moonshot_images/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
