@@ -7,7 +7,7 @@ const features = [
   {
     icon: "🚀",
     title: "Proven Expertise",
-    desc: "Over 10+ years of experience delivering 200+ successful projects globally.",
+    desc: "Over 10+ years of experience delivering 3000+ successful projects globally.",
   },
   {
     icon: "📊",

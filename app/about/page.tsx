@@ -51,7 +51,7 @@ const AnimatedCounter = ({ value, suffix = "", className = "" }: { value: string
 
 const stats = [
   { value: "10+", label: "Years" },
-  { value: "300+", label: "Projects" },
+  { value: "3000+", label: "Projects" },
   { value: "20", label: "Global Offices" },
 ];
 
