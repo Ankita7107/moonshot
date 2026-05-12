@@ -2,137 +2,10 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-// Map tech names → simple-icons slug
-const ICON_SLUGS: Record<string, string> = {
-  // Frontend
-  React: "react",
-  "Next.js": "nextdotjs",
-  "Vue.js": "vuedotjs",
-  Angular: "angular",
-  "Tailwind CSS": "tailwindcss",
-  TypeScript: "typescript",
-  // Backend
-  "Node.js": "nodedotjs",
-  Go: "go",
-  Java: "openjdk",
-  "C#": "csharp",
-  ".NET Core": "dotnet",
-  // Database
-  PostgreSQL: "postgresql",
-  MySQL: "mysql",
-  Redis: "redis",
-  DynamoDB: "amazondynamodb",
-  Elasticsearch: "elasticsearch",
-  // Cloud/DevOps
-  AWS: "amazonaws",
-  Azure: "microsoftazure",
-  GCP: "googlecloud",
-  Docker: "docker",
-  Kubernetes: "kubernetes",
-  Terraform: "terraform",
-  // Tools
-  GitHub: "github",
-  GitLab: "gitlab",
-  Jira: "jira",
-  Postman: "postman",
-  "VS Code": "visualstudiocode",
-  Figma: "figma",
-  // API
-  GraphQL: "graphql",
-  Stripe: "stripe",
-  Twilio: "twilio",
-  // Security
-  JWT: "jsonwebtokens",
-  Auth0: "auth0",
-  Keycloak: "keycloak",
-  "OpenID Connect": "openid",
-  // AI/Data
-  OpenAI: "openai",
-  TensorFlow: "tensorflow",
-  PyTorch: "pytorch",
-  Pandas: "pandas",
-  NumPy: "numpy",
-  "Hugging Face": "huggingface",
-  // Mobile
-  "React Native": "react",
-  Flutter: "flutter",
-  Kotlin: "kotlin",
-  Swift: "swift",
-  // LLM
-  "GPT-4": "openai",
-  "OpenAI API": "openai",
-  LangChain: "langchain",
-  // Microservices
-  Kafka: "apachekafka",
-  RabbitMQ: "rabbitmq",
-  // Data Engineering
-  Spark: "apachespark",
-  Airflow: "apacheairflow",
-  Snowflake: "snowflake",
-  BigQuery: "googlebigquery",
-  // Cloud Advanced
-  Serverless: "serverless",
-  "AWS Lambda": "amazonaws",
-  // Testing
-  Jest: "jest",
-  Cypress: "cypress",
-  Selenium: "selenium",
-  Playwright: "playwright",
-  // Blockchain
-  Ethereum: "ethereum",
-  Solidity: "solidity",
-  Metamask: "ethereum",
-};
-
-function TechLogo({ name }: { name: string }) {
-  const slug = ICON_SLUGS[name];
-  if (!slug) return null;
-  return (
-    <img
-      src={`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`}
-      alt={name}
-      width={14}
-      height={14}
-      className="inline-block mr-1.5 flex-shrink-0"
-      style={{ verticalAlign: "middle" }}
-      onError={(e) => {
-        (e.currentTarget as HTMLImageElement).style.display = "none";
-      }}
-    />
-  );
-}
-
-// Category header icon — one representative logo per category
-const CATEGORY_ICONS: Record<string, string> = {
-  Frontend: "react",
-  Backend: "nodedotjs",
-  Database: "postgresql",
-  "Cloud/DevOps": "docker", // docker logo is clearly visible
-  "Tools & Platforms": "github",
-  "API & Integration": "graphql",
-  Security: "jsonwebtokens",
-  "AI / Data": "tensorflow", // tensorflow orange logo works well
-  "Mobile Development": "flutter",
-  "AI / LLM Systems": "huggingface", // huggingface yellow is clearly visible
-  Microservices: "kubernetes",
-  Authentication: "auth0",
-  "Data Engineering": "apachespark",
-  "Advanced Cloud": "kubernetes", // kubernetes blue works
-  "Testing & QA": "jest",
-  Blockchain: "ethereum",
-};
-
 const techCategories = [
   {
     title: "Frontend",
-    tags: [
-      "React",
-      "Next.js",
-      "Vue.js",
-      "Angular",
-      "Tailwind CSS",
-      "TypeScript",
-    ],
+    tags: ["React", "Next.js", "Vue.js", "Angular", "Tailwind CSS", "TypeScript"],
   },
   {
     title: "Backend",
@@ -160,14 +33,7 @@ const techCategories = [
   },
   {
     title: "AI / Data",
-    tags: [
-      "OpenAI",
-      "TensorFlow",
-      "PyTorch",
-      "Pandas",
-      "NumPy",
-      "Hugging Face",
-    ],
+    tags: ["OpenAI", "TensorFlow", "PyTorch", "Pandas", "NumPy", "Hugging Face"],
   },
   {
     title: "Mobile Development",
@@ -250,52 +116,30 @@ export default function TechnologiesPage() {
           viewport={{ once: true, margin: "-50px" }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-auto pb-2 md:pb-0 flex md:grid md:grid-cols-4 gap-6 snap-x snap-mandatory md:snap-none md:overflow-visible"
         >
-          {techCategories.map((cat) => {
-            const headerSlug = CATEGORY_ICONS[cat.title];
-            return (
-              <motion.div
-                variants={fadeIn}
-                whileHover={{ y: -8, scale: 1.015, rotateX: 6, rotateY: 10 }}
-                transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                key={cat.title}
-                className="card card-hover hover-shine min-w-[260px] md:min-w-0 snap-start md:snap-start"
-                style={{ transformPerspective: 900 }}
-              >
-                {/* Category header icon — real brand logo */}
-                <motion.div
-                  whileHover={{ rotate: -8, y: -2, scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                  className="w-12 h-12 bg-sky-50 rounded-xl flex items-center justify-center mb-4"
-                >
-                  {headerSlug ? (
-                    <img
-                      src={`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${headerSlug}.svg`}
-                      alt={cat.title}
-                      width={28}
-                      height={28}
-                      className="object-contain"
-                    />
-                  ) : null}
-                </motion.div>
+          {techCategories.map((cat) => (
+            <motion.div
+              variants={fadeIn}
+              whileHover={{ y: -8, scale: 1.015, rotateX: 6, rotateY: 10 }}
+              transition={{ type: "spring", stiffness: 260, damping: 18 }}
+              key={cat.title}
+              className="card card-hover hover-shine min-w-[260px] md:min-w-0 snap-start md:snap-start"
+              style={{ transformPerspective: 900 }}
+            >
+              <h3 className="font-bold text-slate-800 mb-4">{cat.title}</h3>
 
-                <h3 className="font-bold text-slate-800 mb-4">{cat.title}</h3>
-
-                {/* Tags with real logos */}
-                <div className="flex flex-wrap gap-2">
-                  {cat.tags.map((tag) => (
-                    <motion.span
-                      whileHover={{ y: -2 }}
-                      key={tag}
-                      className="badge text-xs flex items-center"
-                    >
-                      <TechLogo name={tag} />
-                      {tag}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+              <div className="flex flex-wrap gap-2">
+                {cat.tags.map((tag) => (
+                  <motion.span
+                    whileHover={{ y: -2 }}
+                    key={tag}
+                    className="badge text-xs"
+                  >
+                    {tag}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </section>
 
