@@ -199,8 +199,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <>
-      <header className="sticky top-0 z-50 border-b border-slate-100/80 bg-white/90 backdrop-blur-xl shadow-sm shadow-slate-200/30">
+    <header className="sticky top-0 z-50 border-b border-slate-100/80 bg-white/90 backdrop-blur-xl shadow-sm shadow-slate-200/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]">
         {/* Logo */}
         <Link
@@ -497,23 +496,5 @@ export default function Navbar() {
         </div>
       </div>
     </header>
-    
-    {/* Zoho-inspired "Zia" Floating Assistant UI */}
-    <div className="fixed bottom-6 right-6 z-[60]">
-      <motion.button
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        whileTap={{ scale: 0.9 }}
-        className="relative group"
-      >
-        <div className="absolute -top-12 right-0 bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-xl whitespace-nowrap">
-          Hi, I'm Moonshot AI! How can I help?
-          <div className="absolute -bottom-1 right-4 w-2 h-2 bg-slate-900 rotate-45" />
-        </div>
-        <div className="w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl shadow-2xl flex items-center justify-center text-white border border-white/20">
-          <Sparkles className="w-6 h-6 animate-pulse" />
-        </div>
-      </motion.button>
-    </div>
-</>
   );
 }
