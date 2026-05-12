@@ -274,40 +274,61 @@ export default function ServicesPage() {
             {displayedServices.map((s, index) => (
               <motion.div
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                whileHover={{
+                  y: -10,
+                  boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+                  transition: { duration: 0.3 }
+                }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
                 key={s.title}
                 id={s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
-                className="card card-hover scroll-mt-24"
+                className="card card-hover scroll-mt-24 group border-slate-100 hover:border-sky-200 transition-all duration-300"
               >
-                <div className="flex gap-5">
-                  <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center shrink-0">
-                    {s.icon}
-                  </div>
+                <div className="flex gap-6">
+                  <motion.div
+                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                    className="w-16 h-16 bg-gradient-to-br from-slate-50 to-white group-hover:from-slate-100 group-hover:to-white border border-transparent group-hover:border-sky-300 rounded-2xl flex items-center justify-center shrink-0 shadow-sm transition-all duration-500"
+                  >
+                    <div className="group-hover:scale-110 transition-transform duration-300">
+                      {s.icon}
+                    </div>
+                  </motion.div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-slate-800 text-lg mb-2">
+                    <h3 className="font-bold text-slate-800 text-xl mb-2 group-hover:text-sky-600 transition-colors">
                       {s.title}
                     </h3>
-                    <p className="text-slate-500 text-sm mb-4">{s.desc}</p>
-                    <ul className="space-y-1 mb-4">
-                      {features.map((f) => (
-                        <li
+                    <p className="text-slate-500 text-sm mb-5 leading-relaxed">{s.desc}</p>
+                    <div className="grid grid-cols-1 gap-2 mb-6">
+                      {features.map((f, i) => (
+                        <motion.li
                           key={f}
-                          className="flex items-center gap-2 text-sm text-slate-500"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.2 + (i * 0.1) }}
+                          className="flex items-center gap-3 text-sm text-slate-500 list-none"
                         >
-                          <CheckCircle size={14} className="text-sky-500" /> {f}
-                        </li>
+                          <div className="w-5 h-5 rounded-full bg-sky-50 flex items-center justify-center">
+                            <CheckCircle size={12} className="text-sky-500" />
+                          </div>
+                          {f}
+                        </motion.li>
                       ))}
-                    </ul>
+                    </div>
                     <Link
                       href="/contact"
-                      className="text-sky-500 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
+                      className="inline-flex items-center gap-2 text-sky-500 text-sm font-bold group/link"
                     >
-                      Inquire for Quote <ArrowRight size={14} />
+                      Inquire for Quote
+                      <motion.span
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
+                      </motion.span>
                     </Link>
                   </div>
                 </div>

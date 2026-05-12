@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
@@ -138,18 +139,25 @@ function HoverMenu({
         />
       </Link>
 
-      <div
-        className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 z-50 transition-all duration-200 origin-top
-          ${open ? "opacity-100 scale-100 translate-y-0 pointer-events-auto" : "opacity-0 scale-95 -translate-y-1 pointer-events-none"}`}
-      >
-        <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45 z-10" />
-        <div 
-          onClick={() => setOpen(false)}
-          className="relative bg-white rounded-2xl shadow-2xl shadow-slate-300/40 border border-slate-100 overflow-hidden"
-        >
-          {children}
-        </div>
-      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
+            exit={{ opacity: 0, y: -10, scale: 0.95, x: "-50%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="absolute top-full left-1/2 mt-2 z-50 origin-top pointer-events-auto"
+          >
+            <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45 z-10" />
+            <div 
+              onClick={() => setOpen(false)}
+              className="relative bg-white rounded-2xl shadow-2xl shadow-slate-300/40 border border-slate-100 overflow-hidden"
+            >
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

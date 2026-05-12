@@ -1,6 +1,15 @@
+"use client";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Linkedin, Twitter, Github } from "lucide-react";
-
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Linkedin,
+  Twitter,
+  Github,
+  ArrowRight,
+} from "lucide-react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Footer() {
@@ -12,155 +21,173 @@ export default function Footer() {
       { label: "Contact", href: "/contact" },
     ],
     expertise: [
-      { label: "Web Development", href: "#" },
-      { label: "Enterprise Software", href: "#" },
-      { label: "Cloud & DevOps", href: "#" },
-      { label: "AI & Data Science", href: "#" },
+      { label: "Web Development", href: "/services#custom-web-solutions" },
+      { label: "Enterprise Software", href: "/services#enterprise-software" },
+      { label: "Cloud & DevOps", href: "/services#cloud-devops" },
+      { label: "AI & Data Science", href: "/services#ai-machine-learning" },
     ],
   };
 
-  const socialLinks = [
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Github, href: "#", label: "GitHub" },
-  ];
-
   return (
-    <footer className="relative bg-slate-950 border-t border-slate-800 pt-16 pb-8">
-      {/* Background gradient */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-500/5 via-transparent to-transparent" />
+    <footer className="relative bg-slate-950 border-t border-slate-900 pt-20 pb-10 overflow-hidden">
+      {/* Dynamic background gradient */}
+      <motion.div
+        animate={{
+          opacity: [0.3, 0.5, 0.3],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 bg-sky-500/10 rounded-full blur-[100px]"
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main footer content */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 mb-12">
-          {/* Brand Section - spans 4 columns */}
-          <div className="md:col-span-4 space-y-4">
-            <div className="flex items-center">
-              <div className="relative w-16 h-16 bg-white rounded-xl shadow-sm overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 mb-16">
+          {/* Brand Section */}
+          <div className="md:col-span-5 space-y-6">
+            <Link href="/" className="group flex items-center w-fit">
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: 2 }}
+                className="relative w-16 h-16 bg-white rounded-2xl shadow-xl overflow-hidden p-2"
+              >
                 <Image
                   src="/moonshot_images/logo.png"
                   alt="Moonshot Minds Logo"
                   fill
                   sizes="64px"
-                  className="object-contain"
+                  className="object-contain p-1"
                 />
+              </motion.div>
+              <div className="ml-4">
+                <p className="text-2xl font-bold tracking-tight">
+                  <span className="text-white">Moonshot</span>
+                  <span className="text-sky-500">Minds</span>
+                </p>
+                <p className="text-[10px] text-slate-500 uppercase tracking-[0.3em] font-bold">
+                  Tech Studio
+                </p>
               </div>
-              <span className="text-xl font-bold ml-2">
-                <span className="text-white">Moonshot</span>
-                <span className="text-sky-500">Minds</span>
-              </span>
-            </div>
+            </Link>
 
-            <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-              Empowering global enterprises with scalable software solutions and
-              innovative technologies.
+            <p className="text-slate-400 text-base leading-relaxed max-w-md">
+              Architecting the next generation of digital infrastructure. We
+              combine engineering excellence with visionary design to build
+              solutions that scale with your ambition.
             </p>
 
-            {/* Social Links */}
-            {/* <div className="flex gap-2 pt-2">
-              {socialLinks.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-sky-400 hover:border-sky-500/50 transition-all duration-200"
+            <div className="flex gap-4">
+              {[Linkedin, Twitter, Github].map((Icon, i) => (
+                <motion.a
+                  key={i}
+                  href="#"
+                  whileHover={{ y: -5, scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-500/50 transition-all duration-300"
                 >
-                  <Icon size={18} />
-                </a>
+                  <Icon size={20} />
+                </motion.a>
               ))}
-            </div> */}
+            </div>
           </div>
 
-          {/* Company Links - spans 2 columns */}
-          <div className="md:col-span-2">
-            <h3 className="font-semibold text-white text-sm uppercase tracking-wider mb-4">
-              Company
-            </h3>
-            <ul className="space-y-2">
-              {footerLinks.company.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-slate-400 hover:text-sky-400 text-sm transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Links Sections */}
+          <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="font-bold text-white text-xs uppercase tracking-[0.2em] mb-6">
+                Company
+              </h3>
+              <ul className="space-y-4">
+                {footerLinks.company.map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="text-slate-400 hover:text-sky-400 text-sm transition-all duration-300 flex items-center group"
+                    >
+                      <motion.span
+                        whileHover={{ x: 5 }}
+                        className="flex items-center gap-2"
+                      >
+                        {item.label}
+                      </motion.span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Expertise Links - spans 2 columns */}
-          <div className="md:col-span-2">
-            <h3 className="font-semibold text-white text-sm uppercase tracking-wider mb-4">
-              Expertise
-            </h3>
-            <ul className="space-y-2">
-              {footerLinks.expertise.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-slate-400 hover:text-sky-400 text-sm transition-colors duration-200"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div>
+              <h3 className="font-bold text-white text-xs uppercase tracking-[0.2em] mb-6">
+                Expertise
+              </h3>
+              <ul className="space-y-4">
+                {footerLinks.expertise.map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="text-slate-400 hover:text-sky-400 text-sm transition-all duration-300 flex items-center group"
+                    >
+                      <motion.span
+                        whileHover={{ x: 5 }}
+                        className="flex items-center gap-2"
+                      >
+                        {item.label}
+                      </motion.span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Contact Info - spans 4 columns */}
-          <div className="md:col-span-4">
-            <h3 className="font-semibold text-white text-sm uppercase tracking-wider mb-4">
-              Get in Touch
-            </h3>
-            <div className="space-y-3">
-              <div className="flex gap-3 text-slate-400 text-sm">
-                <MapPin size={18} className="text-sky-500 shrink-0 mt-0.5" />
-                <div className="space-y-1">
-                  <p>92 Hothly Drive, Craigieburn, Victoria-3064, Australia</p>
+            <div className="col-span-2 md:col-span-1">
+              <h3 className="font-bold text-white text-xs uppercase tracking-[0.2em] mb-6">
+                Contact
+              </h3>
+              <div className="space-y-4">
+                <div className="flex gap-4 items-start group">
+                  <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0 group-hover:bg-sky-500/20 transition-colors">
+                    <MapPin size={16} className="text-sky-500" />
+                  </div>
+                  <p className="text-slate-400 text-xs leading-relaxed">
+                    92 Hothly Drive, Craigieburn, Victoria-3064, Australia
+                  </p>
                 </div>
-              </div>
-
-              <div className="flex gap-3 text-slate-400 text-sm">
-                <Phone size={18} className="text-sky-500 shrink-0 mt-0.5" />
-                <div className="space-y-1">
-                  <p>+61 412 345 678</p>
-                  {/* <p>+91 98765 43210</p> */}
+                <div className="flex gap-4 items-start group">
+                  <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0 group-hover:bg-sky-500/20 transition-colors">
+                    <Phone size={16} className="text-sky-500" />
+                  </div>
+                  <p className="text-slate-400 text-xs">+61 412 345 678</p>
                 </div>
-              </div>
-
-              <div className="flex gap-3 text-slate-400 text-sm">
-                <Mail size={18} className="text-sky-500 shrink-0 mt-0.5" />
-                <a
-                  href="mailto:moonshotminds@gmail.com"
-                  className="hover:text-sky-400 transition-colors"
-                >
-                  moonshotminds@gmail.com
-                </a>
+                <div className="flex gap-4 items-start group">
+                  <div className="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0 group-hover:bg-sky-500/20 transition-colors">
+                    <Mail size={16} className="text-sky-500" />
+                  </div>
+                  <a
+                    href="mailto:moonshotminds@gmail.com"
+                    className="text-slate-400 text-xs hover:text-sky-400 transition-colors"
+                  >
+                    moonshotminds@gmail.com
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
-          <p className="text-slate-500 order-2 sm:order-1">
-            © 2002 Moonshot Minds Tech. All rights reserved.
+        <div className="border-t border-slate-900 pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
+          <p className="text-slate-500 text-xs order-2 sm:order-1 font-medium">
+            © 2002 <span className="text-slate-400">Moonshot Minds Tech</span>.
+            All rights reserved.
           </p>
-          <div className="flex gap-6 order-1 sm:order-2">
-            <Link
-              href="/privacy-policy"
-              className="text-slate-500 hover:text-sky-400 transition-colors text-sm"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms-of-service"
-              className="text-slate-500 hover:text-sky-400 transition-colors text-sm"
-            >
-              Terms of Service
-            </Link>
+          <div className="flex gap-8 order-1 sm:order-2">
+            {["Privacy Policy", "Terms of Service"].map((item) => (
+              <Link
+                key={item}
+                href={`/${item.toLowerCase().replace(/ /g, "-")}`}
+                className="text-slate-500 hover:text-sky-500 transition-colors text-xs font-semibold uppercase tracking-wider"
+              >
+                {item}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

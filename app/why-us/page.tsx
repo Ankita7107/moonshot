@@ -96,7 +96,7 @@ export default function WhyUsPage() {
         </div>
       </section>
 
-      {/* Feature Cards */}
+      {/* Feature Cards with Glow Effect */}
       <section className="py-20">
         <motion.div
           variants={staggerContainer}
@@ -109,31 +109,33 @@ export default function WhyUsPage() {
             <motion.div
               variants={fadeIn}
               key={f.title}
-              className="card card-hover text-center hover-shine"
+              whileHover={{ y: -10 }}
+              className="card text-center transition-all duration-300 bg-white/80 backdrop-blur-sm border-slate-100"
             >
-              <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl">
+              <div className="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mx-auto mb-5 text-3xl shadow-sm group-hover:scale-110 transition-transform">
                 {f.icon}
               </div>
-              <h3 className="font-bold text-slate-800 mb-2">{f.title}</h3>
-              <p className="text-slate-500 text-sm">{f.desc}</p>
+              <h3 className="font-bold text-slate-800 mb-2 text-lg">{f.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
 
-      {/* Security & Reliability */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
+      {/* Security & Reliability with Floating Image */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center relative z-10">
           <div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
                 Security & Reliability
               </h2>
-              <p className="text-slate-500 mb-8">
+              <p className="text-slate-500 text-lg mb-8 leading-relaxed">
                 In the digital age, trust is the primary currency. We implement
                 rigorous security protocols from day one, ensuring your
                 intellectual property and user data are always protected.
@@ -144,77 +146,118 @@ export default function WhyUsPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="space-y-3"
+              className="space-y-4"
             >
-              {securityPoints.map((p) => (
+              {securityPoints.map((p, i) => (
                 <motion.li
                   variants={fadeIn}
                   key={p}
-                  className="flex items-center gap-3 text-slate-600"
+                  className="flex items-center gap-4 text-slate-700 bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow cursor-default"
                 >
-                  <CheckCircle size={18} className="text-sky-500 shrink-0" />{" "}
-                  {p}
+                  <div className="w-8 h-8 bg-sky-50 rounded-full flex items-center justify-center shrink-0">
+                    <CheckCircle size={18} className="text-sky-500" />
+                  </div>
+                  <span className="font-medium">{p}</span>
                 </motion.li>
               ))}
             </motion.ul>
           </div>
 
-          {/* IMAGE SECTION */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 30, rotate: 2 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            transition={{ duration: 0.8 }}
+            className="relative perspective-1000"
           >
-            {/* Decorative background element */}
-            <div className="absolute -inset-4 bg-sky-100/50 rounded-3xl -rotate-2" />
+            <motion.div
+              animate={{
+                y: [0, -15, 0],
+                rotate: [0, -1, 0]
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              whileHover={{ scale: 1.05, rotateY: -5 }}
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-white transform-style-3d"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"
+                alt="Security Interface"
+                className="w-full h-[450px] object-cover transition-all duration-500 hover:brightness-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+            </motion.div>
 
-            {/* Main Image */}
-            <img
-              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"
-              alt="Security Interface"
-              className="relative rounded-2xl shadow-2xl border border-slate-200 object-cover w-full h-[400px]"
-            />
+            {/* Background Accent */}
+            <div className="absolute -inset-6 bg-sky-100/50 rounded-3xl -rotate-2 -z-10 blur-xl" />
           </motion.div>
         </div>
       </section>
 
-      {/* Transparent Partnership */}
-      <section className="py-20">
+      {/* Transparent Partnership with Drift Image */}
+      <section className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
-          {/* IMAGE SIDE */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9, x: -30 }}
+            whileInView={{ opacity: 1, scale: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            transition={{ duration: 0.8 }}
+            className="relative order-2 md:order-1"
           >
-            {/* Decorative Gradient Background */}
-            <div className="absolute -inset-4 bg-gradient-to-tr from-sky-100 to-slate-200 rounded-3xl rotate-1 opacity-70" />
+            <motion.div
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-white"
+              animate={{
+                y: [0, 15, 0],
+                rotate: [0, 1, 0]
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+              whileHover={{
+                scale: 1.05,
+                rotateY: 5
+              }}
+            >
+              <motion.div
+                whileHover={{
+                  x: [0, -15, 15, 0],
+                  transition: { duration: 12, repeat: Infinity, ease: "linear" }
+                }}
+                className="w-full h-full"
+              >
+                <img
+                  src="/moonshot_images/whypartners.png"
+                  alt="Team Collaboration"
+                  className="w-full h-[450px] object-cover"
+                />
+              </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/40 via-transparent to-white/10" />
+            </motion.div>
 
-            {/* Main Image: Collaborative Team */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white">
-              <img
-                src="/moonshot_images/whypartners.png"
-                alt="Team Collaboration"
-                className="w-full h-[400px] object-cover transition-transform duration-500 hover:scale-105"
-              />
-              {/* Overlay Gradient for depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
-            </div>
+            {/* Glossy reflection */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none"
+              animate={{ x: ['-100%', '200%'] }}
+              transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
+            />
           </motion.div>
 
-          {/* TEXT SIDE */}
-          <div>
+          <div className="order-1 md:order-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
                 Transparent Partnership
               </h2>
-              <p className="text-slate-500 mb-8">
+              <p className="text-slate-500 text-lg mb-8 leading-relaxed">
                 No black boxes. You get full visibility into our development
                 process via shared Jira boards, Slack channels, and weekly
                 sprint reviews.
@@ -225,15 +268,18 @@ export default function WhyUsPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="space-y-3"
+              className="space-y-4"
             >
               {partnerPoints.map((p) => (
                 <motion.li
                   variants={fadeIn}
                   key={p}
-                  className="flex items-center gap-3 text-slate-600"
+                  className="flex items-center gap-4 text-slate-700 bg-sky-50/50 p-4 rounded-xl border border-sky-100 hover:bg-sky-50 transition-colors cursor-default"
                 >
-                  <Clock size={18} className="text-sky-500 shrink-0" /> {p}
+                  <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm">
+                    <Clock size={18} className="text-sky-500" />
+                  </div>
+                  <span className="font-medium">{p}</span>
                 </motion.li>
               ))}
             </motion.ul>

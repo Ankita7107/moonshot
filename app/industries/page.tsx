@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image"; // 1. Added Import
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const industries = [
   {
@@ -133,10 +134,10 @@ export default function IndustriesPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative py-20 text-center overflow-hidden animated-grid-bg">
-        <div className="absolute top-12 left-[15%] h-20 w-20 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
-        <div className="absolute bottom-6 right-[15%] h-20 w-20 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
+      {/* HEADER */}
+      <section className="relative bg-gradient-to-br from-slate-50 to-white py-20 text-center overflow-hidden animated-grid-bg">
+        <div className="absolute top-8 left-[14%] h-24 w-24 rounded-full bg-slate-200/20 blur-2xl animate-float-slow" />
+        <div className="absolute bottom-8 right-[14%] h-24 w-24 rounded-full bg-slate-100/20 blur-2xl animate-float-delay" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -159,47 +160,74 @@ export default function IndustriesPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8">
           {displayedIndustries.map((ind, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
+              transition={{
+                duration: 0.6,
+                delay: (index % 6) * 0.1,
+                ease: [0.21, 0.45, 0.32, 0.9]
+              }}
               key={ind.title}
               id={ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
               className="card p-0 overflow-hidden card-hover group border-slate-100 hover:border-sky-200 scroll-mt-24"
             >
-              {/* 3. Updated Image / Banner Logic */}
-              <div className="h-52 relative overflow-hidden">
-                {/* Background Image */}
-                <Image
-                  src={ind.image}
-                  alt={ind.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                {/* Gradient Overlay (using your existing ind.bg) */}
+              <div className="h-56 relative overflow-hidden">
+                {/* Background Image with dynamic drift animation */}
+                <motion.div
+                  className="absolute inset-0 w-full h-full"
+                  whileHover={{
+                    scale: 1.15,
+                    x: [0, -10, 10, 0],
+                    transition: {
+                      scale: { duration: 0.6 },
+                      x: { duration: 10, repeat: Infinity, ease: "linear" }
+                    }
+                  }}
+                >
+                  <Image
+                    src={ind.image}
+                    alt={ind.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
+                </motion.div>
+
+                {/* Gradient Overlay */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${ind.bg} opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-40`}
                 />
-                {/* Visual Content Overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+
+                {/* Visual Content Overlay (Optional: can add floating elements here) */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
                   <motion.div
-                    whileHover={{ y: -4, rotate: 2 }}
-                    transition={{ duration: 0.25 }}
-                    className="text-5xl mb-2 transition-transform duration-500 group-hover:scale-110"
-                  ></motion.div>
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 0.2, scale: 1 }}
+                    className="w-24 h-24 rounded-full border-2 border-white/30 flex items-center justify-center"
+                  />
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-slate-800 mb-2">
+              <div className="p-7 relative bg-white">
+                <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight className="text-sky-500 w-5 h-5" />
+                  </motion.div>
+                </div>
+                <h3 className="text-xl font-bold text-slate-800 mb-2 group-hover:text-sky-600 transition-colors">
                   {ind.title}
                 </h3>
-                <p className="text-slate-500 text-sm mb-4">{ind.desc}</p>
-                <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                <p className="text-slate-500 text-sm mb-5 line-clamp-2 leading-relaxed">
+                  {ind.desc}
+                </p>
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-50">
                   {tags.map((tag) => (
-                    <span key={tag} className="badge text-xs">
+                    <span key={tag} className="badge bg-slate-50 text-slate-500 text-[10px] uppercase tracking-wider font-semibold group-hover:bg-sky-50 group-hover:text-sky-600 transition-colors">
                       {tag}
                     </span>
                   ))}

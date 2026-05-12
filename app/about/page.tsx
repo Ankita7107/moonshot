@@ -6,14 +6,22 @@ import { Target, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Animated counter component
-const AnimatedCounter = ({ value, suffix = "", className = "" }: { value: string; suffix?: string; className?: string }) => {
+const AnimatedCounter = ({
+  value,
+  suffix = "",
+  className = "",
+}: {
+  value: string;
+  suffix?: string;
+  className?: string;
+}) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLParagraphElement>(null);
   const numericValue = parseFloat(value.replace(/[^0-9.]/g, ""));
   const hasPlus = value.includes("+");
   const hasPercent = value.includes("%");
   const isDecimal = value.includes(".");
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -33,18 +41,21 @@ const AnimatedCounter = ({ value, suffix = "", className = "" }: { value: string
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
-    
+
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [numericValue]);
-  
+
   const displayValue = isDecimal ? count.toFixed(1) : Math.floor(count);
-  
+
   return (
     <span ref={ref} className={className}>
-      {displayValue}{hasPlus ? "+" : ""}{hasPercent ? "%" : ""}{suffix}
+      {displayValue}
+      {hasPlus ? "+" : ""}
+      {hasPercent ? "%" : ""}
+      {suffix}
     </span>
   );
 };
@@ -131,7 +142,7 @@ export default function AboutPage() {
         <div className="absolute bottom-10 right-[10%] h-24 w-24 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
@@ -139,8 +150,8 @@ export default function AboutPage() {
             >
               Engineering Excellence
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
@@ -149,19 +160,19 @@ export default function AboutPage() {
               Moonshot Minds Tech was founded on a simple premise: that software
               should be beautiful, scalable, and inherently useful.
             </motion.p>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
               className="text-slate-500 text-sm"
             >
-              Founded in 2024 and headquartered in Craigieburn, Victoria, we
+              Founded in 2002 and headquartered in Craigieburn, Victoria, we
               specialize in architecting sophisticated software solutions that
               drive innovation, enhance efficiency, and create sustainable
               competitive advantages for enterprises across diverse industries.
             </motion.p>
-            
+
             <motion.div
               variants={staggerContainer}
               initial="hidden"
@@ -181,29 +192,59 @@ export default function AboutPage() {
               ))}
             </motion.div>
           </div>
-          
-          {/* Image with SAME animation as Engineering Excellence text */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative rounded-2xl h-72 overflow-hidden hover-shine bg-gradient-to-br from-slate-800 to-sky-900"
+
+          {/* Image with enhanced dynamic animation */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, rotateY: 20 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative rounded-2xl h-80 overflow-hidden group perspective-1000 shadow-2xl"
           >
             <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Infinity, delay: 2 }}
-              className="relative w-full h-full"
+              animate={{
+                y: [0, -20, 0],
+                rotateZ: [0, 2, 0],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              whileHover={{
+                scale: 1.1,
+                rotateY: 5,
+                rotateX: -5,
+                transition: { duration: 0.4 },
+              }}
+              className="relative w-full h-full transform-style-3d"
             >
-              <Image 
-                src="/moonshot_images/engineering-excellence.png" 
+              <Image
+                src="/moonshot_images/engineering-excellence.png"
                 alt="Engineering Excellence"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-                onError={(e) => {
-                  console.error("Image failed to load");
-                  e.currentTarget.style.display = 'none';
+                className="object-cover transition-transform duration-500 group-hover:brightness-110"
+              />
+
+              {/* Dynamic Light Overlay */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 pointer-events-none"
+                animate={{
+                  x: ["-100%", "200%"],
                 }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatDelay: 2,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Floating Tech Orbs */}
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute top-1/4 right-10 w-12 h-12 bg-sky-500/10 backdrop-blur-xl rounded-full border border-white/20 hidden lg:block"
               />
             </motion.div>
           </motion.div>
@@ -346,7 +387,7 @@ export default function AboutPage() {
               FinTech Platform Modernization
             </h3>
             <div className="grid md:grid-cols-3 gap-5">
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="card bg-white/80 shadow-md hover:shadow-xl transition-shadow duration-300"
               >
@@ -358,7 +399,7 @@ export default function AboutPage() {
                   during peak transactions.
                 </p>
               </motion.div>
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="card bg-white/80 shadow-md hover:shadow-xl transition-shadow duration-300"
               >
@@ -370,7 +411,7 @@ export default function AboutPage() {
                   added automated test coverage.
                 </p>
               </motion.div>
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="card bg-white/80 shadow-md hover:shadow-xl transition-shadow duration-300"
               >
