@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Globe,
@@ -207,6 +207,30 @@ const staggerContainer = {
 
 export default function ServicesPage() {
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const index = services.findIndex(s => s.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash);
+        if (index >= 6) {
+          setShowAll(true);
+          // Wait for the DOM to update before scrolling
+          setTimeout(() => {
+            const element = document.getElementById(hash);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100);
+        }
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   const displayedServices = showAll ? services : services.slice(0, 6);
 
   return (
@@ -216,7 +240,7 @@ export default function ServicesPage() {
         <div className="absolute bottom-6 right-[14%] h-20 w-20 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
         <div className="max-w-3xl mx-auto px-4">
           {/* Animated Heading */}
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -224,9 +248,9 @@ export default function ServicesPage() {
           >
             Our Services & Solutions
           </motion.h1>
-          
+
           {/* Animated Paragraph */}
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
@@ -239,7 +263,7 @@ export default function ServicesPage() {
       </section>
 
       <section className="py-20">
-        <motion.div 
+        <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -257,7 +281,8 @@ export default function ServicesPage() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
                 key={s.title}
-                className="card card-hover"
+                id={s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+                className="card card-hover scroll-mt-24"
               >
                 <div className="flex gap-5">
                   <div className="w-14 h-14 bg-sky-50 rounded-xl flex items-center justify-center shrink-0">
@@ -330,7 +355,8 @@ export default function ServicesPage() {
                 variants={fadeIn}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
                 key={f.title}
-                className="card card-hover"
+                id={f.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+                className="card card-hover scroll-mt-24"
               >
                 <div
                   className={`w-11 h-11 ${f.iconBg} rounded-xl flex items-center justify-center mb-4`}

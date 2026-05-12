@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image"; // 1. Added Import
 import { motion } from "framer-motion";
@@ -105,6 +105,30 @@ const tags = [
 
 export default function IndustriesPage() {
   const [showAll, setShowAll] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash) {
+        const index = industries.findIndex(ind => ind.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash);
+        if (index >= 6) {
+          setShowAll(true);
+          // Wait for the DOM to update before scrolling
+          setTimeout(() => {
+            const element = document.getElementById(hash);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100);
+        }
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   const displayedIndustries = showAll ? industries : industries.slice(0, 6);
 
   return (
@@ -140,7 +164,8 @@ export default function IndustriesPage() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
               key={ind.title}
-              className="card p-0 overflow-hidden card-hover group border-slate-100 hover:border-sky-200"
+              id={ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+              className="card p-0 overflow-hidden card-hover group border-slate-100 hover:border-sky-200 scroll-mt-24"
             >
               {/* 3. Updated Image / Banner Logic */}
               <div className="h-52 relative overflow-hidden">
