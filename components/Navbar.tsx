@@ -32,20 +32,21 @@ import {
   Plane,
   Building2,
   Landmark,
+  Sparkles,
 } from "lucide-react";
 
 /* ─── Menu Data ──────────────────────────────────────────── */
 
 const servicesMenu = {
   tech: [
-    { icon: Globe, label: "Custom Web Solutions", href: "/services#custom-web-solutions" },
-    { icon: Settings, label: "Enterprise Software", href: "/services#enterprise-software" },
-    { icon: Cloud, label: "Cloud & DevOps", href: "/services#cloud-devops" },
-    { icon: Zap, label: "AI & Machine Learning", href: "/services#ai-machine-learning" },
-    { icon: Shield, label: "Cybersecurity", href: "/services#cybersecurity" },
-    { icon: Smartphone, label: "Mobile App Development", href: "/services#mobile-app-development" },
-    { icon: Code2, label: "API Development", href: "/services#api-development-integration" },
-    { icon: Layers, label: "SaaS Product Development", href: "/services#saas-product-development" },
+    { icon: Globe, label: "Custom Web Solutions", desc: "Performance-first web apps", href: "/services#custom-web-solutions" },
+    { icon: Settings, label: "Enterprise Software", desc: "Streamlined business tools", href: "/services#enterprise-software" },
+    { icon: Cloud, label: "Cloud & DevOps", desc: "Automated infra scaling", href: "/services#cloud-devops" },
+    { icon: Zap, label: "AI & Machine Learning", desc: "Intelligent automation", href: "/services#ai-machine-learning" },
+    { icon: Shield, label: "Cybersecurity", desc: "Threat audits & protection", href: "/services#cybersecurity" },
+    { icon: Smartphone, label: "Mobile Development", desc: "Native & hybrid experiences", href: "/services#mobile-app-development" },
+    { icon: Code2, label: "API Development", desc: "Secure data integrations", href: "/services#api-development-integration" },
+    { icon: Layers, label: "SaaS Products", desc: "Multi-tenant platforms", href: "/services#saas-product-development" },
   ],
   finance: [
     {
@@ -198,7 +199,8 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100/80 bg-white/90 backdrop-blur-xl shadow-sm shadow-slate-200/30">
+    <>
+      <header className="sticky top-0 z-50 border-b border-slate-100/80 bg-white/90 backdrop-blur-xl shadow-sm shadow-slate-200/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]">
         {/* Logo */}
         <Link
@@ -255,15 +257,20 @@ export default function Navbar() {
                       <Link
                         key={item.label}
                         href={item.href}
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 group/item transition-colors"
+                        className="flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 group/item transition-colors"
                       >
                         <item.icon
-                          size={14}
-                          className="text-sky-400 group-hover/item:text-sky-600 shrink-0 transition-colors"
+                          size={16}
+                          className="mt-0.5 text-sky-400 group-hover/item:text-sky-600 shrink-0 transition-colors"
                         />
-                        <span className="text-sm text-slate-600 group-hover/item:text-slate-900 font-medium transition-colors">
-                          {item.label}
-                        </span>
+                        <div>
+                          <span className="block text-sm text-slate-800 group-hover/item:text-sky-600 font-bold transition-colors">
+                            {item.label}
+                          </span>
+                          <span className="text-[10px] text-slate-400 font-medium">
+                            {item.desc}
+                          </span>
+                        </div>
                       </Link>
                     ))}
                   </div>
@@ -490,5 +497,23 @@ export default function Navbar() {
         </div>
       </div>
     </header>
+    
+    {/* Zoho-inspired "Zia" Floating Assistant UI */}
+    <div className="fixed bottom-6 right-6 z-[60]">
+      <motion.button
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        whileTap={{ scale: 0.9 }}
+        className="relative group"
+      >
+        <div className="absolute -top-12 right-0 bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-xl whitespace-nowrap">
+          Hi, I'm Moonshot AI! How can I help?
+          <div className="absolute -bottom-1 right-4 w-2 h-2 bg-slate-900 rotate-45" />
+        </div>
+        <div className="w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl shadow-2xl flex items-center justify-center text-white border border-white/20">
+          <Sparkles className="w-6 h-6 animate-pulse" />
+        </div>
+      </motion.button>
+    </div>
+</>
   );
 }

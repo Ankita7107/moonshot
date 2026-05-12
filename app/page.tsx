@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Globe, Settings, Cloud, ChevronRight, Code, Database, Smartphone, Zap, Sparkles, ShieldCheck, Rocket } from "lucide-react";
+import { ArrowRight, Globe, Settings, Cloud, ChevronRight, Code, Database, Smartphone, Zap, Sparkles, ShieldCheck, Rocket, BarChart, Activity, Cpu, Settings2, Users, MousePointer2 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const stats = [
@@ -254,6 +254,161 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* Dashboard / Control Center Section (Zoho Inspired) */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-16 items-center">
+            {/* Dashboard Visual */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="w-full lg:w-1/2 relative"
+            >
+              <div className="dashboard-panel p-6 md:p-8">
+                <div className="grid-pattern absolute inset-0 opacity-20" />
+                
+                {/* Dashboard Header */}
+                <div className="flex items-center justify-between mb-8 relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="status-pulse" />
+                    <span className="text-white font-semibold tracking-wide">LIVE CONTROL CENTER</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/50" />
+                  </div>
+                </div>
+
+                {/* Dashboard Widgets Grid */}
+                <div className="grid grid-cols-2 gap-4 relative z-10">
+                  <motion.div 
+                    whileHover={{ y: -5 }}
+                    className="dashboard-widget col-span-2"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-white/60 text-xs font-medium uppercase tracking-widest">Global Traffic</span>
+                      <Activity className="text-sky-400 w-4 h-4" />
+                    </div>
+                    <div className="h-24 w-full flex items-end gap-1 px-1">
+                      {[40, 70, 45, 90, 65, 80, 55, 95, 75, 85].map((h, i) => (
+                        <motion.div 
+                          key={i}
+                          initial={{ height: 0 }}
+                          whileInView={{ height: `${h}%` }}
+                          transition={{ delay: i * 0.1, duration: 1 }}
+                          className="flex-1 bg-gradient-to-t from-sky-500/20 to-sky-400 rounded-t-sm"
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+
+                  <motion.div whileHover={{ y: -5 }} className="dashboard-widget">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Cpu className="text-emerald-400 w-4 h-4" />
+                      <span className="text-white/60 text-[10px] font-bold">CPU LOAD</span>
+                    </div>
+                    <div className="text-2xl font-mono text-white">12.4<span className="text-white/30">%</span></div>
+                  </motion.div>
+
+                  <motion.div whileHover={{ y: -5 }} className="dashboard-widget">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Settings2 className="text-amber-400 w-4 h-4" />
+                      <span className="text-white/60 text-[10px] font-bold">OPTIMIZATION</span>
+                    </div>
+                    <div className="text-2xl font-mono text-white">99.9<span className="text-white/30">%</span></div>
+                  </motion.div>
+                </div>
+
+                {/* Floating metrics */}
+                <motion.div 
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -right-6 top-1/4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl z-20"
+                >
+                  <div className="text-[10px] text-white/50 font-bold mb-1">HEALTH SCORE</div>
+                  <div className="text-sky-400 font-mono text-xl">A+ EXCELLENT</div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Content */}
+            <div className="w-full lg:w-1/2">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <p className="section-label inline-flex items-center gap-2">
+                  <BarChart className="w-4 h-4" /> TOTAL VISIBILITY
+                </p>
+                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+                  One Unified Command Center for Your Product
+                </h2>
+                <p className="text-lg text-slate-500 mb-8 leading-relaxed">
+                  Inspired by the world's most powerful business operating systems, our Control Center provides real-time visibility into your software's performance, health, and scalability metrics.
+                </p>
+                
+                <div className="space-y-4">
+                  {[
+                    "Real-time resource monitoring",
+                    "Automated performance scaling",
+                    "Integrated security event tracking"
+                  ].map((text, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 + (i * 0.1) }}
+                      className="flex items-center gap-3"
+                    >
+                      <div className="w-5 h-5 rounded-full bg-sky-50 flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-sky-500" />
+                      </div>
+                      <span className="text-slate-700 font-medium">{text}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions by Role Section */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Built for Every Stakeholder</h2>
+            <p className="text-slate-500">Solutions tailored to solve your specific challenges.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { role: "For Founders", desc: "Build your MVP faster with scalable architecture that grows with your vision.", icon: <Rocket className="w-6 h-6" /> },
+              { role: "For CTOs", desc: "Enterprise-grade security, code quality audits, and automated DevOps pipelines.", icon: <Cpu className="w-6 h-6" /> },
+              { role: "For Product Managers", desc: "Data-driven insights, rapid prototyping, and seamless integration cycles.", icon: <Users className="w-6 h-6" /> }
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ y: -10 }}
+                className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-sky-200 transition-all shadow-sm hover:shadow-xl group"
+              >
+                <div className="w-14 h-14 bg-slate-50 group-hover:bg-sky-500 group-hover:text-white rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-800 mb-3">{item.role}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed mb-6">{item.desc}</p>
+                <Link href="/contact" className="text-sky-500 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Learn more <ArrowRight size={14} />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Services with enhanced hover effects */}
       <section className="py-24 bg-slate-50 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sky-100/40 via-transparent to-transparent pointer-events-none" />
@@ -433,6 +588,54 @@ export default function HomePage() {
                 ease: "easeInOut"
               }}
             />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Client Success Marquee (Zoho Inspired) */}
+      <section className="py-20 border-y border-slate-100 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 text-center">TRUSTED BY INDUSTRY DISRUPTORS</p>
+        </div>
+        <div className="flex relative group">
+          <motion.div 
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="flex gap-12 items-center whitespace-nowrap"
+          >
+            {[
+              { name: "FinFlow", metric: "+45% Efficiency" },
+              { name: "HealthSync", metric: "2M+ Users" },
+              { name: "CloudScale", metric: "99.9% Uptime" },
+              { name: "EduGrow", metric: "3x Growth" },
+              { name: "SecureNet", metric: "Zero Breaches" },
+              { name: "LogiSmart", metric: "30% Cost Save" },
+              // Duplicate for infinite scroll
+              { name: "FinFlow", metric: "+45% Efficiency" },
+              { name: "HealthSync", metric: "2M+ Users" },
+              { name: "CloudScale", metric: "99.9% Uptime" },
+              { name: "EduGrow", metric: "3x Growth" },
+              { name: "SecureNet", metric: "Zero Breaches" },
+              { name: "LogiSmart", metric: "30% Cost Save" },
+            ].map((client, i) => (
+              <motion.div 
+                key={i}
+                whileHover={{ scale: 1.1 }}
+                className="relative px-8 py-4 bg-slate-50 rounded-2xl border border-slate-100 group/client cursor-default min-w-[200px] text-center"
+              >
+                <span className="text-xl font-black text-slate-300 group-hover/client:text-sky-500 transition-colors uppercase tracking-tighter italic">
+                  {client.name}
+                </span>
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileHover={{ opacity: 1, y: 0 }}
+                  className="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap shadow-xl pointer-events-none"
+                >
+                  {client.metric}
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45" />
+                </motion.div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
