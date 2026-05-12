@@ -31,7 +31,7 @@ const services = [
 ];
 
 const whyUs = [
-  { icon: "🚀", title: "Proven Expertise", desc: "Over 10+ years of experience delivering 3000+ successful projects globally." },
+  { icon: "🚀", title: "Proven Expertise", desc: "Over 25  years of experience delivering 3000+ successful projects globally." },
   { icon: "📊", title: "Agile Methodology", desc: "Fast iterations, transparent communication, and continuous delivery cycles." },
   { icon: "👥", title: "Customer Centric", desc: "We don't just build software; we build solutions that solve real-world problems." },
   { icon: "🔒", title: "Security First", desc: "Every line of code is written with security best practices to protect your data." },

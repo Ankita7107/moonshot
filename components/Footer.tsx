@@ -146,7 +146,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
           <p className="text-slate-500 order-2 sm:order-1">
-            © 2024 Moonshot Minds Tech. All rights reserved.
+            © 2002 Moonshot Minds Tech. All rights reserved.
           </p>
           <div className="flex gap-6 order-1 sm:order-2">
             <Link
