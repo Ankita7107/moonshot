@@ -2,25 +2,30 @@
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import {
+  Globe, Cpu, Database, Cloud, Wrench, Plug, ShieldCheck,
+  BrainCircuit, Smartphone, Bot, Network, KeyRound,
+  BarChart3, ServerCog, TestTube2, Bitcoin, type LucideIcon,
+} from "lucide-react";
 
 /* ─── data ─────────────────────────────────────────────────── */
-const techCategories = [
-  { title: "Frontend", tags: ["React", "Next.js", "Vue.js", "Angular", "Tailwind CSS", "TypeScript"] },
-  { title: "Backend", tags: ["Node.js", "Go", "Java", "C#", ".NET Core"] },
-  { title: "Database", tags: ["PostgreSQL", "MySQL", "Redis", "DynamoDB", "Elasticsearch"] },
-  { title: "Cloud / DevOps", tags: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"] },
-  { title: "Tools & Platforms", tags: ["GitHub", "GitLab", "Jira", "Postman", "VS Code", "Figma"] },
-  { title: "API & Integration", tags: ["GraphQL", "REST", "Stripe", "Twilio", "Webhooks"] },
-  { title: "Security", tags: ["JWT", "Auth0", "Keycloak", "OpenID Connect"] },
-  { title: "AI / Data", tags: ["OpenAI", "TensorFlow", "PyTorch", "Pandas", "Hugging Face"] },
-  { title: "Mobile", tags: ["React Native", "Flutter", "Kotlin", "Swift"] },
-  { title: "AI / LLM Systems", tags: ["GPT-4", "OpenAI API", "LangChain", "Hugging Face"] },
-  { title: "Microservices", tags: ["Docker", "Kubernetes", "Kafka", "RabbitMQ"] },
-  { title: "Authentication", tags: ["JWT", "Auth0", "Keycloak", "OpenID Connect"] },
-  { title: "Data Engineering", tags: ["Spark", "Kafka", "Airflow", "Snowflake", "BigQuery"] },
-  { title: "Advanced Cloud", tags: ["Serverless", "AWS Lambda", "Docker", "Kubernetes"] },
-  { title: "Testing & QA", tags: ["Jest", "Cypress", "Selenium", "Playwright"] },
-  { title: "Blockchain", tags: ["Ethereum", "Solidity", "Metamask"] },
+const techCategories: { title: string; tags: string[]; Icon: LucideIcon }[] = [
+  { title: "Frontend", Icon: Globe, tags: ["React", "Next.js", "Vue.js", "Angular", "Tailwind CSS", "TypeScript"] },
+  { title: "Backend", Icon: Cpu, tags: ["Node.js", "Go", "Java", "C#", ".NET Core"] },
+  { title: "Database", Icon: Database, tags: ["PostgreSQL", "MySQL", "Redis", "DynamoDB", "Elasticsearch"] },
+  { title: "Cloud / DevOps", Icon: Cloud, tags: ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"] },
+  { title: "Tools & Platforms", Icon: Wrench, tags: ["GitHub", "GitLab", "Jira", "Postman", "VS Code", "Figma"] },
+  { title: "API & Integration", Icon: Plug, tags: ["GraphQL", "REST", "Stripe", "Twilio", "Webhooks"] },
+  { title: "Security", Icon: ShieldCheck, tags: ["JWT", "Auth0", "Keycloak", "OpenID Connect"] },
+  { title: "AI / Data", Icon: BrainCircuit, tags: ["OpenAI", "TensorFlow", "PyTorch", "Pandas", "Hugging Face"] },
+  { title: "Mobile", Icon: Smartphone, tags: ["React Native", "Flutter", "Kotlin", "Swift"] },
+  { title: "AI / LLM Systems", Icon: Bot, tags: ["GPT-4", "OpenAI API", "LangChain", "Hugging Face"] },
+  { title: "Microservices", Icon: Network, tags: ["Docker", "Kubernetes", "Kafka", "RabbitMQ"] },
+  { title: "Authentication", Icon: KeyRound, tags: ["JWT", "Auth0", "Keycloak", "OpenID Connect"] },
+  { title: "Data Engineering", Icon: BarChart3, tags: ["Spark", "Kafka", "Airflow", "Snowflake", "BigQuery"] },
+  { title: "Advanced Cloud", Icon: ServerCog, tags: ["Serverless", "AWS Lambda", "Docker", "Kubernetes"] },
+  { title: "Testing & QA", Icon: TestTube2, tags: ["Jest", "Cypress", "Selenium", "Playwright"] },
+  { title: "Blockchain", Icon: Bitcoin, tags: ["Ethereum", "Solidity", "Metamask"] },
 ];
 
 const partners = ["AWS", "GOOGLE CLOUD", "MICROSOFT AZURE", "DIGITALOCEAN"];
@@ -127,8 +132,7 @@ function MagneticCard({ cat, index }: { cat: typeof techCategories[0]; index: nu
   const rawY = useMotionValue(0);
   const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [10, -10]), { stiffness: 260, damping: 20 });
   const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-12, 12]), { stiffness: 260, damping: 20 });
-  const glowX = useTransform(rawX, [-0.5, 0.5], [0, 100]);
-  const glowY = useTransform(rawY, [-0.5, 0.5], [0, 100]);
+
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = cardRef.current!.getBoundingClientRect();
@@ -161,18 +165,7 @@ function MagneticCard({ cat, index }: { cat: typeof techCategories[0]; index: nu
       className="relative rounded-2xl bg-white border border-slate-100 p-6 shadow-sm overflow-hidden
                  min-w-[260px] md:min-w-0 snap-start cursor-default"
     >
-      {/* radial glow that follows cursor */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none rounded-2xl transition-opacity duration-300"
-        style={{
-          background: useTransform(
-            [glowX, glowY],
-            ([x, y]) =>
-              `radial-gradient(circle at ${x}% ${y}%, rgba(14,165,233,0.12) 0%, transparent 65%)`
-          ),
-          opacity: hovered ? 1 : 0,
-        }}
-      />
+
 
       {/* top-right sparkle */}
       <motion.div
@@ -181,6 +174,15 @@ function MagneticCard({ cat, index }: { cat: typeof techCategories[0]; index: nu
         className="absolute top-3 right-3 text-sky-400 text-sm"
       >
         ✦
+      </motion.div>
+
+      {/* icon box */}
+      <motion.div
+        animate={{ scale: hovered ? 1.1 : 1, rotate: hovered ? -6 : 0 }}
+        transition={{ type: "spring" as const, stiffness: 300, damping: 18 }}
+        className="mb-4 inline-flex items-center justify-center w-12 h-12 rounded-xl bg-sky-50 text-sky-500"
+      >
+        <cat.Icon size={22} strokeWidth={1.6} />
       </motion.div>
 
       <h3 className="font-bold text-slate-800 mb-4 text-sm tracking-wide uppercase">
