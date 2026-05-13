@@ -2,7 +2,26 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Globe, Settings, Cloud, ChevronRight, Code, Database, Smartphone, Zap, Sparkles, ShieldCheck, Rocket, BarChart, Activity, Cpu, Settings2, Users, MousePointer2 } from "lucide-react";
+import {
+  ArrowRight,
+  Globe,
+  Settings,
+  Cloud,
+  ChevronRight,
+  Code,
+  Database,
+  Smartphone,
+  Zap,
+  Sparkles,
+  ShieldCheck,
+  Rocket,
+  BarChart,
+  Activity,
+  Cpu,
+  Settings2,
+  Users,
+  MousePointer2,
+} from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const stats = [
@@ -31,15 +50,31 @@ const services = [
 ];
 
 const whyUs = [
-  { icon: "🚀", title: "Proven Expertise", desc: "Over 25  years of experience delivering 3000+ successful projects globally." },
-  { icon: "📊", title: "Agile Methodology", desc: "Fast iterations, transparent communication, and continuous delivery cycles." },
-  { icon: "👥", title: "Customer Centric", desc: "We don't just build software; we build solutions that solve real-world problems." },
-  { icon: "🔒", title: "Security First", desc: "Every line of code is written with security best practices to protect your data." },
+  {
+    icon: "🚀",
+    title: "Proven Expertise",
+    desc: "Over 25  years of experience delivering 3000+ successful projects globally.",
+  },
+  {
+    icon: "📊",
+    title: "Agile Methodology",
+    desc: "Fast iterations, transparent communication, and continuous delivery cycles.",
+  },
+  {
+    icon: "👥",
+    title: "Customer Centric",
+    desc: "We don't just build software; we build solutions that solve real-world problems.",
+  },
+  {
+    icon: "🔒",
+    title: "Security First",
+    desc: "Every line of code is written with security best practices to protect your data.",
+  },
 ];
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 const staggerContainer = {
@@ -47,13 +82,43 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+// Typewriter effect component
+const TypewriterText = ({
+  text,
+  speed = 100,
+}: {
+  text: string;
+  speed?: number;
+}) => {
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText((prev) => prev + text[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
+      }, speed);
+      return () => clearTimeout(timeout);
     }
-  }
+  }, [currentIndex, text, speed]);
+
+  return <span>{displayText}</span>;
 };
 
 // Animated counter component
-const AnimatedCounter = ({ value, suffix = "" }: { value: string; suffix?: string }) => {
+const AnimatedCounter = ({
+  value,
+  suffix = "",
+}: {
+  value: string;
+  suffix?: string;
+}) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLParagraphElement>(null);
   const numericValue = parseFloat(value.replace(/[^0-9.]/g, ""));
@@ -79,7 +144,7 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: string; suffix?: strin
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -90,35 +155,61 @@ const AnimatedCounter = ({ value, suffix = "" }: { value: string; suffix?: strin
   const displayValue = isDecimal ? count.toFixed(1) : Math.floor(count);
 
   return (
-    <p ref={ref} className="text-5xl font-extrabold text-sky-500 mb-2 group-hover:scale-110 transition-transform duration-300">
-      {displayValue}{hasPlus && !isDecimal ? "+" : ""}{suffix}
+    <p
+      ref={ref}
+      className="text-5xl font-extrabold text-sky-500 mb-2 group-hover:scale-110 transition-transform duration-300"
+    >
+      {displayValue}
+      {hasPlus && !isDecimal ? "+" : ""}
+      {suffix}
     </p>
   );
 };
 
-// Floating particle component
-const FloatingParticle = ({ delay, duration, x, y, size }: { delay: number; duration: number; x: string; y: string; size: string }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{ opacity: [0, 0.5, 0], scale: [0, 1, 0], y: [0, -100, -200], x: [0, Math.random() * 100 - 50, Math.random() * 200 - 100] }}
-    transition={{ duration, delay, repeat: Infinity, ease: "easeOut" }}
-    className={`absolute ${x} ${y} w-${size} h-${size} bg-sky-400/30 rounded-full blur-sm pointer-events-none`}
-  />
-);
+// Staggered text reveal component
+const StaggeredText = ({
+  text,
+  delay = 0,
+}: {
+  text: string;
+  delay?: number;
+}) => {
+  const words = text.split(" ");
+
+  return (
+    <span>
+      {words.map((word, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            delay: delay + index * 0.1,
+            ease: "easeOut",
+          }}
+          className="inline-block mr-1"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
 
 export default function HomePage() {
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+  const parallaxY1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const parallaxY2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
 
   return (
     <div className="overflow-hidden">
       {/* Hero */}
-      <motion.section
-        className="relative bg-gradient-to-br from-slate-50 via-white to-sky-50 py-32 text-center overflow-hidden"
-      >
-        {/* Enhanced floating particles */}
+      <motion.section className="relative bg-gradient-to-br from-slate-50 via-white to-sky-50 py-32 text-center overflow-hidden">
+        {/* Enhanced floating particles with tech icons */}
         <div className="absolute top-24 left-[12%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
         <div className="absolute bottom-24 right-[12%] h-28 w-28 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
 
@@ -132,23 +223,38 @@ export default function HomePage() {
         </motion.div>
         <motion.div
           animate={{ y: [0, 25, 0], rotate: [0, -5, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
           className="absolute bottom-20 right-[15%] hidden md:flex w-16 h-16 bg-white rounded-2xl shadow-xl items-center justify-center text-sky-400 z-10"
         >
           <Database size={32} />
         </motion.div>
         <motion.div
           animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          transition={{
+            duration: 4.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
           className="absolute top-40 right-[10%] hidden lg:flex w-12 h-12 bg-white rounded-xl shadow-lg items-center justify-center text-sky-300 z-10"
         >
           <Smartphone size={24} />
         </motion.div>
 
-        {/* New floating elements */}
+        {/* New floating tech icons */}
         <motion.div
           animate={{ y: [0, -30, 0], x: [0, 10, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1.5,
+          }}
           className="absolute bottom-32 left-[20%] hidden lg:flex w-14 h-14 bg-gradient-to-br from-sky-100 to-white rounded-2xl shadow-lg items-center justify-center text-sky-400 z-10"
         >
           <Zap size={28} />
@@ -164,10 +270,73 @@ export default function HomePage() {
           className="absolute bottom-1/4 right-[8%] hidden xl:flex w-6 h-6 bg-sky-300/40 rounded-full blur-sm"
         />
 
-        {/* Animated gradient orb */}
+        {/* Additional floating tech elements */}
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 180, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+          className="absolute top-1/4 right-[25%] hidden lg:flex w-10 h-10 bg-white/80 backdrop-blur-sm rounded-xl shadow-lg items-center justify-center text-sky-500 z-10"
+        >
+          <ShieldCheck size={20} />
+        </motion.div>
+        <motion.div
+          animate={{
+            y: [0, 15, 0],
+            x: [0, -10, 0],
+            rotate: [0, -10, 10, 0],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 3,
+          }}
+          className="absolute bottom-1/3 left-[15%] hidden lg:flex w-12 h-12 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg items-center justify-center text-sky-400 z-10"
+        >
+          <BarChart size={24} />
+        </motion.div>
+        <motion.div
+          animate={{
+            y: [0, -10, 0],
+            rotate: [0, 360],
+            opacity: [0.7, 1, 0.7],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 1,
+          }}
+          className="absolute top-3/4 right-[5%] hidden xl:flex w-6 h-6 bg-sky-400/60 rounded-full blur-sm"
+        />
+        <motion.div
+          animate={{
+            y: [0, 20, 0],
+            x: [0, 15, 0],
+            scale: [1, 0.8, 1],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4,
+          }}
+          className="absolute top-1/2 left-[25%] hidden xl:flex w-8 h-8 bg-sky-300/50 rounded-full blur-sm"
+        />
+
+        {/* Animated gradient orb with parallax */}
         <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          style={{ y: parallaxY1 }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-sky-200/30 to-sky-400/20 rounded-full blur-3xl pointer-events-none"
         />
 
@@ -179,7 +348,9 @@ export default function HomePage() {
             className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm mb-6 border border-sky-100"
           >
             <Sparkles className="w-4 h-4 text-sky-500" />
-            <span className="text-sm text-slate-600">Next-Gen Development Studio</span>
+            <span className="text-sm text-slate-600">
+              Next-Gen Development Studio
+            </span>
           </motion.div>
 
           <motion.h1
@@ -194,7 +365,7 @@ export default function HomePage() {
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity, delay: 2 }}
             >
-              Moonshot
+              <TypewriterText text="Moonshot" speed={150} />
             </motion.span>{" "}
             Engineering
           </motion.h1>
@@ -204,7 +375,9 @@ export default function HomePage() {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10"
           >
-            Transforming complex business challenges into sleek, scalable software solutions. We partner with visionaries to build the future of tech.
+            Transforming complex business challenges into sleek, scalable
+            software solutions. We partner with visionaries to build the future
+            of tech.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -213,24 +386,39 @@ export default function HomePage() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/contact" className="btn-primary hover-shine flex items-center justify-center gap-2 text-lg px-8 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 text-white shadow-lg shadow-sky-200">
-                Start Your Project <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 1, repeat: Infinity, delay: 2 }}><ArrowRight size={18} /></motion.span>
+              <Link
+                href="/contact"
+                className="btn-primary hover-shine flex items-center justify-center gap-2 text-lg px-8 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 text-white shadow-lg shadow-sky-200"
+              >
+                Start Your Project{" "}
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: 2 }}
+                >
+                  <ArrowRight size={18} />
+                </motion.span>
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/services" className="btn-outline flex items-center justify-center gap-2 text-lg bg-white/50 backdrop-blur-sm px-8 py-3 rounded-xl border border-slate-200 hover:border-sky-300">
+              <Link
+                href="/services"
+                className="btn-outline flex items-center justify-center gap-2 text-lg bg-white/50 backdrop-blur-sm px-8 py-3 rounded-xl border border-slate-200 hover:border-sky-300"
+              >
                 View Solutions
               </Link>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Decorative background blur */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sky-300/20 rounded-full blur-3xl -z-10 pointer-events-none" />
+        {/* Decorative background blur with parallax */}
+        <motion.div
+          style={{ y: parallaxY2 }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sky-300/20 rounded-full blur-3xl -z-10 pointer-events-none"
+        />
       </motion.section>
 
       {/* Stats with animated counters */}
-      <section className="py-20 border-y border-slate-100 bg-white relative">
+      <section className="py-20 border-y border-slate-100 bg-white relative wave-divider">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -242,13 +430,31 @@ export default function HomePage() {
             <motion.div
               variants={fadeIn}
               key={s.label}
-              className="group cursor-default"
-              whileHover={{ y: -5 }}
+              className="group cursor-pointer"
+              whileHover={{ y: -10, scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
-              <AnimatedCounter value={s.value} />
-              <div className="w-8 h-1 bg-sky-100 mx-auto mb-3 rounded-full group-hover:w-12 group-hover:bg-sky-500 transition-all duration-300" />
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">{s.label}</p>
+              <motion.div
+                className="relative"
+                whileHover={{ rotate: [0, -2, 2, 0] }}
+                transition={{ duration: 0.5 }}
+              >
+                <AnimatedCounter value={s.value} />
+                <motion.div
+                  className="absolute inset-0 bg-sky-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100"
+                  animate={false}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.div>
+              <motion.div
+                className="w-8 h-1 bg-sky-100 mx-auto mb-3 rounded-full group-hover:w-12 group-hover:bg-sky-500 transition-all duration-500"
+                whileHover={{ scaleX: 1.5 }}
+              />
+              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest group-hover:text-sky-500 transition-colors duration-300">
+                {s.label}
+              </p>
             </motion.div>
           ))}
         </motion.div>
@@ -272,7 +478,9 @@ export default function HomePage() {
                 <div className="flex items-center justify-between mb-8 relative z-10">
                   <div className="flex items-center gap-3">
                     <div className="status-pulse" />
-                    <span className="text-white font-semibold tracking-wide">LIVE CONTROL CENTER</span>
+                    <span className="text-white font-semibold tracking-wide">
+                      LIVE CONTROL CENTER
+                    </span>
                   </div>
                   <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500/50" />
@@ -288,7 +496,9 @@ export default function HomePage() {
                     className="dashboard-widget col-span-2"
                   >
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-white/60 text-xs font-medium uppercase tracking-widest">Global Traffic</span>
+                      <span className="text-white/60 text-xs font-medium uppercase tracking-widest">
+                        Global Traffic
+                      </span>
                       <Activity className="text-sky-400 w-4 h-4" />
                     </div>
                     <div className="h-24 w-full flex items-end gap-1 px-1">
@@ -304,31 +514,53 @@ export default function HomePage() {
                     </div>
                   </motion.div>
 
-                  <motion.div whileHover={{ y: -5 }} className="dashboard-widget">
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    className="dashboard-widget"
+                  >
                     <div className="flex items-center gap-3 mb-2">
                       <Cpu className="text-emerald-400 w-4 h-4" />
-                      <span className="text-white/60 text-[10px] font-bold">CPU LOAD</span>
+                      <span className="text-white/60 text-[10px] font-bold">
+                        CPU LOAD
+                      </span>
                     </div>
-                    <div className="text-2xl font-mono text-white">12.4<span className="text-white/30">%</span></div>
+                    <div className="text-2xl font-mono text-white">
+                      12.4<span className="text-white/30">%</span>
+                    </div>
                   </motion.div>
 
-                  <motion.div whileHover={{ y: -5 }} className="dashboard-widget">
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    className="dashboard-widget"
+                  >
                     <div className="flex items-center gap-3 mb-2">
                       <Settings2 className="text-amber-400 w-4 h-4" />
-                      <span className="text-white/60 text-[10px] font-bold">OPTIMIZATION</span>
+                      <span className="text-white/60 text-[10px] font-bold">
+                        OPTIMIZATION
+                      </span>
                     </div>
-                    <div className="text-2xl font-mono text-white">99.9<span className="text-white/30">%</span></div>
+                    <div className="text-2xl font-mono text-white">
+                      99.9<span className="text-white/30">%</span>
+                    </div>
                   </motion.div>
                 </div>
 
                 {/* Floating metrics */}
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   className="absolute -right-6 top-1/4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl z-20"
                 >
-                  <div className="text-[10px] text-white/50 font-bold mb-1">HEALTH SCORE</div>
-                  <div className="text-sky-400 font-mono text-xl">A+ EXCELLENT</div>
+                  <div className="text-[10px] text-white/50 font-bold mb-1">
+                    HEALTH SCORE
+                  </div>
+                  <div className="text-sky-400 font-mono text-xl">
+                    A+ EXCELLENT
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
@@ -347,20 +579,22 @@ export default function HomePage() {
                   One Unified Command Center for Your Product
                 </h2>
                 <p className="text-lg text-slate-500 mb-8 leading-relaxed">
-                  Inspired by the world's most powerful business operating systems, our Control Center provides real-time visibility into your software's performance, health, and scalability metrics.
+                  Inspired by the world's most powerful business operating
+                  systems, our Control Center provides real-time visibility into
+                  your software's performance, health, and scalability metrics.
                 </p>
 
                 <div className="space-y-4">
                   {[
                     "Real-time resource monitoring",
                     "Automated performance scaling",
-                    "Integrated security event tracking"
+                    "Integrated security event tracking",
                   ].map((text, i) => (
                     <motion.div
                       key={i}
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + (i * 0.1) }}
+                      transition={{ delay: 0.3 + i * 0.1 }}
                       className="flex items-center gap-3"
                     >
                       <div className="w-5 h-5 rounded-full bg-sky-50 flex items-center justify-center">
@@ -380,15 +614,31 @@ export default function HomePage() {
       <section className="py-24 bg-slate-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Built for Every Stakeholder</h2>
-            <p className="text-slate-500">Solutions tailored to solve your specific challenges.</p>
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+              Built for Every Stakeholder
+            </h2>
+            <p className="text-slate-500">
+              Solutions tailored to solve your specific challenges.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { role: "For Founders", desc: "Build your MVP faster with scalable architecture that grows with your vision.", icon: <Rocket className="w-6 h-6" /> },
-              { role: "For CTOs", desc: "Enterprise-grade security, code quality audits, and automated DevOps pipelines.", icon: <Cpu className="w-6 h-6" /> },
-              { role: "For Product Managers", desc: "Data-driven insights, rapid prototyping, and seamless integration cycles.", icon: <Users className="w-6 h-6" /> }
+              {
+                role: "For Founders",
+                desc: "Build your MVP faster with scalable architecture that grows with your vision.",
+                icon: <Rocket className="w-6 h-6" />,
+              },
+              {
+                role: "For CTOs",
+                desc: "Enterprise-grade security, code quality audits, and automated DevOps pipelines.",
+                icon: <Cpu className="w-6 h-6" />,
+              },
+              {
+                role: "For Product Managers",
+                desc: "Data-driven insights, rapid prototyping, and seamless integration cycles.",
+                icon: <Users className="w-6 h-6" />,
+              },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -398,9 +648,16 @@ export default function HomePage() {
                 <div className="w-14 h-14 bg-slate-50 group-hover:bg-sky-500 group-hover:text-white rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3">{item.role}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-6">{item.desc}</p>
-                <Link href="/contact" className="text-sky-500 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                <h3 className="text-xl font-bold text-slate-800 mb-3">
+                  {item.role}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                  {item.desc}
+                </p>
+                <Link
+                  href="/contact"
+                  className="text-sky-500 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all"
+                >
                   Learn more <ArrowRight size={14} />
                 </Link>
               </motion.div>
@@ -410,7 +667,7 @@ export default function HomePage() {
       </section>
 
       {/* Services with enhanced hover effects */}
-      <section className="py-24 bg-slate-50 relative overflow-hidden">
+      <section className="py-24 bg-slate-50 relative overflow-hidden wave-divider">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sky-100/40 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -426,7 +683,9 @@ export default function HomePage() {
             >
               <Rocket className="w-4 h-4" /> OUR EXPERTISE
             </motion.p>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Solutions for the Next Frontier</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+              Solutions for the Next Frontier
+            </h2>
             <motion.div
               className="w-16 h-1.5 bg-sky-500 mx-auto mt-6 rounded-full glow-card"
               animate={{ width: ["4rem", "6rem", "4rem"] }}
@@ -457,17 +716,33 @@ export default function HomePage() {
                 />
                 <motion.div
                   className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center mb-6 shadow-sm relative z-10"
-                  animate={hoveredService === idx ? { scale: 1.1, rotate: 5 } : { scale: 1, rotate: 0 }}
+                  animate={
+                    hoveredService === idx
+                      ? { scale: 1.1, rotate: 5 }
+                      : { scale: 1, rotate: 0 }
+                  }
                   transition={{ type: "spring", stiffness: 400 }}
                 >
                   {s.icon}
                 </motion.div>
-                <h3 className="text-xl font-bold text-slate-800 mb-3 relative z-10">{s.title}</h3>
-                <p className="text-slate-500 text-base mb-6 leading-relaxed relative z-10">{s.desc}</p>
-                <Link href="/services" className="text-sky-500 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all w-fit group relative z-10">
+                <h3 className="text-xl font-bold text-slate-800 mb-3 relative z-10">
+                  {s.title}
+                </h3>
+                <p className="text-slate-500 text-base mb-6 leading-relaxed relative z-10">
+                  <StaggeredText text={s.desc} delay={0.2} />
+                </p>
+                <Link
+                  href="/services"
+                  className="text-sky-500 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all w-fit group relative z-10"
+                >
                   Learn more
-                  <motion.span animate={hoveredService === idx ? { x: 5 } : { x: 0 }}>
-                    <ChevronRight size={16} className="group-hover:text-sky-600" />
+                  <motion.span
+                    animate={hoveredService === idx ? { x: 5 } : { x: 0 }}
+                  >
+                    <ChevronRight
+                      size={16}
+                      className="group-hover:text-sky-600"
+                    />
                   </motion.span>
                 </Link>
 
@@ -475,7 +750,9 @@ export default function HomePage() {
                 <motion.div
                   className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-sky-100/50 to-transparent rounded-tl-3xl"
                   initial={{ opacity: 0 }}
-                  animate={hoveredService === idx ? { opacity: 1 } : { opacity: 0 }}
+                  animate={
+                    hoveredService === idx ? { opacity: 1 } : { opacity: 0 }
+                  }
                 />
               </motion.div>
             ))}
@@ -492,10 +769,16 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <motion.p variants={fadeIn} className="section-label inline-flex items-center gap-2">
+            <motion.p
+              variants={fadeIn}
+              className="section-label inline-flex items-center gap-2"
+            >
               <Sparkles className="w-4 h-4" /> WHY MOONSHOT MINDS
             </motion.p>
-            <motion.h2 variants={fadeIn} className="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
+            <motion.h2
+              variants={fadeIn}
+              className="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight"
+            >
               We build tech that scales with your ambition
             </motion.h2>
             <ul className="space-y-8">
@@ -514,8 +797,12 @@ export default function HomePage() {
                     {item.icon}
                   </motion.div>
                   <div>
-                    <h4 className="text-lg font-bold text-slate-800 mb-1">{item.title}</h4>
-                    <p className="text-slate-500 text-sm md:text-base leading-relaxed">{item.desc}</p>
+                    <h4 className="text-lg font-bold text-slate-800 mb-1">
+                      {item.title}
+                    </h4>
+                    <p className="text-slate-500 text-sm md:text-base leading-relaxed">
+                      {item.desc}
+                    </p>
                   </div>
                 </motion.li>
               ))}
@@ -531,16 +818,16 @@ export default function HomePage() {
             <motion.div
               animate={{
                 y: [0, -15, 0],
-                rotate: [0, 1, 0]
+                rotate: [0, 1, 0],
               }}
               transition={{
                 duration: 6,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               whileHover={{
                 scale: 1.05,
-                transition: { duration: 0.4 }
+                transition: { duration: 0.4 },
               }}
               className="relative w-full h-full"
             >
@@ -568,8 +855,12 @@ export default function HomePage() {
                     <Rocket className="text-white w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-white text-xs font-bold uppercase tracking-wider">Innovation</p>
-                    <p className="text-sky-200 text-[10px]">Pioneering the Future</p>
+                    <p className="text-white text-xs font-bold uppercase tracking-wider">
+                      Innovation
+                    </p>
+                    <p className="text-sky-200 text-[10px]">
+                      Pioneering the Future
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -579,13 +870,13 @@ export default function HomePage() {
             <motion.div
               className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 pointer-events-none"
               animate={{
-                x: ['-100%', '200%'],
+                x: ["-100%", "200%"],
               }}
               transition={{
                 duration: 3,
                 repeat: Infinity,
                 repeatDelay: 4,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
             />
           </motion.div>
@@ -595,7 +886,9 @@ export default function HomePage() {
       {/* Client Success Marquee (Zoho Inspired) */}
       <section className="py-20 border-y border-slate-100 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 text-center">TRUSTED BY INDUSTRY DISRUPTORS</p>
+          <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 text-center">
+            TRUSTED BY INDUSTRY DISRUPTORS
+          </p>
         </div>
         <div className="flex relative group">
           <motion.div
@@ -663,15 +956,18 @@ export default function HomePage() {
                   animate={{
                     y: [0, -100, 0],
                     opacity: [0, 0.5, 0],
-                    scale: [0, 1, 0]
+                    scale: [0, 1, 0],
                   }}
                   transition={{
                     duration: 3 + (i % 3),
                     repeat: Infinity,
                     delay: i * 0.5,
-                    ease: "easeOut"
+                    ease: "easeOut",
                   }}
-                  style={{ left: `${leftPositions[i]}%`, top: `${topPositions[i]}%` }}
+                  style={{
+                    left: `${leftPositions[i]}%`,
+                    top: `${topPositions[i]}%`,
+                  }}
                 />
               );
             })}
@@ -684,16 +980,23 @@ export default function HomePage() {
               Ready to launch your next mission?
             </motion.h2>
             <p className="text-sky-100 mb-8 max-w-2xl mx-auto relative z-10">
-              Join dozens of industry leaders who trust us with their critical infrastructure and software innovation.
+              Join dozens of industry leaders who trust us with their critical
+              infrastructure and software innovation.
             </p>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="relative z-10 inline-block"
             >
-              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-sky-600 font-semibold px-7 py-3 rounded-xl hover:bg-sky-50 transition-colors shadow-lg">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white text-sky-600 font-semibold px-7 py-3 rounded-xl hover:bg-sky-50 transition-colors shadow-lg"
+              >
                 Consult Our Tech Experts
-                <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 1, repeat: Infinity }}>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                >
                   <ArrowRight size={16} />
                 </motion.span>
               </Link>
@@ -709,7 +1012,12 @@ export default function HomePage() {
             </motion.div>
             <motion.div
               animate={{ y: [0, 15, 0], rotate: [0, -10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
               className="absolute top-4 right-4 opacity-20"
             >
               <Zap size={48} />

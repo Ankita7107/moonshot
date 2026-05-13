@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  color: #0F172A;
+  color: #0f172a;
   background: #ffffff;
 }
 
@@ -48,9 +48,21 @@ body {
     content: "";
     @apply pointer-events-none absolute inset-0 -z-10;
     background:
-      radial-gradient(circle at 15% 10%, rgba(14, 165, 233, 0.12), transparent 38%),
-      radial-gradient(circle at 85% 35%, rgba(14, 165, 233, 0.1), transparent 42%),
-      linear-gradient(180deg, rgba(248, 250, 252, 0.9) 0%, rgba(255, 255, 255, 0.98) 100%);
+      radial-gradient(
+        circle at 15% 10%,
+        rgba(14, 165, 233, 0.12),
+        transparent 38%
+      ),
+      radial-gradient(
+        circle at 85% 35%,
+        rgba(14, 165, 233, 0.1),
+        transparent 42%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(248, 250, 252, 0.9) 0%,
+        rgba(255, 255, 255, 0.98) 100%
+      );
   }
 
   .section-surface {
@@ -87,10 +99,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.2),
-        transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
     animation: shimmer 2.5s infinite;
   }
 
@@ -160,7 +174,12 @@ body {
     width: 40%;
     height: 100%;
     transform: skewX(-20deg);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
     transition: left 0.7s ease;
   }
 
@@ -256,7 +275,6 @@ body {
 }
 
 @keyframes float {
-
   0%,
   100% {
     transform: translateY(0);
@@ -280,7 +298,6 @@ body {
 }
 
 @keyframes floatSlow {
-
   0%,
   100% {
     transform: translateY(0px);
@@ -292,7 +309,6 @@ body {
 }
 
 @keyframes pulseGlow {
-
   0%,
   100% {
     opacity: 0.35;
@@ -354,7 +370,7 @@ body {
 }
 
 .reveal-stagger.active .reveal-item:nth-child(4) {
-  animation-delay: 1.0s;
+  animation-delay: 1s;
 }
 
 .reveal-stagger.active .reveal-item:nth-child(5) {
@@ -368,4 +384,52 @@ body {
 .card-hover:hover {
   transform: translateY(-8px) scale(1.015);
   @apply shadow-2xl shadow-sky-500/20 border-sky-200;
+}
+
+/* Wave animations for section dividers */
+@keyframes wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.wave-divider {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-divider::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(14, 165, 233, 0.1),
+    transparent
+  );
+  animation: wave 3s ease-in-out infinite;
+}
+
+.wave-divider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(14, 165, 233, 0.05),
+    transparent
+  );
+  animation: wave 3s ease-in-out infinite;
+  animation-delay: 1.5s;
 }
