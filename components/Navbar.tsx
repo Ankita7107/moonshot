@@ -60,8 +60,18 @@ function HoverMenu({ label, href, isActive, children }: { label: string; href: s
   const [open, setOpen] = useState(false);
   const timer = useRef<NodeJS.Timeout>();
 
-  const show = () => { if (timer.current) clearTimeout(timer.current); setOpen(true); };
-  const hide = () => { timer.current = setTimeout(() => setOpen(false), 150); };
+  const show = () => {
+    if (timer.current) clearTimeout(timer.current);
+    setOpen(true);
+  };
+
+  const hide = () => {
+    timer.current = setTimeout(() => setOpen(false), 300);
+  };
+
+  const cancelHide = () => {
+    if (timer.current) clearTimeout(timer.current);
+  };
 
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
@@ -84,6 +94,8 @@ function HoverMenu({ label, href, isActive, children }: { label: string; href: s
       <AnimatePresence>
         {open && (
           <motion.div
+            onMouseEnter={cancelHide}
+            onMouseLeave={hide}
             initial={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
             animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
             exit={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
@@ -269,7 +281,7 @@ export default function Navbar() {
             <div className="py-6 flex flex-col gap-2">
               <Link href="/" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">Home</Link>
               <Link href="/about" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">About</Link>
-              
+
               <MobileAccordion label="Services">
                 {servicesMenu.tech.map(i => (
                   <Link key={i.label} href={i.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-3 text-slate-500 font-bold">{i.label}</Link>

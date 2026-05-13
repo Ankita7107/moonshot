@@ -233,22 +233,40 @@ export default function ServicesPage() {
   const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.98]);
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const scrollToHash = () => {
       const hash = window.location.hash.replace("#", "");
-      if (hash) {
-        const index = services.findIndex(s => s.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash);
-        if (index >= 6) {
-          setShowAll(true);
-          setTimeout(() => {
-            const element = document.getElementById(hash);
-            if (element) element.scrollIntoView({ behavior: "smooth" });
-          }, 100);
-        }
+      if (!hash) return;
+
+      const techIndex = services.findIndex(
+        (s) => s.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash
+      );
+
+      const financeIndex = financeServices.findIndex(
+        (f) => f.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash
+      );
+
+      if (financeIndex >= 0) {
+        // Finance cards साठी
+        setTimeout(() => {
+          document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      } else if (techIndex >= 6) {
+        // Index 6+ असलेल्या tech services साठी — आधी showAll true कर
+        setShowAll(true);
+        setTimeout(() => {
+          document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+        }, 300); // ✅ 150 नाही — 300ms द्या कारण DOM render व्हायला वेळ लागतो
+      } else if (techIndex >= 0) {
+        // पहिल्या 6 tech services साठी
+        setTimeout(() => {
+          document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+        }, 100);
       }
     };
-    handleHashChange();
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+
+    scrollToHash();
+    window.addEventListener("hashchange", scrollToHash);
+    return () => window.removeEventListener("hashchange", scrollToHash);
   }, []);
 
   const displayedServices = showAll ? services : services.slice(0, 6);
@@ -262,7 +280,7 @@ export default function ServicesPage() {
       >
         <div className="absolute top-8 left-[10%] h-24 w-24 rounded-full bg-sky-300/10 blur-3xl animate-float-slow" />
         <div className="absolute bottom-6 right-[10%] h-24 w-24 rounded-full bg-sky-200/10 blur-3xl animate-float-delay" />
-        
+
         <div className="max-w-4xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -272,7 +290,7 @@ export default function ServicesPage() {
             <Sparkles className="w-4 h-4 text-sky-500 animate-pulse" />
             <span className="text-sm text-slate-600 font-medium">Precision Engineering</span>
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -297,10 +315,7 @@ export default function ServicesPage() {
       {/* ══════════════════ SERVICES GRID ══════════════════ */}
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence mode="popLayout">
               {displayedServices.map((s, index) => (
                 <motion.div
@@ -320,7 +335,7 @@ export default function ServicesPage() {
                       </div>
                       <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">{s.title}</h3>
                       <p className="text-slate-500 text-sm mb-6 leading-relaxed flex-grow">{s.desc}</p>
-                      
+
                       <div className="space-y-2 mb-8">
                         {s.features.map((f) => (
                           <div key={f} className="flex items-center gap-3 text-xs text-slate-500">
@@ -370,11 +385,12 @@ export default function ServicesPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Financial Products</h2>
             <p className="text-slate-500 max-w-2xl mx-auto">Comprehensive financial solutions to grow and protect your wealth.</p>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {financeServices.map((f, i) => (
               <motion.div
                 key={f.title}
+                id={f.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -390,7 +406,7 @@ export default function ServicesPage() {
                 </span>
                 <h3 className="text-xl font-bold text-slate-900 mb-3">{f.title}</h3>
                 <p className="text-slate-500 text-sm mb-6 leading-relaxed">{f.desc}</p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-6">
                   {f.features.map((feat) => (
                     <span key={feat} className="badge text-[10px] uppercase tracking-wider font-bold">
