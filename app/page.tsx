@@ -259,7 +259,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             {/* Dashboard Visual */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -267,7 +267,7 @@ export default function HomePage() {
             >
               <div className="dashboard-panel p-6 md:p-8">
                 <div className="grid-pattern absolute inset-0 opacity-20" />
-                
+
                 {/* Dashboard Header */}
                 <div className="flex items-center justify-between mb-8 relative z-10">
                   <div className="flex items-center gap-3">
@@ -283,7 +283,7 @@ export default function HomePage() {
 
                 {/* Dashboard Widgets Grid */}
                 <div className="grid grid-cols-2 gap-4 relative z-10">
-                  <motion.div 
+                  <motion.div
                     whileHover={{ y: -5 }}
                     className="dashboard-widget col-span-2"
                   >
@@ -293,7 +293,7 @@ export default function HomePage() {
                     </div>
                     <div className="h-24 w-full flex items-end gap-1 px-1">
                       {[40, 70, 45, 90, 65, 80, 55, 95, 75, 85].map((h, i) => (
-                        <motion.div 
+                        <motion.div
                           key={i}
                           initial={{ height: 0 }}
                           whileInView={{ height: `${h}%` }}
@@ -322,7 +322,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Floating metrics */}
-                <motion.div 
+                <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   className="absolute -right-6 top-1/4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl z-20"
@@ -349,14 +349,14 @@ export default function HomePage() {
                 <p className="text-lg text-slate-500 mb-8 leading-relaxed">
                   Inspired by the world's most powerful business operating systems, our Control Center provides real-time visibility into your software's performance, health, and scalability metrics.
                 </p>
-                
+
                 <div className="space-y-4">
                   {[
                     "Real-time resource monitoring",
                     "Automated performance scaling",
                     "Integrated security event tracking"
                   ].map((text, i) => (
-                    <motion.div 
+                    <motion.div
                       key={i}
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
@@ -390,7 +390,7 @@ export default function HomePage() {
               { role: "For CTOs", desc: "Enterprise-grade security, code quality audits, and automated DevOps pipelines.", icon: <Cpu className="w-6 h-6" /> },
               { role: "For Product Managers", desc: "Data-driven insights, rapid prototyping, and seamless integration cycles.", icon: <Users className="w-6 h-6" /> }
             ].map((item, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 whileHover={{ y: -10 }}
                 className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-sky-200 transition-all shadow-sm hover:shadow-xl group"
@@ -598,7 +598,7 @@ export default function HomePage() {
           <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 text-center">TRUSTED BY INDUSTRY DISRUPTORS</p>
         </div>
         <div className="flex relative group">
-          <motion.div 
+          <motion.div
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             className="flex gap-12 items-center whitespace-nowrap"
@@ -618,7 +618,7 @@ export default function HomePage() {
               { name: "SecureNet", metric: "Zero Breaches" },
               { name: "LogiSmart", metric: "30% Cost Save" },
             ].map((client, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 whileHover={{ scale: 1.1 }}
                 className="relative px-8 py-4 bg-slate-50 rounded-2xl border border-slate-100 group/client cursor-default min-w-[200px] text-center"
@@ -626,7 +626,7 @@ export default function HomePage() {
                 <span className="text-xl font-black text-slate-300 group-hover/client:text-sky-500 transition-colors uppercase tracking-tighter italic">
                   {client.name}
                 </span>
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   whileHover={{ opacity: 1, y: 0 }}
                   className="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap shadow-xl pointer-events-none"

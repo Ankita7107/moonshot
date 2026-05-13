@@ -1,42 +1,18 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Menu,
-  X,
-  ChevronDown,
-  Globe,
-  Settings,
-  Cloud,
-  Zap,
-  Shield,
-  Smartphone,
-  Banknote,
-  ShieldCheck,
-  TrendingUp,
-  Home,
-  BarChart2,
-  IndianRupee,
-  ArrowRight,
-  Rocket,
-  Code2,
-  Layers,
-  HeartPulse,
-  ShoppingCart,
-  Truck,
-  GraduationCap,
-  Factory,
-  Plane,
-  Building2,
-  Landmark,
-  Sparkles,
+  Menu, X, ChevronDown, Globe, Settings, Cloud, Zap, Shield, Smartphone,
+  Banknote, ShieldCheck, TrendingUp, Home, BarChart2, IndianRupee,
+  ArrowRight, Rocket, Code2, Layers, HeartPulse, ShoppingCart, Truck,
+  GraduationCap, Factory, Plane, Building2, Landmark, Sparkles,
+  Layout, MessageSquare, RefreshCcw
 } from "lucide-react";
 
 /* ─── Menu Data ──────────────────────────────────────────── */
-
 const servicesMenu = {
   tech: [
     { icon: Globe, label: "Custom Web Solutions", desc: "Performance-first web apps", href: "/services#custom-web-solutions" },
@@ -46,45 +22,18 @@ const servicesMenu = {
     { icon: Shield, label: "Cybersecurity", desc: "Threat audits & protection", href: "/services#cybersecurity" },
     { icon: Smartphone, label: "Mobile Development", desc: "Native & hybrid experiences", href: "/services#mobile-app-development" },
     { icon: Code2, label: "API Development", desc: "Secure data integrations", href: "/services#api-development-integration" },
-    { icon: Layers, label: "SaaS Products", desc: "Multi-tenant platforms", href: "/services#saas-product-development" },
+    { icon: Layout, label: "UI/UX Design", desc: "User-centric design systems", href: "/services#ui-ux-design" },
+    { icon: MessageSquare, label: "AI Chatbots", desc: "Intelligent conversational agents", href: "/services#ai-chatbots-automation" },
+    { icon: RefreshCcw, label: "ERP & CRM", desc: "Custom business management", href: "/services#erp-crm-systems" },
+    { icon: Shield, label: "Software Testing", desc: "Automated QA & stability", href: "/services#software-testing-qa" },
   ],
   finance: [
-    {
-      icon: Banknote,
-      label: "Loans",
-      href: "/services#loans",
-      color: "text-sky-500",
-    },
-    {
-      icon: ShieldCheck,
-      label: "Insurance",
-      href: "/services#insurance",
-      color: "text-green-500",
-    },
-    {
-      icon: TrendingUp,
-      label: "Mutual Fund",
-      href: "/services#mutual-fund",
-      color: "text-yellow-500",
-    },
-    {
-      icon: IndianRupee,
-      label: "Investments",
-      href: "/services#investments",
-      color: "text-violet-500",
-    },
-    {
-      icon: Home,
-      label: "Real Estate",
-      href: "/services#real-estate",
-      color: "text-orange-500",
-    },
-    {
-      icon: BarChart2,
-      label: "Unlisted",
-      href: "/services#unlisted",
-      color: "text-fuchsia-500",
-    },
+    { icon: Banknote, label: "Loans", href: "/services#loans", color: "text-sky-500" },
+    { icon: ShieldCheck, label: "Insurance", href: "/services#insurance", color: "text-green-500" },
+    { icon: TrendingUp, label: "Mutual Fund", href: "/services#mutual-fund", color: "text-yellow-500" },
+    { icon: IndianRupee, label: "Investments", href: "/services#investments", color: "text-violet-500" },
+    { icon: Home, label: "Real Estate", href: "/services#real-estate", color: "text-orange-500" },
+    { icon: BarChart2, label: "Unlisted", href: "/services#unlisted", color: "text-fuchsia-500" },
   ],
 };
 
@@ -99,61 +48,48 @@ const industriesMenu = [
   { icon: Plane, label: "Travel & Hospitality", href: "/industries#travel-hospitality" },
   { icon: Building2, label: "Banking & Insurance", href: "/industries#banking-insurance" },
   { icon: Shield, label: "Cybersecurity", href: "/industries#cybersecurity" },
+  { icon: Smartphone, label: "Telecom", href: "/industries#telecom" },
+  { icon: Rocket, label: "Automotive", href: "/industries#automotive" },
+  { icon: Layers, label: "Media & Entertainment", href: "/industries#media-entertainment" },
+  { icon: ShoppingCart, label: "Food Tech", href: "/industries#food-restaurant-tech" },
+  { icon: Building2, label: "Public Sector", href: "/industries#government-public-sector" },
 ];
 
-/* ─── Reusable Hover Menu Component ─────────────────────── */
-function HoverMenu({
-  label,
-  href,
-  isActive,
-  children,
-}: {
-  label: string;
-  href: string;
-  isActive: boolean;
-  children: React.ReactNode;
-}) {
+/* ─── Components ─────────────────────────────────────────── */
+function HoverMenu({ label, href, isActive, children }: { label: string; href: string; isActive: boolean; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  let closeTimer: ReturnType<typeof setTimeout>;
+  const timer = useRef<NodeJS.Timeout>();
 
-  const show = () => {
-    clearTimeout(closeTimer);
-    setOpen(true);
-  };
-
-  const hide = () => {
-    closeTimer = setTimeout(() => setOpen(false), 100);
-  };
+  const show = () => { if (timer.current) clearTimeout(timer.current); setOpen(true); };
+  const hide = () => { timer.current = setTimeout(() => setOpen(false), 150); };
 
   return (
     <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
       <Link
         href={href}
-        onClick={() => setOpen(false)}
-        className={`group flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 select-none
-          ${isActive || open ? "bg-sky-50 text-sky-600" : "text-slate-600 hover:text-sky-500 hover:bg-slate-50"}`}
+        className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors
+          ${isActive || open ? "text-sky-600" : "text-slate-600 hover:text-sky-500"}`}
       >
         {label}
-        <ChevronDown
-          size={13}
-          className={`transition-transform duration-300 ${open ? "rotate-180 text-sky-500" : "text-slate-400 group-hover:text-sky-400"}`}
-        />
+        <ChevronDown size={14} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        {(isActive || open) && (
+          <motion.div
+            layoutId="nav-glow"
+            className="absolute inset-0 bg-sky-50 rounded-full -z-10"
+            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+          />
+        )}
       </Link>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.95, x: "-50%" }}
+            initial={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
             animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
-            exit={{ opacity: 0, y: -10, scale: 0.95, x: "-50%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="absolute top-full left-1/2 mt-2 z-50 origin-top pointer-events-auto"
+            exit={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
+            className="absolute top-full left-1/2 mt-2 z-[100]"
           >
-            <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-100 rotate-45 z-10" />
-            <div 
-              onClick={() => setOpen(false)}
-              className="relative bg-white rounded-2xl shadow-2xl shadow-slate-300/40 border border-slate-100 overflow-hidden"
-            >
+            <div className="bg-white rounded-3xl shadow-2xl shadow-sky-900/10 border border-slate-100 overflow-hidden backdrop-blur-xl">
               {children}
             </div>
           </motion.div>
@@ -163,338 +99,195 @@ function HoverMenu({
   );
 }
 
-/* ─── Mobile Accordion ───────────────────────────────────── */
-function MobileAccordion({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function MobileAccordion({ label, children }: { label: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div>
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-xl transition-colors"
-      >
+    <div className="border-b border-slate-50 last:border-0">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between py-4 text-sm font-bold text-slate-900">
         {label}
-        <ChevronDown
-          size={13}
-          className={`text-slate-400 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-        />
+        <ChevronDown size={16} className={`transition-transform ${open ? "rotate-180 text-sky-500" : "text-slate-400"}`} />
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ${open ? "max-h-[600px] pb-2" : "max-h-0"}`}
-      >
-        <div className="pl-3 flex flex-col gap-0.5">{children}</div>
-      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
+            <div className="pb-4 space-y-1">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-/* ─── Main Navbar ────────────────────────────────────────── */
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    const handle = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handle);
+    return () => window.removeEventListener("scroll", handle);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100/80 bg-white/90 backdrop-blur-xl shadow-sm shadow-slate-200/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="group flex items-center font-bold text-lg shrink-0"
-        >
-          <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-105">
-            <Image
-              src="/moonshot_images/logo.png"
-              alt="Moonshot Minds"
-              fill
-              sizes="64px"
-              className="object-contain"
-              priority
-            />
+    <header className={`sticky top-0 z-[100] transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-xl py-3 border-b border-slate-100" : "bg-white py-5"}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="relative w-12 h-12 group-hover:scale-110 transition-transform">
+            <Image src="/moonshot_images/logo.png" alt="Logo" fill className="object-contain" priority />
           </div>
-          <span className="-ml-1">
-            <span className="text-slate-800">Moonshot</span>
-            <span className="text-sky-500">Minds</span>
+          <span className="text-xl font-black tracking-tighter text-slate-900">
+            Moonshot<span className="text-sky-500">Minds</span>
           </span>
         </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop */}
         <nav className="hidden lg:flex items-center gap-1">
-          {/* Home */}
-          <Link
-            href="/"
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200
-              ${pathname === "/" ? "bg-sky-50 text-sky-600" : "text-slate-600 hover:text-sky-500 hover:bg-slate-50"}`}
-          >
-            Home
-          </Link>
+          {[
+            { label: "Home", href: "/" },
+            { label: "About", href: "/about" },
+          ].map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              className={`relative px-4 py-2 text-sm font-semibold transition-colors
+                ${pathname === link.href ? "text-sky-600" : "text-slate-600 hover:text-sky-500"}`}
+            >
+              {link.label}
+              {pathname === link.href && (
+                <motion.div
+                  layoutId="nav-glow"
+                  className="absolute inset-0 bg-sky-50 rounded-full -z-10"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+            </Link>
+          ))}
 
-          {/* About — simple link, no submenu */}
-          <Link
-            href="/about"
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200
-              ${["/about", "/why-us"].includes(pathname) ? "bg-sky-50 text-sky-600" : "text-slate-600 hover:text-sky-500 hover:bg-slate-50"}`}
-          >
-            About
-          </Link>
-
-          {/* Services */}
           <HoverMenu label="Services" href="/services" isActive={pathname === "/services"}>
-            <div className="w-[780px]">
-              <div className="flex">
-                {/* Tech */}
-                <div className="flex-1 p-5 border-r border-slate-100">
-                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-4">
-                    Tech Services
-                  </p>
-                  <div className="grid grid-cols-2 gap-0.5">
-                    {servicesMenu.tech.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 group/item transition-colors"
-                      >
-                        <item.icon
-                          size={16}
-                          className="mt-0.5 text-sky-400 group-hover/item:text-sky-600 shrink-0 transition-colors"
-                        />
-                        <div>
-                          <span className="block text-sm text-slate-800 group-hover/item:text-sky-600 font-bold transition-colors">
-                            {item.label}
-                          </span>
-                          <span className="text-[10px] text-slate-400 font-medium">
-                            {item.desc}
-                          </span>
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Finance */}
-                <div className="w-[200px] p-5 border-r border-slate-100">
-                  <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-4">
-                    Financial Products
-                  </p>
-                  <div className="space-y-0.5">
-                    {servicesMenu.finance.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-slate-50 group/item transition-colors"
-                      >
-                        <item.icon
-                          size={14}
-                          className={`${item.color} shrink-0`}
-                        />
-                        <span className="text-sm text-slate-600 group-hover/item:text-slate-900 font-medium transition-colors">
-                          {item.label}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <div className="w-[175px] flex items-center p-4">
-                  <div className="bg-gradient-to-br from-sky-500 to-sky-600 rounded-xl p-4 text-white w-full">
-                    <Rocket size={20} className="mb-2 opacity-80" />
-                    <p className="text-sm font-bold mb-1">Start a Project</p>
-                    <p className="text-xs opacity-75 mb-3 leading-relaxed">
-                      Build something amazing with us.
-                    </p>
-                    <Link
-                      href="/contact"
-                      className="flex items-center justify-center gap-1 text-xs font-semibold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition-colors"
-                    >
-                      Get in Touch <ArrowRight size={11} />
+            <div className="w-[820px] flex p-2">
+              <div className="flex-1 p-6">
+                <div className="grid grid-cols-2 gap-2">
+                  {servicesMenu.tech.map((i) => (
+                    <Link key={i.label} href={i.href} className="flex items-start gap-4 p-4 rounded-2xl hover:bg-sky-50 group/item transition-all">
+                      <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-sky-500 group-hover/item:bg-sky-500 group-hover/item:text-white transition-all">
+                        <i.icon size={20} />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-slate-900 mb-1">{i.label}</div>
+                        <div className="text-[10px] text-slate-400 font-medium">{i.desc}</div>
+                      </div>
                     </Link>
-                  </div>
+                  ))}
                 </div>
               </div>
+              <div className="w-[240px] bg-slate-50/50 p-6 rounded-2xl border-l border-slate-100 flex flex-col justify-between">
+                <div>
+                  <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Finance</div>
+                  <div className="space-y-2 mb-8">
+                    {servicesMenu.finance.map((i) => (
+                      <Link key={i.label} href={i.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-white hover:shadow-sm transition-all group/f">
+                        <i.icon size={16} className={i.color} />
+                        <span className="text-sm font-bold text-slate-700 group-hover/f:text-sky-600 transition-colors">{i.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
-              {/* Footer bar */}
-              <div className="border-t border-slate-100 px-5 py-3 bg-slate-50/60 flex items-center justify-between">
-                <span className="text-xs text-slate-400">
-                  Explore all 15+ services
-                </span>
-                <Link
-                  href="/services"
-                  className="text-xs font-semibold text-sky-500 hover:text-sky-600 flex items-center gap-1 transition-colors"
-                >
-                  View All Services <ArrowRight size={11} />
-                </Link>
-              </div>
-            </div>
-          </HoverMenu>
-
-          {/* Industries */}
-          <HoverMenu label="Industries" href="/industries" isActive={pathname === "/industries"}>
-            <div className="w-[420px] p-4">
-              <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest px-2 mb-3">
-                Domains We Serve
-              </p>
-              <div className="grid grid-cols-2 gap-0.5">
-                {industriesMenu.map((item) => (
+                {/* CTA Box */}
+                <div className="bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl p-5 text-white shadow-lg shadow-sky-200">
+                  <Rocket size={24} className="mb-3 opacity-90" />
+                  <p className="text-sm font-bold mb-1">Start a Project</p>
+                  <p className="text-[10px] opacity-80 mb-4 leading-relaxed">
+                    Build something amazing with our expert engineering team.
+                  </p>
                   <Link
-                    key={item.label}
-                    href={item.href}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-sky-50 group/item transition-colors"
+                    href="/contact"
+                    className="flex items-center justify-center gap-2 text-[10px] font-bold bg-white/20 hover:bg-white/30 px-4 py-2 rounded-xl transition-all"
                   >
-                    <item.icon
-                      size={14}
-                      className="text-sky-400 group-hover/item:text-sky-500 shrink-0 transition-colors"
-                    />
-                    <span className="text-sm text-slate-600 group-hover/item:text-slate-900 font-medium transition-colors">
-                      {item.label}
-                    </span>
+                    Get in Touch <ArrowRight size={12} />
                   </Link>
-                ))}
-              </div>
-              <div className="mt-3 pt-3 border-t border-slate-100 px-2">
-                <Link
-                  href="/industries"
-                  className="text-xs font-semibold text-sky-500 hover:text-sky-600 flex items-center gap-1 transition-colors"
-                >
-                  View all 15 industries <ArrowRight size={11} />
-                </Link>
+                </div>
               </div>
             </div>
           </HoverMenu>
 
-          {/* Why Us */}
-          <Link
-            href="/why-us"
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200
-              ${pathname === "/why-us" ? "bg-sky-50 text-sky-600" : "text-slate-600 hover:text-sky-500 hover:bg-slate-50"}`}
-          >
-            Why Us
-          </Link>
+          <HoverMenu label="Industries" href="/industries" isActive={pathname === "/industries"}>
+            <div className="w-[450px] p-4 grid grid-cols-2 gap-2">
+              {industriesMenu.map((i) => (
+                <Link key={i.label} href={i.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-sky-50 group/i transition-all">
+                  <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-sky-400 group-hover/i:text-sky-600 shadow-sm transition-all">
+                    <i.icon size={16} />
+                  </div>
+                  <span className="text-sm font-bold text-slate-700">{i.label}</span>
+                </Link>
+              ))}
+            </div>
+          </HoverMenu>
 
-          {/* Technologies — simple link, no submenu */}
-          <Link
-            href="/technologies"
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200
-              ${pathname === "/technologies" ? "bg-sky-50 text-sky-600" : "text-slate-600 hover:text-sky-500 hover:bg-slate-50"}`}
-          >
-            Technologies
-          </Link>
+          {["Why Us", "Technologies"].map((link) => {
+            const href = "/" + link.toLowerCase().replace(" ", "-");
+            return (
+              <Link
+                key={link}
+                href={href}
+                className={`relative px-4 py-2 text-sm font-semibold transition-colors
+                  ${pathname === href ? "text-sky-600" : "text-slate-600 hover:text-sky-500"}`}
+              >
+                {link}
+                {pathname === href && (
+                  <motion.div
+                    layoutId="nav-glow"
+                    className="absolute inset-0 bg-sky-50 rounded-full -z-10"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
 
-          <Link
-            href="/contact"
-            className="btn-primary ml-3 text-sm hover-shine"
-          >
+          <Link href="/contact" className="ml-4 btn-primary rounded-full">
             Get Started
           </Link>
         </nav>
 
         {/* Mobile Toggle */}
-        <button
-          className="lg:hidden text-slate-700 p-2 rounded-lg hover:bg-slate-100 transition-colors"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        <button onClick={() => setMobileOpen(!mobileOpen)} className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 hover:bg-slate-50 rounded-full transition-colors">
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ${mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"}`}
-      >
-        <div className="bg-white/98 backdrop-blur border-t border-slate-100 px-4 py-3 flex flex-col gap-1 overflow-y-auto max-h-[80vh]">
-          {/* Home */}
-          <Link
-            href="/"
-            onClick={() => setMobileOpen(false)}
-            className={`text-sm font-medium px-3 py-2.5 rounded-xl ${pathname === "/" ? "text-sky-600 bg-sky-50" : "text-slate-700 hover:bg-slate-50"}`}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "100vh" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white fixed inset-x-0 top-[72px] z-[90] overflow-y-auto px-6 pb-20"
           >
-            Home
-          </Link>
+            <div className="py-6 flex flex-col gap-2">
+              <Link href="/" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">Home</Link>
+              <Link href="/about" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">About</Link>
+              
+              <MobileAccordion label="Services">
+                {servicesMenu.tech.map(i => (
+                  <Link key={i.label} href={i.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-3 text-slate-500 font-bold">{i.label}</Link>
+                ))}
+              </MobileAccordion>
 
-          {/* About — simple link, no accordion */}
-          <Link
-            href="/about"
-            onClick={() => setMobileOpen(false)}
-            className={`text-sm font-medium px-3 py-2.5 rounded-xl ${["/about", "/why-us"].includes(pathname) ? "text-sky-600 bg-sky-50" : "text-slate-700 hover:bg-slate-50"}`}
-          >
-            About
-          </Link>
+              <MobileAccordion label="Industries">
+                {industriesMenu.map(i => (
+                  <Link key={i.label} href={i.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-3 text-slate-500 font-bold">{i.label}</Link>
+                ))}
+              </MobileAccordion>
 
-          {/* Services */}
-          <MobileAccordion label="Services">
-            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider px-3 pt-2 pb-1">
-              Tech
-            </p>
-            {servicesMenu.tech.map((i) => (
-              <Link
-                key={i.label}
-                href={i.href}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-slate-600 hover:text-sky-600 rounded-lg hover:bg-sky-50"
-              >
-                <i.icon size={14} className="text-sky-400" /> {i.label}
-              </Link>
-            ))}
-            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider px-3 pt-3 pb-1">
-              Finance
-            </p>
-            {servicesMenu.finance.map((i) => (
-              <Link
-                key={i.label}
-                href={i.href}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-slate-600 hover:text-sky-600 rounded-lg hover:bg-sky-50"
-              >
-                <i.icon size={14} className={i.color} /> {i.label}
-              </Link>
-            ))}
-          </MobileAccordion>
-
-          {/* Industries */}
-          <MobileAccordion label="Industries">
-            {industriesMenu.map((i) => (
-              <Link
-                key={i.label}
-                href={i.href}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-slate-600 hover:text-sky-600 rounded-lg hover:bg-sky-50"
-              >
-                <i.icon size={14} className="text-sky-400" /> {i.label}
-              </Link>
-            ))}
-          </MobileAccordion>
-
-          {/* Why Us */}
-          <Link
-            href="/why-us"
-            onClick={() => setMobileOpen(false)}
-            className={`text-sm font-medium px-3 py-2.5 rounded-xl ${pathname === "/why-us" ? "text-sky-600 bg-sky-50" : "text-slate-700 hover:bg-slate-50"}`}
-          >
-            Why Us
-          </Link>
-
-          {/* Technologies — simple link, no accordion */}
-          <Link
-            href="/technologies"
-            onClick={() => setMobileOpen(false)}
-            className={`text-sm font-medium px-3 py-2.5 rounded-xl ${pathname === "/technologies" ? "text-sky-600 bg-sky-50" : "text-slate-700 hover:bg-slate-50"}`}
-          >
-            Technologies
-          </Link>
-
-          <Link
-            href="/contact"
-            onClick={() => setMobileOpen(false)}
-            className="btn-primary text-sm text-center mt-2"
-          >
-            Get Started
-          </Link>
-        </div>
-      </div>
+              <Link href="/why-us" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">Why Us</Link>
+              <Link href="/contact" onClick={() => setMobileOpen(false)} className="mt-8 btn-primary text-center">Get Started</Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

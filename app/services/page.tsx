@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
   Globe,
@@ -16,87 +16,108 @@ import {
   Home,
   BarChart2,
   IndianRupee,
+  Cpu,
+  Database,
+  Layout,
+  MessageSquare,
+  BarChart,
+  RefreshCcw,
+  Search,
+  Code,
+  Sparkles
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 const services = [
   {
-    icon: <Globe className="w-7 h-7 text-sky-500" />,
+    icon: <Globe className="w-7 h-7" />,
     title: "Custom Web Solutions",
     desc: "Scalable, high-performance web applications tailored to your business needs using cutting-edge frameworks.",
+    features: ["Next.js/React", "SEO Optimized", "Microservices"],
   },
   {
-    icon: <Settings className="w-7 h-7 text-sky-500" />,
+    icon: <Settings className="w-7 h-7" />,
     title: "Enterprise Software",
     desc: "Robust ERP, CRM, and internal tools designed to streamline complex business processes for large-scale organizations.",
+    features: ["Scalable Architecture", "Legacy Integration", "24/7 Support"],
   },
   {
-    icon: <Cloud className="w-7 h-7 text-sky-500" />,
+    icon: <Cloud className="w-7 h-7" />,
     title: "Cloud & DevOps",
     desc: "Accelerate your deployment cycles with automated pipelines and scalable cloud infrastructure on AWS, Azure, or GCP.",
+    features: ["AWS/Azure/GCP", "CI/CD Pipelines", "Auto-scaling"],
   },
   {
-    icon: <Zap className="w-7 h-7 text-sky-500" />,
+    icon: <Zap className="w-7 h-7" />,
     title: "AI & Machine Learning",
     desc: "Integrate intelligent automation and data insights into your product to stay ahead of the competition.",
+    features: ["Predictive Analytics", "NLP Systems", "Computer Vision"],
   },
   {
-    icon: <Shield className="w-7 h-7 text-sky-500" />,
+    icon: <Shield className="w-7 h-7" />,
     title: "Cybersecurity",
     desc: "Protect your digital assets with enterprise-grade security audits, penetration testing, and compliance monitoring.",
+    features: ["Vulnerability Audits", "Penetration Testing", "Compliance"],
   },
   {
-    icon: <Smartphone className="w-7 h-7 text-sky-500" />,
+    icon: <Smartphone className="w-7 h-7" />,
     title: "Mobile App Development",
     desc: "Native and cross-platform mobile experiences that engage users and drive business growth.",
+    features: ["iOS & Android", "React Native/Flutter", "High Performance"],
   },
-
-  // 🆕 NEW SERVICES ADDED
-
   {
-    icon: <Settings className="w-7 h-7 text-sky-500" />,
+    icon: <Code className="w-7 h-7" />,
     title: "API Development & Integration",
     desc: "RESTful APIs, GraphQL services, and third-party integrations like payment gateways, SMS, and WhatsApp APIs.",
+    features: ["REST/GraphQL", "Secure Auth", "High Throughput"],
   },
   {
-    icon: <Cloud className="w-7 h-7 text-sky-500" />,
+    icon: <Database className="w-7 h-7" />,
     title: "DevOps & CI/CD Automation",
     desc: "Automated deployment pipelines using Docker, Kubernetes, Jenkins, and GitHub Actions for faster delivery.",
+    features: ["Docker/K8s", "Jenkins/Actions", "Terraform"],
   },
   {
-    icon: <Shield className="w-7 h-7 text-sky-500" />,
+    icon: <Layout className="w-7 h-7" />,
     title: "UI/UX Design",
     desc: "Modern, user-centric UI/UX design with wireframing, prototyping, and Figma-based design systems.",
+    features: ["User Research", "Wireframing", "Prototyping"],
   },
   {
-    icon: <Zap className="w-7 h-7 text-sky-500" />,
+    icon: <MessageSquare className="w-7 h-7" />,
     title: "AI Chatbots & Automation",
     desc: "Smart AI-powered chatbots and workflow automation to improve customer engagement and reduce manual work.",
+    features: ["24/7 Automation", "Multi-lingual", "CRM Integration"],
   },
   {
-    icon: <Cloud className="w-7 h-7 text-sky-500" />,
+    icon: <BarChart className="w-7 h-7" />,
     title: "Data Analytics & BI Dashboards",
     desc: "Interactive dashboards, real-time reporting, and business intelligence solutions for data-driven decisions.",
+    features: ["PowerBI/Tableau", "Real-time Ops", "Data Mining"],
   },
   {
-    icon: <Settings className="w-7 h-7 text-sky-500" />,
+    icon: <RefreshCcw className="w-7 h-7" />,
     title: "ERP & CRM Systems",
     desc: "Fully customized ERP and CRM solutions for sales, HR, inventory, and customer management systems.",
+    features: ["Custom Modules", "Data Analytics", "Workflows"],
   },
   {
-    icon: <Shield className="w-7 h-7 text-sky-500" />,
+    icon: <Shield className="w-7 h-7" />,
     title: "Software Testing & QA",
     desc: "Manual and automated testing including performance, security, and regression testing for stable applications.",
+    features: ["Unit/Integration", "Automated QA", "Load Testing"],
   },
   {
-    icon: <Cloud className="w-7 h-7 text-sky-500" />,
+    icon: <Cloud className="w-7 h-7" />,
     title: "System Migration Services",
     desc: "Legacy system modernization, database migration, and cloud migration with zero downtime strategy.",
+    features: ["Zero Downtime", "Data Integrity", "Legacy Modernization"],
   },
   {
-    icon: <Zap className="w-7 h-7 text-sky-500" />,
+    icon: <Zap className="w-7 h-7" />,
     title: "SaaS Product Development",
     desc: "Scalable multi-tenant SaaS platforms with subscription models and cloud-native architecture.",
+    features: ["Multi-tenancy", "Stripe Billing", "High Availability"],
   },
 ];
 
@@ -109,7 +130,7 @@ const financeServices = [
     badgeStyle: "bg-sky-100 text-sky-700",
     title: "Loans",
     desc: "Home, personal, and business loans with competitive rates and quick approvals.",
-    link: "/loans",
+    features: ["Quick Processing", "Lowest Interest", "Minimal Paperwork"],
   },
   {
     icon: <ShieldCheck className="w-6 h-6" />,
@@ -119,7 +140,7 @@ const financeServices = [
     badgeStyle: "bg-green-100 text-green-700",
     title: "Insurance",
     desc: "Secure your future with life, health, vehicle, and term insurance plans.",
-    link: "/insurance",
+    features: ["Full Coverage", "Fast Claims", "Global Help"],
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
@@ -129,7 +150,7 @@ const financeServices = [
     badgeStyle: "bg-yellow-100 text-yellow-700",
     title: "Mutual Fund",
     desc: "Invest in top-rated equity, debt, and hybrid mutual fund schemes.",
-    link: "/mutual-fund",
+    features: ["SIP Options", "Expert Managed", "Tax Benefits"],
   },
   {
     icon: <IndianRupee className="w-6 h-6" />,
@@ -139,7 +160,7 @@ const financeServices = [
     badgeStyle: "bg-violet-100 text-violet-700",
     title: "Investments",
     desc: "Grow wealth through equities, bonds, fixed deposits, and more.",
-    link: "/investments",
+    features: ["Portfolio Growth", "Diversified Risk", "Real-time Tracking"],
   },
   {
     icon: <Home className="w-6 h-6" />,
@@ -149,7 +170,7 @@ const financeServices = [
     badgeStyle: "bg-orange-100 text-orange-700",
     title: "Real Estate",
     desc: "Buy, sell, or invest in verified residential and commercial properties.",
-    link: "/real-estate",
+    features: ["Prime Locations", "High ROI", "Verified Assets"],
   },
   {
     icon: <BarChart2 className="w-6 h-6" />,
@@ -159,54 +180,57 @@ const financeServices = [
     badgeStyle: "bg-fuchsia-100 text-fuchsia-700",
     title: "Unlisted",
     desc: "Access exclusive pre-IPO shares and unlisted equity opportunities.",
-    link: "/unlisted",
+    features: ["Early Access", "High Alpha", "Vetted Ventures"],
   },
-];
-
-const features = [
-  "24/7 Monitoring",
-  "Enterprise Scalability",
-  "Seamless Integration",
 ];
 
 const steps = [
-  {
-    num: "01",
-    title: "Discovery",
-    desc: "Understanding your vision and business requirements in detail.",
-  },
-  {
-    num: "02",
-    title: "Strategy",
-    desc: "Planning the architecture, tech stack, and project roadmap.",
-  },
-  {
-    num: "03",
-    title: "Execution",
-    desc: "Agile development with continuous feedback loops and testing.",
-  },
-  {
-    num: "04",
-    title: "Launch",
-    desc: "Deploying your solution and providing ongoing support.",
-  },
+  { num: "01", title: "Discovery", desc: "Understanding your vision and business requirements." },
+  { num: "02", title: "Strategy", desc: "Planning the architecture and project roadmap." },
+  { num: "03", title: "Execution", desc: "Agile development with continuous feedback loops." },
+  { num: "04", title: "Launch", desc: "Deploying your solution with ongoing support." },
 ];
 
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+/* ─────────────────── SPOTLIGHT CARD ───────────────────────── */
+function SpotlightCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
+  const onMove = useCallback((e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative overflow-hidden ${className}`}
+    >
+      {hovered && (
+        <div
+          className="pointer-events-none absolute z-0 rounded-full transition-opacity duration-300"
+          style={{
+            width: 350, height: 350,
+            background: "radial-gradient(circle, rgba(14,165,233,0.12) 0%, transparent 70%)",
+            left: pos.x - 175, top: pos.y - 175,
+          }}
+        />
+      )}
+      {children}
+    </div>
+  );
+}
 
 export default function ServicesPage() {
   const [showAll, setShowAll] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.98]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -215,17 +239,13 @@ export default function ServicesPage() {
         const index = services.findIndex(s => s.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash);
         if (index >= 6) {
           setShowAll(true);
-          // Wait for the DOM to update before scrolling
           setTimeout(() => {
             const element = document.getElementById(hash);
-            if (element) {
-              element.scrollIntoView({ behavior: "smooth" });
-            }
+            if (element) element.scrollIntoView({ behavior: "smooth" });
           }, 100);
         }
       }
     };
-
     handleHashChange();
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
@@ -235,177 +255,160 @@ export default function ServicesPage() {
 
   return (
     <>
-      <section className="relative bg-gradient-to-br from-sky-50 to-white py-20 text-center overflow-hidden animated-grid-bg">
-        <div className="absolute top-8 left-[14%] h-20 w-20 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
-        <div className="absolute bottom-6 right-[14%] h-20 w-20 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
-        <div className="max-w-3xl mx-auto px-4">
-          {/* Animated Heading */}
+      {/* ══════════════════ HERO ══════════════════ */}
+      <motion.section
+        style={{ opacity: heroOpacity, scale: heroScale }}
+        className="relative bg-gradient-to-br from-sky-50 to-white py-24 text-center overflow-hidden animated-grid-bg"
+      >
+        <div className="absolute top-8 left-[10%] h-24 w-24 rounded-full bg-sky-300/10 blur-3xl animate-float-slow" />
+        <div className="absolute bottom-6 right-[10%] h-24 w-24 rounded-full bg-sky-200/10 blur-3xl animate-float-delay" />
+        
+        <div className="max-w-4xl mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm mb-6 border border-sky-100"
+          >
+            <Sparkles className="w-4 h-4 text-sky-500 animate-pulse" />
+            <span className="text-sm text-slate-600 font-medium">Precision Engineering</span>
+          </motion.div>
+          
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-5xl font-extrabold text-slate-900 mb-4"
+            className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight"
           >
-            Our Services & Solutions
+            Our Services & <span className="text-sky-500">Solutions</span>
           </motion.h1>
 
-          {/* Animated Paragraph */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-slate-500"
+            className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed"
           >
             We provide end-to-end software development services using the latest
             technologies to help your business achieve digital excellence.
           </motion.p>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-20">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8"
-        >
-          <AnimatePresence mode="popLayout">
-            {displayedServices.map((s, index) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                whileHover={{
-                  y: -10,
-                  boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-                  transition: { duration: 0.3 }
-                }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
-                key={s.title}
-                id={s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
-                className="card card-hover scroll-mt-24 group border-slate-100 hover:border-sky-200 transition-all duration-300"
-              >
-                <div className="flex gap-6">
-                  <motion.div
-                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-                    className="w-16 h-16 bg-gradient-to-br from-slate-50 to-white group-hover:from-slate-100 group-hover:to-white border border-transparent group-hover:border-sky-300 rounded-2xl flex items-center justify-center shrink-0 shadow-sm transition-all duration-500"
-                  >
-                    <div className="group-hover:scale-110 transition-transform duration-300">
-                      {s.icon}
-                    </div>
-                  </motion.div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-slate-800 text-xl mb-2 group-hover:text-sky-600 transition-colors">
-                      {s.title}
-                    </h3>
-                    <p className="text-slate-500 text-sm mb-5 leading-relaxed">{s.desc}</p>
-                    <div className="grid grid-cols-1 gap-2 mb-6">
-                      {features.map((f, i) => (
-                        <motion.li
-                          key={f}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.2 + (i * 0.1) }}
-                          className="flex items-center gap-3 text-sm text-slate-500 list-none"
-                        >
-                          <div className="w-5 h-5 rounded-full bg-sky-50 flex items-center justify-center">
-                            <CheckCircle size={12} className="text-sky-500" />
-                          </div>
-                          {f}
-                        </motion.li>
-                      ))}
-                    </div>
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 text-sky-500 text-sm font-bold group/link"
-                    >
-                      Inquire for Quote
-                      <motion.span
-                        animate={{ x: [0, 4, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
-                      </motion.span>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {services.length > 6 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-16 flex justify-center"
-          >
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover-shine"
-            >
-              {showAll ? "Show Less" : "View All Services"}
-            </button>
-          </motion.div>
-        )}
-      </section>
-
-      {/* Finance Products */}
-      <section className="py-20 bg-slate-50">
+      {/* ══════════════════ SERVICES GRID ══════════════════ */}
+      <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-3">
-              Financial Products
-            </h2>
-            <p className="text-slate-500">
-              Comprehensive financial solutions to grow and protect your wealth.
-            </p>
-          </div>
           <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            layout
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {financeServices.map((f) => (
-              <motion.div
-                variants={fadeIn}
-                whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                key={f.title}
-                id={f.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
-                className="card card-hover scroll-mt-24"
-              >
-                <div
-                  className={`w-11 h-11 ${f.iconBg} rounded-xl flex items-center justify-center mb-4`}
+            <AnimatePresence mode="popLayout">
+              {displayedServices.map((s, index) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
+                  key={s.title}
+                  id={s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
                 >
-                  <span className={f.iconColor}>{f.icon}</span>
-                </div>
-                <span
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-full ${f.badgeStyle} mb-3 inline-block`}
-                >
-                  {f.badge}
-                </span>
-                <h3 className="font-bold text-slate-800 text-lg mb-2">
-                  {f.title}
-                </h3>
-                <p className="text-slate-500 text-sm mb-4">{f.desc}</p>
-                <Link
-                  href="/contact"
-                  className="text-sky-500 text-sm font-semibold flex items-center gap-1 hover:gap-2 transition-all"
-                >
-                  Explore <ArrowRight size={14} />
-                </Link>
-              </motion.div>
-            ))}
+                  <SpotlightCard className="h-full rounded-3xl">
+                    <div className="card card-hover h-full bg-white/80 backdrop-blur-sm border border-slate-100 hover:border-sky-200 p-8 flex flex-col group transition-all">
+                      <div className="w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                        {s.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">{s.title}</h3>
+                      <p className="text-slate-500 text-sm mb-6 leading-relaxed flex-grow">{s.desc}</p>
+                      
+                      <div className="space-y-2 mb-8">
+                        {s.features.map((f) => (
+                          <div key={f} className="flex items-center gap-3 text-xs text-slate-500">
+                            <div className="w-4 h-4 rounded-full bg-sky-50 flex items-center justify-center">
+                              <CheckCircle size={10} className="text-sky-500" />
+                            </div>
+                            {f}
+                          </div>
+                        ))}
+                      </div>
+
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-2 text-sky-500 text-sm font-bold group/link hover:gap-3 transition-all"
+                      >
+                        Inquire Now <ArrowRight size={16} />
+                      </Link>
+                    </div>
+                  </SpotlightCard>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </motion.div>
+
+          {services.length > 6 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="mt-16 flex justify-center"
+            >
+              <button
+                onClick={() => setShowAll(!showAll)}
+                className="relative px-8 py-3 rounded-full border-2 border-sky-500 text-sky-600 font-bold hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg overflow-hidden group"
+              >
+                <div className="absolute inset-0 bg-white/20 -skew-x-12 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700" />
+                {showAll ? "Show Less" : "Explore All Services"}
+              </button>
+            </motion.div>
+          )}
         </div>
       </section>
 
-      {/* How We Work */}
+      {/* ══════════════════ FINANCE PRODUCTS ══════════════════ */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Financial Products</h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">Comprehensive financial solutions to grow and protect your wealth.</p>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {financeServices.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
+              >
+                <div className={`w-12 h-12 ${f.iconBg} rounded-2xl flex items-center justify-center mb-6 ${f.iconColor} group-hover:scale-110 transition-transform`}>
+                  {f.icon}
+                </div>
+                <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${f.badgeStyle} mb-4 inline-block uppercase tracking-wider`}>
+                  {f.badge}
+                </span>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{f.title}</h3>
+                <p className="text-slate-500 text-sm mb-6 leading-relaxed">{f.desc}</p>
+                
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {f.features.map((feat) => (
+                    <span key={feat} className="badge text-[10px] uppercase tracking-wider font-bold">
+                      {feat}
+                    </span>
+                  ))}
+                </div>
+
+                <Link href="/contact" className="text-sky-500 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                  Consult Experts <ArrowRight size={16} />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════ HOW WE WORK ══════════════════ */}
       <section className="py-20 bg-[#1E3A5F]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-3">How We Work</h2>
@@ -413,16 +416,17 @@ export default function ServicesPage() {
             Our structured approach ensures project success every time.
           </p>
           <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
+            transition={{ staggerChildren: 0.1 }}
             className="grid md:grid-cols-4 gap-6"
           >
             {steps.map((step) => (
               <motion.div
-                variants={fadeIn}
-                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
                 key={step.num}
                 className="bg-white/10 rounded-2xl p-6 text-left border border-white/10 transition-transform hover:-translate-y-1 hover:shadow-lg"
               >
