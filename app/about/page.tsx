@@ -49,17 +49,23 @@ const AnimatedCounter = ({
     return () => observer.disconnect();
   }, [numericValue]);
 
-  const displayValue = isStatic ? value : (isDecimal ? count.toFixed(1) : Math.floor(count));
+  const displayValue = isStatic
+    ? value
+    : isDecimal
+      ? count.toFixed(1)
+      : Math.floor(count);
 
   return (
     <span ref={ref} className={className}>
-      {isStatic ? value : `${displayValue}${hasPlus ? "+" : ""}${hasPercent ? "%" : ""}${suffix}`}
+      {isStatic
+        ? value
+        : `${displayValue}${hasPlus ? "+" : ""}${hasPercent ? "%" : ""}${suffix}`}
     </span>
   );
 };
 
 const stats = [
-  { value: "10+", label: "Years" },
+  { value: "25 ", label: "Years" },
   { value: "3000+", label: "Projects" },
   { value: "20", label: "Global Offices" },
 ];
