@@ -245,7 +245,7 @@ export default function IndustriesPage() {
           <div className="mt-20 flex justify-center">
             <button
               onClick={() => setShowAll(!showAll)}
-              className="px-10 py-4 rounded-full bg-slate-900 text-white font-bold hover:bg-sky-500 transition-all shadow-xl active:scale-95 group overflow-hidden relative"
+              className="px-10 py-4 rounded-full bg-sky-500 text-white font-bold hover:bg-sky-600 transition-all shadow-xl active:scale-95 group overflow-hidden relative"
             >
               <div className="absolute inset-0 bg-white/20 -skew-x-12 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700" />
               {showAll ? "Show Less" : "Discover All Sectors"}
