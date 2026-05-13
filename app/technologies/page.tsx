@@ -601,24 +601,28 @@ export default function TechnologiesPage() {
             Certified Cloud Partners
           </motion.p>
         </div>
-        <div className="relative flex overflow-x-hidden">
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent z-10" />
+        <div className="relative flex overflow-x-hidden group">
+          {/* fade masks */}
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white to-transparent z-10" />
+
           {[0, 1].map((track) => (
             <motion.div
               key={track}
               animate={{ x: ["0%", "-50%"] }}
-              transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
-              className="flex items-center gap-16 min-w-max pr-16"
+              transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+              className="flex items-center gap-10 min-w-max pr-10"
             >
               {[...partners, ...partners].map((p, i) => (
-                <motion.span
+                <motion.div
                   key={`${p}-${i}`}
-                  whileHover={{ scale: 1.08, color: "#0ea5e9" }}
-                  className="text-xl font-extrabold text-slate-800 tracking-wider cursor-default transition-colors"
+                  whileHover={{ y: -4 }}
+                  className="px-10 py-5 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-sky-100 transition-all duration-300 min-w-[220px] text-center cursor-default group/partner"
                 >
-                  {p}
-                </motion.span>
+                  <span className="text-lg font-extrabold text-slate-800 tracking-wider group-hover/partner:text-sky-600 transition-colors uppercase">
+                    {p}
+                  </span>
+                </motion.div>
               ))}
             </motion.div>
           ))}

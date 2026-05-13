@@ -913,10 +913,10 @@ export default function HomePage() {
             ].map((client, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.1 }}
-                className="relative px-8 py-4 bg-slate-50 rounded-2xl border border-slate-100 group/client cursor-default min-w-[200px] text-center"
+                whileHover={{ y: -4 }}
+                className="relative px-8 py-5 bg-white rounded-xl border border-slate-100 group/client cursor-default min-w-[220px] text-center transition-all duration-300 hover:shadow-md hover:border-sky-100"
               >
-                <span className="text-xl font-black text-slate-300 group-hover/client:text-sky-500 transition-colors uppercase tracking-tighter italic">
+                <span className="text-xl font-bold text-slate-800 group-hover/client:text-sky-600 transition-colors uppercase tracking-wider">
                   {client.name}
                 </span>
                 <motion.div
