@@ -21,6 +21,7 @@ const AnimatedCounter = ({
   const hasPlus = value.includes("+");
   const hasPercent = value.includes("%");
   const isDecimal = value.includes(".");
+  const isStatic = value.includes("/");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -48,14 +49,11 @@ const AnimatedCounter = ({
     return () => observer.disconnect();
   }, [numericValue]);
 
-  const displayValue = isDecimal ? count.toFixed(1) : Math.floor(count);
+  const displayValue = isStatic ? value : (isDecimal ? count.toFixed(1) : Math.floor(count));
 
   return (
     <span ref={ref} className={className}>
-      {displayValue}
-      {hasPlus ? "+" : ""}
-      {hasPercent ? "%" : ""}
-      {suffix}
+      {isStatic ? value : `${displayValue}${hasPlus ? "+" : ""}${hasPercent ? "%" : ""}${suffix}`}
     </span>
   );
 };
