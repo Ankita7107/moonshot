@@ -21,6 +21,11 @@ import {
   Settings2,
   Users,
   MousePointer2,
+  ExternalLink,
+  Search,
+  Layout,
+  Code2,
+  CheckCircle2,
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -69,6 +74,71 @@ const whyUs = [
     icon: "🔒",
     title: "Security First",
     desc: "Every line of code is written with security best practices to protect your data.",
+  },
+];
+
+const caseStudies = [
+  {
+    title: "Infinity Arthvishva",
+    category: "Financial Services",
+    result: "100% Digital",
+    desc: "A comprehensive financial advisory platform offering seamless solutions across loans, insurance, and wealth management.",
+    color: "from-blue-500 to-indigo-600",
+    image: "/infinityfront.png",
+  },
+  {
+    title: "Infinity HRMS",
+    category: "Enterprise Software",
+    result: "Automated Workflows",
+    desc: "A powerful HR Management System designed to streamline HR operations, payroll, and employee lifecycle management.",
+    color: "from-emerald-400 to-teal-600",
+    image: "/moonshot_images/infinityhrms.png",
+  },
+  {
+    title: "Raja-ji",
+    category: "E-commerce & Retail",
+    result: "Premium Shopping",
+    desc: "An elegant e-commerce destination for exclusive wedding apparel, featuring premium sarees, traditional kurtas, and stylish blazers.",
+    color: "from-rose-400 to-orange-500",
+    image: "/rajaji.jpeg",
+  },
+];
+
+const workProcess = [
+  {
+    step: "01",
+    title: "Discovery & Strategy",
+    desc: "We dive deep into your business goals, target audience, and technical requirements to build a solid roadmap.",
+    icon: <Search className="w-6 h-6" />,
+    color: "bg-blue-500",
+  },
+  {
+    step: "02",
+    title: "Design & Prototyping",
+    desc: "Our designers craft intuitive user experiences and interactive prototypes to visualize the end product.",
+    icon: <Layout className="w-6 h-6" />,
+    color: "bg-indigo-500",
+  },
+  {
+    step: "03",
+    title: "Agile Development",
+    desc: "Our engineers build your solution using modern tech stacks with transparent, iterative delivery cycles.",
+    icon: <Code2 className="w-6 h-6" />,
+    color: "bg-sky-500",
+  },
+  {
+    step: "04",
+    title: "Quality Assurance",
+    desc: "Rigorous testing across all devices and scenarios ensures your software is bug-free and high-performing.",
+    icon: <CheckCircle2 className="w-6 h-6" />,
+    color: "bg-emerald-500",
+  },
+  {
+    step: "05",
+    title: "Launch & Support",
+    desc: "We ensure a smooth deployment and provide ongoing support to scale and evolve your product.",
+    icon: <Rocket className="w-6 h-6" />,
+    color: "bg-violet-500",
   },
 ];
 
@@ -757,6 +827,188 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Featured Case Studies Section */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="max-w-2xl">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="section-label inline-flex items-center gap-2"
+              >
+                <BarChart className="w-4 h-4" /> SUCCESS STORIES
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-5xl font-bold text-slate-900"
+              >
+                Engineering Excellence in Action
+              </motion.h2>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Link
+                href="/contact"
+                className="group flex items-center gap-2 text-sky-500 font-bold hover:text-sky-600 transition-colors"
+              >
+                Start your own success story
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+            </motion.div>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {caseStudies.map((study, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="group relative h-[450px] rounded-[2.5rem] overflow-hidden bg-slate-900 shadow-2xl hover:shadow-sky-200/50 transition-all duration-500"
+              >
+                {/* Project Image */}
+                {study.image && (
+                  <div className="absolute inset-0 z-0 flex flex-col justify-start overflow-hidden bg-slate-900">
+                    <div className="relative w-full h-[65%]">
+                      <Image
+                        src={study.image}
+                        alt={study.title}
+                        fill
+                        className="object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-transform duration-700 origin-top"
+                      />
+                    </div>
+                    {/* Strong Gradient overlay to seamlessly blend the image into the dark card bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent" />
+                  </div>
+                )}
+
+                {/* Image Placeholder with Gradient (Fallback) */}
+                {!study.image && (
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-40 group-hover:opacity-60 transition-opacity duration-500`}
+                  />
+                )}
+
+                {/* Grid Pattern Overlay */}
+                <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500 animated-grid-bg" />
+
+                {/* Floating Content */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                  <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-wider">
+                        {study.category}
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-sky-500/20">
+                        {study.result}
+                      </span>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-white mb-3">
+                      {study.title}
+                    </h3>
+
+                    <p className="text-slate-300 text-sm leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {study.desc}
+                    </p>
+
+                    <button className="flex items-center gap-2 text-white font-bold text-sm bg-white/10 hover:bg-sky-500 backdrop-blur-md border border-white/20 px-5 py-2.5 rounded-xl transition-all duration-300 group/btn">
+                      View Project
+                      <ExternalLink
+                        size={14}
+                        className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Animated Light Effect */}
+                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_50%)] pointer-events-none group-hover:animate-pulse-glow" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Process Section */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="section-label inline-flex items-center gap-2"
+            >
+              <Activity className="w-4 h-4" /> OUR METHODOLOGY
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold text-slate-900 mt-4"
+            >
+              How We Turn Ideas Into Reality
+            </motion.h2>
+          </div>
+
+          <div className="relative">
+            {/* Desktop Timeline Line */}
+            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -translate-y-1/2 hidden lg:block" />
+
+            <div className="grid lg:grid-cols-5 gap-8 relative z-20">
+              {workProcess.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="relative group"
+                >
+                  {/* Step Card */}
+                  <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 group-hover:-translate-y-2 h-full flex flex-col">
+                    <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-sky-200/20 group-hover:scale-110 transition-transform duration-300`}>
+                      {item.icon}
+                    </div>
+
+                    <span className="text-4xl font-black text-slate-100 group-hover:text-sky-50 transition-colors absolute top-6 right-8 pointer-events-none">
+                      {item.step}
+                    </span>
+
+                    <h3 className="text-xl font-bold text-slate-800 mb-3 relative z-10">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-500 text-sm leading-relaxed mb-6 relative z-10">
+                      {item.desc}
+                    </p>
+                  </div>
+
+                  {/* Mobile Connector */}
+                  {idx < workProcess.length - 1 && (
+                    <div className="h-12 w-0.5 bg-slate-200 mx-auto my-4 lg:hidden" />
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
