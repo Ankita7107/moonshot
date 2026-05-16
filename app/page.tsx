@@ -872,74 +872,64 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="group relative h-[450px] rounded-[2.5rem] overflow-hidden bg-slate-900 shadow-2xl hover:shadow-sky-200/50 transition-all duration-500"
+                className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
               >
-                {/* Project Image */}
-                {study.image && (
-                  <div className="absolute inset-0 z-0 flex flex-col justify-start overflow-hidden bg-slate-900">
-                    <div className="relative w-full h-[65%]">
-                      <Image
-                        src={study.image}
-                        alt={study.title}
-                        fill
-                        className="object-cover object-top opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-transform duration-700 origin-top"
-                      />
-                    </div>
-                    {/* Strong Gradient overlay to seamlessly blend the image into the dark card bottom */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent" />
-                  </div>
-                )}
-
-                {/* Image Placeholder with Gradient (Fallback) */}
-                {!study.image && (
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-40 group-hover:opacity-60 transition-opacity duration-500`}
-                  />
-                )}
-
-                {/* Grid Pattern Overlay */}
-                <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500 animated-grid-bg" />
-
-                {/* Floating Content */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end z-20">
-                  <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-wider">
-                        {study.category}
-                      </span>
-                      <span className="px-3 py-1 rounded-full bg-sky-500 text-white text-[10px] font-bold uppercase tracking-wider shadow-lg shadow-sky-500/20">
-                        {study.result}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl font-bold text-white mb-3">
-                      {study.title}
-                    </h3>
-
-                    <p className="text-slate-300 text-sm leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                      {study.desc}
-                    </p>
-
-                    <button className="flex items-center gap-2 text-white font-bold text-sm bg-white/10 hover:bg-sky-500 backdrop-blur-md border border-white/20 px-5 py-2.5 rounded-xl transition-all duration-300 group/btn">
-                      View Project
-                      <ExternalLink
-                        size={14}
-                        className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
-                      />
-                    </button>
-                  </div>
+                {/* Top: Image Section */}
+                <div className="relative h-64 w-full overflow-hidden">
+                  {study.image ? (
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-80`} />
+                  )}
+                  {/* Subtle overlay for image depth */}
+                  <div className="absolute inset-0 bg-slate-900/5 group-hover:bg-transparent transition-colors duration-300" />
                 </div>
 
-                {/* Animated Light Effect */}
-                <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.1)_0%,_transparent_50%)] pointer-events-none group-hover:animate-pulse-glow" />
+                {/* Bottom: Content Section */}
+                <div className="p-8 flex flex-col flex-grow">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] font-bold uppercase tracking-wider">
+                      {study.category}
+                    </span>
+                    <span className="px-3 py-1 rounded-full bg-slate-50 text-slate-500 text-[10px] font-bold uppercase tracking-wider">
+                      {study.result}
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-sky-500 transition-colors">
+                    {study.title}
+                  </h3>
+
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    {study.desc}
+                  </p>
+
+                  <div className="mt-auto pt-4 flex items-center justify-between border-t border-slate-50">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 text-sky-500 font-bold text-sm hover:text-sky-600 transition-colors"
+                    >
+                      View Case Study
+                      <ArrowRight size={16} />
+                    </Link>
+                    <div className="text-slate-300">
+                      <ExternalLink size={18} />
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
