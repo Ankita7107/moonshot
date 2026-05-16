@@ -26,6 +26,7 @@ import {
   Layout,
   Code2,
   CheckCircle2,
+  ArrowUp,
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
