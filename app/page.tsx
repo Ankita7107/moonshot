@@ -27,7 +27,7 @@ import {
   Code2,
   CheckCircle2,
 } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 const stats = [
   { value: "3000+", label: "Successful Projects" },
@@ -274,6 +274,15 @@ export default function HomePage() {
   const parallaxY1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const parallaxY2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
+  const [currentCaseStudy, setCurrentCaseStudy] = useState(0);
+
+  const nextCaseStudy = () => {
+    setCurrentCaseStudy((prev) => (prev + 1) % caseStudies.length);
+  };
+
+  const prevCaseStudy = () => {
+    setCurrentCaseStudy((prev) => (prev - 1 + caseStudies.length) % caseStudies.length);
+  };
 
   return (
     <div className="overflow-hidden">
@@ -872,66 +881,93 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {caseStudies.map((study, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+          <div className="relative max-w-5xl mx-auto">
+            {/* Navigation Buttons */}
+            <div className="absolute top-1/2 -left-4 lg:-left-20 -translate-y-1/2 z-30">
+              <button
+                onClick={prevCaseStudy}
+                className="w-12 h-12 rounded-full bg-white shadow-xl border border-slate-100 flex items-center justify-center text-slate-400 hover:text-sky-500 hover:border-sky-200 transition-all active:scale-90"
               >
-                {/* Top: Image Section */}
-                <div className="relative h-64 w-full overflow-hidden">
-                  {study.image ? (
-                    <Image
-                      src={study.image}
-                      alt={study.title}
-                      fill
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-80`} />
-                  )}
-                  {/* Subtle overlay for image depth */}
-                  <div className="absolute inset-0 bg-slate-900/5 group-hover:bg-transparent transition-colors duration-300" />
-                </div>
+                <ChevronRight size={24} className="rotate-180" />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -right-4 lg:-right-20 -translate-y-1/2 z-30">
+              <button
+                onClick={nextCaseStudy}
+                className="w-12 h-12 rounded-full bg-white shadow-xl border border-slate-100 flex items-center justify-center text-slate-400 hover:text-sky-500 hover:border-sky-200 transition-all active:scale-90"
+              >
+                <ChevronRight size={24} />
+              </button>
+            </div>
 
-                {/* Bottom: Content Section */}
-                <div className="p-8 flex flex-col flex-grow">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className="px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-[10px] font-bold uppercase tracking-wider">
-                      {study.category}
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-slate-50 text-slate-500 text-[10px] font-bold uppercase tracking-wider">
-                      {study.result}
-                    </span>
+            <div className="overflow-hidden px-4 py-10">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentCaseStudy}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.05 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl flex flex-col min-h-[600px]"
+                >
+                  {/* Top: Image Section (Full Width) */}
+                  <div className="relative h-80 md:h-96 w-full overflow-hidden">
+                    {caseStudies[currentCaseStudy].image ? (
+                      <Image
+                        src={caseStudies[currentCaseStudy].image}
+                        alt={caseStudies[currentCaseStudy].title}
+                        fill
+                        className="object-cover object-top"
+                      />
+                    ) : (
+                      <div className={`absolute inset-0 bg-gradient-to-br ${caseStudies[currentCaseStudy].color} opacity-80`} />
+                    )}
+                    {/* Subtitle overlay for visual depth */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-sky-500 transition-colors">
-                    {study.title}
-                  </h3>
+                  {/* Bottom: Content Section */}
+                  <div className="p-8 md:p-12 flex flex-col flex-grow">
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      <span className="px-4 py-1.5 rounded-full bg-sky-50 text-sky-600 text-xs font-bold uppercase tracking-wider">
+                        {caseStudies[currentCaseStudy].category}
+                      </span>
+                      <span className="px-4 py-1.5 rounded-full bg-slate-50 text-slate-500 text-xs font-bold uppercase tracking-wider">
+                        {caseStudies[currentCaseStudy].result}
+                      </span>
+                    </div>
 
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                    {study.desc}
-                  </p>
+                    <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">
+                      {caseStudies[currentCaseStudy].title}
+                    </h3>
 
-                  <div className="mt-auto pt-4 flex items-center justify-between border-t border-slate-50">
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 text-sky-500 font-bold text-sm hover:text-sky-600 transition-colors"
-                    >
-                      View Case Study
-                      <ArrowRight size={16} />
-                    </Link>
-                    <div className="text-slate-300">
-                      <ExternalLink size={18} />
+                    <p className="text-slate-500 text-lg leading-relaxed mb-8 max-w-2xl">
+                      {caseStudies[currentCaseStudy].desc}
+                    </p>
+
+                    <div className="mt-auto pt-8 flex items-center justify-between border-t border-slate-100">
+                      <Link
+                        href="/contact"
+                        className="inline-flex items-center gap-3 bg-sky-500 text-white font-bold px-8 py-4 rounded-2xl hover:bg-sky-600 transition-all hover:shadow-lg hover:shadow-sky-500/25 active:scale-95"
+                      >
+                        View Case Study
+                        <ArrowRight size={20} />
+                      </Link>
+
+                      <div className="flex gap-4">
+                        {caseStudies.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setCurrentCaseStudy(i)}
+                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentCaseStudy ? 'bg-sky-500 w-8' : 'bg-slate-200 hover:bg-slate-300'}`}
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </section>
