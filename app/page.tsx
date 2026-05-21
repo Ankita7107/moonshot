@@ -841,137 +841,113 @@ export default function HomePage() {
       </section>
 
       {/* Featured Case Studies Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div className="max-w-2xl">
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="section-label inline-flex items-center gap-2"
-              >
-                <BarChart className="w-4 h-4" /> SUCCESS STORIES
-              </motion.p>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-4xl md:text-5xl font-bold text-slate-900"
-              >
-                Engineering Excellence in Action
-              </motion.h2>
+   
+{/* Featured Case Studies Section - Sleek Grid Version */}
+<section className="py-24 bg-white relative overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div className="max-w-2xl">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="section-label inline-flex items-center gap-2"
+        >
+          <BarChart className="w-4 h-4" /> SUCCESS STORIES
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="text-4xl md:text-5xl font-bold text-slate-900 mt-2"
+        >
+          Engineering Excellence
+        </motion.h2>
+      </div>
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+      >
+        <Link
+          href="/contact"
+          className="group flex items-center gap-2 text-sky-500 font-bold hover:text-sky-600 transition-colors"
+        >
+          View all projects
+          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+        </Link>
+      </motion.div>
+    </div>
+
+    {/* Grid Container - 3 Cards side by side */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {caseStudies.map((study, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: idx * 0.1 }}
+          whileHover={{ y: -10 }}
+          className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col"
+        >
+          {/* Image Section - Impactful yet balanced */}
+          <div className="relative h-64 w-full overflow-hidden">
+            {study.image ? (
+              <Image
+                src={study.image}
+                alt={study.title}
+                fill
+                className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
+              />
+            ) : (
+              <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-90`} />
+            )}
+            
+            {/* Category Badge overlay on image */}
+            <div className="absolute top-6 left-6">
+              <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-sky-600 text-[10px] font-black uppercase tracking-widest shadow-lg">
+                {study.category}
+              </span>
             </div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
+          </div>
+
+          {/* Content Section */}
+          <div className="p-8 flex flex-col flex-grow">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-emerald-600 text-xs font-bold uppercase tracking-wider">
+                {study.result}
+              </span>
+            </div>
+
+            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-sky-600 transition-colors">
+              {study.title}
+            </h3>
+
+            <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
+              {study.desc}
+            </p>
+
+            <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
               <Link
                 href="/contact"
-                className="group flex items-center gap-2 text-sky-500 font-bold hover:text-sky-600 transition-colors"
+                className="inline-flex items-center gap-2 text-slate-900 font-bold text-sm group/btn"
               >
-                Start your own success story
-                <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
+                View Case Study
+                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover/btn:bg-sky-500 group-hover/btn:text-white transition-all">
+                  <ArrowRight size={14} />
+                </div>
               </Link>
-            </motion.div>
-          </div>
-
-          <div className="relative max-w-5xl mx-auto">
-            {/* Navigation Buttons */}
-            <div className="absolute top-1/2 -left-4 lg:-left-20 -translate-y-1/2 z-30">
-              <button
-                onClick={prevCaseStudy}
-                className="w-12 h-12 rounded-full bg-white shadow-xl border border-slate-100 flex items-center justify-center text-slate-400 hover:text-sky-500 hover:border-sky-200 transition-all active:scale-90"
-              >
-                <ChevronRight size={24} className="rotate-180" />
-              </button>
-            </div>
-            <div className="absolute top-1/2 -right-4 lg:-right-20 -translate-y-1/2 z-30">
-              <button
-                onClick={nextCaseStudy}
-                className="w-12 h-12 rounded-full bg-white shadow-xl border border-slate-100 flex items-center justify-center text-slate-400 hover:text-sky-500 hover:border-sky-200 transition-all active:scale-90"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
-
-            <div className="overflow-hidden px-4 py-10">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentCaseStudy}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.05 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="bg-white rounded-[3rem] overflow-hidden border border-slate-100 shadow-2xl flex flex-col min-h-[600px]"
-                >
-                  {/* Top: Image Section (Full Width) */}
-                  <div className="relative h-80 md:h-96 w-full overflow-hidden">
-                    {caseStudies[currentCaseStudy].image ? (
-                      <Image
-                        src={caseStudies[currentCaseStudy].image}
-                        alt={caseStudies[currentCaseStudy].title}
-                        fill
-                        className="object-cover object-top"
-                      />
-                    ) : (
-                      <div className={`absolute inset-0 bg-gradient-to-br ${caseStudies[currentCaseStudy].color} opacity-80`} />
-                    )}
-                    {/* Subtitle overlay for visual depth */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                  </div>
-
-                  {/* Bottom: Content Section */}
-                  <div className="p-8 md:p-12 flex flex-col flex-grow">
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      <span className="px-4 py-1.5 rounded-full bg-sky-50 text-sky-600 text-xs font-bold uppercase tracking-wider">
-                        {caseStudies[currentCaseStudy].category}
-                      </span>
-                      <span className="px-4 py-1.5 rounded-full bg-slate-50 text-slate-500 text-xs font-bold uppercase tracking-wider">
-                        {caseStudies[currentCaseStudy].result}
-                      </span>
-                    </div>
-
-                    <h3 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 tracking-tight">
-                      {caseStudies[currentCaseStudy].title}
-                    </h3>
-
-                    <p className="text-slate-500 text-lg leading-relaxed mb-8 max-w-2xl">
-                      {caseStudies[currentCaseStudy].desc}
-                    </p>
-
-                    <div className="mt-auto pt-8 flex items-center justify-between border-t border-slate-100">
-                      <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-3 bg-sky-500 text-white font-bold px-8 py-4 rounded-2xl hover:bg-sky-600 transition-all hover:shadow-lg hover:shadow-sky-500/25 active:scale-95"
-                      >
-                        View Case Study
-                        <ArrowRight size={20} />
-                      </Link>
-
-                      <div className="flex gap-4">
-                        {caseStudies.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => setCurrentCaseStudy(i)}
-                            className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentCaseStudy ? 'bg-sky-500 w-8' : 'bg-slate-200 hover:bg-slate-300'}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
             </div>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Our Process Section */}
       <section className="py-24 bg-slate-50 relative overflow-hidden">
