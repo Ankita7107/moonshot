@@ -13,6 +13,9 @@ import {
   Layout,
   Terminal,
   TrendingUp,
+  Rocket,
+  BookOpen,
+  MessageSquare,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -83,22 +86,34 @@ const stats = [
 
 const values = [
   {
-    icon: "🚀",
+    icon: Rocket,
+    iconColor: "text-sky-500",
+    bgClass: "bg-sky-50 group-hover:bg-sky-500",
+    rotateClass: "group-hover:rotate-6",
     title: "Quality First",
     desc: "No compromises on code standards.",
   },
   {
-    icon: "📚",
+    icon: BookOpen,
+    iconColor: "text-emerald-500",
+    bgClass: "bg-emerald-50 group-hover:bg-emerald-500",
+    rotateClass: "group-hover:-rotate-6",
     title: "Always Learning",
     desc: "Staying at the edge of the tech curve.",
   },
   {
-    icon: "🎯",
+    icon: Target,
+    iconColor: "text-rose-500",
+    bgClass: "bg-rose-50 group-hover:bg-rose-500",
+    rotateClass: "group-hover:rotate-6",
     title: "Extreme Ownership",
     desc: "We treat your product as our own.",
   },
   {
-    icon: "💬",
+    icon: MessageSquare,
+    iconColor: "text-violet-500",
+    bgClass: "bg-violet-50 group-hover:bg-violet-500",
+    rotateClass: "group-hover:-rotate-6",
     title: "Radical Candor",
     desc: "Honest communication at every stage.",
   },
@@ -329,35 +344,38 @@ export default function AboutPage() {
             Core Values That Drive Innovation
           </motion.h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {values.map((v, idx) => (
-              <motion.div
-                key={v.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                whileHover={{ y: -12, scale: 1.02 }}
-                className="card bg-white p-8 group hover:border-sky-200 transition-all shadow-sm hover:shadow-xl"
-              >
+            {values.map((v, idx) => {
+              const IconComponent = v.icon;
+              return (
                 <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: idx * 0.5,
-                  }}
-                  className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-500"
+                  key={v.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  whileHover={{ y: -12, scale: 1.02 }}
+                  className="card bg-white p-8 group hover:border-sky-200 transition-all shadow-sm hover:shadow-xl flex flex-col items-center text-center"
                 >
-                  {v.icon}
+                  <motion.div
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: idx * 0.5,
+                    }}
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 ${v.bgClass} ${v.rotateClass} shadow-sm group-hover:text-white ${v.iconColor}`}
+                  >
+                    <IconComponent className="w-8 h-8 transition-transform duration-500 group-hover:scale-110" />
+                  </motion.div>
+                  <h4 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-sky-600 transition-colors">
+                    {v.title}
+                  </h4>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    {v.desc}
+                  </p>
                 </motion.div>
-                <h4 className="text-lg font-bold text-slate-800 mb-2">
-                  {v.title}
-                </h4>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  {v.desc}
-                </p>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
