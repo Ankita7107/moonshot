@@ -12,6 +12,11 @@ const industries = [
     bg: "from-slate-900 to-blue-900",
     image: "/moonshot_images/Fintech.jpg",
     tags: ["Blockchain", "Digital Payments", "Trading Systems"],
+    highlights: [
+      "Atomic Ledger Settlements (15ms)",
+      "PCI-DSS & GDPR Compliance Built-In",
+      "Real-Time AI Fraud Prevention Checks"
+    ],
   },
   {
     title: "Healthcare",
@@ -19,6 +24,11 @@ const industries = [
     bg: "from-blue-800 to-cyan-700",
     image: "/moonshot_images/healthcare.webp",
     tags: ["HIPAA", "Telemedicine", "EHR Systems"],
+    highlights: [
+      "100% HIPAA-HITECH Compliant Security",
+      "Interoperable HL7/FHIR Integration APIs",
+      "Zero-Trust Patient Records Encryption"
+    ],
   },
   {
     title: "E-Commerce",
@@ -26,6 +36,11 @@ const industries = [
     bg: "from-slate-900 to-indigo-900",
     image: "/moonshot_images/E-commerce.jpeg",
     tags: ["Omnichannel", "AI Personalization", "Inventory"],
+    highlights: [
+      "Global Serverless Autoscaling Storefronts",
+      "AI Personalization & Recommendation Engine",
+      "Event-Sourced Dynamic Catalog Sync"
+    ],
   },
   {
     title: "Logistics",
@@ -33,6 +48,11 @@ const industries = [
     bg: "from-sky-700 to-slate-800",
     image: "/moonshot_images/logistics.jpg",
     tags: ["Supply Chain", "Fleet MGMT", "Warehouse AI"],
+    highlights: [
+      "AI Route Optimization & Fuel Reduction",
+      "High-Volume Fleet Tracker Ingestion",
+      "Autonomous Warehouse Desks Synchronizer"
+    ],
   },
   {
     title: "Real Estate",
@@ -40,6 +60,11 @@ const industries = [
     bg: "from-amber-800 to-orange-700",
     image: "/moonshot_images/real-estate.png",
     tags: ["PropTech", "Smart Buildings", "CRM"],
+    highlights: [
+      "Smart Property & Contract Admin Desks",
+      "Integrated MLS/RESO Data Feed Ingestion",
+      "Virtual High-Fidelity 3D Tour Embeds"
+    ],
   },
   {
     title: "Education",
@@ -47,6 +72,11 @@ const industries = [
     bg: "from-emerald-800 to-teal-700",
     image: "/moonshot_images/education.jpeg",
     tags: ["LMS", "Virtual Classroom", "EdTech"],
+    highlights: [
+      "Scalable LTI Compliant Course Managers",
+      "AI Personalized Study Paths Generator",
+      "Real-Time WebRTC Virtual Classrooms"
+    ],
   },
   {
     title: "Manufacturing",
@@ -54,6 +84,11 @@ const industries = [
     bg: "from-zinc-800 to-slate-700",
     image: "/moonshot_images/manufacturing.webp",
     tags: ["Industry 4.0", "IoT", "Automation"],
+    highlights: [
+      "IoT Sensor Telemetry Real-Time Feeds",
+      "Predictive ML Industrial Asset Fail Alerts",
+      "Supply Chain Assembly Flow Dashboards"
+    ],
   },
   {
     title: "Travel & Hospitality",
@@ -61,6 +96,11 @@ const industries = [
     bg: "from-sky-800 to-cyan-900",
     image: "/moonshot_images/Travel & Hospitality.png",
     tags: ["Booking Engines", "SaaS", "Hospitality AI"],
+    highlights: [
+      "Low-Latency Global Flight Search Engines",
+      "Dynamic Pricing & Availability Matrices",
+      "Secure Multi-currency Payment Pipelines"
+    ],
   },
   {
     title: "Banking & Insurance",
@@ -68,6 +108,11 @@ const industries = [
     bg: "from-indigo-900 to-slate-900",
     image: "/moonshot_images/banking.jpeg",
     tags: ["InsurTech", "Risk Analysis", "Banking"],
+    highlights: [
+      "Distributed High-Frequency Consensus Ledger",
+      "Smart Claims Underwriting Workflows",
+      "Secure Cryptographic Auditing Desks"
+    ],
   },
   {
     title: "Cybersecurity",
@@ -75,6 +120,11 @@ const industries = [
     bg: "from-red-900 to-slate-900",
     image: "/moonshot_images/Cybersecurity.webp",
     tags: ["SOC", "Identity MGMT", "Threat Detection"],
+    highlights: [
+      "Autonomous Real-Time Threat Hunting Logs",
+      "Multi-factor Zero-Trust Access Systems",
+      "Automated Penetration Sandbox Testing"
+    ],
   },
   {
     title: "Telecom",
@@ -82,6 +132,11 @@ const industries = [
     bg: "from-purple-800 to-slate-900",
     image: "/moonshot_images/telecom.jpg",
     tags: ["5G", "Network Infra", "Automation"],
+    highlights: [
+      "5G Network Traffic Elastic Balancing",
+      "Automated Real-Time Invoicing Middlewares",
+      "Autonomous Customer Virtual Desk Assistants"
+    ],
   },
   {
     title: "Automotive",
@@ -89,6 +144,11 @@ const industries = [
     bg: "from-gray-800 to-slate-900",
     image: "/moonshot_images/Automotive.jpg",
     tags: ["EV Systems", "Connected Cars", "Mobility"],
+    highlights: [
+      "EV Fleet Charge Routing Optimizers",
+      "Connected Vehicle Telemetry Sync Feeds",
+      "Smart Predictive Maintenance Pipelines"
+    ],
   },
   {
     title: "Media & Entertainment",
@@ -96,6 +156,11 @@ const industries = [
     bg: "from-pink-800 to-slate-900",
     image: "/moonshot_images/Media & Entertainment.webp",
     tags: ["OTT", "Streaming", "Content AI"],
+    highlights: [
+      "Dynamic High-Speed Content Delivery (CDN)",
+      "User Behavior Adaptive Stream Feeds",
+      "Digital Rights Security Framework Blocks"
+    ],
   },
   {
     title: "Food & Restaurant Tech",
@@ -103,6 +168,11 @@ const industries = [
     bg: "from-orange-800 to-slate-900",
     image: "/moonshot_images/Food & Restaurant Tech.jpg",
     tags: ["Food Delivery", "POS", "Inventory"],
+    highlights: [
+      "Real-Time Order Tracking & Dispatch Maps",
+      "Local Retail POS Offline Inventory Sync",
+      "Predictive Kitchen Supply Chain Planners"
+    ],
   },
   {
     title: "Government & Public Sector",
@@ -110,6 +180,11 @@ const industries = [
     bg: "from-green-900 to-slate-900",
     image: "/moonshot_images/Government & Public Sector.jpg",
     tags: ["e-Governance", "Digital ID", "Public Services"],
+    highlights: [
+      "Citizen Service Web Portal Access Desks",
+      "Cryptographic Zero-Trust Digital IDs",
+      "Secure Tax Filing Audit Trail Records"
+    ],
   },
 ];
 
@@ -216,11 +291,21 @@ export default function IndustriesPage() {
                 </div>
               </div>
 
-              <div className="p-8 bg-white flex flex-col flex-1 min-h-[250px]">
-                <p className="text-slate-500 text-sm mb-6 leading-relaxed">
+              <div className="p-6 bg-white flex flex-col flex-1">
+                <p className="text-slate-500 text-sm mb-2 leading-relaxed">
                   {ind.desc}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-8 mt-auto pt-4 border-t border-slate-50">
+
+                <ul className="space-y-1 mb-3 pt-1">
+                  {ind.highlights.map((hl) => (
+                    <li key={hl} className="flex items-center gap-2 text-[11px] text-slate-500 font-semibold">
+                      <div className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 animate-pulse" />
+                      <span>{hl}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex flex-wrap gap-2 mb-4 mt-auto pt-2 border-t border-slate-50">
                   {ind.tags.map((tag) => (
                     <span key={tag} className="badge text-[10px] uppercase tracking-wider font-bold">
                       {tag}
@@ -229,7 +314,7 @@ export default function IndustriesPage() {
                 </div>
                 <Link
                   href={`/industries/${ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                  className="inline-flex items-center justify-between w-full text-slate-900 font-bold group/btn pt-2"
+                  className="inline-flex items-center justify-between w-full text-slate-900 font-bold group/btn pt-1"
                 >
                   <span className="group-hover/btn:text-sky-600 transition-colors">Explore Sector</span>
                   <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center group-hover/btn:bg-sky-500 group-hover/btn:text-white transition-all">
