@@ -228,7 +228,7 @@ export default function IndustriesPage() {
                   ))}
                 </div>
                 <Link
-                  href="/contact"
+                  href={`/industries/${ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
                   className="inline-flex items-center justify-between w-full text-slate-900 font-bold group/btn pt-2"
                 >
                   <span className="group-hover/btn:text-sky-600 transition-colors">Explore Sector</span>

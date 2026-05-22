@@ -540,31 +540,33 @@ export default function AboutPage() {
   );
 }
 
-const RocketIcon = ({
+function RocketIcon({
   size = 24,
   className = "",
 }: {
   size?: number;
   className?: string;
-}) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.19-2.49A12.01 12.01 0 0 1 4.5 16.5z" />
-    <path d="M7 15s-1 6-1 6" />
-    <path d="M15 9s-6 1-6 1" />
-    <path d="M9 15c.16-2.5 1-4.2 1.5-5 1-1.5 3-2.5 4.5-3 2.5-1 6-1 6-1s0 3.5-1 6c-.5 1.5-1.5 3.5-3 4.5-.8.5-2.5 1.34-5 1.5" />
-    <path d="M15 9l5.5-5.5" />
-    <path d="M9 15l-5.5 5.5" />
-    <path d="M21 3s-3.5 0-6 1c-1.5.5-3.5 1.5-4.5 3-1.5 2-1.5 5.5-1.5 5.5" />
-    <circle cx="12" cy="12" r="1" />
-  </svg>
-);
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.19-2.49A12.01 12.01 0 0 1 4.5 16.5z" />
+      <path d="M7 15s-1 6-1 6" />
+      <path d="M15 9s-6 1-6 1" />
+      <path d="M9 15c.16-2.5 1-4.2 1.5-5 1-1.5 3-2.5 4.5-3 2.5-1 6-1 6-1s0 3.5-1 6c-.5 1.5-1.5 3.5-3 4.5-.8.5-2.5 1.34-5 1.5" />
+      <path d="M15 9l5.5-5.5" />
+      <path d="M9 15l-5.5 5.5" />
+      <path d="M21 3s-3.5 0-6 1c-1.5.5-3.5 1.5-4.5 3-1.5 2-1.5 5.5-1.5 5.5" />
+      <circle cx="12" cy="12" r="1" />
+    </svg>
+  );
+}
