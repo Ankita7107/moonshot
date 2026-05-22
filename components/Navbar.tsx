@@ -141,6 +141,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handle);
   }, []);
 
+  const handleSamePageHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const [path, hash] = href.split("#");
+    if (pathname === path) {
+      e.preventDefault();
+      if (hash) {
+        window.location.hash = hash;
+      }
+    }
+  };
+
   return (
     <header className={`sticky top-0 z-[100] transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-xl py-3 border-b border-slate-100" : "bg-white py-5"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -181,7 +191,12 @@ export default function Navbar() {
               <div className="flex-1 p-6">
                 <div className="grid grid-cols-2 gap-2">
                   {servicesMenu.tech.map((i) => (
-                    <Link key={i.label} href={i.href} className="flex items-start gap-4 p-4 rounded-2xl hover:bg-sky-50 group/item transition-all">
+                    <Link
+                      key={i.label}
+                      href={i.href}
+                      onClick={(e) => handleSamePageHashClick(e, i.href)}
+                      className="flex items-start gap-4 p-4 rounded-2xl hover:bg-sky-50 group/item transition-all"
+                    >
                       <div className="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-sky-500 group-hover/item:bg-sky-500 group-hover/item:text-white transition-all">
                         <i.icon size={20} />
                       </div>
@@ -198,7 +213,12 @@ export default function Navbar() {
                   <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Finance</div>
                   <div className="space-y-2 mb-8">
                     {servicesMenu.finance.map((i) => (
-                      <Link key={i.label} href={i.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-white hover:shadow-sm transition-all group/f">
+                      <Link
+                        key={i.label}
+                        href={i.href}
+                        onClick={(e) => handleSamePageHashClick(e, i.href)}
+                        className="flex items-center gap-3 p-3 rounded-xl hover:bg-white hover:shadow-sm transition-all group/f"
+                      >
                         <i.icon size={16} className={i.color} />
                         <span className="text-sm font-bold text-slate-700 group-hover/f:text-sky-600 transition-colors">{i.label}</span>
                       </Link>
@@ -227,7 +247,12 @@ export default function Navbar() {
           <HoverMenu label="Industries" href="/industries" isActive={pathname === "/industries"}>
             <div className="w-[450px] p-4 grid grid-cols-2 gap-2">
               {industriesMenu.map((i) => (
-                <Link key={i.label} href={i.href} className="flex items-center gap-3 p-3 rounded-xl hover:bg-sky-50 group/i transition-all">
+                <Link
+                  key={i.label}
+                  href={i.href}
+                  onClick={(e) => handleSamePageHashClick(e, i.href)}
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-sky-50 group/i transition-all"
+                >
                   <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-sky-400 group-hover/i:text-sky-600 shadow-sm transition-all">
                     <i.icon size={16} />
                   </div>
@@ -284,13 +309,33 @@ export default function Navbar() {
 
               <MobileAccordion label="Services">
                 {servicesMenu.tech.map(i => (
-                  <Link key={i.label} href={i.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-3 text-slate-500 font-bold">{i.label}</Link>
+                  <Link
+                    key={i.label}
+                    href={i.href}
+                    onClick={(e) => {
+                      setMobileOpen(false);
+                      handleSamePageHashClick(e, i.href);
+                    }}
+                    className="flex items-center gap-3 py-3 text-slate-500 font-bold"
+                  >
+                    {i.label}
+                  </Link>
                 ))}
               </MobileAccordion>
 
               <MobileAccordion label="Industries">
                 {industriesMenu.map(i => (
-                  <Link key={i.label} href={i.href} onClick={() => setMobileOpen(false)} className="flex items-center gap-3 py-3 text-slate-500 font-bold">{i.label}</Link>
+                  <Link
+                    key={i.label}
+                    href={i.href}
+                    onClick={(e) => {
+                      setMobileOpen(false);
+                      handleSamePageHashClick(e, i.href);
+                    }}
+                    className="flex items-center gap-3 py-3 text-slate-500 font-bold"
+                  >
+                    {i.label}
+                  </Link>
                 ))}
               </MobileAccordion>
 
