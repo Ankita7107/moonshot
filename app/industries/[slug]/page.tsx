@@ -544,7 +544,7 @@ const industryContent: Record<string, IndustryData> = {
       },
     ],
     metrics: [
-      { value: "<5ms", label: "Edge Signal Routing Latency" },
+      { value: "5ms", label: "Edge Signal Routing Latency" },
       { value: "99.999%", label: "Network Uptime Rate" },
       { value: "+45%", label: "Billing System Speed" },
     ],
