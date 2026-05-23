@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
@@ -745,6 +745,103 @@ const industryContent: Record<string, IndustryData> = {
   },
 };
 
+// CountUpMetric component
+const CountUpMetric = ({
+  value,
+  className = "",
+}: {
+  value: string;
+  className?: string;
+}) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  // Extract prefix (e.g. "+", "-", "<")
+  const prefixMatch = value.match(/^([+\-<]+)/);
+  const prefix = prefixMatch ? prefixMatch[1] : "";
+
+  // Extract suffix (e.g. "%", "ms", "x", "m")
+  const suffixMatch = value.match(/([%a-zA-Z\s]+)$/);
+  const suffix = suffixMatch ? suffixMatch[1] : "";
+
+  // Extract numbers
+  const numericString = value.replace(/[^0-9.]/g, "");
+  const numericValue = parseFloat(numericString) || 0;
+
+  // Count decimal places
+  const decimalMatch = numericString.split(".");
+  const decimalPlaces = decimalMatch[1] ? decimalMatch[1].length : 0;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let start = 0;
+          const duration = 2000; // 2 seconds
+          const steps = duration / 16;
+          const increment = numericValue / steps;
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= numericValue) {
+              setCount(numericValue);
+              clearInterval(timer);
+            } else {
+              setCount(start);
+            }
+          }, 16);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [numericValue]);
+
+  const displayValue = decimalPlaces > 0 ? count.toFixed(decimalPlaces) : Math.floor(count);
+
+  return (
+    <span ref={ref} className={className}>
+      {prefix}
+      {displayValue}
+      {suffix}
+    </span>
+  );
+};
+
+// StaggeredReveal component
+const StaggeredReveal = ({
+  text,
+  className = "",
+  delay = 0,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+}) => {
+  const words = text.split(" ");
+  return (
+    <span className={className}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.4,
+            delay: delay + i * 0.08,
+            ease: "easeOut",
+          }}
+          className="inline-block mr-2 last:mr-0"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
+
 export default function IndustryDetailsPage() {
   const { slug } = useParams() as { slug: string };
   const data = industryContent[slug];
@@ -776,10 +873,35 @@ export default function IndustryDetailsPage() {
     <div className="bg-white min-h-screen overflow-hidden">
       {/* ══════════════════ HERO SECTION ══════════════════ */}
       <section className={`relative bg-gradient-to-br ${data.bg} py-32 text-center overflow-hidden`}>
-        {/* Animated background particles */}
-        <div className="absolute inset-0 pointer-events-none opacity-30">
-          <div className="absolute top-10 left-[10%] h-32 w-32 rounded-full bg-white/5 blur-3xl animate-pulse-glow" />
-          <div className="absolute bottom-10 right-[15%] h-40 w-40 rounded-full bg-white/5 blur-3xl animate-float-slow" />
+        {/* Animated background particles with continuous physics drifting */}
+        <div className="absolute inset-0 pointer-events-none opacity-30 overflow-hidden">
+          <motion.div
+            animate={{
+              x: [0, 40, -20, 0],
+              y: [0, -30, 20, 0],
+              scale: [1, 1.15, 0.9, 1],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-10 left-[10%] h-40 w-40 rounded-full bg-white/10 blur-3xl"
+          />
+          <motion.div
+            animate={{
+              x: [0, -50, 30, 0],
+              y: [0, 40, -30, 0],
+              scale: [1, 0.85, 1.1, 1],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            }}
+            className="absolute bottom-10 right-[15%] h-52 w-52 rounded-full bg-white/15 blur-3xl"
+          />
           <div
             className="absolute inset-0"
             style={{
@@ -801,23 +923,13 @@ export default function IndustryDetailsPage() {
             <span className="text-xs font-bold tracking-widest uppercase text-sky-300">Industry Insight</span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-5xl md:text-7xl font-black mb-6 tracking-tighter"
-          >
-            {data.title}
-          </motion.h1>
+          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">
+            <StaggeredReveal text={data.title} />
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8"
-          >
-            {data.desc}
-          </motion.p>
+          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+            <StaggeredReveal text={data.desc} delay={0.25} />
+          </p>
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -826,12 +938,13 @@ export default function IndustryDetailsPage() {
             className="flex flex-wrap gap-3 justify-center mb-10"
           >
             {data.tags.map((tag) => (
-              <span
+              <motion.span
                 key={tag}
-                className="px-4 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 backdrop-blur-sm tracking-wide text-sky-200"
+                whileHover={{ y: -3, scale: 1.05 }}
+                className="px-4 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 backdrop-blur-sm tracking-wide text-sky-200 cursor-default transition-colors duration-200"
               >
                 {tag}
-              </span>
+              </motion.span>
             ))}
           </motion.div>
 
@@ -851,21 +964,22 @@ export default function IndustryDetailsPage() {
       </section>
 
       {/* ══════════════════ CORE METRICS ══════════════════ */}
-      <section className="py-16 border-b border-slate-100 bg-white relative z-20 shadow-sm">
+      <section className="py-20 border-b border-slate-100 bg-white relative z-20 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
           {data.metrics.map((metric, idx) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15, duration: 0.5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
+              whileHover={{ y: -6 }}
               key={metric.label}
-              className="group"
+              className="group p-6 rounded-3xl hover:bg-slate-50/50 hover:shadow-xl hover:shadow-sky-100/20 transition-all duration-300 border border-transparent hover:border-slate-100"
             >
-              <h3 className="text-4xl md:text-5xl font-black text-sky-500 mb-2 group-hover:scale-105 transition-transform duration-300">
-                {metric.value}
+              <h3 className={`text-4xl md:text-5xl font-black ${textThemeClass} mb-3 group-hover:scale-110 transition-transform duration-500 flex justify-center items-center gap-1`}>
+                <CountUpMetric value={metric.value} />
               </h3>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest group-hover:text-slate-600 transition-colors">
                 {metric.label}
               </p>
             </motion.div>
@@ -884,17 +998,21 @@ export default function IndustryDetailsPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {data.challenges.map((challenge, idx) => (
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15, duration: 0.5 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: idx * 0.1, type: "spring", stiffness: 100, damping: 15 }}
+                whileHover={{ y: -10, scale: 1.015 }}
                 key={challenge.title}
-                className="bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl hover:border-sky-100 transition-all duration-300 group"
+                className="bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl hover:border-rose-200 transition-all duration-300 group"
               >
-                <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500">
+                <motion.div 
+                  whileHover={{ rotate: [0, -5, 5, 0] }}
+                  className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500"
+                >
                   <AlertCircle size={24} />
-                </div>
-                <h4 className="text-lg font-bold text-slate-800 mb-3">{challenge.title}</h4>
+                </motion.div>
+                <h4 className="text-lg font-bold text-slate-800 mb-3 group-hover:text-rose-600 transition-colors">{challenge.title}</h4>
                 <p className="text-slate-500 text-sm leading-relaxed">{challenge.desc}</p>
               </motion.div>
             ))}
@@ -913,17 +1031,21 @@ export default function IndustryDetailsPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {data.solutions.map((solution, idx) => (
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15, duration: 0.5 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: idx * 0.1, type: "spring", stiffness: 100, damping: 15 }}
+                whileHover={{ y: -10, scale: 1.015 }}
                 key={solution.title}
-                className="bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl hover:border-sky-100 transition-all duration-300 group"
+                className={`bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl ${borderThemeClass} transition-all duration-300 group`}
               >
-                <div className="w-12 h-12 bg-sky-50 text-sky-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500">
+                <motion.div 
+                  whileHover={{ rotate: [0, -5, 5, 0] }}
+                  className={`w-12 h-12 bg-sky-50 ${textThemeClass} rounded-2xl flex items-center justify-center mb-6 group-hover:${bgThemeClass} group-hover:text-white transition-all duration-500`}
+                >
                   <CheckCircle2 size={24} />
-                </div>
-                <h4 className="text-lg font-bold text-slate-800 mb-3">{solution.title}</h4>
+                </motion.div>
+                <h4 className={`text-lg font-bold text-slate-800 mb-3 group-hover:${textThemeClass} transition-colors`}>{solution.title}</h4>
                 <p className="text-slate-500 text-sm leading-relaxed">{solution.desc}</p>
               </motion.div>
             ))}
@@ -945,47 +1067,80 @@ export default function IndustryDetailsPage() {
             <div className="grid md:grid-cols-3 gap-8 items-center text-center relative z-10">
               {/* Step 1 */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-sky-200 transition-all"
+                transition={{ type: "spring", stiffness: 80 }}
+                whileHover={{ y: -6, scale: 1.03 }}
+                className={`flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-${data.themeColor}-200 transition-all shadow-sm`}
               >
-                <div className="w-10 h-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center mb-4">
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  className={`w-10 h-10 rounded-full bg-sky-100 ${textThemeClass} flex items-center justify-center mb-4`}
+                >
                   <Globe2 size={20} />
-                </div>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Source Interface</span>
-                <h4 className="text-sm font-bold text-slate-800">{data.architecture.source}</h4>
+                </motion.div>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Source Ingress</span>
+                <h4 className="text-sm font-bold text-slate-800 leading-tight">{data.architecture.source}</h4>
               </motion.div>
 
-              {/* Step 2 */}
+              {/* Step 2 with Laser Flow arrows */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.15 }}
-                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-sky-200 transition-all relative"
+                transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
+                whileHover={{ y: -6, scale: 1.03 }}
+                className={`flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-indigo-200 transition-all shadow-sm relative`}
               >
-                {/* Simulated connecting dynamic light flow */}
-                <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
-                  <Cpu size={20} />
+                {/* Flow Laser lines */}
+                <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-sky-400">
+                  <motion.div
+                    animate={{ x: [-8, 8, -8] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ArrowRight size={14} />
+                  </motion.div>
                 </div>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Secure Middleware</span>
-                <h4 className="text-sm font-bold text-slate-800">{data.architecture.process}</h4>
+                <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-indigo-400">
+                  <motion.div
+                    animate={{ x: [-8, 8, -8] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+                  >
+                    <ArrowRight size={14} />
+                  </motion.div>
+                </div>
+
+                <motion.div 
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4"
+                >
+                  <Cpu size={20} />
+                </motion.div>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Cognitive Middleware</span>
+                <h4 className="text-sm font-bold text-slate-800 leading-tight">{data.architecture.process}</h4>
               </motion.div>
 
               {/* Step 3 */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-sky-200 transition-all"
+                transition={{ delay: 0.2, type: "spring", stiffness: 80 }}
+                whileHover={{ y: -6, scale: 1.03 }}
+                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-emerald-200 transition-all shadow-sm"
               >
-                <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+                <motion.div 
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4"
+                >
                   <Database size={20} />
-                </div>
+                </motion.div>
                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Reliable Target</span>
-                <h4 className="text-sm font-bold text-slate-800">{data.architecture.target}</h4>
+                <h4 className="text-sm font-bold text-slate-800 leading-tight">{data.architecture.target}</h4>
               </motion.div>
             </div>
 
@@ -1032,7 +1187,13 @@ export default function IndustryDetailsPage() {
                     href="/contact"
                     className="btn-primary flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl"
                   >
-                    Request Custom Architecture Call <ArrowRight size={18} />
+                    Request Custom Architecture Call{" "}
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.2, repeat: Infinity }}
+                    >
+                      <ArrowRight size={18} />
+                    </motion.span>
                   </Link>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
