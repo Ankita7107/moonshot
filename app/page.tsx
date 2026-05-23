@@ -27,8 +27,11 @@ import {
   Code2,
   CheckCircle2,
   ArrowUp,
+  ShoppingBag,
+  TrendingUp,
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { DoodleCircle, DoodleArrow } from "../components/Doodle";
 
 const stats = [
   { value: "3000+", label: "Successful Projects" },
@@ -538,6 +541,256 @@ export default function HomePage() {
             </motion.div>
           ))}
         </motion.div>
+      </section>
+
+      {/* Native AI Across All Your Business Section (Odoo Inspired) */}
+      <section className="py-24 bg-gradient-to-b from-white via-sky-50/20 to-white relative overflow-hidden">
+        {/* Playful background doodles & grids */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
+        
+        {/* Glow orbs */}
+        <div className="absolute top-1/4 left-10 w-72 h-72 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 border border-sky-100 mb-4"
+            >
+              <Sparkles className="w-4 h-4 text-sky-500 animate-pulse" />
+              <span className="text-xs font-bold text-sky-600 uppercase tracking-wider">Unified Intelligence</span>
+            </motion.div>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight"
+            >
+              Native AI across all your business.
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-slate-500 mt-6 leading-relaxed"
+            >
+              No clunky APIs or disconnected silos. Moonshot embeds deep cognitive agents directly into the code of your daily operations—helping every team make decisions at the speed of thought.
+            </motion.p>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            
+            {/* Card 1: E-Commerce */}
+            <div className="relative group">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+                className="bg-white p-6 rounded-3xl border border-slate-100 hover:border-sky-100 transition-all shadow-sm hover:shadow-xl group flex flex-col justify-between min-h-[440px] relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 bg-sky-50 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform duration-500" />
+                <div>
+                  <div className="w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 text-sky-500 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-sm shadow-sky-100">
+                    <ShoppingBag className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-800 mb-2">Smart E-Commerce</h3>
+                  <span className="text-xs font-semibold text-sky-600 bg-sky-50 px-2.5 py-1 rounded-full inline-block mb-4">
+                    Autopilot Recommendations
+                  </span>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    Hyper-personalized purchase triggers, autonomous SEO content generation, and live inventory demand predictions.
+                  </p>
+                </div>
+
+                {/* Interactive Preview Widget */}
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 mt-auto group-hover:bg-sky-50/50 group-hover:border-sky-100/50 transition-colors duration-300">
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className="text-slate-400 font-medium">Recommendation score</span>
+                    <span className="text-sky-500 font-bold">99.4% Match</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center text-[10px] font-bold text-sky-600">
+                      UI
+                    </div>
+                    <div className="flex-1">
+                      <div className="h-2 bg-slate-200 rounded-full w-full overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          whileInView={{ width: "94%" }}
+                          transition={{ duration: 1.5, ease: "easeOut" }}
+                          className="h-full bg-sky-500"
+                        />
+                      </div>
+                      <div className="h-1.5 bg-slate-200 rounded-full w-2/3 mt-2 overflow-hidden">
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          whileInView={{ width: "70%" }}
+                          transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+                          className="h-full bg-sky-400"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              {/* Doodle Arrow pointing to Card 2 (Centered in gap, hidden on mobile) */}
+              <div className="absolute top-1/2 -right-6 w-12 h-8 hidden lg:block z-20 pointer-events-none -translate-y-1/2 translate-x-1/2">
+                <DoodleArrow rotate={10} color="#38bdf8" className="w-full h-full" />
+              </div>
+            </div>
+
+            {/* Card 2: ERP */}
+            <div className="relative group">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-white p-6 rounded-3xl border border-slate-100 hover:border-emerald-100 transition-all shadow-sm hover:shadow-xl group flex flex-col justify-between min-h-[440px] relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform duration-500" />
+                <div>
+                  <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-sm shadow-emerald-100">
+                    <Cpu className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-800 mb-2">Cognitive ERP</h3>
+                  <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full inline-block mb-4">
+                    Neural Supply Chain
+                  </span>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    Intelligent resource allocation, self-healing logistic lines, and predictive equipment maintenance.
+                  </p>
+                </div>
+
+                {/* Interactive Preview Widget */}
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 mt-auto group-hover:bg-emerald-50/50 group-hover:border-emerald-100/50 transition-colors duration-300">
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className="text-slate-400 font-medium">Auto-scaling efficiency</span>
+                    <span className="text-emerald-500 font-bold">+42.8%</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-3 w-3 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </div>
+                    <span className="text-xs font-bold text-slate-700">All Operations Optimal</span>
+                  </div>
+                </div>
+              </motion.div>
+              
+              {/* Doodle Arrow pointing to Card 3 (Centered in gap, hidden on mobile) */}
+              <div className="absolute top-1/2 -right-6 w-12 h-8 hidden lg:block z-20 pointer-events-none -translate-y-1/2 translate-x-1/2">
+                <DoodleArrow rotate={-15} color="#eab308" className="w-full h-full" />
+              </div>
+            </div>
+
+            {/* Card 3: HRMS */}
+            <div className="relative group">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ y: -8 }}
+                className="bg-white p-6 rounded-3xl border border-slate-100 hover:border-purple-100 transition-all shadow-sm hover:shadow-xl group flex flex-col justify-between min-h-[440px] relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-24 h-24 bg-purple-50 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform duration-500" />
+                <div>
+                  <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center mb-6 text-purple-500 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-sm shadow-purple-100">
+                    <Users className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-800 mb-2">Intelligent HRMS</h3>
+                  <span className="text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full inline-block mb-4">
+                    Predictive Talent Search
+                  </span>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    Automated resume matching, predictive attrition models, and custom-generated candidate assessment journeys.
+                  </p>
+                </div>
+
+                {/* Interactive Preview Widget */}
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 mt-auto group-hover:bg-purple-50/50 group-hover:border-purple-100/50 transition-colors duration-300">
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className="text-slate-400 font-medium">Candidate Match Index</span>
+                    <span className="text-purple-500 font-bold">98% Fit</span>
+                  </div>
+                  <div className="flex -space-x-2 overflow-hidden">
+                    {[1, 2, 3].map((n) => (
+                      <div key={n} className="h-6 w-6 rounded-full ring-2 ring-white bg-purple-200 flex items-center justify-center text-[8px] font-bold text-purple-700">
+                        U{n}
+                      </div>
+                    ))}
+                    <div className=" h-6 w-6 rounded-full ring-2 ring-white bg-slate-100 flex items-center justify-center text-[8px] font-bold text-slate-500">
+                      +12
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              {/* Doodle Arrow pointing to Card 4 (Centered in gap, hidden on mobile) */}
+              <div className="absolute top-1/2 -right-6 w-12 h-8 hidden lg:block z-20 pointer-events-none -translate-y-1/2 translate-x-1/2">
+                <DoodleArrow rotate={5} color="#c084fc" className="w-full h-full" />
+              </div>
+            </div>
+
+            {/* Card 4: Finance */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              whileHover={{ y: -8 }}
+              className="bg-white p-6 rounded-3xl border border-slate-100 hover:border-rose-100 transition-all shadow-sm hover:shadow-xl group flex flex-col justify-between min-h-[440px] relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 bg-rose-50 rounded-bl-[100px] -z-10 group-hover:scale-110 transition-transform duration-500" />
+              <div>
+                <div className="w-14 h-14 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 text-rose-500 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm shadow-rose-100">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-800 mb-2">Automated Finance</h3>
+                <span className="text-xs font-semibold text-rose-600 bg-rose-50 px-2.5 py-1 rounded-full inline-block mb-4">
+                  Zero-Click Invoicing
+                </span>
+                <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                  Continuous cash flow forecasting, AI instant invoice extraction, and automated ledger reconciliation.
+                </p>
+              </div>
+
+              {/* Interactive Preview Widget */}
+              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 mt-auto group-hover:bg-rose-50/50 group-hover:border-rose-100/50 transition-colors duration-300">
+                <div className="flex items-center justify-between text-xs mb-2">
+                  <span className="text-slate-400 font-medium">Reconciliation Anomaly</span>
+                  <span className="text-rose-500 font-bold">0 Detected</span>
+                </div>
+                <div className="w-full h-8 flex items-center">
+                  <svg className="w-full h-full overflow-visible" viewBox="0 0 100 20">
+                    <motion.path 
+                      d="M0,15 L20,12 L40,14 L60,8 L80,10 L100,2"
+                      fill="transparent"
+                      stroke="#f43f5e"
+                      strokeWidth="2"
+                      initial={{ pathLength: 0 }}
+                      whileInView={{ pathLength: 1 }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
+                    />
+                  </svg>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
       </section>
 
       {/* Dashboard / Control Center Section (Zoho Inspired) */}
