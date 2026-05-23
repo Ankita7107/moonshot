@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
@@ -842,6 +842,51 @@ const StaggeredReveal = ({
   );
 };
 
+// SpotlightCard component for cursor tracking glow
+function SpotlightCard({
+  children,
+  className = "",
+  glowColor = "rgba(14,165,233,0.12)",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  glowColor?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+
+  const onMove = useCallback((e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`relative overflow-hidden ${className}`}
+    >
+      {hovered && (
+        <div
+          className="pointer-events-none absolute z-0 rounded-full transition-opacity duration-300"
+          style={{
+            width: 350,
+            height: 350,
+            background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`,
+            left: pos.x - 175,
+            top: pos.y - 175,
+          }}
+        />
+      )}
+      {children}
+    </div>
+  );
+}
+
 export default function IndustryDetailsPage() {
   const { slug } = useParams() as { slug: string };
   const data = industryContent[slug];
@@ -1030,24 +1075,25 @@ export default function IndustryDetailsPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {data.solutions.map((solution, idx) => (
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: idx * 0.1, type: "spring", stiffness: 100, damping: 15 }}
-                whileHover={{ y: -10, scale: 1.015 }}
-                key={solution.title}
-                className={`bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl ${borderThemeClass} transition-all duration-300 group`}
-              >
-                <motion.div 
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
-                  className={`w-12 h-12 bg-sky-50 ${textThemeClass} rounded-2xl flex items-center justify-center mb-6 group-hover:${bgThemeClass} group-hover:text-white transition-all duration-500`}
+              <SpotlightCard key={solution.title} className="h-full rounded-3xl" glowColor={data.glowColor}>
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ delay: idx * 0.1, type: "spring", stiffness: 100, damping: 15 }}
+                  whileHover={{ y: -10, scale: 1.015 }}
+                  className={`bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl ${borderThemeClass} h-full transition-all duration-300 group flex flex-col`}
                 >
-                  <CheckCircle2 size={24} />
+                  <motion.div 
+                    whileHover={{ rotate: [0, -5, 5, 0] }}
+                    className={`w-12 h-12 bg-sky-50 ${textThemeClass} rounded-2xl flex items-center justify-center mb-6 group-hover:${bgThemeClass} group-hover:text-white transition-all duration-500`}
+                  >
+                    <CheckCircle2 size={24} />
+                  </motion.div>
+                  <h4 className={`text-lg font-bold text-slate-800 mb-3 group-hover:${textThemeClass} transition-colors`}>{solution.title}</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed">{solution.desc}</p>
                 </motion.div>
-                <h4 className={`text-lg font-bold text-slate-800 mb-3 group-hover:${textThemeClass} transition-colors`}>{solution.title}</h4>
-                <p className="text-slate-500 text-sm leading-relaxed">{solution.desc}</p>
-              </motion.div>
+              </SpotlightCard>
             ))}
           </div>
         </div>
