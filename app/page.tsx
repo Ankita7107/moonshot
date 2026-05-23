@@ -31,7 +31,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { DoodleCircle, DoodleArrow } from "../components/Doodle";
 
 const stats = [
   { value: "3000+", label: "Successful Projects" },
@@ -642,11 +641,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </motion.div>
-              
-              {/* Doodle Arrow pointing to Card 2 (Centered in gap, hidden on mobile) */}
-              <div className="absolute top-1/2 -right-6 w-12 h-8 hidden lg:block z-20 pointer-events-none -translate-y-1/2 translate-x-1/2">
-                <DoodleArrow rotate={10} color="#38bdf8" className="w-full h-full" />
-              </div>
             </div>
 
             {/* Card 2: ERP */}
@@ -688,11 +682,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </motion.div>
-              
-              {/* Doodle Arrow pointing to Card 3 (Centered in gap, hidden on mobile) */}
-              <div className="absolute top-1/2 -right-6 w-12 h-8 hidden lg:block z-20 pointer-events-none -translate-y-1/2 translate-x-1/2">
-                <DoodleArrow rotate={-15} color="#eab308" className="w-full h-full" />
-              </div>
             </div>
 
             {/* Card 3: HRMS */}
@@ -737,11 +726,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </motion.div>
-              
-              {/* Doodle Arrow pointing to Card 4 (Centered in gap, hidden on mobile) */}
-              <div className="absolute top-1/2 -right-6 w-12 h-8 hidden lg:block z-20 pointer-events-none -translate-y-1/2 translate-x-1/2">
-                <DoodleArrow rotate={5} color="#c084fc" className="w-full h-full" />
-              </div>
             </div>
 
             {/* Card 4: Finance */}
