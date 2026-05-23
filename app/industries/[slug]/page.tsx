@@ -74,7 +74,7 @@ const industryContent: Record<string, IndustryData> = {
       },
     ],
     metrics: [
-      { value: "99.999%", label: "System Uptime" },
+      { value: "99.99%", label: "System Uptime" },
       { value: "15ms", label: "Ledger Settlement" },
       { value: "100%", label: "Audit Compliance Rate" },
     ],
@@ -452,7 +452,7 @@ const industryContent: Record<string, IndustryData> = {
     metrics: [
       { value: "90%", label: "Auto-Processed Claims" },
       { value: "-40%", label: "Operational Overhead" },
-      { value: "99.999%", label: "Core Transaction Security" },
+      { value: "99.99%", label: "Core Transaction Security" },
     ],
     architecture: {
       source: "Consumer Banking Interface",
@@ -545,7 +545,7 @@ const industryContent: Record<string, IndustryData> = {
     ],
     metrics: [
       { value: "5ms", label: "Edge Signal Routing Latency" },
-      { value: "99.999%", label: "Network Uptime Rate" },
+      { value: "99.99%", label: "Network Uptime Rate" },
       { value: "+45%", label: "Billing System Speed" },
     ],
     architecture: {
