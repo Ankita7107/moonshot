@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -18,7 +18,6 @@ import {
   Terminal,
   Activity,
 } from "lucide-react";
-import { DoodleArrow, DoodleUnderline } from "../../../components/Doodle";
 
 interface IndustryData {
   title: string;
@@ -746,325 +745,9 @@ const industryContent: Record<string, IndustryData> = {
   },
 };
 
-const mockTerminalLogs: Record<string, string[]> = {
-  fintech: [
-    "GET /ingress-gateway - 200 OK (2.1ms)",
-    "AuthMiddleware: Session verified (JWT)",
-    "AI-Anomaly: Checking fraud factors...",
-    "AI-Anomaly: Risk score 0.003 [SECURE]",
-    "KafkaBroker: Pushing txn payload to broker streams",
-    "ConsensusNode: Resolving transactional log #83910",
-    "AtomicWrite: Ledger state updated in 12ms",
-    "POST /transfer/commit - 200 OK [COMMITTED]"
-  ],
-  healthcare: [
-    "GET /telehealth/stream/init - 200 OK (5.4ms)",
-    "WebRTC: Connection established [SECURE]",
-    "FHIRValidator: Fetching patient profile token...",
-    "FHIRValidator: Record decrypt validation SUCCESS",
-    "DataVault: Querying patient EHR vault",
-    "AuditLogger: Session recorded to secure cloud catalog",
-    "MetricsMonitor: Stream bandwidth stabilized",
-    "GET /ehr/records/search - 200 OK [DECRYPTED]"
-  ],
-  "e-commerce": [
-    "GET /storefront/cart - 200 OK (0.9ms)",
-    "RedisCache: Cart state parsed successfully",
-    "ElasticSearch: Querying category 'trending'...",
-    "RecommendationModel: Matching similar items...",
-    "RecommendationModel: Score 99.4% Match FOUND",
-    "PaymentGateway: Validating Stripe token...",
-    "InventoryService: Reserving SKUs [SUCCESS]",
-    "POST /cart/checkout - 200 OK [ORDER_COMPLETED]"
-  ],
-  logistics: [
-    "GET /fleet/tracker/stream - 200 OK (1.1ms)",
-    "KinesisConsumer: Ingested telemetry ID #849102",
-    "GISRouter: Recalculating route metrics (traffic)",
-    "GISRouter: Route updated [ETA decreased by 12m]",
-    "WarehouseService: Inventory bin sync active",
-    "SmartBin: Re-assigning order queue priority",
-    "TelemetryRegistry: Speed and payload levels NORMAL",
-    "POST /fleet/dispatch - 200 OK [ROUTED]"
-  ],
-  "real-estate": [
-    "GET /listings/properties - 200 OK (4.2ms)",
-    "MLS-Feed: Fetching RESO updates...",
-    "MLS-Feed: Listing #39281 synchronized",
-    "CRMLeadScorer: Scoring user interaction data...",
-    "CRMLeadScorer: Qualified buyer score 92%",
-    "WebGL-Loader: Loading spatial 3D viewport",
-    "AgentScheduler: Booking consultation slot...",
-    "POST /listing/qualification - 200 OK [QUALIFIED]"
-  ],
-  education: [
-    "GET /lms/classroom - 200 OK (3.5ms)",
-    "WebSocketHub: Classroom connection ACTIVE",
-    "SCORMEngine: Restoring lesson state object #9281",
-    "AdaptiveScorer: Analyzing assessment responses...",
-    "AdaptiveScorer: Skill index updated [+8% progress]",
-    "AnalyticsCore: Compiling engagement indicators",
-    "InteractiveWhiteboard: Broadcast sync COMPLETE",
-    "POST /classroom/progress - 200 OK [SYNCED]"
-  ],
-  manufacturing: [
-    "GET /factory/scada/ingress - 200 OK (1.5ms)",
-    "SCADATranslator: Parsing Modbus payload...",
-    "IoTAnomalyDetector: Checking vibration levels",
-    "IoTAnomalyDetector: Standard deviation optimal",
-    "AWSKinesis: Telemetry stream compiled [95% precision]",
-    "AssemblyScorer: Operating yield computed at 98.4%",
-    "PredictiveMaintenance: Triggering status optimal",
-    "POST /scada/telemetry - 200 OK [COMMITTED]"
-  ],
-  "travel-hospitality": [
-    "GET /bookings/rates - 200 OK (2.8ms)",
-    "GDSConnector: Synchronizing Sabre API matrix...",
-    "AmadeusDirect: Rates match verified",
-    "PricingEngine: Adjusting pricing to dynamic demand",
-    "PricingEngine: Optimized occupancy rate updated",
-    "GuestProfileHub: Fetching preference records",
-    "PaymentProcessor: Secure reservation lock active",
-    "POST /booking/commit - 200 OK [RESERVED]"
-  ],
-  "banking-insurance": [
-    "GET /core/accounts - 200 OK (1.4ms)",
-    "AtomicLedger: Session validated (token crypt)",
-    "RiskEvaluator: Scoring portfolio exposure...",
-    "ClaimsProcessor: Analyzing insurance claim proof",
-    "ClaimsProcessor: Verification success rate 94%",
-    "CoreLedger: Committing balances [SUCCESS]",
-    "AuditBroker: State snapshot archived securely",
-    "POST /ledger/commit - 200 OK [COMPLETED]"
-  ],
-  cybersecurity: [
-    "GET /soc/endpoints - 200 OK (0.8ms)",
-    "SIEMCore: Ingesting endpoint log buffer...",
-    "SIEMCore: Scanning for malicious signatures",
-    "IncidentResponse: Evaluating system integrity",
-    "IncidentResponse: Active threats = 0 [SAFE]",
-    "AccessController: Biometric token matched context",
-    "ZeroTrustGateway: Authorization granted",
-    "POST /auth/verify - 200 OK [AUTHORIZED]"
-  ],
-  telecom: [
-    "GET /network/traffic - 200 OK (1.2ms)",
-    "TrafficRouter: Recalculating signal prioritizations",
-    "EdgeIngress: Telemetry processed in 5ms",
-    "BillingStream: Calculating edge data consumption",
-    "BillingStream: Data bundle sync SUCCESS",
-    "OSS-Config: Validating network update payload",
-    "NetworkController: Rolling updates deployed [0 downtime]",
-    "POST /billing/sync - 200 OK [COMPLETED]"
-  ],
-  automotive: [
-    "GET /vehicle/telematics - 200 OK (0.9ms)",
-    "CANBusParser: Parsing speed/vitals stream...",
-    "BatteryScorer: Cell voltage balance checked",
-    "BatteryScorer: Battery health forecast = 98%",
-    "EdgeIngestion: Raw telematic payload normalized",
-    "SafetyMonitor: Brake and traction states optimal",
-    "GPSGateway: Dynamic location push SUCCESS",
-    "POST /vehicle/diagnostics - 200 OK [REGISTERED]"
-  ],
-  "media-entertainment": [
-    "GET /ott/stream - 200 OK (3.2ms)",
-    "CDNEdge: Match request routed to local node",
-    "TranscoderQueue: Checking codec stream compatibility",
-    "TranscoderQueue: Adaptive rate standard initialized",
-    "InterestParser: Viewer activity scoring...",
-    "RecommendationEngine: Found 3 top matching titles",
-    "PlaybackMonitor: Frame drops = 0 [OPTIMAL]",
-    "POST /playback/session - 200 OK [ACTIVE]"
-  ],
-  "food-restaurant-tech": [
-    "GET /kitchen/orders - 200 OK (1.9ms)",
-    "POSGateway: Consolidating active order channels",
-    "KitchenScreen: New ticket order parsed",
-    "DispatchEngine: Finding nearby courier agents...",
-    "DispatchEngine: Driver found (ETA 8m prep sync)",
-    "OfflineCache: Syncing POS ledger entries",
-    "POSSync: Server connections RESTORED",
-    "POST /kitchen/dispatch - 200 OK [PREPARED]"
-  ],
-  "government-public-sector": [
-    "GET /citizen/services - 200 OK (6.4ms)",
-    "WCAGAuditor: Layout accessibility validated [AA]",
-    "DigitalIDHub: Verifying identity hash credentials",
-    "DigitalIDHub: Identity validation SUCCESS",
-    "TaxService: Fetching citizen ledger snapshot",
-    "QueueMonitor: Real-time service queue computed",
-    "RecordsVault: Secure citizen database locked",
-    "POST /citizen/records - 200 OK [SECURED]"
-  ]
-};
-
-const getColorClasses = (color: string) => {
-  switch (color) {
-    case "sky":
-      return {
-        text: "text-sky-500",
-        bg: "bg-sky-500",
-        bgLight: "bg-sky-50",
-        border: "border-sky-100",
-        borderHover: "hover:border-sky-300",
-        shadow: "shadow-sky-100/50",
-        glow: "rgba(14,165,233,0.12)",
-        hex: "#38bdf8",
-      };
-    case "cyan":
-      return {
-        text: "text-cyan-500",
-        bg: "bg-cyan-500",
-        bgLight: "bg-cyan-50",
-        border: "border-cyan-100",
-        borderHover: "hover:border-cyan-300",
-        shadow: "shadow-cyan-100/50",
-        glow: "rgba(6,182,212,0.12)",
-        hex: "#06b6d4",
-      };
-    case "indigo":
-      return {
-        text: "text-indigo-500",
-        bg: "bg-indigo-500",
-        bgLight: "bg-indigo-50",
-        border: "border-indigo-100",
-        borderHover: "hover:border-indigo-300",
-        shadow: "shadow-indigo-100/50",
-        glow: "rgba(99,102,241,0.12)",
-        hex: "#6366f1",
-      };
-    case "orange":
-      return {
-        text: "text-orange-500",
-        bg: "bg-orange-500",
-        bgLight: "bg-orange-50",
-        border: "border-orange-100",
-        borderHover: "hover:border-orange-300",
-        shadow: "shadow-orange-100/50",
-        glow: "rgba(249,115,22,0.12)",
-        hex: "#f97316",
-      };
-    case "emerald":
-      return {
-        text: "text-emerald-500",
-        bg: "bg-emerald-500",
-        bgLight: "bg-emerald-50",
-        border: "border-emerald-100",
-        borderHover: "hover:border-emerald-300",
-        shadow: "shadow-emerald-100/50",
-        glow: "rgba(16,185,129,0.12)",
-        hex: "#10b981",
-      };
-    case "zinc":
-      return {
-        text: "text-zinc-500",
-        bg: "bg-zinc-500",
-        bgLight: "bg-zinc-50",
-        border: "border-zinc-100",
-        borderHover: "hover:border-zinc-300",
-        shadow: "shadow-zinc-100/50",
-        glow: "rgba(113,113,122,0.12)",
-        hex: "#71717a",
-      };
-    case "red":
-      return {
-        text: "text-red-500",
-        bg: "bg-red-500",
-        bgLight: "bg-red-50",
-        border: "border-red-100",
-        borderHover: "hover:border-red-300",
-        shadow: "shadow-red-100/50",
-        glow: "rgba(239,68,68,0.12)",
-        hex: "#ef4444",
-      };
-    case "purple":
-      return {
-        text: "text-purple-500",
-        bg: "bg-purple-500",
-        bgLight: "bg-purple-50",
-        border: "border-purple-100",
-        borderHover: "hover:border-purple-300",
-        shadow: "shadow-purple-100/50",
-        glow: "rgba(168,85,247,0.12)",
-        hex: "#a855f7",
-      };
-    case "slate":
-      return {
-        text: "text-slate-500",
-        bg: "bg-slate-500",
-        bgLight: "bg-slate-50",
-        border: "border-slate-100",
-        borderHover: "hover:border-slate-300",
-        shadow: "shadow-slate-100/50",
-        glow: "rgba(100,116,139,0.12)",
-        hex: "#64748b",
-      };
-    case "pink":
-      return {
-        text: "text-pink-500",
-        bg: "bg-pink-500",
-        bgLight: "bg-pink-50",
-        border: "border-pink-100",
-        borderHover: "hover:border-pink-300",
-        shadow: "shadow-pink-100/50",
-        glow: "rgba(236,72,153,0.12)",
-        hex: "#ec4899",
-      };
-    case "green":
-      return {
-        text: "text-green-500",
-        bg: "bg-green-500",
-        bgLight: "bg-green-50",
-        border: "border-green-100",
-        borderHover: "hover:border-green-300",
-        shadow: "shadow-green-100/50",
-        glow: "rgba(34,197,94,0.12)",
-        hex: "#22c55e",
-      };
-    default:
-      return {
-        text: "text-sky-500",
-        bg: "bg-sky-500",
-        bgLight: "bg-sky-50",
-        border: "border-sky-100",
-        borderHover: "hover:border-sky-300",
-        shadow: "shadow-sky-100/50",
-        glow: "rgba(14,165,233,0.12)",
-        hex: "#38bdf8",
-      };
-  }
-};
-
 export default function IndustryDetailsPage() {
   const { slug } = useParams() as { slug: string };
   const data = industryContent[slug];
-
-  // Active terminal logs emulator
-  const [activeLogs, setActiveLogs] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (!data) return;
-    const allLogs = mockTerminalLogs[slug] || mockTerminalLogs["fintech"];
-    // Initialize with first 3 logs
-    setActiveLogs(allLogs.slice(0, 3));
-
-    let currentIdx = 3;
-    const interval = setInterval(() => {
-      setActiveLogs((prev) => {
-        const nextLog = allLogs[currentIdx % allLogs.length];
-        currentIdx++;
-        // Maintain a max list of 5 scrolling logs
-        const updated = [...prev, nextLog];
-        if (updated.length > 5) {
-          updated.shift();
-        }
-        return updated;
-      });
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [slug, data]);
 
   if (!data) {
     return (
@@ -1091,7 +774,7 @@ export default function IndustryDetailsPage() {
 
   return (
     <div className="bg-white min-h-screen overflow-hidden">
-      {/* ══════════════════ HERO SECTION (UNTOUCHED PER USER REQUEST) ══════════════════ */}
+      {/* ══════════════════ HERO SECTION ══════════════════ */}
       <section className={`relative bg-gradient-to-br ${data.bg} py-32 text-center overflow-hidden`}>
         {/* Animated background particles */}
         <div className="absolute inset-0 pointer-events-none opacity-30">
@@ -1167,249 +850,147 @@ export default function IndustryDetailsPage() {
         </div>
       </section>
 
-      {/* ══════════════════ CORE METRICS (FLOATING WITH NEGATIVE MARGIN) ══════════════════ */}
-      <section className="relative z-30 max-w-6xl mx-auto px-4 -mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {data.metrics.map((metric, idx) => {
-            const colors = getColorClasses(data.themeColor);
-            return (
+      {/* ══════════════════ CORE METRICS ══════════════════ */}
+      <section className="py-16 border-b border-slate-100 bg-white relative z-20 shadow-sm">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+          {data.metrics.map((metric, idx) => (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.15, duration: 0.5 }}
+              key={metric.label}
+              className="group"
+            >
+              <h3 className="text-4xl md:text-5xl font-black text-sky-500 mb-2 group-hover:scale-105 transition-transform duration-300">
+                {metric.value}
+              </h3>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                {metric.label}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════ CORE CHALLENGES SOLVED ══════════════════ */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-xs font-semibold tracking-[0.3em] text-sky-500 uppercase mb-4">Core Silos Broken</h2>
+            <h3 className="text-4xl font-bold text-slate-900">Challenges We Address</h3>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {data.challenges.map((challenge, idx) => (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.1, duration: 0.5 }}
-                whileHover={{ y: -6 }}
-                key={metric.label}
-                className="bg-white/90 backdrop-blur-md p-8 rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50 hover:shadow-2xl hover:border-slate-200 transition-all duration-300 flex flex-col items-center text-center group overflow-hidden"
+                transition={{ delay: idx * 0.15, duration: 0.5 }}
+                key={challenge.title}
+                className="bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl hover:border-sky-100 transition-all duration-300 group"
               >
-                <div className={`absolute top-0 left-0 w-full h-1.5 ${colors.bg}`} />
-                <h3 className={`text-4xl md:text-5xl font-black ${colors.text} mb-2 group-hover:scale-105 transition-transform duration-300`}>
-                  <DoodleUnderline color={colors.hex}>{metric.value}</DoodleUnderline>
-                </h3>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-2">
-                  {metric.label}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ══════════════════ PROBLEM VS. SOLUTION COMPARATIVE GRID ══════════════════ */}
-      <section className="py-24 bg-slate-50/50 relative overflow-hidden">
-        {/* Subtle background grids */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20 pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-20">
-            <span className={`text-xs font-bold tracking-[0.2em] uppercase ${getColorClasses(data.themeColor).text} bg-white px-4 py-1.5 rounded-full border border-slate-100 shadow-sm inline-block mb-4`}>
-              Engineering Diagnosis
-            </span>
-            <h3 className="text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              Bridging Industry Bottlenecks with Custom Architecture
-            </h3>
-          </div>
-
-          <div className="space-y-12">
-            {data.challenges.map((challenge, idx) => {
-              const colors = getColorClasses(data.themeColor);
-              const solution = data.solutions[idx] || { title: "Custom Integration Layer", desc: "Tailored middleware executing direct-channel data optimizations." };
-              return (
-                <div key={idx} className="flex flex-col lg:flex-row items-stretch gap-6 relative">
-                  
-                  {/* Left Column: Challenge */}
-                  <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    className="flex-1 bg-white p-8 rounded-3xl border border-rose-100 shadow-sm flex flex-col justify-between group relative overflow-hidden"
-                  >
-                    <div className="absolute top-0 right-0 w-16 h-16 bg-rose-50/50 rounded-bl-[40px] -z-10 group-hover:scale-110 transition-transform duration-500" />
-                    <div>
-                      <div className="w-10 h-10 bg-rose-50 text-rose-500 rounded-xl flex items-center justify-center mb-6 font-bold text-xs shadow-sm">
-                        SILO
-                      </div>
-                      <h4 className="text-lg font-bold text-slate-800 mb-3 group-hover:text-rose-600 transition-colors">
-                        {challenge.title}
-                      </h4>
-                      <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                        {challenge.desc}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs font-semibold text-rose-500 mt-auto">
-                      <AlertCircle size={14} className="animate-pulse" /> Operational Risk Factor
-                    </div>
-                  </motion.div>
-
-                  {/* Center Column: Visual Connector Arrow (Desktop only) */}
-                  <div className="w-[8%] hidden lg:flex items-center justify-center relative pointer-events-none">
-                    <DoodleArrow rotate={idx % 2 === 0 ? 15 : -15} color={colors.hex} className="w-14 h-14" />
-                  </div>
-
-                  {/* Right Column: Moonshot Solution */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    whileHover={{ y: -4 }}
-                    className="flex-1 bg-white p-8 rounded-3xl border border-slate-100 hover:border-slate-200 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden"
-                    style={{
-                      boxShadow: `0 10px 30px -10px ${colors.glow}`,
-                    }}
-                  >
-                    <div className={`absolute top-0 right-0 w-16 h-16 ${colors.bgLight} rounded-bl-[40px] -z-10 group-hover:scale-110 transition-transform duration-500`} />
-                    <div>
-                      <div className={`w-10 h-10 ${colors.bgLight} ${colors.text} rounded-xl flex items-center justify-center mb-6 font-bold text-xs shadow-sm`}>
-                        SOLVE
-                      </div>
-                      <h4 className="text-lg font-bold text-slate-800 mb-3 group-hover:text-slate-900 transition-colors">
-                        {solution.title}
-                      </h4>
-                      <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                        {solution.desc}
-                      </p>
-                    </div>
-                    <div className={`flex items-center gap-2 text-xs font-bold ${colors.text} mt-auto`}>
-                      <CheckCircle2 size={14} /> Moonshot Solution Integrated
-                    </div>
-                  </motion.div>
-
+                <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500">
+                  <AlertCircle size={24} />
                 </div>
-              );
-            })}
+                <h4 className="text-lg font-bold text-slate-800 mb-3">{challenge.title}</h4>
+                <p className="text-slate-500 text-sm leading-relaxed">{challenge.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════ SIMULATED ARCHITECTURE FLOW (PULSING) ══════════════════ */}
-      <section className="py-24 bg-white relative overflow-hidden border-b border-slate-100">
+      {/* ══════════════════ CUSTOM REMEDIES / SOLUTIONS ══════════════════ */}
+      <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <span className={`text-xs font-bold tracking-[0.2em] uppercase ${getColorClasses(data.themeColor).text} bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100 inline-block mb-4`}>
-              System Blueprints
-            </span>
-            <h3 className="text-4xl font-extrabold text-slate-900 tracking-tight">
-              Representative Live System Flow
-            </h3>
+            <h2 className="text-xs font-semibold tracking-[0.3em] text-sky-500 uppercase mb-4">Engineering Excellence</h2>
+            <h3 className="text-4xl font-bold text-slate-900">Custom Architectural Solutions</h3>
           </div>
 
-          <div className="max-w-4xl mx-auto bg-slate-950 rounded-3xl border border-slate-900 p-8 md:p-12 shadow-2xl relative overflow-hidden">
-            {/* Inner background highlights */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-sky-500/5 blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/5 blur-3xl pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-20 pointer-events-none" />
+          <div className="grid md:grid-cols-3 gap-8">
+            {data.solutions.map((solution, idx) => (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.15, duration: 0.5 }}
+                key={solution.title}
+                className="bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl hover:border-sky-100 transition-all duration-300 group"
+              >
+                <div className="w-12 h-12 bg-sky-50 text-sky-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500">
+                  <CheckCircle2 size={24} />
+                </div>
+                <h4 className="text-lg font-bold text-slate-800 mb-3">{solution.title}</h4>
+                <p className="text-slate-500 text-sm leading-relaxed">{solution.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════ SIMULATED ARCHITECTURE FLOW ══════════════════ */}
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-xs font-semibold tracking-[0.3em] text-sky-500 uppercase mb-4">System Blueprints</h2>
+            <h3 className="text-4xl font-bold text-slate-900">Representative System Flow</h3>
+          </div>
+
+          <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-100 p-8 md:p-12 shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-sky-100/30 blur-3xl pointer-events-none" />
 
             <div className="grid md:grid-cols-3 gap-8 items-center text-center relative z-10">
-              
-              {/* Step 1: Ingress */}
+              {/* Step 1 */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center p-6 bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-slate-800 hover:border-sky-500/30 transition-all group"
+                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-sky-200 transition-all"
               >
-                <div className="w-12 h-12 rounded-full bg-sky-500/10 text-sky-400 flex items-center justify-center mb-4 border border-sky-500/20 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300">
-                  <Globe2 size={22} className="group-hover:rotate-12 transition-transform" />
+                <div className="w-10 h-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center mb-4">
+                  <Globe2 size={20} />
                 </div>
-                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-1">Ingress Ingestion</span>
-                <h4 className="text-sm font-bold text-slate-200">{data.architecture.source}</h4>
-                <div className="flex items-center gap-1.5 mt-3">
-                  <span className="h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
-                  <span className="text-[10px] font-mono text-slate-400">active pipeline</span>
-                </div>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Source Interface</span>
+                <h4 className="text-sm font-bold text-slate-800">{data.architecture.source}</h4>
               </motion.div>
 
-              {/* Step 2: Processing Middleware */}
+              {/* Step 2 */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="flex flex-col items-center p-6 bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-slate-800 hover:border-indigo-500/30 transition-all group relative"
+                transition={{ delay: 0.15 }}
+                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-sky-200 transition-all relative"
               >
-                {/* Visual live particle streaming connector paths */}
-                <div className="absolute -left-[30%] top-1/2 w-[30%] h-0.5 bg-gradient-to-r from-sky-500/40 to-indigo-500/40 hidden md:block">
-                  <motion.div
-                    animate={{ x: ["0%", "300%"] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className="w-2 h-2 rounded-full bg-sky-400 blur-sm shadow-md"
-                  />
+                {/* Simulated connecting dynamic light flow */}
+                <div className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
+                  <Cpu size={20} />
                 </div>
-                <div className="absolute -right-[30%] top-1/2 w-[30%] h-0.5 bg-gradient-to-r from-indigo-500/40 to-emerald-500/40 hidden md:block">
-                  <motion.div
-                    animate={{ x: ["0%", "300%"] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className="w-2 h-2 rounded-full bg-indigo-400 blur-sm shadow-md"
-                  />
-                </div>
-
-                <div className="w-12 h-12 rounded-full bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 border border-indigo-500/20 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300">
-                  <Cpu size={22} className="group-hover:scale-110 transition-transform" />
-                </div>
-                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-1">Cognitive Middleware</span>
-                <h4 className="text-sm font-bold text-slate-200">{data.architecture.process}</h4>
-                <div className="flex items-center gap-1.5 mt-3">
-                  <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
-                  <span className="text-[10px] font-mono text-slate-400">AI validation</span>
-                </div>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Secure Middleware</span>
+                <h4 className="text-sm font-bold text-slate-800">{data.architecture.process}</h4>
               </motion.div>
 
-              {/* Step 3: Reliable Database Target */}
+              {/* Step 3 */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="flex flex-col items-center p-6 bg-slate-900/60 backdrop-blur-sm rounded-2xl border border-slate-800 hover:border-emerald-500/30 transition-all group"
+                transition={{ delay: 0.3 }}
+                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-sky-200 transition-all"
               >
-                <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
-                  <Database size={22} className="group-hover:rotate-12 transition-transform" />
+                <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4">
+                  <Database size={20} />
                 </div>
-                <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-1">Database Registry</span>
-                <h4 className="text-sm font-bold text-slate-200">{data.architecture.target}</h4>
-                <div className="flex items-center gap-1.5 mt-3">
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] font-mono text-slate-400">audit-safe states</span>
-                </div>
+                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Reliable Target</span>
+                <h4 className="text-sm font-bold text-slate-800">{data.architecture.target}</h4>
               </motion.div>
-
             </div>
 
-            {/* Simulated Live Console Log Window */}
-            <div className="mt-12 bg-slate-950 border border-slate-900 rounded-2xl p-6 relative">
-              <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4 text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                  <span className="font-mono text-slate-400 ml-2">telemetry-stream.sh</span>
-                </div>
-                <div className="flex items-center gap-1.5 font-mono text-emerald-500">
-                  <Activity size={12} className="animate-pulse" />
-                  <span>STREAMING</span>
-                </div>
-              </div>
-              <div className="font-mono text-[11px] text-slate-350 min-h-[120px] max-h-[120px] overflow-hidden flex flex-col justify-end space-y-2 select-none">
-                <AnimatePresence initial={false}>
-                  {activeLogs.map((log, i) => (
-                    <motion.div
-                      key={log + i}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex items-center gap-2 leading-relaxed"
-                    >
-                      <span className="text-sky-500 font-bold shrink-0">&gt;</span>
-                      <span className="text-slate-300 font-light truncate">{log}</span>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </div>
-            </div>
-
-            <div className="mt-8 pt-8 border-t border-slate-900 text-center text-slate-400 text-sm leading-relaxed max-w-2xl mx-auto relative z-10">
-              <span className="font-bold text-slate-200 block mb-2">Architectural Summary</span>
+            <div className="mt-8 pt-8 border-t border-slate-100 text-center text-slate-500 text-sm leading-relaxed max-w-2xl mx-auto relative z-10">
+              <span className="font-bold text-slate-700 block mb-2">Architectural Summary</span>
               {data.architecture.description}
             </div>
           </div>
@@ -1423,7 +1004,7 @@ export default function IndustryDetailsPage() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[3rem] overflow-hidden bg-white border border-slate-100 p-12 md:p-20 text-center shadow-2xl transition-all duration-700 group hover:border-slate-200"
+            className="relative rounded-[3rem] overflow-hidden bg-white border border-slate-100 p-12 md:p-20 text-center shadow-2xl transition-all duration-700 group hover:border-sky-200"
             style={glowShadowStyle}
           >
             {/* Shimmer background */}
