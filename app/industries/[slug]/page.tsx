@@ -906,10 +906,10 @@ export default function IndustryDetailsPage() {
     telecom: "/moonshot_images/telecom.jpg",
     automotive: "/moonshot_images/Automotive.jpg",
     "media-entertainment": "/moonshot_images/Media & Entertainment.webp",
-    "food-restaurant-tech": "/moonshot_images/Food & Restaurant Tech.png",
+    "food-restaurant-tech": "/moonshot_images/FoodRestaurantTech.jpg",
     "government-public-sector": "/moonshot_images/Government & Public Sector.jpg",
   };
-  const bgImage = bgImageMap[slug];
+  const bgImage = bgImageMap[slug] ? encodeURI(bgImageMap[slug]).replace(/&/g, "%26") : undefined;
 
   if (!data) {
     return (
@@ -964,6 +964,45 @@ export default function IndustryDetailsPage() {
   };
   const textGradient = textGradientMap[data.themeColor] || "from-sky-600 via-blue-600 to-indigo-600";
 
+  const leftIconMap: Record<string, React.ReactNode> = {
+    fintech: <Database className="w-6 h-6 text-sky-500" />,
+    healthcare: <Activity className="w-6 h-6 text-cyan-500" />,
+    "e-commerce": <Zap className="w-6 h-6 text-indigo-500" />,
+    logistics: <Cpu className="w-6 h-6 text-sky-500" />,
+    "real-estate": <Globe2 className="w-6 h-6 text-orange-500" />,
+    education: <Layers className="w-6 h-6 text-emerald-500" />,
+    manufacturing: <Cpu className="w-6 h-6 text-zinc-500" />,
+    "travel-hospitality": <Globe2 className="w-6 h-6 text-sky-500" />,
+    "banking-insurance": <ShieldCheck className="w-6 h-6 text-indigo-500" />,
+    cybersecurity: <ShieldCheck className="w-6 h-6 text-red-500" />,
+    telecom: <Activity className="w-6 h-6 text-purple-500" />,
+    automotive: <Cpu className="w-6 h-6 text-slate-500" />,
+    "media-entertainment": <Layers className="w-6 h-6 text-pink-500" />,
+    "food-restaurant-tech": <Zap className="w-6 h-6 text-orange-500" />,
+    "government-public-sector": <Database className="w-6 h-6 text-green-500" />,
+  };
+
+  const rightIconMap: Record<string, React.ReactNode> = {
+    fintech: <ShieldCheck className="w-6 h-6 text-sky-400" />,
+    healthcare: <ShieldCheck className="w-6 h-6 text-cyan-400" />,
+    "e-commerce": <Layers className="w-6 h-6 text-indigo-400" />,
+    logistics: <Globe2 className="w-6 h-6 text-sky-400" />,
+    "real-estate": <Layers className="w-6 h-6 text-orange-400" />,
+    education: <Globe2 className="w-6 h-6 text-emerald-400" />,
+    manufacturing: <Database className="w-6 h-6 text-zinc-400" />,
+    "travel-hospitality": <Layers className="w-6 h-6 text-sky-400" />,
+    "banking-insurance": <Database className="w-6 h-6 text-indigo-400" />,
+    cybersecurity: <Terminal className="w-6 h-6 text-red-400" />,
+    telecom: <Globe2 className="w-6 h-6 text-purple-400" />,
+    automotive: <Zap className="w-6 h-6 text-slate-400" />,
+    "media-entertainment": <Sparkles className="w-6 h-6 text-pink-400" />,
+    "food-restaurant-tech": <Database className="w-6 h-6 text-orange-400" />,
+    "government-public-sector": <ShieldCheck className="w-6 h-6 text-green-400" />,
+  };
+
+  const leftIcon = leftIconMap[slug] || <Cpu className="w-6 h-6 text-sky-500" />;
+  const rightIcon = rightIconMap[slug] || <Globe2 className="w-6 h-6 text-sky-400" />;
+
   return (
     <div className="bg-white min-h-screen overflow-hidden">
       {/* ══════════════════ HERO SECTION (LIGHT THEME) ══════════════════ */}
@@ -1011,15 +1050,72 @@ export default function IndustryDetailsPage() {
           />
         </div>
 
+        {/* Floating Sparks/Fireflies Particles */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{
+                x: `${10 + Math.random() * 80}%`,
+                y: "105%",
+                opacity: 0.05,
+                scale: 0.4 + Math.random() * 0.6,
+              }}
+              animate={{
+                y: ["105%", "-10%"],
+                opacity: [0, 0.4, 0.4, 0],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 9 + Math.random() * 6,
+                repeat: Infinity,
+                ease: "linear",
+                delay: i * 1.6,
+              }}
+              className={`absolute w-3.5 h-3.5 text-${data.themeColor}-400/60`}
+            >
+              <Sparkles size={12} className="animate-pulse" />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Left Floating Industry Icon Orb */}
+        <motion.div
+          initial={{ opacity: 0, x: -30, scale: 0.8 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+        >
+          <motion.div
+            animate={{ y: [0, -15, 0], rotate: [0, 6, -6, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute left-[7%] top-[35%] hidden xl:flex w-16 h-16 bg-white/60 backdrop-blur-md rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 items-center justify-center z-10 cursor-pointer hover:scale-110 transition-transform duration-300"
+          >
+            {leftIcon}
+          </motion.div>
+        </motion.div>
+
+        {/* Right Floating Industry Icon Orb */}
+        <motion.div
+          initial={{ opacity: 0, x: 30, scale: 0.8 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+        >
+          <motion.div
+            animate={{ y: [0, 15, 0], rotate: [0, -6, 6, 0] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+            className="absolute right-[7%] top-[35%] hidden xl:flex w-16 h-16 bg-white/60 backdrop-blur-md rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 items-center justify-center z-10 cursor-pointer hover:scale-110 transition-transform duration-300"
+          >
+            {rightIcon}
+          </motion.div>
+        </motion.div>
+
         {/* Full-width dynamic background image integrated very lightly */}
         {bgImage && (
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-[0.07] mix-blend-multiply">
-            <Image
+            <img
               src={bgImage}
               alt={data.title}
-              fill
-              priority
-              className="object-cover scale-105 select-none pointer-events-none"
+              className="w-full h-full object-cover scale-105 select-none pointer-events-none"
             />
           </div>
         )}
@@ -1039,8 +1135,15 @@ export default function IndustryDetailsPage() {
             <StaggeredReveal text={data.title} />
           </h1>
 
-          {/* Styled Underline Accent */}
-          <div className={`w-24 h-1.5 bg-gradient-to-r ${textGradient} rounded-full mb-6`} />
+          {/* Styled Underline Accent with Shimmering Laser effect */}
+          <div className="relative mb-6">
+            <div className={`w-24 h-1.5 bg-gradient-to-r ${textGradient} rounded-full`} />
+            <motion.div
+              animate={{ x: [-48, 48] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-10 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent blur-[2px] pointer-events-none"
+            />
+          </div>
 
           <p className="text-lg md:text-xl text-slate-600/90 font-medium leading-relaxed mb-8 max-w-2xl mx-auto">
             <StaggeredReveal text={data.desc} delay={0.25} />
