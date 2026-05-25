@@ -1135,21 +1135,7 @@ export default function HomePage() {
         </motion.h2>
       </div>
       <div className="flex items-center gap-4 justify-between md:justify-end w-full md:w-auto">
-        <div className="h-8 w-px bg-slate-200 hidden sm:block" />
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          <Link
-            href="/contact"
-            className="group flex items-center gap-2 text-sky-500 font-bold hover:text-sky-600 transition-colors"
-          >
-            View all projects
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
+     
       </div>
     </div>
 
