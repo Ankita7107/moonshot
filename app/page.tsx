@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
+  ArrowLeft,
   ArrowRight,
   Globe,
   Settings,
   Cloud,
+  ChevronLeft,
   ChevronRight,
   Code,
   Database,
@@ -104,6 +106,22 @@ const caseStudies = [
     desc: "An elegant e-commerce destination for exclusive wedding apparel, featuring premium sarees, traditional kurtas, and stylish blazers.",
     color: "from-rose-400 to-orange-500",
     image: "/rajaji.jpeg",
+  },
+  {
+    title: "Quest Tours",
+    category: "Travel & Tourism",
+    result: "Discover Adventure",
+    desc: "A premium travel and tourism platform designed to help travelers discover destinations, book packages, and plan voyages with ease.",
+    color: "from-sky-400 to-blue-600",
+    image: "/quest.jpeg",
+  },
+  {
+    title: "Talent Connect India",
+    category: "HR & Recruitment Tech",
+    result: "AI Hiring Solutions",
+    desc: "A powerful recruitment portal featuring AI-based calling workflows, verified candidate profiles, and seamless talent match capabilities.",
+    color: "from-indigo-600 to-blue-700",
+    image: "/talentconnectindia.PNG",
   },
 ];
 
@@ -278,6 +296,19 @@ export default function HomePage() {
   const parallaxY2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const [hoveredService, setHoveredService] = useState<number | null>(null);
   const [currentCaseStudy, setCurrentCaseStudy] = useState(0);
+
+  const caseStudiesRef = useRef<HTMLDivElement>(null);
+
+  const scrollCaseStudies = (direction: "left" | "right") => {
+    if (caseStudiesRef.current) {
+      const { scrollLeft, clientWidth } = caseStudiesRef.current;
+      const scrollAmount = clientWidth * 0.75;
+      caseStudiesRef.current.scrollTo({
+        left: direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const nextCaseStudy = () => {
     setCurrentCaseStudy((prev) => (prev + 1) % caseStudies.length);
@@ -1079,7 +1110,8 @@ export default function HomePage() {
 
       {/* Featured Case Studies Section */}
    
-{/* Featured Case Studies Section - Sleek Grid Version */}
+{/* Featured Case Studies Section - Sleek Horizontal Scroll Version */}
+{/* Featured Case Studies Section - Sleek Horizontal Scroll Version */}
 <section className="py-24 bg-white relative overflow-hidden">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -1102,86 +1134,107 @@ export default function HomePage() {
           Engineering Excellence
         </motion.h2>
       </div>
-      <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 }}
-      >
-        <Link
-          href="/contact"
-          className="group flex items-center gap-2 text-sky-500 font-bold hover:text-sky-600 transition-colors"
+      <div className="flex items-center gap-4 justify-between md:justify-end w-full md:w-auto">
+        <div className="h-8 w-px bg-slate-200 hidden sm:block" />
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
         >
-          View all projects
-          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-        </Link>
-      </motion.div>
+          <Link
+            href="/contact"
+            className="group flex items-center gap-2 text-sky-500 font-bold hover:text-sky-600 transition-colors"
+          >
+            View all projects
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
+      </div>
     </div>
 
-    {/* Grid Container - 3 Cards side by side */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {caseStudies.map((study, idx) => (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: idx * 0.1 }}
-          whileHover={{ y: -10 }}
-          className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col"
-        >
-          {/* Image Section - Impactful yet balanced */}
-          <div className="relative h-64 w-full overflow-hidden">
-            {study.image ? (
-              <Image
-                src={study.image}
-                alt={study.title}
-                fill
-                className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
-              />
-            ) : (
-              <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-90`} />
-            )}
-            
-            {/* Category Badge overlay on image */}
-            <div className="absolute top-6 left-6">
-              <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-sky-600 text-[10px] font-black uppercase tracking-widest shadow-lg">
-                {study.category}
-              </span>
+    {/* Scroll Container with overlay arrows */}
+    <div className="relative">
+      {/* Left Arrow - overlaid on scroll container */}
+      <button
+        onClick={() => scrollCaseStudies("left")}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 w-12 h-12 rounded-full border border-slate-200 hover:border-sky-300 hover:text-sky-500 bg-white flex items-center justify-center shadow-md hover:shadow-xl transition-all active:scale-95 group"
+        aria-label="Scroll left"
+      >
+        <ChevronLeft size={20} className="group-hover:-translate-x-0.5 transition-transform" />
+      </button>
+
+      {/* Right Arrow - overlaid on scroll container */}
+      <button
+        onClick={() => scrollCaseStudies("right")}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 w-12 h-12 rounded-full border border-slate-200 hover:border-sky-300 hover:text-sky-500 bg-white flex items-center justify-center shadow-md hover:shadow-xl transition-all active:scale-95 group"
+        aria-label="Scroll right"
+      >
+        <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
+      </button>
+
+      <div
+        ref={caseStudiesRef}
+        className="flex gap-8 overflow-x-auto no-scrollbar pb-8 snap-x snap-mandatory scroll-smooth px-1"
+      >
+        {caseStudies.map((study, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ delay: idx * 0.1 }}
+            whileHover={{ y: -10 }}
+            className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col w-full md:w-[calc(50%-16px)] lg:w-[calc((100%-64px)/3)] flex-shrink-0 snap-start"
+          >
+            {/* Image Section */}
+            <div className="relative h-64 w-full overflow-hidden">
+              {study.image ? (
+                <Image
+                  src={study.image}
+                  alt={study.title}
+                  fill
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                />
+              ) : (
+                <div className={`absolute inset-0 bg-gradient-to-br ${study.color} opacity-90`} />
+              )}
+              <div className="absolute top-6 left-6">
+                <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-sky-600 text-[10px] font-black uppercase tracking-widest shadow-lg">
+                  {study.category}
+                </span>
+              </div>
             </div>
-          </div>
 
-          {/* Content Section */}
-          <div className="p-8 flex flex-col flex-grow">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-emerald-600 text-xs font-bold uppercase tracking-wider">
-                {study.result}
-              </span>
+            {/* Content Section */}
+            <div className="p-8 flex flex-col flex-grow">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-emerald-600 text-xs font-bold uppercase tracking-wider">
+                  {study.result}
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-sky-600 transition-colors">
+                {study.title}
+              </h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
+                {study.desc}
+              </p>
+              <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 text-slate-900 font-bold text-sm group/btn"
+                >
+                  View Case Study
+                  <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover/btn:bg-sky-500 group-hover/btn:text-white transition-all">
+                    <ArrowRight size={14} />
+                  </div>
+                </Link>
+              </div>
             </div>
-
-            <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-sky-600 transition-colors">
-              {study.title}
-            </h3>
-
-            <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">
-              {study.desc}
-            </p>
-
-            <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-slate-900 font-bold text-sm group/btn"
-              >
-                View Case Study
-                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover/btn:bg-sky-500 group-hover/btn:text-white transition-all">
-                  <ArrowRight size={14} />
-                </div>
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
