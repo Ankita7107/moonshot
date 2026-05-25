@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -891,6 +892,25 @@ export default function IndustryDetailsPage() {
   const { slug } = useParams() as { slug: string };
   const data = industryContent[slug];
 
+  const bgImageMap: Record<string, string> = {
+    fintech: "/moonshot_images/Fintech.jpg",
+    healthcare: "/moonshot_images/healthcare.webp",
+    "e-commerce": "/moonshot_images/E-commerce.jpeg",
+    logistics: "/moonshot_images/logistics.jpg",
+    "real-estate": "/moonshot_images/real-estate.png",
+    education: "/moonshot_images/education.jpeg",
+    manufacturing: "/moonshot_images/manufacturing.webp",
+    "travel-hospitality": "/moonshot_images/Travel & Hospitality.png",
+    "banking-insurance": "/moonshot_images/banking.jpeg",
+    cybersecurity: "/moonshot_images/Cybersecurity.webp",
+    telecom: "/moonshot_images/telecom.jpg",
+    automotive: "/moonshot_images/Automotive.jpg",
+    "media-entertainment": "/moonshot_images/Media & Entertainment.webp",
+    "food-restaurant-tech": "/moonshot_images/Food & Restaurant Tech.png",
+    "government-public-sector": "/moonshot_images/Government & Public Sector.jpg",
+  };
+  const bgImage = bgImageMap[slug];
+
   if (!data) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-8">
@@ -914,30 +934,64 @@ export default function IndustryDetailsPage() {
     boxShadow: `0 0 50px -10px ${data.glowColor}`,
   };
 
+  const lightBgMap: Record<string, string> = {
+    sky: "from-sky-50/60 via-white to-slate-50/50",
+    cyan: "from-cyan-50/60 via-white to-slate-50/50",
+    indigo: "from-indigo-50/60 via-white to-slate-50/50",
+    orange: "from-orange-50/60 via-white to-slate-50/50",
+    emerald: "from-emerald-50/60 via-white to-slate-50/50",
+    zinc: "from-zinc-100/50 via-white to-slate-50/50",
+    red: "from-red-50/55 via-white to-slate-50/50",
+    purple: "from-purple-50/60 via-white to-slate-50/50",
+    slate: "from-slate-100/60 via-white to-slate-50/50",
+    pink: "from-pink-50/60 via-white to-slate-50/50",
+    green: "from-green-50/60 via-white to-slate-50/50",
+  };
+  const lightBg = lightBgMap[data.themeColor] || "from-sky-50/60 via-white to-slate-50/50";
+
+  const textGradientMap: Record<string, string> = {
+    sky: "from-sky-600 via-blue-600 to-indigo-600",
+    cyan: "from-cyan-600 via-teal-600 to-emerald-600",
+    indigo: "from-indigo-600 via-purple-600 to-pink-600",
+    orange: "from-orange-600 via-amber-600 to-yellow-500",
+    emerald: "from-emerald-600 via-teal-600 to-cyan-600",
+    zinc: "from-slate-800 via-zinc-700 to-slate-600",
+    red: "from-red-600 via-rose-600 to-orange-500",
+    purple: "from-purple-600 via-violet-600 to-indigo-600",
+    slate: "from-slate-800 via-slate-600 to-zinc-500",
+    pink: "from-pink-600 via-rose-500 to-red-500",
+    green: "from-green-600 via-emerald-600 to-teal-500",
+  };
+  const textGradient = textGradientMap[data.themeColor] || "from-sky-600 via-blue-600 to-indigo-600";
+
   return (
     <div className="bg-white min-h-screen overflow-hidden">
-      {/* ══════════════════ HERO SECTION ══════════════════ */}
-      <section className={`relative bg-gradient-to-br ${data.bg} py-32 text-center overflow-hidden`}>
+      {/* ══════════════════ HERO SECTION (LIGHT THEME) ══════════════════ */}
+      <section className={`relative bg-gradient-to-br ${lightBg} py-24 md:py-32 overflow-hidden border-b border-slate-100`}>
+        {/* Soft background glow orbs */}
+        <div className={`absolute top-1/4 left-[5%] w-80 h-80 bg-${data.themeColor}-200/30 rounded-full blur-3xl pointer-events-none`} />
+        <div className="absolute bottom-1/4 right-[5%] w-96 h-96 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
+
         {/* Animated background particles with continuous physics drifting */}
-        <div className="absolute inset-0 pointer-events-none opacity-30 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none opacity-40 overflow-hidden">
           <motion.div
             animate={{
-              x: [0, 40, -20, 0],
-              y: [0, -30, 20, 0],
-              scale: [1, 1.15, 0.9, 1],
+              x: [0, 30, -15, 0],
+              y: [0, -20, 15, 0],
+              scale: [1, 1.1, 0.95, 1],
             }}
             transition={{
               duration: 15,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute top-10 left-[10%] h-40 w-40 rounded-full bg-white/10 blur-3xl"
+            className={`absolute top-10 left-[10%] h-40 w-40 rounded-full bg-${data.themeColor}-300/10 blur-3xl`}
           />
           <motion.div
             animate={{
-              x: [0, -50, 30, 0],
-              y: [0, 40, -30, 0],
-              scale: [1, 0.85, 1.1, 1],
+              x: [0, -40, 20, 0],
+              y: [0, 30, -20, 0],
+              scale: [1, 0.9, 1.05, 1],
             }}
             transition={{
               duration: 18,
@@ -945,34 +999,50 @@ export default function IndustryDetailsPage() {
               ease: "easeInOut",
               delay: 2,
             }}
-            className="absolute bottom-10 right-[15%] h-52 w-52 rounded-full bg-white/15 blur-3xl"
+            className="absolute bottom-10 right-[15%] h-52 w-52 rounded-full bg-purple-300/10 blur-3xl"
           />
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-                                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+              backgroundImage: `linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px),
+                                linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)`,
               backgroundSize: "40px 40px",
             }}
           />
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 relative z-10 text-white">
+        {/* Full-width dynamic background image integrated very lightly */}
+        {bgImage && (
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-[0.07] mix-blend-multiply">
+            <Image
+              src={bgImage}
+              alt={data.title}
+              fill
+              priority
+              className="object-cover scale-105 select-none pointer-events-none"
+            />
+          </div>
+        )}
+
+        <div className="max-w-4xl mx-auto px-4 relative z-10 text-center flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full px-4 py-2 border border-white/20 mb-8"
+            className={`inline-flex items-center gap-2 bg-${data.themeColor}-50/80 backdrop-blur-md rounded-full px-4 py-2 border border-${data.themeColor}-100/80 mb-6`}
           >
-            <Sparkles className="w-4 h-4 text-sky-400" />
-            <span className="text-xs font-bold tracking-widest uppercase text-sky-300">Industry Insight</span>
+            <Sparkles className={`w-4 h-4 text-${data.themeColor}-500 animate-pulse`} />
+            <span className={`text-xs font-bold tracking-widest uppercase text-${data.themeColor}-600`}>Industry Insight</span>
           </motion.div>
 
-          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter">
+          <h1 className={`text-5xl md:text-7xl font-black mb-4 tracking-tighter leading-tight bg-gradient-to-r ${textGradient} bg-clip-text text-transparent`}>
             <StaggeredReveal text={data.title} />
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
+          {/* Styled Underline Accent */}
+          <div className={`w-24 h-1.5 bg-gradient-to-r ${textGradient} rounded-full mb-6`} />
+
+          <p className="text-lg md:text-xl text-slate-600/90 font-medium leading-relaxed mb-8 max-w-2xl mx-auto">
             <StaggeredReveal text={data.desc} delay={0.25} />
           </p>
 
@@ -980,13 +1050,13 @@ export default function IndustryDetailsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-wrap gap-3 justify-center mb-10"
+            className="flex flex-wrap gap-2.5 justify-center mb-10"
           >
             {data.tags.map((tag) => (
               <motion.span
                 key={tag}
                 whileHover={{ y: -3, scale: 1.05 }}
-                className="px-4 py-1.5 rounded-full text-xs font-bold bg-white/10 border border-white/20 backdrop-blur-sm tracking-wide text-sky-200 cursor-default transition-colors duration-200"
+                className={`px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-slate-200/80 shadow-sm tracking-wide text-slate-600 hover:border-${data.themeColor}-300 hover:text-${data.themeColor}-600 cursor-default transition-all duration-200`}
               >
                 {tag}
               </motion.span>
@@ -1000,7 +1070,7 @@ export default function IndustryDetailsPage() {
           >
             <Link
               href="/industries"
-              className="inline-flex items-center gap-2 text-sm font-bold text-slate-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-700 transition-colors"
             >
               <ArrowLeft size={16} /> Back to Sectors
             </Link>
