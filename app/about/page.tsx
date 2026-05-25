@@ -253,6 +253,7 @@ export default function AboutPage() {
                 alt="Engineering Excellence"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
                 className="object-cover transition-transform duration-500 group-hover:brightness-110"
               />
 
