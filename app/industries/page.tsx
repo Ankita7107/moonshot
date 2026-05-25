@@ -94,7 +94,7 @@ const industries = [
     title: "Travel & Hospitality",
     desc: "Booking engines, dynamic pricing tools, and guest experience platforms for hotels and airlines.",
     bg: "from-sky-800 to-cyan-900",
-    image: "/moonshot_images/Travel & Hospitality.png",
+    image: "/moonshot_images/travel-hospitality.png",
     tags: ["Booking Engines", "SaaS", "Hospitality AI"],
     highlights: [
       "Low-Latency Global Flight Search Engines",
@@ -166,7 +166,7 @@ const industries = [
     title: "Food & Restaurant Tech",
     desc: "Food delivery apps, POS systems, restaurant management, and inventory tracking solutions.",
     bg: "from-orange-800 to-slate-900",
-    image: "/moonshot_images/Food & Restaurant Tech.jpg",
+    image: "/moonshot_images/food-restaurant-tech.jpg",
     tags: ["Food Delivery", "POS", "Inventory"],
     highlights: [
       "Real-Time Order Tracking & Dispatch Maps",
@@ -178,7 +178,7 @@ const industries = [
     title: "Government & Public Sector",
     desc: "e-Governance systems, digital identity platforms, tax portals, and citizen services.",
     bg: "from-green-900 to-slate-900",
-    image: "/moonshot_images/Government & Public Sector.jpg",
+    image: "/moonshot_images/government-public-sector.jpg",
     tags: ["e-Governance", "Digital ID", "Public Services"],
     highlights: [
       "Citizen Service Web Portal Access Desks",

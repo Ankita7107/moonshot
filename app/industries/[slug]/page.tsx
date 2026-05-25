@@ -900,14 +900,14 @@ export default function IndustryDetailsPage() {
     "real-estate": "/moonshot_images/real-estate.png",
     education: "/moonshot_images/education.jpeg",
     manufacturing: "/moonshot_images/manufacturing.webp",
-    "travel-hospitality": "/moonshot_images/Travel & Hospitality.png",
+    "travel-hospitality": "/moonshot_images/travel-hospitality.png",
     "banking-insurance": "/moonshot_images/banking.jpeg",
     cybersecurity: "/moonshot_images/Cybersecurity.webp",
     telecom: "/moonshot_images/telecom.jpg",
     automotive: "/moonshot_images/Automotive.jpg",
     "media-entertainment": "/moonshot_images/Media & Entertainment.webp",
-    "food-restaurant-tech": "/moonshot_images/FoodRestaurantTech.jpg",
-    "government-public-sector": "/moonshot_images/Government & Public Sector.jpg",
+    "food-restaurant-tech": "/moonshot_images/food-restaurant-tech.jpg",
+    "government-public-sector": "/moonshot_images/government-public-sector.jpg",
   };
   const bgImage = bgImageMap[slug] ? encodeURI(bgImageMap[slug]).replace(/&/g, "%26") : undefined;
 
