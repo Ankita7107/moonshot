@@ -1067,9 +1067,8 @@ export default function IndustryDetailsPage() {
     );
   }
 
-  // Get mapped styles to avoid JIT Tailwind issues
-  const themeColorKey = data.themeColor;
-  const styles = themeStylesMap[themeColorKey] || themeStylesMap.sky;
+  // Always use the logo's primary brand theme (Sky Blue & Deep Navy) to ensure consistent brand identity
+  const styles = themeStylesMap.sky;
 
   const leftIconMap: Record<string, React.ReactNode> = {
     fintech: <Database className="w-6 h-6 text-sky-500" />,
@@ -1107,8 +1106,16 @@ export default function IndustryDetailsPage() {
     "government-public-sector": <ShieldCheck className="w-6 h-6 text-green-400" />,
   };
 
-  const leftIcon = leftIconMap[slug] || <Cpu className="w-6 h-6 text-sky-500" />;
-  const rightIcon = rightIconMap[slug] || <Globe2 className="w-6 h-6 text-sky-400" />;
+  const leftIconRaw = leftIconMap[slug] || <Cpu className="w-6 h-6 text-sky-500" />;
+  const rightIconRaw = rightIconMap[slug] || <Globe2 className="w-6 h-6 text-sky-400" />;
+
+  // Force logo brand colors (Sky Blue) for all industry icons
+  const leftIcon = React.cloneElement(leftIconRaw as React.ReactElement, {
+    className: "w-6 h-6 text-sky-500"
+  });
+  const rightIcon = React.cloneElement(rightIconRaw as React.ReactElement, {
+    className: "w-6 h-6 text-sky-400"
+  });
 
   return (
     <div className="bg-slate-50/30 min-h-screen overflow-hidden">
@@ -1473,7 +1480,7 @@ export default function IndustryDetailsPage() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className={`flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-indigo-200 transition-all shadow-sm relative`}
+                className="flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-sky-200 transition-all shadow-sm relative"
               >
                 {/* Laser connections with continuous line movement */}
                 <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-sky-400">
@@ -1484,7 +1491,7 @@ export default function IndustryDetailsPage() {
                     <ArrowRight size={14} />
                   </motion.div>
                 </div>
-                <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-indigo-400">
+                <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-sky-400">
                   <motion.div
                     animate={{ x: [-8, 8, -8] }}
                     transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
@@ -1493,7 +1500,7 @@ export default function IndustryDetailsPage() {
                   </motion.div>
                 </div>
 
-                <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
                   <Cpu size={20} className="animate-pulse" />
                 </div>
                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Middleware Hub</span>
@@ -1507,9 +1514,9 @@ export default function IndustryDetailsPage() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 80 }}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-emerald-200 transition-all shadow-sm"
+                className="flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-slate-350 transition-all shadow-sm"
               >
-                <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-650 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center mb-4">
                   <Database size={20} />
                 </div>
                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Target Vault</span>
