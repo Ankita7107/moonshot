@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2 } from "lucide-react";
+import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check } from "lucide-react";
 
 interface Inquiry {
   id: number;
@@ -23,6 +23,7 @@ export default function AdminDashboardPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterInterest, setFilterInterest] = useState("All");
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
 
   // Authenticate Session
   useEffect(() => {
@@ -108,6 +109,14 @@ export default function AdminDashboardPage() {
   const triggerRefresh = () => {
     setIsRefreshing(true);
     fetchInquiries();
+  };
+
+  const handleCopyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    setCopiedEmail(email);
+    setTimeout(() => {
+      setCopiedEmail(null);
+    }, 2000);
   };
 
   const formatDate = (dateString: string) => {
@@ -248,13 +257,26 @@ export default function AdminDashboardPage() {
                           <p className="font-extrabold text-slate-800 text-sm">
                             {inq.full_name}
                           </p>
-                          <a
-                            href={`mailto:${inq.email}`}
-                            className="text-xs text-sky-500 hover:text-sky-600 flex items-center gap-1.5 mt-1 transition-colors font-medium"
-                          >
-                            <Mail className="w-3.5 h-3.5 shrink-0" />
-                            {inq.email}
-                          </a>
+                          <div className="flex items-center gap-2 mt-1">
+                            <a
+                              href={`mailto:${inq.email}`}
+                              className="text-xs text-sky-500 hover:text-sky-600 flex items-center gap-1.5 transition-colors font-medium"
+                            >
+                              <Mail className="w-3.5 h-3.5 shrink-0" />
+                              {inq.email}
+                            </a>
+                            <button
+                              onClick={() => handleCopyEmail(inq.email)}
+                              className="p-1 hover:bg-slate-100 rounded-md transition-colors text-slate-400 hover:text-sky-500 flex items-center justify-center shrink-0"
+                              title="Copy Email"
+                            >
+                              {copiedEmail === inq.email ? (
+                                <Check className="w-3.5 h-3.5 text-emerald-500" />
+                              ) : (
+                                <Copy className="w-3.5 h-3.5" />
+                              )}
+                            </button>
+                          </div>
                         </td>
                         <td className="py-6 px-6">
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-xs font-bold border border-sky-100 shadow-sm shadow-sky-50">
