@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -18,6 +18,10 @@ import {
   Globe2,
   Terminal,
   Activity,
+  ArrowRightLeft,
+  Radio,
+  FileCode,
+  Workflow
 } from "lucide-react";
 
 interface IndustryData {
@@ -746,7 +750,144 @@ const industryContent: Record<string, IndustryData> = {
   },
 };
 
-// CountUpMetric component
+// Strict Tailwind CSS theme mapper to avoid dynamic string issues
+interface ThemeStyles {
+  text: string;
+  bg: string;
+  bgLight: string;
+  bgSuperLight: string;
+  border: string;
+  borderHover: string;
+  ring: string;
+  glow: string;
+  gradientText: string;
+}
+
+const themeStylesMap: Record<string, ThemeStyles> = {
+  sky: {
+    text: "text-sky-500",
+    bg: "bg-sky-500",
+    bgLight: "bg-sky-50",
+    bgSuperLight: "from-sky-50/70 via-white to-slate-50/50",
+    border: "border-sky-100",
+    borderHover: "group-hover:border-sky-300",
+    ring: "focus:ring-sky-500",
+    glow: "rgba(14,165,233,0.18)",
+    gradientText: "from-sky-600 via-blue-600 to-indigo-600"
+  },
+  cyan: {
+    text: "text-cyan-500",
+    bg: "bg-cyan-500",
+    bgLight: "bg-cyan-50",
+    bgSuperLight: "from-cyan-50/70 via-white to-slate-50/50",
+    border: "border-cyan-100",
+    borderHover: "group-hover:border-cyan-300",
+    ring: "focus:ring-cyan-500",
+    glow: "rgba(6,182,212,0.18)",
+    gradientText: "from-cyan-600 via-teal-600 to-emerald-600"
+  },
+  indigo: {
+    text: "text-indigo-500",
+    bg: "bg-indigo-500",
+    bgLight: "bg-indigo-50",
+    bgSuperLight: "from-indigo-50/70 via-white to-slate-50/50",
+    border: "border-indigo-100",
+    borderHover: "group-hover:border-indigo-300",
+    ring: "focus:ring-indigo-500",
+    glow: "rgba(99,102,241,0.18)",
+    gradientText: "from-indigo-600 via-purple-600 to-pink-600"
+  },
+  orange: {
+    text: "text-orange-500",
+    bg: "bg-orange-500",
+    bgLight: "bg-orange-50",
+    bgSuperLight: "from-orange-50/70 via-white to-slate-50/50",
+    border: "border-orange-100",
+    borderHover: "group-hover:border-orange-300",
+    ring: "focus:ring-orange-500",
+    glow: "rgba(249,115,22,0.18)",
+    gradientText: "from-orange-600 via-amber-600 to-yellow-500"
+  },
+  emerald: {
+    text: "text-emerald-500",
+    bg: "bg-emerald-500",
+    bgLight: "bg-emerald-50",
+    bgSuperLight: "from-emerald-50/70 via-white to-slate-50/50",
+    border: "border-emerald-100",
+    borderHover: "group-hover:border-emerald-300",
+    ring: "focus:ring-emerald-500",
+    glow: "rgba(16,185,129,0.18)",
+    gradientText: "from-emerald-600 via-teal-600 to-cyan-600"
+  },
+  zinc: {
+    text: "text-zinc-500",
+    bg: "bg-zinc-500",
+    bgLight: "bg-zinc-100",
+    bgSuperLight: "from-zinc-100/50 via-white to-slate-50/50",
+    border: "border-zinc-200",
+    borderHover: "group-hover:border-zinc-400",
+    ring: "focus:ring-zinc-500",
+    glow: "rgba(113,113,122,0.18)",
+    gradientText: "from-slate-800 via-zinc-700 to-slate-600"
+  },
+  red: {
+    text: "text-red-500",
+    bg: "bg-red-500",
+    bgLight: "bg-red-50",
+    bgSuperLight: "from-red-50/60 via-white to-slate-50/50",
+    border: "border-red-100",
+    borderHover: "group-hover:border-red-300",
+    ring: "focus:ring-red-500",
+    glow: "rgba(239,68,68,0.18)",
+    gradientText: "from-red-600 via-rose-600 to-orange-500"
+  },
+  purple: {
+    text: "text-purple-500",
+    bg: "bg-purple-500",
+    bgLight: "bg-purple-50",
+    bgSuperLight: "from-purple-50/70 via-white to-slate-50/50",
+    border: "border-purple-100",
+    borderHover: "group-hover:border-purple-300",
+    ring: "focus:ring-purple-500",
+    glow: "rgba(168,85,247,0.18)",
+    gradientText: "from-purple-600 via-violet-600 to-indigo-600"
+  },
+  slate: {
+    text: "text-slate-500",
+    bg: "bg-slate-500",
+    bgLight: "bg-slate-100",
+    bgSuperLight: "from-slate-100/60 via-white to-slate-50/50",
+    border: "border-slate-200",
+    borderHover: "group-hover:border-slate-400",
+    ring: "focus:ring-slate-500",
+    glow: "rgba(100,116,139,0.18)",
+    gradientText: "from-slate-800 via-slate-600 to-zinc-500"
+  },
+  pink: {
+    text: "text-pink-500",
+    bg: "bg-pink-500",
+    bgLight: "bg-pink-50",
+    bgSuperLight: "from-pink-50/70 via-white to-slate-50/50",
+    border: "border-pink-100",
+    borderHover: "group-hover:border-pink-300",
+    ring: "focus:ring-pink-500",
+    glow: "rgba(236,72,153,0.18)",
+    gradientText: "from-pink-600 via-rose-500 to-red-500"
+  },
+  green: {
+    text: "text-green-500",
+    bg: "bg-green-500",
+    bgLight: "bg-green-50",
+    bgSuperLight: "from-green-50/70 via-white to-slate-50/50",
+    border: "border-green-100",
+    borderHover: "group-hover:border-green-300",
+    ring: "focus:ring-green-500",
+    glow: "rgba(34,197,94,0.18)",
+    gradientText: "from-green-600 via-emerald-600 to-teal-500"
+  }
+};
+
+// CountUpMetric component for interactive statistics
 const CountUpMetric = ({
   value,
   className = "",
@@ -757,19 +898,15 @@ const CountUpMetric = ({
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
 
-  // Extract prefix (e.g. "+", "-", "<")
   const prefixMatch = value.match(/^([+\-<]+)/);
   const prefix = prefixMatch ? prefixMatch[1] : "";
 
-  // Extract suffix (e.g. "%", "ms", "x", "m")
   const suffixMatch = value.match(/([%a-zA-Z\s]+)$/);
   const suffix = suffixMatch ? suffixMatch[1] : "";
 
-  // Extract numbers
   const numericString = value.replace(/[^0-9.]/g, "");
   const numericValue = parseFloat(numericString) || 0;
 
-  // Count decimal places
   const decimalMatch = numericString.split(".");
   const decimalPlaces = decimalMatch[1] ? decimalMatch[1].length : 0;
 
@@ -778,7 +915,7 @@ const CountUpMetric = ({
       ([entry]) => {
         if (entry.isIntersecting) {
           let start = 0;
-          const duration = 2000; // 2 seconds
+          const duration = 2000;
           const steps = duration / 16;
           const increment = numericValue / steps;
           const timer = setInterval(() => {
@@ -811,7 +948,7 @@ const CountUpMetric = ({
   );
 };
 
-// StaggeredReveal component
+// Word-by-word reveal for premium feel
 const StaggeredReveal = ({
   text,
   className = "",
@@ -831,10 +968,10 @@ const StaggeredReveal = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.4,
-            delay: delay + i * 0.08,
+            delay: delay + i * 0.05,
             ease: "easeOut",
           }}
-          className="inline-block mr-2 last:mr-0"
+          className="inline-block mr-1.5 last:mr-0"
         >
           {word}
         </motion.span>
@@ -843,7 +980,7 @@ const StaggeredReveal = ({
   );
 };
 
-// SpotlightCard component for cursor tracking glow
+// SpotlightCard for cursor tracking glowing layout
 function SpotlightCard({
   children,
   className = "",
@@ -883,7 +1020,7 @@ function SpotlightCard({
           }}
         />
       )}
-      {children}
+      <div className="relative z-10 h-full">{children}</div>
     </div>
   );
 }
@@ -891,6 +1028,9 @@ function SpotlightCard({
 export default function IndustryDetailsPage() {
   const { slug } = useParams() as { slug: string };
   const data = industryContent[slug];
+
+  // Active challenge selected inside the tab terminal
+  const [activeTab, setActiveTab] = useState(0);
 
   const bgImageMap: Record<string, string> = {
     fintech: "/moonshot_images/Fintech.jpg",
@@ -927,42 +1067,9 @@ export default function IndustryDetailsPage() {
     );
   }
 
-  const borderThemeClass = `group-hover:border-${data.themeColor}-300`;
-  const textThemeClass = `text-${data.themeColor}-500`;
-  const bgThemeClass = `bg-${data.themeColor}-500`;
-  const glowShadowStyle = {
-    boxShadow: `0 0 50px -10px ${data.glowColor}`,
-  };
-
-  const lightBgMap: Record<string, string> = {
-    sky: "from-sky-50/60 via-white to-slate-50/50",
-    cyan: "from-cyan-50/60 via-white to-slate-50/50",
-    indigo: "from-indigo-50/60 via-white to-slate-50/50",
-    orange: "from-orange-50/60 via-white to-slate-50/50",
-    emerald: "from-emerald-50/60 via-white to-slate-50/50",
-    zinc: "from-zinc-100/50 via-white to-slate-50/50",
-    red: "from-red-50/55 via-white to-slate-50/50",
-    purple: "from-purple-50/60 via-white to-slate-50/50",
-    slate: "from-slate-100/60 via-white to-slate-50/50",
-    pink: "from-pink-50/60 via-white to-slate-50/50",
-    green: "from-green-50/60 via-white to-slate-50/50",
-  };
-  const lightBg = lightBgMap[data.themeColor] || "from-sky-50/60 via-white to-slate-50/50";
-
-  const textGradientMap: Record<string, string> = {
-    sky: "from-sky-600 via-blue-600 to-indigo-600",
-    cyan: "from-cyan-600 via-teal-600 to-emerald-600",
-    indigo: "from-indigo-600 via-purple-600 to-pink-600",
-    orange: "from-orange-600 via-amber-600 to-yellow-500",
-    emerald: "from-emerald-600 via-teal-600 to-cyan-600",
-    zinc: "from-slate-800 via-zinc-700 to-slate-600",
-    red: "from-red-600 via-rose-600 to-orange-500",
-    purple: "from-purple-600 via-violet-600 to-indigo-600",
-    slate: "from-slate-800 via-slate-600 to-zinc-500",
-    pink: "from-pink-600 via-rose-500 to-red-500",
-    green: "from-green-600 via-emerald-600 to-teal-500",
-  };
-  const textGradient = textGradientMap[data.themeColor] || "from-sky-600 via-blue-600 to-indigo-600";
+  // Get mapped styles to avoid JIT Tailwind issues
+  const themeColorKey = data.themeColor;
+  const styles = themeStylesMap[themeColorKey] || themeStylesMap.sky;
 
   const leftIconMap: Record<string, React.ReactNode> = {
     fintech: <Database className="w-6 h-6 text-sky-500" />,
@@ -1004,91 +1111,80 @@ export default function IndustryDetailsPage() {
   const rightIcon = rightIconMap[slug] || <Globe2 className="w-6 h-6 text-sky-400" />;
 
   return (
-    <div className="bg-white min-h-screen overflow-hidden">
-      {/* ══════════════════ HERO SECTION (LIGHT THEME) ══════════════════ */}
-      <section className={`relative bg-gradient-to-br ${lightBg} py-24 md:py-32 overflow-hidden border-b border-slate-100`}>
+    <div className="bg-slate-50/30 min-h-screen overflow-hidden">
+      {/* ══════════════════ HERO SECTION (PREMIUM LIGHT THEME) ══════════════════ */}
+      <section className={`relative bg-gradient-to-br ${styles.bgSuperLight} py-28 md:py-36 overflow-hidden border-b border-slate-100/80`}>
         {/* Soft background glow orbs */}
-        <div className={`absolute top-1/4 left-[5%] w-80 h-80 bg-${data.themeColor}-200/30 rounded-full blur-3xl pointer-events-none`} />
-        <div className="absolute bottom-1/4 right-[5%] w-96 h-96 bg-purple-200/20 rounded-full blur-3xl pointer-events-none" />
+        <div className={`absolute top-1/4 left-[5%] w-96 h-96 rounded-full blur-[100px] pointer-events-none`}
+             style={{ background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)` }} />
+        <div className="absolute bottom-1/4 right-[5%] w-[450px] h-[450px] bg-slate-200/40 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Animated background particles with continuous physics drifting */}
-        <div className="absolute inset-0 pointer-events-none opacity-40 overflow-hidden">
+        {/* Animated background tech matrix grid */}
+        <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
           <motion.div
             animate={{
-              x: [0, 30, -15, 0],
-              y: [0, -20, 15, 0],
-              scale: [1, 1.1, 0.95, 1],
+              x: [0, 40, -20, 0],
+              y: [0, -30, 20, 0],
+              scale: [1, 1.05, 0.98, 1],
             }}
             transition={{
-              duration: 15,
+              duration: 20,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className={`absolute top-10 left-[10%] h-40 w-40 rounded-full bg-${data.themeColor}-300/10 blur-3xl`}
-          />
-          <motion.div
-            animate={{
-              x: [0, -40, 20, 0],
-              y: [0, 30, -20, 0],
-              scale: [1, 0.9, 1.05, 1],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-            className="absolute bottom-10 right-[15%] h-52 w-52 rounded-full bg-purple-300/10 blur-3xl"
+            className={`absolute top-10 left-[8%] h-48 w-48 rounded-full blur-3xl`}
+            style={{ backgroundColor: `${styles.glow}` }}
           />
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `linear-gradient(to right, rgba(15,23,42,0.02) 1px, transparent 1px),
-                                linear-gradient(to bottom, rgba(15,23,42,0.02) 1px, transparent 1px)`,
-              backgroundSize: "40px 40px",
+              backgroundImage: `linear-gradient(to right, rgba(14,165,233,0.03) 1px, transparent 1px),
+                                linear-gradient(to bottom, rgba(14,165,233,0.03) 1px, transparent 1px)`,
+              backgroundSize: "60px 60px",
             }}
           />
         </div>
 
         {/* Floating Sparks/Fireflies Particles */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
               initial={{
                 x: `${10 + Math.random() * 80}%`,
                 y: "105%",
-                opacity: 0.05,
-                scale: 0.4 + Math.random() * 0.6,
+                opacity: 0,
+                scale: 0.3 + Math.random() * 0.7,
               }}
               animate={{
                 y: ["105%", "-10%"],
-                opacity: [0, 0.4, 0.4, 0],
-                rotate: [0, 180, 360],
+                opacity: [0, 0.5, 0.5, 0],
+                rotate: [0, 360],
               }}
               transition={{
-                duration: 9 + Math.random() * 6,
+                duration: 10 + Math.random() * 8,
                 repeat: Infinity,
                 ease: "linear",
-                delay: i * 1.6,
+                delay: i * 1.2,
               }}
-              className={`absolute w-3.5 h-3.5 text-${data.themeColor}-400/60`}
+              className={`absolute w-4 h-4 ${styles.text} opacity-40`}
             >
-              <Sparkles size={12} className="animate-pulse" />
+              <Sparkles size={14} className="animate-pulse" />
             </motion.div>
           ))}
         </div>
 
         {/* Left Floating Industry Icon Orb */}
         <motion.div
-          initial={{ opacity: 0, x: -30, scale: 0.8 }}
+          initial={{ opacity: 0, x: -50, scale: 0.8 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute left-[8%] top-[40%] hidden xl:flex z-20"
         >
           <motion.div
-            animate={{ y: [0, -15, 0], rotate: [0, 6, -6, 0] }}
+            animate={{ y: [0, -15, 0], rotate: [0, 5, -5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute left-[7%] top-[35%] hidden xl:flex w-16 h-16 bg-white/60 backdrop-blur-md rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 items-center justify-center z-10 cursor-pointer hover:scale-110 transition-transform duration-300"
+            className={`w-16 h-16 bg-white rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.06)] border border-slate-100 flex items-center justify-center hover:scale-110 hover:border-slate-200 transition-all duration-300 cursor-pointer`}
           >
             {leftIcon}
           </motion.div>
@@ -1096,14 +1192,15 @@ export default function IndustryDetailsPage() {
 
         {/* Right Floating Industry Icon Orb */}
         <motion.div
-          initial={{ opacity: 0, x: 30, scale: 0.8 }}
+          initial={{ opacity: 0, x: 50, scale: 0.8 }}
           animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 1, delay: 0.6 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute right-[8%] top-[40%] hidden xl:flex z-20"
         >
           <motion.div
-            animate={{ y: [0, 15, 0], rotate: [0, -6, 6, 0] }}
-            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-            className="absolute right-[7%] top-[35%] hidden xl:flex w-16 h-16 bg-white/60 backdrop-blur-md rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 items-center justify-center z-10 cursor-pointer hover:scale-110 transition-transform duration-300"
+            animate={{ y: [0, 15, 0], rotate: [0, -5, 5, 0] }}
+            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            className={`w-16 h-16 bg-white rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.06)] border border-slate-100 flex items-center justify-center hover:scale-110 hover:border-slate-200 transition-all duration-300 cursor-pointer`}
           >
             {rightIcon}
           </motion.div>
@@ -1111,55 +1208,55 @@ export default function IndustryDetailsPage() {
 
         {/* Full-width dynamic background image integrated very lightly */}
         {bgImage && (
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-[0.07] mix-blend-multiply">
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-[0.06] mix-blend-multiply">
             <img
               src={bgImage}
               alt={data.title}
-              className="w-full h-full object-cover scale-105 select-none pointer-events-none"
+              className="w-full h-full object-cover scale-105 select-none pointer-events-none filter saturate-50"
             />
           </div>
         )}
 
         <div className="max-w-4xl mx-auto px-4 relative z-10 text-center flex flex-col items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className={`inline-flex items-center gap-2 bg-${data.themeColor}-50/80 backdrop-blur-md rounded-full px-4 py-2 border border-${data.themeColor}-100/80 mb-6`}
+            className={`inline-flex items-center gap-2 bg-white border border-slate-100 shadow-[0_5px_15px_rgba(0,0,0,0.02)] rounded-full px-5 py-2.5 mb-8`}
           >
-            <Sparkles className={`w-4 h-4 text-${data.themeColor}-500 animate-pulse`} />
-            <span className={`text-xs font-bold tracking-widest uppercase text-${data.themeColor}-600`}>Industry Insight</span>
+            <Sparkles className={`w-4 h-4 ${styles.text} animate-pulse`} />
+            <span className={`text-xs font-black tracking-[0.2em] uppercase text-slate-500`}>Sector Intelligence Blueprint</span>
           </motion.div>
 
-          <h1 className={`text-5xl md:text-7xl font-black mb-4 tracking-tighter leading-tight bg-gradient-to-r ${textGradient} bg-clip-text text-transparent`}>
+          <h1 className={`text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none bg-gradient-to-r ${styles.gradientText} bg-clip-text text-transparent`}>
             <StaggeredReveal text={data.title} />
           </h1>
 
           {/* Styled Underline Accent with Shimmering Laser effect */}
-          <div className="relative mb-6">
-            <div className={`w-24 h-1.5 bg-gradient-to-r ${textGradient} rounded-full`} />
+          <div className="relative mb-8">
+            <div className={`w-32 h-1.5 bg-gradient-to-r ${styles.gradientText} rounded-full`} />
             <motion.div
-              animate={{ x: [-48, 48] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-10 h-full bg-gradient-to-r from-transparent via-white/80 to-transparent blur-[2px] pointer-events-none"
+              animate={{ x: [-64, 64] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-12 h-full bg-gradient-to-r from-transparent via-white/70 to-transparent blur-[1px] pointer-events-none"
             />
           </div>
 
-          <p className="text-lg md:text-xl text-slate-600/90 font-medium leading-relaxed mb-8 max-w-2xl mx-auto">
-            <StaggeredReveal text={data.desc} delay={0.25} />
+          <p className="text-lg md:text-2xl text-slate-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
+            <StaggeredReveal text={data.desc} delay={0.2} />
           </p>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-wrap gap-2.5 justify-center mb-10"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="flex flex-wrap gap-2.5 justify-center mb-12"
           >
-            {data.tags.map((tag) => (
+            {data.tags.map((tag, idx) => (
               <motion.span
                 key={tag}
                 whileHover={{ y: -3, scale: 1.05 }}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-slate-200/80 shadow-sm tracking-wide text-slate-600 hover:border-${data.themeColor}-300 hover:text-${data.themeColor}-600 cursor-default transition-all duration-200`}
+                className={`px-5 py-2 rounded-full text-xs font-bold bg-white border border-slate-150 shadow-[0_5px_10px_rgba(0,0,0,0.02)] tracking-wide text-slate-600 hover:border-slate-350 hover:text-slate-900 cursor-default transition-all duration-200`}
               >
                 {tag}
               </motion.span>
@@ -1167,13 +1264,13 @@ export default function IndustryDetailsPage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
             <Link
               href="/industries"
-              className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-700 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors"
             >
               <ArrowLeft size={16} /> Back to Sectors
             </Link>
@@ -1182,7 +1279,7 @@ export default function IndustryDetailsPage() {
       </section>
 
       {/* ══════════════════ CORE METRICS ══════════════════ */}
-      <section className="py-20 border-b border-slate-100 bg-white relative z-20 shadow-sm">
+      <section className="py-24 bg-white relative z-20 shadow-sm border-b border-slate-100/50">
         <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
           {data.metrics.map((metric, idx) => (
             <motion.div
@@ -1192,9 +1289,9 @@ export default function IndustryDetailsPage() {
               transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
               whileHover={{ y: -6 }}
               key={metric.label}
-              className="group p-6 rounded-3xl hover:bg-slate-50/50 hover:shadow-xl hover:shadow-sky-100/20 transition-all duration-300 border border-transparent hover:border-slate-100"
+              className="group p-8 rounded-[2rem] hover:bg-slate-50/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.02)] transition-all duration-300 border border-transparent hover:border-slate-100"
             >
-              <h3 className={`text-4xl md:text-5xl font-black ${textThemeClass} mb-3 group-hover:scale-110 transition-transform duration-500 flex justify-center items-center gap-1`}>
+              <h3 className={`text-4xl md:text-5xl font-black ${styles.text} mb-3 group-hover:scale-105 transition-transform duration-300 flex justify-center items-center gap-1`}>
                 <CountUpMetric value={metric.value} />
               </h3>
               <p className="text-xs font-bold text-slate-400 uppercase tracking-widest group-hover:text-slate-600 transition-colors">
@@ -1205,115 +1302,180 @@ export default function IndustryDetailsPage() {
         </div>
       </section>
 
-      {/* ══════════════════ CORE CHALLENGES SOLVED ══════════════════ */}
-      <section className="py-24 bg-slate-50 relative overflow-hidden">
+      {/* ══════════════════ INTERACTIVE SWITCHER TERMINAL (CHALLENGES VS SOLUTIONS) ══════════════════ */}
+      {false && (
+      <section className="py-24 bg-slate-50/60 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[140px] pointer-events-none"
+             style={{ background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)` }} />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-xs font-semibold tracking-[0.3em] text-sky-500 uppercase mb-4">Core Silos Broken</h2>
-            <h3 className="text-4xl font-bold text-slate-900">Challenges We Address</h3>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-100 shadow-sm mb-3`}
+            >
+              <Workflow className={`w-3.5 h-3.5 ${styles.text}`} />
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Interactive Guide</span>
+            </div>
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Industry Challenges & Our Solutions</h3>
+            <p className="text-slate-500 text-sm mt-3">Click on any core challenge below to see how Moonshot's custom technology solves the problem.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {data.challenges.map((challenge, idx) => (
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: idx * 0.1, type: "spring", stiffness: 100, damping: 15 }}
-                whileHover={{ y: -10, scale: 1.015 }}
-                key={challenge.title}
-                className="bg-white p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl hover:border-rose-200 transition-all duration-300 group"
-              >
-                <motion.div 
-                  whileHover={{ rotate: [0, -5, 5, 0] }}
-                  className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500"
-                >
-                  <AlertCircle size={24} />
-                </motion.div>
-                <h4 className="text-lg font-bold text-slate-800 mb-3 group-hover:text-rose-600 transition-colors">{challenge.title}</h4>
-                <p className="text-slate-500 text-sm leading-relaxed">{challenge.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════ CUSTOM REMEDIES / SOLUTIONS ══════════════════ */}
-      <section className="py-24 bg-white relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-xs font-semibold tracking-[0.3em] text-sky-500 uppercase mb-4">Engineering Excellence</h2>
-            <h3 className="text-4xl font-bold text-slate-900">Custom Architectural Solutions</h3>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {data.solutions.map((solution, idx) => (
-              <SpotlightCard key={solution.title} className="h-full rounded-3xl" glowColor={data.glowColor}>
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ delay: idx * 0.1, type: "spring", stiffness: 100, damping: 15 }}
-                  whileHover={{ y: -10, scale: 1.015 }}
-                  className={`bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-slate-100/80 shadow-sm hover:shadow-xl ${borderThemeClass} h-full transition-all duration-300 group flex flex-col`}
-                >
-                  <motion.div 
-                    whileHover={{ rotate: [0, -5, 5, 0] }}
-                    className={`w-12 h-12 bg-sky-50 ${textThemeClass} rounded-2xl flex items-center justify-center mb-6 group-hover:${bgThemeClass} group-hover:text-white transition-all duration-500`}
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            {/* Left Column: Challenges selector */}
+            <div className="lg:col-span-5 flex flex-col gap-4">
+              <span className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1 px-1">Industry Challenges</span>
+              {data.challenges.map((challenge, idx) => {
+                const isActive = activeTab === idx;
+                return (
+                  <motion.button
+                    key={challenge.title}
+                    onClick={() => setActiveTab(idx)}
+                    whileHover={{ x: isActive ? 0 : 5 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`text-left p-6 rounded-[2rem] border transition-all duration-300 flex items-start gap-4 shadow-sm hover:shadow-md relative overflow-hidden ${
+                      isActive 
+                        ? `bg-white border-${styles.text.split("-")[1]}-300 ring-2 ring-${styles.text.split("-")[1]}-100` 
+                        : "bg-white/80 border-slate-100/80 hover:bg-white hover:border-slate-200"
+                    }`}
                   >
-                    <CheckCircle2 size={24} />
+                    {/* Active accent side strip */}
+                    {isActive && (
+                      <motion.div 
+                        layoutId="activeSideStrip"
+                        className={`absolute left-0 inset-y-0 w-1.5 ${styles.bg}`}
+                      />
+                    )}
+                    
+                    <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
+                      isActive 
+                        ? `${styles.bg} text-white` 
+                        : "bg-rose-50 text-rose-500"
+                    }`}>
+                      <AlertCircle size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-800 text-sm md:text-base leading-snug">{challenge.title}</h4>
+                      <p className="text-slate-400 text-xs mt-1 leading-normal font-semibold">Challenge {idx + 1}</p>
+                    </div>
+                  </motion.button>
+                );
+              })}
+            </div>
+
+            {/* Right Column: Dynamic Remedy detail card */}
+            <div className="lg:col-span-7">
+              <div className="h-full bg-white rounded-[2.5rem] border border-slate-100 p-8 md:p-12 shadow-md relative overflow-hidden flex flex-col justify-between">
+                <div className="absolute top-0 right-0 w-32 h-32 blur-3xl pointer-events-none rounded-bl-full"
+                     style={{ backgroundColor: `${styles.glow}` }} />
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTab}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                    className="flex flex-col h-full justify-between"
+                  >
+                    <div>
+                      {/* Active tag info */}
+                      <div className="flex items-center gap-3 mb-6">
+                        <span className="text-[10px] font-black text-rose-500 bg-rose-50 border border-rose-100 px-3 py-1 rounded-full uppercase tracking-wider">
+                          Challenge: {data.challenges[activeTab].title}
+                        </span>
+                        <ArrowRightLeft className="w-4 h-4 text-slate-300" />
+                        <span className={`text-[10px] font-black ${styles.text} ${styles.bgLight} border ${styles.border} px-3 py-1 rounded-full uppercase tracking-wider`}>
+                          Our Solution Ready
+                        </span>
+                      </div>
+
+                      <h4 className="text-2xl md:text-3xl font-extrabold text-slate-850 tracking-tight leading-snug mb-4">
+                        {data.solutions[activeTab].title}
+                      </h4>
+                      
+                      <div className="w-12 h-1 bg-slate-100 rounded-full mb-6" />
+
+                      <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-medium">
+                        {data.solutions[activeTab].desc}
+                      </p>
+
+                      <div className="bg-slate-50 rounded-2xl border border-slate-100 p-5 mt-6">
+                        <span className="text-slate-400 text-xs font-bold uppercase tracking-widest block mb-2">Understanding the Challenge</span>
+                        <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
+                          {data.challenges[activeTab].desc}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3 items-center justify-between mt-8 pt-6 border-t border-slate-50 shrink-0">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2.5 h-2.5 rounded-full ${styles.bg} animate-ping`} />
+                        <span className="text-xs font-bold text-slate-700">Solution Ready to Implement</span>
+                      </div>
+                      <Link
+                        href="/contact"
+                        className={`inline-flex items-center gap-2 text-xs font-bold ${styles.text} hover:opacity-85 transition-opacity`}
+                      >
+                        Implement This Solution <ArrowRight size={14} />
+                      </Link>
+                    </div>
                   </motion.div>
-                  <h4 className={`text-lg font-bold text-slate-800 mb-3 group-hover:${textThemeClass} transition-colors`}>{solution.title}</h4>
-                  <p className="text-slate-500 text-sm leading-relaxed">{solution.desc}</p>
-                </motion.div>
-              </SpotlightCard>
-            ))}
+                </AnimatePresence>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+      )}
 
-      {/* ══════════════════ SIMULATED ARCHITECTURE FLOW ══════════════════ */}
-      <section className="py-24 bg-slate-50 relative overflow-hidden">
+      {/* ══════════════════ SIMULATED ARCHITECTURE FLOW (BLUEPRINT DESIGN) ══════════════════ */}
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-xs font-semibold tracking-[0.3em] text-sky-500 uppercase mb-4">System Blueprints</h2>
-            <h3 className="text-4xl font-bold text-slate-900">Representative System Flow</h3>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 shadow-sm mb-3`}
+            >
+              <FileCode className={`w-3.5 h-3.5 ${styles.text}`} />
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">System Topologies</span>
+            </motion.div>
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Representative Data Pipeline</h3>
+            <p className="text-slate-500 text-sm mt-3">An engineering breakdown of component validation nodes as transaction signals ingest to database files.</p>
           </div>
 
-          <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-100 p-8 md:p-12 shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-sky-100/30 blur-3xl pointer-events-none" />
+          <div className="max-w-4xl mx-auto bg-slate-50/40 rounded-[2.5rem] border border-slate-100/80 p-8 md:p-12 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 blur-3xl pointer-events-none rounded-bl-full"
+                 style={{ backgroundColor: `${styles.glow}` }} />
 
             <div className="grid md:grid-cols-3 gap-8 items-center text-center relative z-10">
               {/* Step 1 */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -35 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 80 }}
-                whileHover={{ y: -6, scale: 1.03 }}
-                className={`flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-${data.themeColor}-200 transition-all shadow-sm`}
+                whileHover={{ y: -5, scale: 1.02 }}
+                className={`flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-${styles.text.split("-")[1]}-200 transition-all shadow-sm`}
               >
-                <motion.div 
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className={`w-10 h-10 rounded-full bg-sky-100 ${textThemeClass} flex items-center justify-center mb-4`}
-                >
-                  <Globe2 size={20} />
-                </motion.div>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Source Ingress</span>
-                <h4 className="text-sm font-bold text-slate-800 leading-tight">{data.architecture.source}</h4>
+                <div className={`w-10 h-10 rounded-full ${styles.bgLight} ${styles.text} flex items-center justify-center mb-4`}>
+                  <Globe2 size={20} className="animate-spin-slow" />
+                </div>
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Source Ingress</span>
+                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">{data.architecture.source}</h4>
               </motion.div>
 
-              {/* Step 2 with Laser Flow arrows */}
+              {/* Step 2 */}
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, type: "spring", stiffness: 80 }}
-                whileHover={{ y: -6, scale: 1.03 }}
-                className={`flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-indigo-200 transition-all shadow-sm relative`}
+                whileHover={{ y: -5, scale: 1.02 }}
+                className={`flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-indigo-200 transition-all shadow-sm relative`}
               >
-                {/* Flow Laser lines */}
+                {/* Laser connections with continuous line movement */}
                 <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-sky-400">
                   <motion.div
                     animate={{ x: [-8, 8, -8] }}
@@ -1331,94 +1493,85 @@ export default function IndustryDetailsPage() {
                   </motion.div>
                 </div>
 
-                <motion.div 
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4"
-                >
-                  <Cpu size={20} />
-                </motion.div>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Cognitive Middleware</span>
-                <h4 className="text-sm font-bold text-slate-800 leading-tight">{data.architecture.process}</h4>
+                <div className="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+                  <Cpu size={20} className="animate-pulse" />
+                </div>
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Middleware Hub</span>
+                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">{data.architecture.process}</h4>
               </motion.div>
 
               {/* Step 3 */}
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 35 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 80 }}
-                whileHover={{ y: -6, scale: 1.03 }}
-                className="flex flex-col items-center p-6 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-emerald-200 transition-all shadow-sm"
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-emerald-200 transition-all shadow-sm"
               >
-                <motion.div 
-                  animate={{ y: [0, -4, 0] }}
-                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4"
-                >
+                <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-650 flex items-center justify-center mb-4">
                   <Database size={20} />
-                </motion.div>
-                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Reliable Target</span>
-                <h4 className="text-sm font-bold text-slate-800 leading-tight">{data.architecture.target}</h4>
+                </div>
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Target Vault</span>
+                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">{data.architecture.target}</h4>
               </motion.div>
             </div>
 
             <div className="mt-8 pt-8 border-t border-slate-100 text-center text-slate-500 text-sm leading-relaxed max-w-2xl mx-auto relative z-10">
-              <span className="font-bold text-slate-700 block mb-2">Architectural Summary</span>
-              {data.architecture.description}
+              <span className="font-bold text-slate-700 block mb-2 text-xs uppercase tracking-widest">Architectural Execution</span>
+              <p className="text-slate-500 text-xs md:text-sm font-medium">{data.architecture.description}</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ══════════════════ CTA CARD ══════════════════ */}
-      <section className="py-28 relative">
+      <section className="py-24 bg-slate-50/50 border-t border-slate-100/60 relative">
         <div className="max-w-4xl mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[3rem] overflow-hidden bg-white border border-slate-100 p-12 md:p-20 text-center shadow-2xl transition-all duration-700 group hover:border-sky-200"
-            style={glowShadowStyle}
+            className="relative rounded-[2.5rem] overflow-hidden bg-white border border-slate-100/80 p-12 md:p-16 text-center shadow-md hover:shadow-xl hover:border-slate-200 transition-all duration-500 group"
           >
-            {/* Shimmer background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-sky-50/10 via-transparent to-sky-50/10 animate-shimmer opacity-20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-sky-50/5 via-transparent to-sky-50/5 animate-shimmer opacity-20 pointer-events-none" />
 
             <div className="relative z-10">
               <motion.div
-                animate={{ scale: [1, 1.12, 1], rotate: [0, 5, -5, 0] }}
+                animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="w-20 h-20 bg-sky-50 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-sky-100"
+                className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-slate-100"
               >
-                <Terminal size={36} className="text-sky-500" />
+                <Terminal size={30} className={styles.text} />
               </motion.div>
 
               <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">
-                Ready to engineer your custom <span className="text-sky-600">{data.title}</span> solution?
+                Engineering your custom <span className={styles.text}>{data.title}</span> solution
               </h2>
-              <p className="text-slate-500 text-base max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+              
+              <p className="text-slate-500 text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed font-semibold">
                 Our specialists coordinate with your key stakeholders to construct high-performance, compliant systems matching your exact scale targets.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     href="/contact"
-                    className="btn-primary flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl"
+                    className={`btn-primary flex items-center justify-center gap-2 text-sm px-8 py-4 rounded-xl ${styles.bg} hover:brightness-105 shadow-sm text-white`}
                   >
-                    Request Custom Architecture Call{" "}
+                    Request Consultation Call{" "}
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.2, repeat: Infinity }}
                     >
-                      <ArrowRight size={18} />
+                      <ArrowRight size={16} />
                     </motion.span>
                   </Link>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                   <Link
                     href="/industries"
-                    className="btn-outline flex items-center justify-center gap-2 text-base px-8 py-4 rounded-xl bg-white/50 backdrop-blur-sm"
+                    className="btn-outline flex items-center justify-center gap-2 text-sm px-8 py-4 rounded-xl bg-white border border-slate-150 hover:bg-slate-50 text-slate-600 font-bold"
                   >
                     All Industry Sectors
                   </Link>
