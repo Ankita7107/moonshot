@@ -1,8 +1,89 @@
 "use client";
-import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Linkedin, Twitter, Send } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 
 export default function ContactPage() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [interest, setInterest] = useState("Web Development");
+  const [message, setMessage] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSubmitStatus(null);
+
+    if (!fullName || !email || !message) {
+      setSubmitStatus({ type: "error", text: "Please fill in all required fields." });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          email,
+          companyName,
+          interest,
+          message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus({
+          type: "success",
+          text: "Thank you! Your message has been sent successfully. We will contact you soon.",
+        });
+        // Reset form fields
+        setFullName("");
+        setEmail("");
+        setCompanyName("");
+        setInterest("Web Development");
+        setMessage("");
+
+        // Auto-clear message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 5000);
+      } else {
+        setSubmitStatus({
+          type: "error",
+          text: data.error || "Failed to submit request. Please try again.",
+        });
+
+        // Auto-clear message after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 5000);
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      setSubmitStatus({
+        type: "error",
+        text: "Could not connect to the backend server. Please check if server is running.",
+      });
+
+      // Auto-clear message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus(null);
+      }, 5000);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       {/* Hero */}
@@ -89,18 +170,6 @@ export default function ContactPage() {
                   </li>
                 </ul>
               </div>
-
-              {/* <div className="mt-auto pt-8 border-t border-white/20 relative z-10">
-                <p className="text-sky-100 text-xs uppercase tracking-widest font-semibold mb-4">Follow Our Journey</p>
-                <div className="flex gap-4">
-                  <a href="#" className="w-10 h-10 bg-white/20 hover:bg-white rounded-lg flex items-center justify-center transition-colors group">
-                    <Linkedin className="w-5 h-5 text-white group-hover:text-sky-500" />
-                  </a>
-                  <a href="#" className="w-10 h-10 bg-white/20 hover:bg-white rounded-lg flex items-center justify-center transition-colors group">
-                    <Twitter className="w-5 h-5 text-white group-hover:text-sky-500" />
-                  </a>
-                </div>
-              </div> */}
             </motion.div>
 
             {/* Right: Form */}
@@ -111,69 +180,128 @@ export default function ContactPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-white p-8 md:p-16 lg:pl-28 flex-1 w-full rounded-3xl shadow-xl z-10 border border-slate-100"
             >
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
+              <form onSubmit={handleSubmit}>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="FULL NAME"
+                      className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                      Work Email *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="abc@company.com"
+                      className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      placeholder="ABC"
+                      className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">
+                      Interest
+                    </label>
+                    <div className="relative">
+                      <select
+                        value={interest}
+                        onChange={(e) => setInterest(e.target.value)}
+                        className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm appearance-none"
+                      >
+                        <option>Web Development</option>
+                        <option>Enterprise Software</option>
+                        <option>Cloud & DevOps</option>
+                        <option>AI & Machine Learning</option>
+                        <option>Cybersecurity</option>
+                        <option>Mobile App Development</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6">
                   <label className="block text-sm font-bold text-slate-700 mb-2">
-                    Full Name
+                    How can we help you? *
                   </label>
-                  <input
-                    type="text"
-                    placeholder="FULL NAME"
-                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
+                  <textarea
+                    rows={5}
+                    required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Tell us about your project..."
+                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm resize-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">
-                    Work Email
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="abc@company.com"
-                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">
-                    Company Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="ABC"
-                    className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-slate-700 mb-2">
-                    Interest
-                  </label>
-                  <select className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm appearance-none">
-                    <option>Web Development</option>
-                    <option>Enterprise Software</option>
-                    <option>Cloud & DevOps</option>
-                    <option>AI & Machine Learning</option>
-                    <option>Cybersecurity</option>
-                    <option>Mobile App Development</option>
-                  </select>
-                </div>
-              </div>
-              <div className="mt-6">
-                <label className="block text-sm font-bold text-slate-700 mb-2">
-                  How can we help you?
-                </label>
-                <textarea
-                  rows={5}
-                  placeholder="Tell us about your project..."
-                  className="w-full bg-slate-50 border-transparent rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all shadow-sm resize-none"
-                />
-              </div>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="mt-8 w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-sky-500/25 hover-shine"
-              >
-                Send Message
-                <Send className="w-5 h-5" />
-              </motion.button>
+
+                {/* Submit Feedback Notice */}
+                <AnimatePresence>
+                  {submitStatus && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className={`mt-6 p-4 rounded-xl flex items-center gap-3 text-sm font-medium ${
+                        submitStatus.type === "success"
+                          ? "bg-emerald-50 text-emerald-800 border border-emerald-100"
+                          : "bg-rose-50 text-rose-800 border border-rose-100"
+                      }`}
+                    >
+                      {submitStatus.type === "success" ? (
+                        <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+                      ) : (
+                        <AlertCircle className="w-5 h-5 text-rose-500 shrink-0" />
+                      )}
+                      <span>{submitStatus.text}</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <motion.button
+                  whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                  whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                  disabled={isLoading}
+                  type="submit"
+                  className="mt-8 w-full bg-sky-500 hover:bg-sky-600 disabled:bg-sky-400 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-sky-500/25 hover-shine"
+                >
+                  {isLoading ? (
+                    <>
+                      Sending Message...
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="w-5 h-5" />
+                    </>
+                  )}
+                </motion.button>
+              </form>
             </motion.div>
           </div>
         </div>
@@ -203,3 +331,4 @@ export default function ContactPage() {
     </>
   );
 }
+
