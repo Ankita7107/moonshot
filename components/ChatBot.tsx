@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { MessageSquare } from "lucide-react";
 
 interface Message {
   role: "user" | "bot";
@@ -57,6 +58,10 @@ export default function ChatBot() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent("chatbot-toggle", { detail: isOpen }));
+  }, [isOpen]);
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -135,8 +140,8 @@ export default function ChatBot() {
 
       {/* Toggle Button */}
       <button onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 
-                   text-white text-2xl shadow-lg flex items-center justify-center 
+        className="w-12 h-12 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 
+                   text-white text-xl shadow-lg flex items-center justify-center 
                    hover:scale-110 transition-transform">
         {isOpen ? "✕" : "🚀"}
       </button>
