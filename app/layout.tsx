@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import ChatBot from "@/components/ChatBot";  
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="page-shell">{children}</main>
         <Footer />
         <ScrollToTop />
+        <ChatBot />  
       </body>
     </html>
   );
