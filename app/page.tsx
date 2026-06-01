@@ -44,17 +44,17 @@ const stats = [
 const services = [
   {
     icon: <Globe className="w-6 h-6 text-sky-500" />,
-    title: "Custom Web Solutions",
+    title: "WebCore",
     desc: "Scalable, high-performance web applications tailored to your business needs using cutting-edge frameworks.",
   },
   {
     icon: <Settings className="w-6 h-6 text-sky-500" />,
-    title: "Enterprise Software",
+    title: "Enterprise ERP",
     desc: "Robust ERP, CRM, and internal tools designed to streamline complex business processes for large-scale organizations.",
   },
   {
     icon: <Cloud className="w-6 h-6 text-sky-500" />,
-    title: "Cloud & DevOps",
+    title: "CloudPulse",
     desc: "Accelerate your deployment cycles with automated pipelines and scalable cloud infrastructure on AWS, Azure, or GCP.",
   },
 ];

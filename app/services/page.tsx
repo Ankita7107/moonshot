@@ -30,92 +30,107 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 
 const services = [
   {
+    id: "custom-web-solutions",
     icon: <Globe className="w-7 h-7" />,
-    title: "Custom Web Solutions",
+    title: "WebCore",
     desc: "Scalable, high-performance web applications tailored to your business needs using cutting-edge frameworks.",
     features: ["Next.js/React", "SEO Optimized", "Microservices"],
   },
   {
+    id: "enterprise-software",
     icon: <Settings className="w-7 h-7" />,
-    title: "Enterprise Software",
+    title: "Enterprise ERP",
     desc: "Robust ERP, CRM, and internal tools designed to streamline complex business processes for large-scale organizations.",
     features: ["Scalable Architecture", "Legacy Integration", "24/7 Support"],
   },
   {
+    id: "cloud-devops",
     icon: <Cloud className="w-7 h-7" />,
-    title: "Cloud & DevOps",
+    title: "CloudPulse",
     desc: "Accelerate your deployment cycles with automated pipelines and scalable cloud infrastructure on AWS, Azure, or GCP.",
     features: ["AWS/Azure/GCP", "CI/CD Pipelines", "Auto-scaling"],
   },
   {
+    id: "ai-machine-learning",
     icon: <Zap className="w-7 h-7" />,
-    title: "AI & Machine Learning",
+    title: "CognitiveAI",
     desc: "Integrate intelligent automation and data insights into your product to stay ahead of the competition.",
     features: ["Predictive Analytics", "NLP Systems", "Computer Vision"],
   },
   {
+    id: "cybersecurity",
     icon: <Shield className="w-7 h-7" />,
-    title: "Cybersecurity",
+    title: "CyberShield",
     desc: "Protect your digital assets with enterprise-grade security audits, penetration testing, and compliance monitoring.",
     features: ["Vulnerability Audits", "Penetration Testing", "Compliance"],
   },
   {
+    id: "mobile-app-development",
     icon: <Smartphone className="w-7 h-7" />,
-    title: "Mobile App Development",
+    title: "SwiftMobile",
     desc: "Native and cross-platform mobile experiences that engage users and drive business growth.",
     features: ["iOS & Android", "React Native/Flutter", "High Performance"],
   },
   {
+    id: "api-development-integration",
     icon: <Code className="w-7 h-7" />,
-    title: "API Development & Integration",
+    title: "ConnectAPI",
     desc: "RESTful APIs, GraphQL services, and third-party integrations like payment gateways, SMS, and WhatsApp APIs.",
     features: ["REST/GraphQL", "Secure Auth", "High Throughput"],
   },
   {
+    id: "devops-ci-cd-automation",
     icon: <Database className="w-7 h-7" />,
-    title: "DevOps & CI/CD Automation",
+    title: "DevOpsAuto",
     desc: "Automated deployment pipelines using Docker, Kubernetes, Jenkins, and GitHub Actions for faster delivery.",
     features: ["Docker/K8s", "Jenkins/Actions", "Terraform"],
   },
   {
+    id: "ui-ux-design",
     icon: <Layout className="w-7 h-7" />,
-    title: "UI/UX Design",
+    title: "StudioUX",
     desc: "Modern, user-centric UI/UX design with wireframing, prototyping, and Figma-based design systems.",
     features: ["User Research", "Wireframing", "Prototyping"],
   },
   {
+    id: "ai-chatbots-automation",
     icon: <MessageSquare className="w-7 h-7" />,
-    title: "AI Chatbots & Automation",
+    title: "AutomateBOT",
     desc: "Smart AI-powered chatbots and workflow automation to improve customer engagement and reduce manual work.",
     features: ["24/7 Automation", "Multi-lingual", "CRM Integration"],
   },
   {
+    id: "data-analytics-bi-dashboards",
     icon: <BarChart className="w-7 h-7" />,
-    title: "Data Analytics & BI Dashboards",
+    title: "DataLens",
     desc: "Interactive dashboards, real-time reporting, and business intelligence solutions for data-driven decisions.",
     features: ["PowerBI/Tableau", "Real-time Ops", "Data Mining"],
   },
   {
+    id: "erp-crm-systems",
     icon: <RefreshCcw className="w-7 h-7" />,
-    title: "ERP & CRM Systems",
+    title: "UnifiedCRM",
     desc: "Fully customized ERP and CRM solutions for sales, HR, inventory, and customer management systems.",
     features: ["Custom Modules", "Data Analytics", "Workflows"],
   },
   {
+    id: "software-testing-qa",
     icon: <Shield className="w-7 h-7" />,
-    title: "Software Testing & QA",
+    title: "QAguard",
     desc: "Manual and automated testing including performance, security, and regression testing for stable applications.",
     features: ["Unit/Integration", "Automated QA", "Load Testing"],
   },
   {
+    id: "system-migration-services",
     icon: <Cloud className="w-7 h-7" />,
-    title: "System Migration Services",
+    title: "SwiftMigrate",
     desc: "Legacy system modernization, database migration, and cloud migration with zero downtime strategy.",
     features: ["Zero Downtime", "Data Integrity", "Legacy Modernization"],
   },
   {
+    id: "saas-product-development",
     icon: <Zap className="w-7 h-7" />,
-    title: "SaaS Product Development",
+    title: "SaaSBuilder",
     desc: "Scalable multi-tenant SaaS platforms with subscription models and cloud-native architecture.",
     features: ["Multi-tenancy", "Stripe Billing", "High Availability"],
   },
@@ -123,64 +138,70 @@ const services = [
 
 const financeServices = [
   {
+    id: "ledger",
     icon: <Banknote className="w-6 h-6" />,
     iconColor: "text-sky-600",
     iconBg: "bg-sky-100",
-    badge: "Personal & Business",
+    badge: "Enterprise Accounting",
     badgeStyle: "bg-sky-100 text-sky-700",
-    title: "Loans",
-    desc: "Home, personal, and business loans with competitive rates and quick approvals.",
-    features: ["Quick Processing", "Lowest Interest", "Minimal Paperwork"],
+    title: "Ledger",
+    desc: "Cloud accounting software designed to manage business books, track real-time cash flow, and simplify tax compliance.",
+    features: ["Auto-Reconciliation", "Ledger Sync", "Tax Compliance"],
   },
   {
+    id: "invoice",
     icon: <ShieldCheck className="w-6 h-6" />,
     iconColor: "text-green-600",
     iconBg: "bg-green-100",
-    badge: "Life & General",
+    badge: "Billing & Receivables",
     badgeStyle: "bg-green-100 text-green-700",
-    title: "Insurance",
-    desc: "Secure your future with life, health, vehicle, and term insurance plans.",
-    features: ["Full Coverage", "Fast Claims", "Global Help"],
+    title: "Invoice",
+    desc: "Professional billing solutions that automate recurring invoicing, custom workflows, and global client payment portals.",
+    features: ["Recurring Invoicing", "Client Portals", "Secure Gateways"],
   },
   {
+    id: "expense",
     icon: <TrendingUp className="w-6 h-6" />,
     iconColor: "text-yellow-600",
     iconBg: "bg-yellow-100",
-    badge: "SIP & Lumpsum",
+    badge: "Spend Management",
     badgeStyle: "bg-yellow-100 text-yellow-700",
-    title: "Mutual Fund",
-    desc: "Invest in top-rated equity, debt, and hybrid mutual fund schemes.",
-    features: ["SIP Options", "Expert Managed", "Tax Benefits"],
+    title: "Expense",
+    desc: "Corporate spend auditing software with intelligent OCR receipt scanning, multi-level approvals, and card sync.",
+    features: ["OCR Receipt Scanning", "Corporate Card Sync", "Auto-Approvals"],
   },
   {
+    id: "stock",
     icon: <IndianRupee className="w-6 h-6" />,
     iconColor: "text-violet-600",
     iconBg: "bg-violet-100",
-    badge: "Stocks & Bonds",
+    badge: "Supply & Orders",
     badgeStyle: "bg-violet-100 text-violet-700",
-    title: "Investments",
-    desc: "Grow wealth through equities, bonds, fixed deposits, and more.",
-    features: ["Portfolio Growth", "Diversified Risk", "Real-time Tracking"],
+    title: "StockControl",
+    desc: "End-to-end cloud-native inventory and warehouse management system with real-time stock optimization.",
+    features: ["Multi-Warehouse Tracking", "Stock Optimization", "Auto-Reordering"],
   },
   {
+    id: "billing",
     icon: <Home className="w-6 h-6" />,
     iconColor: "text-orange-600",
     iconBg: "bg-orange-100",
-    badge: "Residential & Commercial",
+    badge: "SaaS Recurring Billing",
     badgeStyle: "bg-orange-100 text-orange-700",
-    title: "Real Estate",
-    desc: "Buy, sell, or invest in verified residential and commercial properties.",
-    features: ["Prime Locations", "High ROI", "Verified Assets"],
+    title: "Billing",
+    desc: "Robust subscription engine offering multi-tiered pricing management, card dunning, and SaaS billing sync.",
+    features: ["Multi-Tiered Plans", "Dunning Prevention", "Stripe Integration"],
   },
   {
+    id: "payroll",
     icon: <BarChart2 className="w-6 h-6" />,
     iconColor: "text-fuchsia-600",
     iconBg: "bg-fuchsia-100",
-    badge: "Pre-IPO & Startups",
+    badge: "Salary & Benefits",
     badgeStyle: "bg-fuchsia-100 text-fuchsia-700",
-    title: "Unlisted",
-    desc: "Access exclusive pre-IPO shares and unlisted equity opportunities.",
-    features: ["Early Access", "High Alpha", "Vetted Ventures"],
+    title: "Payroll",
+    desc: "Automated payroll system managing compliant salaries, direct deposits, tax withholdings, and employee self-service dashboards.",
+    features: ["Direct Deposits", "Automated Taxes", "Employee Portal"],
   },
 ];
 
@@ -238,11 +259,11 @@ export default function ServicesPage() {
       if (!hash) return;
 
       const techIndex = services.findIndex(
-        (s) => s.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash
+        (s) => (s.id || s.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")) === hash
       );
 
       const financeIndex = financeServices.findIndex(
-        (f) => f.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === hash
+        (f) => (f.id || f.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")) === hash
       );
 
       if (financeIndex >= 0) {
@@ -326,7 +347,7 @@ export default function ServicesPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
                   key={s.title}
-                  id={s.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+                  id={s.id}
                 >
                   <SpotlightCard className="h-full rounded-3xl">
                     <div className="card card-hover h-full bg-white/80 backdrop-blur-sm border border-slate-100 hover:border-sky-200 p-8 flex flex-col group transition-all">
@@ -382,15 +403,15 @@ export default function ServicesPage() {
       <section className="py-24 bg-slate-50 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Financial Products</h2>
-            <p className="text-slate-500 max-w-2xl mx-auto">Comprehensive financial solutions to grow and protect your wealth.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">FinTech Software Suites</h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">Cloud-native financial management software and enterprise FinTech products designed for scaling modern business operations.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {financeServices.map((f, i) => (
               <motion.div
                 key={f.title}
-                id={f.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+                id={f.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
