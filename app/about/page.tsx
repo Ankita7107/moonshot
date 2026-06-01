@@ -119,12 +119,7 @@ const values = [
   },
 ];
 
-const trustMetrics = [
-  { value: "95%", label: "Client Retention" },
-  { value: "40%", label: "Faster Delivery Cycles" },
-  { value: "99.9%", label: "Uptime Architectures" },
-  { value: "24/7", label: "Support Availability" },
-];
+
 
 const processSteps = [
   {
@@ -381,51 +376,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="section-label"
-            >
-              MEASURED IMPACT
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-slate-900"
-            >
-              Trust in Real-World Metrics
-            </motion.h2>
-          </div>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
-          >
-            {trustMetrics.map((item) => (
-              <motion.div
-                key={item.label}
-                variants={fadeIn}
-                whileHover={{ y: -8 }}
-                className="card bg-white text-center p-10 border-slate-100 hover:border-sky-100 hover:shadow-2xl transition-all duration-500 group"
-              >
-                <motion.p className="text-4xl md:text-5xl font-black text-sky-500 mb-3 group-hover:scale-110 transition-transform">
-                  <AnimatedCounter value={item.value} />
-                </motion.p>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-                  {item.label}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+
 
       <section className="py-24 bg-slate-50 relative overflow-hidden">
         {/* Subtle decorative background elements */}
