@@ -352,11 +352,7 @@ export default function ServicesPage() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-sky-100/40 blur-3xl" />
 
         <div className="max-w-5xl mx-auto px-4 relative z-10">
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-full px-5 py-2.5 shadow-md mb-8 border border-sky-100">
-            <Sparkles className="w-4 h-4 text-sky-500 animate-pulse" />
-            <span className="text-sm text-slate-600 font-semibold tracking-wide">Precision Engineering · 12+ Years</span>
-          </motion.div>
+        
 
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}
             className="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
