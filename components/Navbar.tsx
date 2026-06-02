@@ -104,17 +104,17 @@ function HoverMenu({ label, href, isActive, children }: {
 function MobileAccordion({ label, children }: { label: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-b border-slate-50 last:border-0">
+    <div className="border-b border-slate-100">
       <button onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-4 text-sm font-bold text-slate-900">
+        className="w-full flex items-center justify-between py-4 text-lg font-bold text-slate-900 transition-colors hover:text-sky-500">
         {label}
-        <ChevronDown size={16} className={`transition-transform ${open ? "rotate-180 text-sky-500" : "text-slate-400"}`} />
+        <ChevronDown size={18} className={`transition-transform duration-200 ${open ? "rotate-180 text-sky-500" : "text-slate-400"}`} />
       </button>
       <AnimatePresence>
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-            <div className="pb-4 space-y-1">{children}</div>
+            <div className="pb-4 pt-1 space-y-1">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -273,44 +273,52 @@ export default function Navbar() {
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "100vh" }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white fixed inset-x-0 top-[72px] z-[90] overflow-y-auto px-6 pb-20">
-            <div className="py-6 flex flex-col gap-2">
-              <Link href="/" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">Home</Link>
-              <Link href="/about" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">About</Link>
+            <div className="py-4 flex flex-col">
+              <Link href="/" onClick={() => setMobileOpen(false)} className="border-b border-slate-100 py-4 text-lg font-bold text-slate-900 block transition-colors hover:text-sky-500">Home</Link>
+              <Link href="/about" onClick={() => setMobileOpen(false)} className="border-b border-slate-100 py-4 text-lg font-bold text-slate-900 block transition-colors hover:text-sky-500">About</Link>
 
               <MobileAccordion label="Services">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1 pt-2 pb-1">Tech</p>
-                {servicesMenu.tech.map(i => (
-                  <Link key={i.label} href={i.href}
-                    onClick={(e) => { setMobileOpen(false); handleSamePageHashClick(e, i.href); }}
-                    className="flex items-center gap-3 py-2.5 px-1 text-slate-600 font-semibold text-sm">
-                    <i.icon size={15} className="text-sky-400 flex-shrink-0" />
-                    {i.label}
-                  </Link>
-                ))}
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1 pt-4 pb-1">FinTech</p>
-                {servicesMenu.finance.map(i => (
-                  <Link key={i.label} href={i.href}
-                    onClick={(e) => { setMobileOpen(false); handleSamePageHashClick(e, i.href); }}
-                    className="flex items-center gap-3 py-2.5 px-1 text-slate-600 font-semibold text-sm">
-                    <i.icon size={15} className={`${i.color} flex-shrink-0`} />
-                    {i.label}
-                  </Link>
-                ))}
+                <div className="pl-2">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pt-2 pb-1">Tech</p>
+                  <div className="grid grid-cols-1 gap-1">
+                    {servicesMenu.tech.map(i => (
+                      <Link key={i.label} href={i.href}
+                        onClick={(e) => { setMobileOpen(false); handleSamePageHashClick(e, i.href); }}
+                        className="flex items-center gap-3 py-2.5 px-2 rounded-xl hover:bg-slate-50 text-slate-600 font-semibold text-sm transition-colors">
+                        <i.icon size={15} className="text-sky-400 flex-shrink-0" />
+                        {i.label}
+                      </Link>
+                    ))}
+                  </div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pt-4 pb-1">FinTech</p>
+                  <div className="grid grid-cols-1 gap-1">
+                    {servicesMenu.finance.map(i => (
+                      <Link key={i.label} href={i.href}
+                        onClick={(e) => { setMobileOpen(false); handleSamePageHashClick(e, i.href); }}
+                        className="flex items-center gap-3 py-2.5 px-2 rounded-xl hover:bg-slate-50 text-slate-600 font-semibold text-sm transition-colors">
+                        <i.icon size={15} className={`${i.color} flex-shrink-0`} />
+                        {i.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </MobileAccordion>
 
               <MobileAccordion label="Industries">
-                {industriesMenu.map(i => (
-                  <Link key={i.label} href={i.href}
-                    onClick={(e) => { setMobileOpen(false); handleSamePageHashClick(e, i.href); }}
-                    className="flex items-center gap-3 py-2.5 px-1 text-slate-600 font-semibold text-sm">
-                    <i.icon size={15} className="text-sky-400 flex-shrink-0" />
-                    {i.label}
-                  </Link>
-                ))}
+                <div className="pl-2 pt-2 grid grid-cols-2 gap-1">
+                  {industriesMenu.map(i => (
+                    <Link key={i.label} href={i.href}
+                      onClick={(e) => { setMobileOpen(false); handleSamePageHashClick(e, i.href); }}
+                      className="flex items-center gap-3 py-2.5 px-2 rounded-xl hover:bg-slate-50 text-slate-600 font-semibold text-sm transition-colors">
+                      <i.icon size={15} className="text-sky-400 flex-shrink-0" />
+                      {i.label}
+                    </Link>
+                  ))}
+                </div>
               </MobileAccordion>
 
-              <Link href="/why-us" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">Why Us</Link>
-              <Link href="/technologies" onClick={() => setMobileOpen(false)} className="text-2xl font-black text-slate-900 py-4">Technologies</Link>
+              <Link href="/why-us" onClick={() => setMobileOpen(false)} className="border-b border-slate-100 py-4 text-lg font-bold text-slate-900 block transition-colors hover:text-sky-500">Why Us</Link>
+              <Link href="/technologies" onClick={() => setMobileOpen(false)} className="border-b border-slate-100 py-4 text-lg font-bold text-slate-900 block transition-colors hover:text-sky-500">Technologies</Link>
               <Link href="/contact" onClick={() => setMobileOpen(false)} className="mt-8 btn-primary text-center">Get Started</Link>
             </div>
           </motion.div>
