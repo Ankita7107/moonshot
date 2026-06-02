@@ -86,9 +86,9 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 left-4 right-4 sm:bottom-6 sm:right-6 sm:left-auto z-50 flex flex-col items-end">
       {isOpen && (
-        <div className="mb-4 w-80 sm:w-96 rounded-2xl shadow-2xl bg-white border border-slate-100 flex flex-col overflow-hidden" 
+        <div className="mb-4 w-full sm:w-96 rounded-2xl shadow-2xl bg-white border border-slate-100 flex flex-col overflow-hidden max-h-[calc(100vh-120px)]" 
           style={{ height: "480px" }}>
           
           {/* Header */}
