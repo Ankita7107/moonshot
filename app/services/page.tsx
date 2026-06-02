@@ -155,7 +155,7 @@ const financeServices = [
     iconColor: "text-sky-600", iconBg: "bg-sky-100",
     badge: "Enterprise Accounting", badgeStyle: "bg-sky-100 text-sky-700",
     title: "Accounting Software",
-    desc: "Cloud accounting software designed to manage business books, track real-time cash flow, and simplify tax compliance.",
+    desc: "Accounting software designed to manage business books, track real-time cash flow, and simplify tax compliance.",
     features: ["Auto-Reconciliation", "Ledger Sync", "Tax Compliance"],
   },
   {
@@ -376,28 +376,9 @@ export default function ServicesPage() {
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          {/* Section header */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3">
-              What We <span className="text-sky-500">Build</span>
-            </h2>
-            <p className="text-slate-500 max-w-xl mx-auto text-sm">
-              From a single component to an entire digital ecosystem — we do it all.
-            </p>
-          </div>
 
-          {/* Category filter */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12">
-            {categories.map(cat => (
-              <button key={cat} onClick={() => { setActiveCategory(cat); setShowAll(false); }}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 border
-                  ${activeCategory === cat
-                    ? "bg-sky-500 text-white border-sky-500 shadow-md shadow-sky-200"
-                    : "bg-white text-slate-500 border-slate-200 hover:border-sky-300 hover:text-sky-500"}`}>
-                {cat}
-              </button>
-            ))}
-          </div>
+
+
 
           {/* Grid */}
           <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
