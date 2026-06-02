@@ -236,9 +236,9 @@ export default function AboutPage() {
                 ease: "easeInOut",
               }}
               whileHover={{
-                scale: 1.1,
-                rotateY: 5,
-                rotateX: -5,
+                scale: 1.02,
+                rotateY: 3,
+                rotateX: -3,
                 transition: { duration: 0.4 },
               }}
               className="relative w-full h-full transform-style-3d"
@@ -249,7 +249,7 @@ export default function AboutPage() {
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                     priority
-                className="object-cover transition-transform duration-500 group-hover:brightness-110"
+                className="object-cover object-left transition-transform duration-500 group-hover:brightness-110"
               />
 
               {/* Dynamic Light Overlay */}
