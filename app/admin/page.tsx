@@ -26,6 +26,16 @@ export default function AdminLoginPage() {
     }
   }, [router]);
 
+  // Check for expired session parameter
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("expired") === "true") {
+        setErrorMessage("Your session has expired. Please log in again.");
+      }
+    }
+  }, []);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);

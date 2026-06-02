@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check } from "lucide-react";
@@ -14,6 +14,20 @@ interface Inquiry {
   created_at: string;
 }
 
+const isTokenExpired = (token: string): boolean => {
+  try {
+    const payloadBase64 = token.split(".")[1];
+    if (!payloadBase64) return true;
+    const decodedJson = atob(payloadBase64.replace(/-/g, "+").replace(/_/g, "/"));
+    const decoded = JSON.parse(decodedJson);
+    const exp = decoded.exp;
+    if (!exp) return false;
+    return Date.now() >= exp * 1000;
+  } catch {
+    return true;
+  }
+};
+
 export default function AdminDashboardPage() {
   const router = useRouter();
   const [adminUser, setAdminUser] = useState<{ fullName: string; email: string; role: string } | null>(null);
@@ -25,25 +39,49 @@ export default function AdminDashboardPage() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
 
-  // Authenticate Session
+  const handleLogout = useCallback((expired = false) => {
+    localStorage.removeItem("moonshot_admin_session");
+    localStorage.removeItem("moonshot_admin_token");
+    router.push(expired ? "/admin?expired=true" : "/admin");
+  }, [router]);
+
+  // Authenticate Session and setup Auto-Logout Timer
   useEffect(() => {
     const userSession = localStorage.getItem("moonshot_admin_session");
-    if (!userSession) {
-      router.push("/admin");
+    const token = localStorage.getItem("moonshot_admin_token");
+
+    if (!userSession || !token || isTokenExpired(token)) {
+      handleLogout(token ? true : false);
       return;
     }
 
     try {
       const session = JSON.parse(userSession);
       if (session.role !== "admin") {
-        router.push("/admin");
+        handleLogout();
         return;
       }
       setAdminUser(session);
+
+      // Auto-logout when token expires
+      const payloadBase64 = token.split(".")[1];
+      const decodedJson = atob(payloadBase64.replace(/-/g, "+").replace(/_/g, "/"));
+      const decoded = JSON.parse(decodedJson);
+      const exp = decoded.exp * 1000;
+      const delay = exp - Date.now();
+
+      if (delay > 0) {
+        const timer = setTimeout(() => {
+          handleLogout(true);
+        }, delay);
+        return () => clearTimeout(timer);
+      } else {
+        handleLogout(true);
+      }
     } catch (e) {
-      router.push("/admin");
+      handleLogout();
     }
-  }, [router]);
+  }, [router, handleLogout]);
 
   // Fetch Inquiries
   const fetchInquiries = async () => {
@@ -60,6 +98,11 @@ export default function AdminDashboardPage() {
           "Authorization": `Bearer ${token}`, // Pass authorization bearer token
         },
       });
+
+      if (response.status === 401 || response.status === 403) {
+        handleLogout(true);
+        return;
+      }
 
       const data = await response.json();
       if (response.ok && data.success) {
@@ -100,11 +143,7 @@ export default function AdminDashboardPage() {
     setFilteredInquiries(result);
   }, [searchTerm, filterInterest, inquiries]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("moonshot_admin_session");
-    localStorage.removeItem("moonshot_admin_token");
-    router.push("/admin");
-  };
+  // handleLogout is now defined using useCallback above
 
   const triggerRefresh = () => {
     setIsRefreshing(true);
@@ -168,7 +207,7 @@ export default function AdminDashboardPage() {
               <RefreshCw className={`w-5 h-5 ${isRefreshing ? "animate-spin text-sky-500" : ""}`} />
             </button>
             <button
-              onClick={handleLogout}
+              onClick={() => handleLogout()}
               className="px-5 py-3 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-100 rounded-2xl flex items-center gap-2 transition-all font-bold text-sm shadow-sm"
             >
               <LogOut className="w-4 h-4" />
