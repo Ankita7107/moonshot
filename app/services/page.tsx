@@ -361,13 +361,7 @@ export default function ServicesPage() {
           <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}
             className="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
             Our Services &{" "}
-            <span className="relative inline-block">
-              <span className="text-sky-500">Solutions</span>
-              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
-                <motion.path initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: 0.9, duration: 0.7 }}
-                  d="M2 8 Q75 2 150 8 Q225 14 298 8" stroke="#0ea5e9" strokeWidth="3" strokeLinecap="round" fill="none" />
-              </svg>
-            </span>
+            <span className="text-sky-500">Solutions</span>
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
