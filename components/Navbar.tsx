@@ -60,32 +60,26 @@ const industriesMenu = [
 ];
 
 /* ─── HoverMenu ──────────────────────────────────────────── */
-function HoverMenu({ label, href, isActive, children }: {
-  label: string; href: string; isActive: boolean; children: React.ReactNode;
+function HoverMenu({ label, href, isActive, isOpen, onMouseEnter, onMouseLeave, children }: {
+  label: string; href: string; isActive: boolean; isOpen: boolean;
+  onMouseEnter: () => void; onMouseLeave: () => void; children: React.ReactNode;
 }) {
-  const [open, setOpen] = useState(false);
-  const timer = useRef<NodeJS.Timeout>();
-
-  const show = () => { if (timer.current) clearTimeout(timer.current); setOpen(true); };
-  const hide = () => { timer.current = setTimeout(() => setOpen(false), 300); };
-  const cancelHide = () => { if (timer.current) clearTimeout(timer.current); };
-
   return (
-    <div className="relative" onMouseEnter={show} onMouseLeave={hide}>
+    <div className="relative" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <Link href={href}
         className={`relative flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-colors
-          ${isActive || open ? "text-sky-600" : "text-slate-600 hover:text-sky-500"}`}>
+          ${isActive || isOpen ? "text-sky-600" : "text-slate-600 hover:text-sky-500"}`}>
         {label}
-        <ChevronDown size={14} className={`transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
-        {(isActive || open) && (
+        <ChevronDown size={14} className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+        {(isActive || isOpen) && (
           <motion.div layoutId="nav-glow" className="absolute inset-0 bg-sky-50 rounded-full -z-10"
             transition={{ type: "spring", bounce: 0.2, duration: 0.6 }} />
         )}
       </Link>
 
       <AnimatePresence>
-        {open && (
-          <motion.div onMouseEnter={cancelHide} onMouseLeave={hide}
+        {isOpen && (
+          <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
             animate={{ opacity: 1, y: 0, scale: 1, x: "-50%" }}
             exit={{ opacity: 0, y: 10, scale: 0.95, x: "-50%" }}
@@ -127,6 +121,26 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [activeDropdown, setActiveDropdown] = useState<"services" | "industries" | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const handleMouseEnter = (menu: "services" | "industries") => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(menu);
+  };
+
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 200);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const handle = () => setScrolled(window.scrollY > 20);
@@ -171,7 +185,14 @@ export default function Navbar() {
           ))}
 
           {/* Services Mega Menu */}
-          <HoverMenu label="Services" href="/services" isActive={pathname === "/services"}>
+          <HoverMenu 
+            label="Services" 
+            href="/services" 
+            isActive={pathname === "/services"}
+            isOpen={activeDropdown === "services"}
+            onMouseEnter={() => handleMouseEnter("services")}
+            onMouseLeave={handleMouseLeave}
+          >
             <div className="w-[900px] flex p-2">
 
               {/* Tech Services — 3-column grid to fit all 15 */}
@@ -227,7 +248,14 @@ export default function Navbar() {
           </HoverMenu>
 
           {/* Industries Menu */}
-          <HoverMenu label="Industries" href="/industries" isActive={pathname === "/industries"}>
+          <HoverMenu 
+            label="Industries" 
+            href="/industries" 
+            isActive={pathname === "/industries"}
+            isOpen={activeDropdown === "industries"}
+            onMouseEnter={() => handleMouseEnter("industries")}
+            onMouseLeave={handleMouseLeave}
+          >
             <div className="w-[450px] p-4 grid grid-cols-2 gap-2">
               {industriesMenu.map((i) => (
                 <Link key={i.label} href={i.href}
