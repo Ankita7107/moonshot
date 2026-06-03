@@ -181,15 +181,15 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 text-slate-800 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden animated-grid-bg">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 text-slate-800 py-6 md:py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden animated-grid-bg">
       {/* Soft blurred background orbs */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-200/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-sky-100/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header bar */}
-        <header className="flex flex-col sm:flex-row justify-between items-center bg-white/80 border border-slate-100 p-6 rounded-3xl backdrop-blur-xl shadow-[0_10px_40px_rgba(14,165,233,0.04)] mb-8 gap-4">
-          <div>
+        <header className="flex flex-col sm:flex-row justify-between items-center bg-white/80 border border-slate-100 p-5 md:p-6 rounded-2xl md:rounded-3xl backdrop-blur-xl shadow-[0_10px_40px_rgba(14,165,233,0.04)] mb-6 md:mb-8 gap-4">
+          <div className="text-center sm:text-left">
             <span className="text-xs font-bold text-sky-500 uppercase tracking-widest">
               Super Admin Space
             </span>
@@ -198,7 +198,7 @@ export default function AdminDashboardPage() {
             </h1>
             <p className="text-xs text-slate-500 mt-0.5">{adminUser.email}</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
             <button
               onClick={triggerRefresh}
               className="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-2xl flex items-center justify-center transition-all text-slate-600 shadow-sm"
@@ -208,7 +208,7 @@ export default function AdminDashboardPage() {
             </button>
             <button
               onClick={() => handleLogout()}
-              className="px-5 py-3 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-100 rounded-2xl flex items-center gap-2 transition-all font-bold text-sm shadow-sm"
+              className="px-5 py-3 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-100 rounded-2xl flex items-center justify-center gap-2 transition-all font-bold text-sm shadow-sm flex-1 sm:flex-none"
             >
               <LogOut className="w-4 h-4" />
               Sign Out
@@ -217,7 +217,7 @@ export default function AdminDashboardPage() {
         </header>
 
         {/* Search & Filter dashboard controls */}
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
+        <div className="grid md:grid-cols-3 gap-4 mb-6 md:mb-8">
           <div className="relative md:col-span-2">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
               <Search className="w-5 h-5" />
@@ -226,7 +226,7 @@ export default function AdminDashboardPage() {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search inquiries by name, email, company, or message..."
+              placeholder="Search inquiries..."
               className="w-full bg-white/80 border border-slate-100 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all backdrop-blur-xl shadow-sm focus:bg-white"
             />
           </div>
@@ -253,8 +253,8 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* Inquiries table container */}
-        <div className="bg-white/80 border border-slate-100 rounded-[2rem] overflow-hidden backdrop-blur-xl shadow-[0_20px_50px_rgba(14,165,233,0.03)]">
+        {/* Inquiries container */}
+        <div className="bg-white/80 border border-slate-100 rounded-2xl md:rounded-[2rem] overflow-hidden backdrop-blur-xl shadow-[0_20px_50px_rgba(14,165,233,0.03)]">
           {isLoading ? (
             <div className="py-24 text-center">
               <Loader2 className="w-10 h-10 animate-spin text-sky-500 mx-auto mb-4" />
@@ -271,85 +271,159 @@ export default function AdminDashboardPage() {
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-50/50">
-                    <th className="py-5 px-6">Submitted By</th>
-                    <th className="py-5 px-6">Interest Area</th>
-                    <th className="py-5 px-6">Company</th>
-                    <th className="py-5 px-6">Message</th>
-                    <th className="py-5 px-6">Date & Time</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  <AnimatePresence>
-                    {filteredInquiries.map((inq, idx) => (
-                      <motion.tr
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: idx * 0.05 }}
-                        key={inq.id}
-                        className="hover:bg-slate-50/30 transition-colors align-top"
-                      >
-                        <td className="py-6 px-6">
-                          <p className="font-extrabold text-slate-800 text-sm">
-                            {inq.full_name}
-                          </p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <a
-                              href={`mailto:${inq.email}`}
-                              className="text-xs text-sky-500 hover:text-sky-600 flex items-center gap-1.5 transition-colors font-medium"
-                            >
-                              <Mail className="w-3.5 h-3.5 shrink-0" />
-                              {inq.email}
-                            </a>
-                            <button
-                              onClick={() => handleCopyEmail(inq.email)}
-                              className="p-1 hover:bg-slate-100 rounded-md transition-colors text-slate-400 hover:text-sky-500 flex items-center justify-center shrink-0"
-                              title="Copy Email"
-                            >
-                              {copiedEmail === inq.email ? (
-                                <Check className="w-3.5 h-3.5 text-emerald-500" />
-                              ) : (
-                                <Copy className="w-3.5 h-3.5" />
-                              )}
-                            </button>
-                          </div>
-                        </td>
-                        <td className="py-6 px-6">
+            <>
+              {/* Desktop View (Table) */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-50/50">
+                      <th className="py-5 px-6">Submitted By</th>
+                      <th className="py-5 px-6">Interest Area</th>
+                      <th className="py-5 px-6">Company</th>
+                      <th className="py-5 px-6">Message</th>
+                      <th className="py-5 px-6">Date & Time</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    <AnimatePresence>
+                      {filteredInquiries.map((inq, idx) => (
+                        <motion.tr
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: idx * 0.05 }}
+                          key={inq.id}
+                          className="hover:bg-slate-50/30 transition-colors align-top"
+                        >
+                          <td className="py-6 px-6">
+                            <p className="font-extrabold text-slate-800 text-sm">
+                              {inq.full_name}
+                            </p>
+                            <div className="flex items-center gap-2 mt-1">
+                              <a
+                                href={`mailto:${inq.email}`}
+                                className="text-xs text-sky-500 hover:text-sky-600 flex items-center gap-1.5 transition-colors font-medium"
+                              >
+                                <Mail className="w-3.5 h-3.5 shrink-0" />
+                                {inq.email}
+                              </a>
+                              <button
+                                onClick={() => handleCopyEmail(inq.email)}
+                                className="p-1 hover:bg-slate-100 rounded-md transition-colors text-slate-400 hover:text-sky-500 flex items-center justify-center shrink-0"
+                                title="Copy Email"
+                              >
+                                {copiedEmail === inq.email ? (
+                                  <Check className="w-3.5 h-3.5 text-emerald-500" />
+                                ) : (
+                                  <Copy className="w-3.5 h-3.5" />
+                                )}
+                              </button>
+                            </div>
+                          </td>
+                          <td className="py-6 px-6">
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-xs font-bold border border-sky-100 shadow-sm shadow-sky-50">
+                              <Tag className="w-3.5 h-3.5 shrink-0" />
+                              {inq.interest}
+                            </span>
+                          </td>
+                          <td className="py-6 px-6">
+                            {inq.company_name ? (
+                              <span className="inline-flex items-center gap-1.5 text-slate-600 text-sm font-semibold">
+                                <Building className="w-4 h-4 text-slate-400 shrink-0" />
+                                {inq.company_name}
+                              </span>
+                            ) : (
+                              <span className="text-slate-400 text-xs italic">Not Provided</span>
+                            )}
+                          </td>
+                          <td className="py-6 px-6 max-w-md">
+                            <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line bg-slate-50/50 border border-slate-100 rounded-2xl p-4 shadow-inner">
+                              {inq.message}
+                            </p>
+                          </td>
+                          <td className="py-6 px-6 whitespace-nowrap">
+                            <span className="inline-flex items-center gap-1.5 text-slate-500 text-xs font-semibold">
+                              <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
+                              {formatDate(inq.created_at)}
+                            </span>
+                          </td>
+                        </motion.tr>
+                      ))}
+                    </AnimatePresence>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile View (Cards) */}
+              <div className="md:hidden divide-y divide-slate-100">
+                <AnimatePresence>
+                  {filteredInquiries.map((inq, idx) => (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: idx * 0.05 }}
+                      key={inq.id}
+                      className="p-5 flex flex-col gap-4 hover:bg-slate-50/30 transition-colors"
+                    >
+                      {/* Header Stack: Tag, Name, Date */}
+                      <div className="flex flex-col gap-2">
+                        <div className="flex">
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-xs font-bold border border-sky-100 shadow-sm shadow-sky-50">
                             <Tag className="w-3.5 h-3.5 shrink-0" />
                             {inq.interest}
                           </span>
-                        </td>
-                        <td className="py-6 px-6">
-                          {inq.company_name ? (
-                            <span className="inline-flex items-center gap-1.5 text-slate-600 text-sm font-semibold">
-                              <Building className="w-4 h-4 text-slate-400 shrink-0" />
-                              {inq.company_name}
-                            </span>
-                          ) : (
-                            <span className="text-slate-400 text-xs italic">Not Provided</span>
-                          )}
-                        </td>
-                        <td className="py-6 px-6 max-w-md">
-                          <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line bg-slate-50/50 border border-slate-100 rounded-2xl p-4 shadow-inner">
-                            {inq.message}
-                          </p>
-                        </td>
-                        <td className="py-6 px-6 whitespace-nowrap">
-                          <span className="inline-flex items-center gap-1.5 text-slate-500 text-xs font-semibold">
-                            <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
-                            {formatDate(inq.created_at)}
-                          </span>
-                        </td>
-                      </motion.tr>
-                    ))}
-                  </AnimatePresence>
-                </tbody>
-              </table>
-            </div>
+                        </div>
+                        <h4 className="font-extrabold text-slate-800 text-lg leading-tight">
+                          {inq.full_name}
+                        </h4>
+                        <div className="flex items-center gap-1.5 text-slate-400 text-xs font-semibold">
+                          <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                          <span>{formatDate(inq.created_at)}</span>
+                        </div>
+                      </div>
+
+                      {/* Details Area */}
+                      <div className="flex flex-col gap-3 bg-slate-50/40 rounded-2xl p-3.5 border border-slate-100">
+                        <div className="flex items-center justify-between gap-3">
+                          <a
+                            href={`mailto:${inq.email}`}
+                            className="text-xs text-sky-500 hover:text-sky-600 flex items-center gap-1.5 transition-colors font-semibold break-all"
+                          >
+                            <Mail className="w-3.5 h-3.5 shrink-0 text-sky-400" />
+                            {inq.email}
+                          </a>
+                          <button
+                            onClick={() => handleCopyEmail(inq.email)}
+                            className="p-1.5 hover:bg-slate-100 rounded-md transition-colors text-slate-400 hover:text-sky-500 flex items-center justify-center shrink-0"
+                            title="Copy Email"
+                          >
+                            {copiedEmail === inq.email ? (
+                              <Check className="w-3.5 h-3.5 text-emerald-500" />
+                            ) : (
+                              <Copy className="w-3.5 h-3.5" />
+                            )}
+                          </button>
+                        </div>
+
+                        <div className="flex items-center gap-1.5 text-slate-600 text-xs font-semibold border-t border-slate-100/80 pt-2.5">
+                          <Building className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                          <span>{inq.company_name || "No Company Provided"}</span>
+                        </div>
+                      </div>
+
+                      {/* Message Content */}
+                      <div className="bg-slate-50/30 border border-slate-100/70 rounded-2xl p-3.5">
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 mb-1">
+                          Message
+                        </p>
+                        <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line font-medium">
+                          {inq.message}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </>
           )}
         </div>
       </div>
