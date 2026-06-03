@@ -203,7 +203,7 @@ export default function AboutPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="flex gap-10 mt-8"
+              className="flex flex-wrap gap-6 sm:gap-10 mt-8"
             >
               {stats.map((s) => (
                 <motion.div variants={fadeIn} key={s.label}>
@@ -339,7 +339,7 @@ export default function AboutPage() {
           >
             Core Values That Drive Innovation
           </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {values.map((v, idx) => {
               const IconComponent = v.icon;
               return (
@@ -350,7 +350,7 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1, duration: 0.5 }}
                   whileHover={{ y: -12, scale: 1.02 }}
-                  className="card bg-white p-8 group hover:border-sky-200 transition-all shadow-sm hover:shadow-xl flex flex-col items-center text-center"
+                  className="card bg-white p-6 sm:p-8 group hover:border-sky-200 transition-all shadow-sm hover:shadow-xl flex flex-col items-center text-center"
                 >
                   <motion.div
                     animate={{ y: [0, -5, 0] }}
