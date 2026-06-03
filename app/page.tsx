@@ -1421,12 +1421,8 @@ export default function HomePage() {
             TRUSTED BY INDUSTRY DISRUPTORS
           </p>
         </div>
-        <div className="flex relative group">
-          <motion.div
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            className="flex gap-12 items-center whitespace-nowrap"
-          >
+        <div className="flex relative group hover-pause-group">
+          <div className="flex gap-12 items-center whitespace-nowrap animate-marquee hover-pause">
             {[
               { name: "FinFlow", metric: "+45% Efficiency" },
               { name: "HealthSync", metric: "2M+ Users" },
@@ -1460,7 +1456,7 @@ export default function HomePage() {
                 </motion.div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

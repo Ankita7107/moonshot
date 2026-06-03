@@ -601,17 +601,15 @@ export default function TechnologiesPage() {
             Certified Cloud Partners
           </motion.p>
         </div>
-        <div className="relative flex overflow-x-hidden group">
+        <div className="relative flex overflow-x-hidden group hover-pause-group">
           {/* fade masks */}
           <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white to-transparent z-10" />
           <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white to-transparent z-10" />
 
           {[0, 1].map((track) => (
-            <motion.div
+            <div
               key={track}
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
-              className="flex items-center gap-10 min-w-max pr-10"
+              className="flex items-center gap-10 min-w-max pr-10 animate-marquee"
             >
               {[...partners, ...partners].map((p, i) => (
                 <motion.div
@@ -624,7 +622,7 @@ export default function TechnologiesPage() {
                   </span>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
