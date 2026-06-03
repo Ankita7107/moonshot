@@ -336,7 +336,7 @@ function MagneticCard({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={onMouseLeave}
       className="relative rounded-2xl bg-white border border-slate-100 p-6 shadow-sm overflow-hidden
-                 min-w-[270px] md:min-w-0 snap-start cursor-default group"
+                 w-full cursor-default group"
     >
       {/* Dynamic glow spotlight following cursor */}
       <motion.div
@@ -506,6 +506,7 @@ function MagneticCard({
 
 /* ─── page ──────────────────────────────────────────────────── */
 export default function TechnologiesPage() {
+
   return (
     <>
       {/* ── HEADER ── */}
@@ -577,12 +578,7 @@ export default function TechnologiesPage() {
 
       {/* ── TECH CARDS ── */}
       <section className="py-20 bg-slate-50/50">
-        <div
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-                        flex md:grid md:grid-cols-4 gap-6
-                        overflow-x-auto md:overflow-visible pb-4 md:pb-0
-                        snap-x snap-mandatory md:snap-none"
-        >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {techCategories.map((cat, i) => (
             <MagneticCard key={cat.title} cat={cat} index={i} />
           ))}
@@ -609,7 +605,7 @@ export default function TechnologiesPage() {
           {[0, 1].map((track) => (
             <div
               key={track}
-              className="flex items-center gap-10 min-w-max pr-10 animate-marquee"
+                className="flex items-center gap-10 min-w-max pr-10 animate-marquee"
             >
               {[...partners, ...partners].map((p, i) => (
                 <motion.div
