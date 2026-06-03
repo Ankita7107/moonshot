@@ -65,10 +65,10 @@ export default function WhyUsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 leading-tight mb-6 text-center md:text-left">
               Why Partners Choose Us
             </h1>
-            <p className="text-slate-600 text-lg">
+            <p className="text-slate-600 text-sm sm:text-lg text-center md:text-left">
               We go beyond coding. We become your strategic technology partner,
               ensuring every decision supports your long-term business goals.
             </p>
@@ -103,7 +103,7 @@ export default function WhyUsPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-6"
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"
         >
           {features.map((f) => (
             <motion.div
@@ -132,10 +132,10 @@ export default function WhyUsPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight text-center md:text-left">
                 Security & Reliability
               </h2>
-              <p className="text-slate-500 text-lg mb-8 leading-relaxed">
+              <p className="text-slate-500 text-sm sm:text-lg mb-8 leading-relaxed text-center md:text-left">
                 In the digital age, trust is the primary currency. We implement
                 rigorous security protocols from day one, ensuring your
                 intellectual property and user data are always protected.
@@ -186,7 +186,7 @@ export default function WhyUsPage() {
               <img
                 src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"
                 alt="Security Interface"
-                className="w-full h-[450px] object-cover transition-all duration-500 hover:brightness-110"
+                className="w-full h-64 sm:h-[450px] object-cover transition-all duration-500 hover:brightness-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
             </motion.div>
@@ -234,7 +234,7 @@ export default function WhyUsPage() {
                 <img
                   src="/moonshot_images/whypartners.png"
                   alt="Team Collaboration"
-                  className="w-full h-[450px] object-cover"
+                  className="w-full h-64 sm:h-[450px] object-cover"
                 />
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/40 via-transparent to-white/10" />
@@ -254,10 +254,10 @@ export default function WhyUsPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 leading-tight text-center md:text-left">
                 Transparent Partnership
               </h2>
-              <p className="text-slate-500 text-lg mb-8 leading-relaxed">
+              <p className="text-slate-500 text-sm sm:text-lg mb-8 leading-relaxed text-center md:text-left">
                 No black boxes. You get full visibility into our development
                 process via shared Jira boards, Slack channels, and weekly
                 sprint reviews.

@@ -171,7 +171,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-5xl font-extrabold text-slate-900 leading-tight mb-6"
+              className="text-4xl sm:text-5xl font-extrabold text-slate-900 leading-tight mb-6 text-center md:text-left"
             >
               Engineering Excellence
             </motion.h1>
@@ -180,7 +180,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="text-slate-600 mb-4"
+              className="text-slate-600 mb-4 text-center md:text-left text-sm sm:text-base"
             >
               Moonshot Minds Tech was founded on a simple premise: that software
               should be beautiful, scalable, and inherently useful.
@@ -190,7 +190,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="text-slate-500 text-sm"
+              className="text-slate-500 text-xs sm:text-sm text-center md:text-left"
             >
               Founded in 2002 and headquartered in Craigieburn, Victoria, we
               specialize in architecting sophisticated software solutions that
@@ -203,10 +203,10 @@ export default function AboutPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="flex flex-wrap gap-6 sm:gap-10 mt-8"
+              className="flex flex-wrap gap-6 sm:gap-10 mt-8 justify-center md:justify-start"
             >
               {stats.map((s) => (
-                <motion.div variants={fadeIn} key={s.label}>
+                <motion.div variants={fadeIn} key={s.label} className="text-center md:text-left min-w-[80px] sm:min-w-0">
                   <p className="text-3xl font-extrabold text-sky-500 mb-1">
                     <AnimatedCounter value={s.value} />
                   </p>
@@ -223,7 +223,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, scale: 0.9, rotateY: 20 }}
             animate={{ opacity: 1, scale: 1, rotateY: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="relative rounded-2xl h-80 overflow-hidden group perspective-1000 shadow-2xl"
+            className="relative rounded-2xl h-64 sm:h-80 overflow-hidden group perspective-1000 shadow-2xl"
           >
             <motion.div
               animate={{
@@ -292,7 +292,7 @@ export default function AboutPage() {
             <h3 className="text-2xl font-bold text-slate-900 mb-4">
               Our Mission
             </h3>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-500 text-sm sm:text-lg leading-relaxed">
               To empower organizations with robust digital infrastructure and
               innovative software that fosters sustainable growth and solves
               complex global challenges through engineering rigor.
@@ -312,7 +312,7 @@ export default function AboutPage() {
             <h3 className="text-2xl font-bold text-slate-900 mb-4">
               Our Vision
             </h3>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-500 text-sm sm:text-lg leading-relaxed">
               To be the world&apos;s most trusted partner for engineering
               digital transformations, recognized for our commitment to quality,
               integrity, and future-proof architectural innovation.
@@ -452,7 +452,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, type: "spring" }}
-            className="relative rounded-[3rem] overflow-hidden bg-white border border-slate-100 p-12 md:p-20 text-center shadow-[0_30px_60px_-15px_rgba(14,165,233,0.15)] hover:shadow-[0_40px_80px_-15px_rgba(14,165,233,0.2)] transition-all duration-700"
+            className="relative rounded-3xl sm:rounded-[3rem] overflow-hidden bg-white border border-slate-100 p-6 sm:p-12 md:p-20 text-center shadow-[0_30px_60px_-15px_rgba(14,165,233,0.15)] hover:shadow-[0_40px_80px_-15px_rgba(14,165,233,0.2)] transition-all duration-700"
           >
             {/* Subtle animated shimmer bg */}
             <div className="absolute inset-0 bg-gradient-to-r from-sky-50/30 via-transparent to-sky-50/30 animate-shimmer opacity-20" />
@@ -464,39 +464,41 @@ export default function AboutPage() {
                   rotate: [0, 5, -5, 0],
                 }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="w-24 h-24 bg-sky-50 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-sm border border-sky-100"
+                className="w-20 h-20 sm:w-24 sm:h-24 bg-sky-50 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-8 sm:mb-10 shadow-sm border border-sky-100"
               >
-                <RocketIcon size={48} className="text-sky-500" />
+                <RocketIcon className="w-10 h-10 sm:w-12 sm:h-12 text-sky-500" />
               </motion.div>
 
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
                 Ready to engineer your <span className="text-sky-600">moonshot?</span>
               </h2>
-              <p className="text-slate-500 text-lg max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+              <p className="text-slate-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed font-medium">
                 Whether you&apos;re a high-growth startup or an established
                 enterprise, we provide the architectural rigor and engineering
                 talent to bring your vision to life.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
                 <motion.div
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full sm:w-auto"
                 >
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-3 px-10 py-5 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-2xl shadow-xl shadow-sky-500/25 transition-all text-lg"
+                    className="w-full inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-4 sm:py-5 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-2xl shadow-xl shadow-sky-500/25 transition-all text-base sm:text-lg"
                   >
-                    Start Your Project <ArrowRight size={20} />
+                    Start Your Project <ArrowRight size={20} className="shrink-0" />
                   </Link>
                 </motion.div>
                 <motion.div
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full sm:w-auto"
                 >
                   <Link
                     href="/services"
-                    className="inline-flex items-center gap-3 px-10 py-5 bg-white border-2 border-sky-500 text-sky-600 font-bold rounded-2xl transition-all text-lg hover:bg-sky-50"
+                    className="w-full inline-flex items-center justify-center gap-3 px-6 sm:px-10 py-4 sm:py-5 bg-white border-2 border-sky-500 text-sky-600 font-bold rounded-2xl transition-all text-base sm:text-lg hover:bg-sky-50"
                   >
                     View Our Solutions
                   </Link>

@@ -226,24 +226,37 @@ function ParticleCanvas() {
 
 /* ─── split-letter heading ──────────────────────────────────── */
 function SplitHeading({ text }: { text: string }) {
+  const words = text.split(" ");
+  let globalCharIndex = 0;
+
   return (
-    <span className="inline-block">
-      {text.split("").map((ch, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 40, rotateX: -80 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{
-            delay: 0.35 + i * 0.03,
-            duration: 0.5,
-            type: "spring",
-            stiffness: 180,
-          }}
-          style={{ display: ch === " " ? "inline" : "inline-block" }}
-        >
-          {ch === " " ? "\u00A0" : ch}
-        </motion.span>
-      ))}
+    <span className="inline-flex flex-wrap justify-center">
+      {words.map((word, wordIdx) => {
+        const chars = word.split("");
+        return (
+          <span key={wordIdx} className="inline-block whitespace-nowrap mr-2 sm:mr-3">
+            {chars.map((ch) => {
+              const i = globalCharIndex++;
+              return (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 40, rotateX: -80 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  transition={{
+                    delay: 0.35 + i * 0.03,
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 180,
+                  }}
+                  className="inline-block"
+                >
+                  {ch}
+                </motion.span>
+              );
+            })}
+          </span>
+        );
+      })}
     </span>
   );
 }
@@ -537,7 +550,7 @@ export default function TechnologiesPage() {
           className="relative z-10 max-w-3xl mx-auto px-4"
         >
           <h1
-            className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 leading-tight"
             style={{ perspective: 600 }}
           >
             <SplitHeading text="Our Modern Tech Stack" />
@@ -546,7 +559,7 @@ export default function TechnologiesPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.6 }}
-            className="text-slate-500 text-lg"
+            className="text-slate-500 text-sm sm:text-lg"
           >
             We leverage the most powerful tools in the industry to build
             future-proof solutions.
@@ -632,7 +645,7 @@ export default function TechnologiesPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, type: "spring" }}
             className="relative rounded-3xl bg-gradient-to-br from-sky-50 to-white
-                       border border-sky-100 p-12 text-center overflow-hidden group"
+                       border border-sky-100 p-6 sm:p-12 text-center overflow-hidden group"
           >
             <motion.div
               animate={{ x: [0, 20, 0], y: [0, -15, 0] }}
@@ -667,20 +680,21 @@ export default function TechnologiesPage() {
               <h2 className="text-2xl font-bold text-slate-900 mb-4">
                 Need a specific technology?
               </h2>
-              <p className="text-slate-500 mb-8 max-w-xl mx-auto">
+              <p className="text-slate-500 text-sm sm:text-base mb-8 max-w-xl mx-auto">
                 Our polyglot engineers specialise in picking the right tool for
                 the job — whether it&apos;s legacy modernisation or greenfield
                 development.
               </p>
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full sm:w-auto"
               >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 rounded-full
                              border-2 border-sky-500 text-sky-600 font-semibold
-                             hover:bg-sky-500 hover:text-white transition-all duration-300 group"
+                             hover:bg-sky-500 hover:text-white transition-all duration-300 group w-full sm:w-auto"
                 >
                   Discuss Architecture
                   <motion.span

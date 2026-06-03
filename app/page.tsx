@@ -470,7 +470,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6"
+            className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight mb-6"
           >
             Innovation Through{" "}
             <motion.span
@@ -486,7 +486,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-10"
+            className="text-base md:text-lg lg:text-xl text-slate-500 max-w-2xl mx-auto mb-10"
           >
             Transforming complex business challenges into sleek, scalable
             software solutions. We partner with visionaries to build the future
@@ -496,12 +496,12 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
               <Link
                 href="/contact"
-                className="btn-primary hover-shine flex items-center justify-center gap-2 text-lg px-8 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 text-white shadow-lg shadow-sky-200"
+                className="btn-primary hover-shine flex items-center justify-center gap-2 text-base sm:text-lg px-8 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-sky-600 text-white shadow-lg shadow-sky-200 w-full"
               >
                 Start Your Project{" "}
                 <motion.span
@@ -512,10 +512,10 @@ export default function HomePage() {
                 </motion.span>
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full sm:w-auto">
               <Link
                 href="/services"
-                className="btn-outline flex items-center justify-center gap-2 text-lg bg-white/50 backdrop-blur-sm px-8 py-3 rounded-xl border border-slate-200 hover:border-sky-300"
+                className="btn-outline flex items-center justify-center gap-2 text-base sm:text-lg bg-white/50 backdrop-blur-sm px-8 py-3.5 rounded-xl border border-slate-200 hover:border-sky-300 w-full"
               >
                 View Solutions
               </Link>
@@ -537,7 +537,7 @@ export default function HomePage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-12 text-center"
+          className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 text-center"
         >
           {stats.map((s, idx) => (
             <motion.div
@@ -599,7 +599,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight"
             >
               Native AI across all your business.
             </motion.h2>
@@ -901,7 +901,7 @@ export default function HomePage() {
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
-                  className="absolute -right-6 top-1/4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl z-20"
+                  className="absolute -right-6 top-1/4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl z-20 hidden lg:block"
                 >
                   <div className="text-[10px] text-white/50 font-bold mb-1">
                     HEALTH SCORE
@@ -1144,7 +1144,7 @@ export default function HomePage() {
       {/* Left Arrow - overlaid on scroll container */}
       <button
         onClick={() => scrollCaseStudies("left")}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 w-12 h-12 rounded-full border border-slate-200 hover:border-sky-300 hover:text-sky-500 bg-white flex items-center justify-center shadow-md hover:shadow-xl transition-all active:scale-95 group"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 w-12 h-12 rounded-full border border-slate-200 hover:border-sky-300 hover:text-sky-500 bg-white hidden md:flex items-center justify-center shadow-md hover:shadow-xl transition-all active:scale-95 group"
         aria-label="Scroll left"
       >
         <ChevronLeft size={20} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -1153,7 +1153,7 @@ export default function HomePage() {
       {/* Right Arrow - overlaid on scroll container */}
       <button
         onClick={() => scrollCaseStudies("right")}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 w-12 h-12 rounded-full border border-slate-200 hover:border-sky-300 hover:text-sky-500 bg-white flex items-center justify-center shadow-md hover:shadow-xl transition-all active:scale-95 group"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 w-12 h-12 rounded-full border border-slate-200 hover:border-sky-300 hover:text-sky-500 bg-white hidden md:flex items-center justify-center shadow-md hover:shadow-xl transition-all active:scale-95 group"
         aria-label="Scroll right"
       >
         <ChevronRight size={20} className="group-hover:translate-x-0.5 transition-transform" />
@@ -1308,7 +1308,7 @@ export default function HomePage() {
             </motion.p>
             <motion.h2
               variants={fadeIn}
-              className="text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight"
+              className="text-2xl sm:text-3xl md:text-5xl font-bold text-slate-900 mb-8 leading-tight"
             >
               We build tech that scales with your ambition
             </motion.h2>
@@ -1344,7 +1344,7 @@ export default function HomePage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative rounded-3xl h-[450px] overflow-hidden group shadow-2xl"
+            className="relative rounded-3xl h-64 sm:h-[450px] overflow-hidden group shadow-2xl"
           >
             <motion.div
               animate={{
@@ -1467,7 +1467,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-sky-500 to-sky-600 rounded-3xl p-12 text-center text-white relative overflow-hidden"
+            className="bg-gradient-to-r from-sky-500 to-sky-600 rounded-3xl p-6 sm:p-12 text-center text-white relative overflow-hidden"
           >
             {/* Animated background particles */}
             {[...Array(6)].map((_, i) => {
@@ -1500,7 +1500,7 @@ export default function HomePage() {
             })}
 
             <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-4 relative z-10"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 relative z-10"
               animate={{ scale: [1, 1.02, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
