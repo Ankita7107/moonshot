@@ -202,16 +202,44 @@ body {
 
   /* --- Dashboard Command Center Styles --- */
   .dashboard-panel {
-    @apply relative overflow-hidden bg-slate-950/95 border border-slate-800/80 rounded-[2.5rem] shadow-2xl shadow-slate-950/50;
+    @apply relative overflow-hidden bg-slate-50/70 border border-slate-200/80 rounded-[2.5rem] shadow-xl shadow-slate-200/35;
+  }
+
+  .dashboard-panel .text-white {
+    @apply text-slate-800 !important;
+  }
+
+  .dashboard-panel .text-white\/60 {
+    @apply text-slate-500 !important;
+  }
+
+  .dashboard-panel .text-white\/30 {
+    @apply text-slate-400 !important;
+  }
+
+  .dashboard-panel .text-white\/50 {
+    @apply text-slate-400 !important;
+  }
+
+  .dashboard-panel .text-sky-400 {
+    @apply text-sky-600 !important;
+  }
+
+  .dashboard-panel .text-emerald-400 {
+    @apply text-emerald-600 !important;
+  }
+
+  .dashboard-panel .text-amber-400 {
+    @apply text-amber-600 !important;
   }
 
   .dashboard-widget {
-    @apply bg-slate-900/50 backdrop-blur-md border border-slate-800/60 rounded-2xl p-5 transition-all duration-300;
+    @apply bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all duration-300;
   }
 
   .grid-pattern {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
     background-size: 20px 20px;
   }
 
