@@ -600,10 +600,10 @@ export default function HomePage() {
                 </div>
 
                 {/* Dashboard Widgets Grid */}
-                <div className="grid grid-cols-2 gap-4 relative z-10">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
                   <motion.div
                     whileHover={{ y: -5 }}
-                    className="dashboard-widget col-span-2"
+                    className="dashboard-widget col-span-2 lg:col-span-3"
                   >
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-white/60 text-xs font-medium uppercase tracking-widest">
@@ -626,7 +626,7 @@ export default function HomePage() {
 
                   <motion.div
                     whileHover={{ y: -5 }}
-                    className="dashboard-widget"
+                    className="dashboard-widget col-span-1"
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <Cpu className="text-emerald-400 w-4 h-4" />
@@ -641,7 +641,7 @@ export default function HomePage() {
 
                   <motion.div
                     whileHover={{ y: -5 }}
-                    className="dashboard-widget"
+                    className="dashboard-widget col-span-1"
                   >
                     <div className="flex items-center gap-3 mb-2">
                       <Settings2 className="text-amber-400 w-4 h-4" />
@@ -653,25 +653,22 @@ export default function HomePage() {
                       99.9<span className="text-white/30">%</span>
                     </div>
                   </motion.div>
-                </div>
 
-                {/* Floating metrics */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute -right-6 top-1/4 bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl z-20 hidden lg:block"
-                >
-                  <div className="text-[10px] text-white/50 font-bold mb-1">
-                    HEALTH SCORE
-                  </div>
-                  <div className="text-sky-400 font-mono text-xl">
-                    A+ EXCELLENT
-                  </div>
-                </motion.div>
+                  <motion.div
+                    whileHover={{ y: -5 }}
+                    className="dashboard-widget col-span-2 lg:col-span-1"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <ShieldCheck className="text-sky-400 w-4 h-4" />
+                      <span className="text-white/60 text-[10px] font-bold">
+                        HEALTH SCORE
+                      </span>
+                    </div>
+                    <div className="text-2xl font-mono text-white">
+                      A+ <span className="text-sky-400 text-lg font-bold">EXCELLENT</span>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
 

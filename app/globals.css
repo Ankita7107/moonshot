@@ -199,6 +199,30 @@ body {
   .glow-card {
     box-shadow: 0 0 40px rgba(14, 165, 233, 0.15);
   }
+
+  /* --- Dashboard Command Center Styles --- */
+  .dashboard-panel {
+    @apply relative overflow-hidden bg-slate-950/95 border border-slate-800/80 rounded-[2.5rem] shadow-2xl shadow-slate-950/50;
+  }
+
+  .dashboard-widget {
+    @apply bg-slate-900/50 backdrop-blur-md border border-slate-800/60 rounded-2xl p-5 transition-all duration-300;
+  }
+
+  .grid-pattern {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .status-pulse {
+    @apply w-2.5 h-2.5 rounded-full bg-emerald-500 relative;
+  }
+
+  .status-pulse::after {
+    content: "";
+    @apply absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-75;
+  }
 }
 
 @keyframes gradientMove {
