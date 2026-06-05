@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { MessageSquare } from "lucide-react";
+import Link from "next/link";
 
 interface Message {
   role: "user" | "bot";
@@ -18,14 +19,42 @@ const renderMessage = (text: string) => {
     } else if (cleanLine.startsWith("*") && !cleanLine.startsWith("**")) {
       isBullet = true;
       cleanLine = cleanLine.substring(1);
+    } else {
+      cleanLine = line; // Preserve original spacing/indentation for non-bullet lines
     }
 
-    // Parse **bold** parts
-    const parts = cleanLine.split(/\*\*([\s\S]*?)\*\*/g);
+    // Parse Markdown links [label](url) and bold **text**
+    const regex = /(\[.*?\]\(.*?\))|(\*\*.*?\*\*)/g;
+    const parts = cleanLine.split(regex);
     const content = parts.map((part, partIdx) => {
-      if (partIdx % 2 === 1) {
-        return <strong key={partIdx} className="font-extrabold text-slate-900">{part}</strong>;
+      if (!part) return null;
+
+      if (part.startsWith("[") && part.includes("](")) {
+        const match = part.match(/\[(.*?)\]\((.*?)\)/);
+        if (match) {
+          const [_, label, url] = match;
+          const isExternal = url.startsWith("http") || url.startsWith("mailto:") || url.startsWith("tel:");
+          if (isExternal) {
+            return (
+              <a key={partIdx} href={url} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline font-semibold">
+                {label}
+              </a>
+            );
+          } else {
+            return (
+              <Link key={partIdx} href={url} className="text-sky-600 hover:underline font-semibold">
+                {label}
+              </Link>
+            );
+          }
+        }
       }
+
+      if (part.startsWith("**") && part.endsWith("**")) {
+        const boldText = part.slice(2, -2);
+        return <strong key={partIdx} className="font-extrabold text-slate-900">{boldText}</strong>;
+      }
+
       return part;
     });
 
@@ -45,6 +74,7 @@ const renderMessage = (text: string) => {
     );
   });
 };
+
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
