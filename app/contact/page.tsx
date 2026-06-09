@@ -7,6 +7,7 @@ export default function ContactPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [companyName, setCompanyName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [interest, setInterest] = useState("Web Development");
   const [message, setMessage] = useState("");
 
@@ -28,7 +29,7 @@ export default function ContactPage() {
       const response = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullName, email, companyName, interest, message }),
+        body: JSON.stringify({ fullName, email, companyName, mobileNumber, interest, message }),
       });
 
       const data = await response.json();
@@ -38,7 +39,7 @@ export default function ContactPage() {
           type: "success",
           text: "Thank you! Your message has been sent successfully. We will contact you soon.",
         });
-        setFullName(""); setEmail(""); setCompanyName("");
+        setFullName(""); setEmail(""); setCompanyName(""); setMobileNumber("");
         setInterest("Web Development"); setMessage("");
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
@@ -93,7 +94,7 @@ export default function ContactPage() {
         <div className="pointer-events-none absolute top-0 right-0 w-80 h-80 bg-sky-100/30 rounded-full blur-2xl -z-10" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-stretch justify-center">
+          <div className="flex flex-col lg:flex-row items-stretch justify-center gap-8 lg:gap-0">
 
             {/* Left: Contact Info */}
             <motion.div
@@ -126,9 +127,9 @@ export default function ContactPage() {
                       <div>
                         <p className="text-sky-100/80 text-[10px] uppercase tracking-[0.2em] font-bold mb-1">{label}</p>
                         {href ? (
-                          <a href={href} className="text-sm text-white hover:text-sky-200 transition-colors whitespace-pre-line leading-relaxed">{value}</a>
+                          <a href={href} className="text-sm text-white hover:text-sky-200 transition-colors whitespace-pre-line leading-relaxed break-all">{value}</a>
                         ) : (
-                          <p className="text-sm text-white whitespace-pre-line leading-relaxed">{value}</p>
+                          <p className="text-sm text-white whitespace-pre-line leading-relaxed break-words">{value}</p>
                         )}
                       </div>
                     </li>
@@ -163,6 +164,11 @@ export default function ContactPage() {
                       placeholder="Your company" className={inputClass} />
                   </div>
                   <div>
+                    <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wider">Mobile Number</label>
+                    <input type="tel" value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)}
+                      placeholder="+91 98765 43210" className={inputClass} />
+                  </div>
+                  <div className="md:col-span-2">
                     <label className="block text-xs font-bold text-slate-600 mb-2 uppercase tracking-wider">Interest</label>
                     <div className="relative">
                       <select value={interest} onChange={(e) => setInterest(e.target.value)} className={`${inputClass} appearance-none cursor-pointer`}>

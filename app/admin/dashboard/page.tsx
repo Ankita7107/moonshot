@@ -2,13 +2,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check } from "lucide-react";
+import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check, Phone } from "lucide-react";
 
 interface Inquiry {
   id: number;
   full_name: string;
   email: string;
   company_name: string | null;
+  mobile_number: string | null;
   interest: string;
   message: string;
   created_at: string;
@@ -132,6 +133,7 @@ export default function AdminDashboardPage() {
           inq.full_name.toLowerCase().includes(term) ||
           inq.email.toLowerCase().includes(term) ||
           (inq.company_name && inq.company_name.toLowerCase().includes(term)) ||
+          (inq.mobile_number && inq.mobile_number.toLowerCase().includes(term)) ||
           inq.message.toLowerCase().includes(term)
       );
     }
@@ -186,7 +188,7 @@ export default function AdminDashboardPage() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-200/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-sky-100/20 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-[1440px] mx-auto relative z-10">
         {/* Header bar */}
         <header className="flex flex-col sm:flex-row justify-between items-center bg-white/80 border border-slate-100 p-5 md:p-6 rounded-2xl md:rounded-3xl backdrop-blur-xl shadow-[0_10px_40px_rgba(14,165,233,0.04)] mb-6 md:mb-8 gap-4">
           <div className="text-center sm:text-left">
@@ -274,10 +276,11 @@ export default function AdminDashboardPage() {
             <>
               {/* Desktop View (Table) */}
               <div className="hidden md:block overflow-x-auto">
-                <table className="w-full text-left border-collapse">
+                <table className="w-full min-w-[1200px] text-left border-collapse">
                   <thead>
                     <tr className="border-b border-slate-100 text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-50/50">
                       <th className="py-5 px-6">Submitted By</th>
+                      <th className="py-5 px-6">Phone Number</th>
                       <th className="py-5 px-6">Interest Area</th>
                       <th className="py-5 px-6">Company</th>
                       <th className="py-5 px-6">Message</th>
@@ -318,6 +321,19 @@ export default function AdminDashboardPage() {
                                 )}
                               </button>
                             </div>
+                          </td>
+                          <td className="py-6 px-6 whitespace-nowrap">
+                            {inq.mobile_number ? (
+                              <a
+                                href={`tel:${inq.mobile_number}`}
+                                className="text-xs text-sky-500 hover:text-sky-600 flex items-center gap-1.5 transition-colors font-semibold"
+                              >
+                                <Phone className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+                                {inq.mobile_number}
+                              </a>
+                            ) : (
+                              <span className="text-slate-400 text-xs italic">Not Provided</span>
+                            )}
                           </td>
                           <td className="py-6 px-6">
                             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-xs font-bold border border-sky-100 shadow-sm shadow-sky-50">
@@ -403,6 +419,18 @@ export default function AdminDashboardPage() {
                             )}
                           </button>
                         </div>
+
+                        {inq.mobile_number && (
+                          <div className="flex items-center gap-1.5 text-slate-600 text-xs font-semibold border-t border-slate-100/80 pt-2.5">
+                            <a
+                              href={`tel:${inq.mobile_number}`}
+                              className="hover:text-sky-600 flex items-center gap-1.5 transition-colors"
+                            >
+                              <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                              <span>{inq.mobile_number}</span>
+                            </a>
+                          </div>
+                        )}
 
                         <div className="flex items-center gap-1.5 text-slate-600 text-xs font-semibold border-t border-slate-100/80 pt-2.5">
                           <Building className="w-3.5 h-3.5 text-slate-400 shrink-0" />
