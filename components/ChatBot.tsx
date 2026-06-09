@@ -116,9 +116,9 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:bottom-6 sm:right-6 sm:left-auto z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 left-4 right-4 sm:bottom-6 sm:right-6 sm:left-auto z-50 flex flex-col items-end pointer-events-none">
       {isOpen && (
-        <div className="mb-4 w-full sm:w-96 rounded-2xl shadow-2xl bg-white border border-slate-100 flex flex-col overflow-hidden max-h-[calc(100vh-120px)]" 
+        <div className="pointer-events-auto mb-4 w-full sm:w-96 rounded-2xl shadow-2xl bg-white border border-slate-100 flex flex-col overflow-hidden max-h-[calc(100vh-120px)]" 
           style={{ height: "480px" }}>
           
           {/* Header */}
@@ -170,7 +170,7 @@ export default function ChatBot() {
 
       {/* Toggle Button */}
       <button onClick={() => setIsOpen(!isOpen)}
-        className="w-12 h-12 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 
+        className="pointer-events-auto w-12 h-12 rounded-full bg-gradient-to-r from-sky-500 to-sky-600 
                    text-white text-xl shadow-lg flex items-center justify-center 
                    hover:scale-110 transition-transform">
         {isOpen ? "✕" : "🚀"}

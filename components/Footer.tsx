@@ -158,17 +158,17 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-900 pt-6 md:pt-8 flex flex-col sm:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2 order-2 sm:order-1 justify-center sm:justify-start">
+          <div className="flex flex-col sm:flex-row items-center gap-2 order-2 sm:order-1 justify-center sm:justify-start">
             <p className="text-slate-500 text-xs font-medium text-center sm:text-left">
               © 2002 <span className="text-slate-400">Moonshot Minds Tech</span>.
               All rights reserved.
             </p>
             <Link
               href="/admin"
-              className="text-slate-600 hover:text-sky-500 transition-colors opacity-30 hover:opacity-100 flex items-center justify-center p-1"
+              className="text-slate-500 hover:text-sky-500 transition-colors opacity-60 hover:opacity-100 flex items-center justify-center p-2 rounded-lg hover:bg-slate-900/50"
               title="Admin Portal"
             >
-              <Lock size={12} />
+              <Lock size={16} />
             </Link>
           </div>
           <div className="flex flex-wrap gap-6 sm:gap-8 order-1 sm:order-2 justify-center sm:justify-start">
