@@ -263,66 +263,70 @@ export default function IndustriesPage() {
       <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {displayedIndustries.map((ind, index) => (
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: (index % 3) * 0.1 }}
+            <Link
               key={ind.title}
-              id={ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
-              className="group relative bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-100 hover:border-sky-200 transition-all shadow-sm hover:shadow-2xl scroll-mt-24 flex flex-col h-full"
+              href={`/industries/${ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+              className="flex flex-col h-full"
             >
-              <div className="aspect-[4/3] relative overflow-hidden shrink-0">
-                <Image
-                  src={ind.image}
-                  alt={ind.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  unoptimized
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity`} />
-                
-                <div className="absolute bottom-6 left-6 right-6 z-10">
-                  <div className="flex items-center gap-3 mb-2">
-                     <div className="w-8 h-px bg-sky-400 group-hover:w-12 transition-all" />
-                     <span className="text-sky-400 text-xs font-bold uppercase tracking-widest">Industry Solution</span>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: (index % 3) * 0.1 }}
+                id={ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+                className="group relative bg-slate-50 rounded-[2rem] overflow-hidden border border-slate-100 hover:border-sky-200 transition-all shadow-sm hover:shadow-2xl scroll-mt-24 flex flex-col h-full cursor-pointer"
+              >
+                <div className="aspect-[4/3] relative overflow-hidden shrink-0">
+                  <Image
+                    src={ind.image}
+                    alt={ind.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    unoptimized
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity`} />
+                  
+                  <div className="absolute bottom-6 left-6 right-6 z-10">
+                    <div className="flex items-center gap-3 mb-2">
+                       <div className="w-8 h-px bg-sky-400 group-hover:w-12 transition-all" />
+                       <span className="text-sky-400 text-xs font-bold uppercase tracking-widest">Industry Solution</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2">{ind.title}</h3>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{ind.title}</h3>
                 </div>
-              </div>
 
-              <div className="p-6 bg-white flex flex-col flex-1">
-                <p className="text-slate-500 text-sm mb-2 leading-relaxed">
-                  {ind.desc}
-                </p>
+                <div className="p-6 bg-white flex flex-col flex-1">
+                  <p className="text-slate-500 text-sm mb-2 leading-relaxed">
+                    {ind.desc}
+                  </p>
 
-                <ul className="space-y-1 mb-3 pt-1">
-                  {ind.highlights.map((hl) => (
-                    <li key={hl} className="flex items-center gap-2 text-[11px] text-slate-500 font-semibold">
-                      <div className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 animate-pulse" />
-                      <span>{hl}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="space-y-1 mb-3 pt-1">
+                    {ind.highlights.map((hl) => (
+                      <li key={hl} className="flex items-center gap-2 text-[11px] text-slate-500 font-semibold">
+                        <div className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0 animate-pulse" />
+                        <span>{hl}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                <div className="flex flex-wrap gap-2 mb-4 mt-auto pt-2 border-t border-slate-50">
-                  {ind.tags.map((tag) => (
-                    <span key={tag} className="badge text-[10px] uppercase tracking-wider font-bold">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  href={`/industries/${ind.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
-                  className="inline-flex items-center justify-between w-full text-slate-900 font-bold group/btn pt-1"
-                >
-                  <span className="group-hover/btn:text-sky-600 transition-colors">Explore Sector</span>
-                  <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center group-hover/btn:bg-sky-500 group-hover/btn:text-white transition-all">
-                    <ArrowRight size={18} />
+                  <div className="flex flex-wrap gap-2 mb-4 mt-auto pt-2 border-t border-slate-50">
+                    {ind.tags.map((tag) => (
+                      <span key={tag} className="badge text-[10px] uppercase tracking-wider font-bold">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                </Link>
-              </div>
-            </motion.div>
+                  <div
+                    className="inline-flex items-center justify-between w-full text-slate-900 font-bold group/btn pt-1"
+                  >
+                    <span className="group-hover/btn:text-sky-600 transition-colors">Explore Sector</span>
+                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center group-hover/btn:bg-sky-500 group-hover/btn:text-white transition-all">
+                      <ArrowRight size={18} />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
 
