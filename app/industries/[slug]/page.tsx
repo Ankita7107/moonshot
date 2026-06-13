@@ -1277,7 +1277,7 @@ export default function IndustryDetailsPage() {
           >
             <Link
               href="/industries"
-              className="inline-flex items-center gap-2 text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors"
             >
               <ArrowLeft size={16} /> Back to Sectors
             </Link>
