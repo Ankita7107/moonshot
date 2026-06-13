@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageSquare } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface Message {
   role: "user" | "bot";
@@ -77,6 +78,8 @@ const renderMessage = (text: string) => {
 
 
 export default function ChatBot() {
+  const pathname = usePathname();
+
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "bot", text: "Hi! I'm Moonshot Minds assistant. How can I help you? 🚀" }
@@ -114,6 +117,8 @@ export default function ChatBot() {
       setLoading(false);
     }
   };
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <div className="fixed bottom-4 left-4 right-4 sm:bottom-6 sm:right-6 sm:left-auto z-50 flex flex-col items-end pointer-events-none">

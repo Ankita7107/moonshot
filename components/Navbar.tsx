@@ -156,6 +156,8 @@ export default function Navbar() {
     }
   };
 
+  if (pathname?.startsWith("/admin")) return null;
+
   return (
     <header className={`sticky top-0 z-[100] transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-xl py-3 border-b border-slate-100" : "bg-white py-5"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">

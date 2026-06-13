@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check, Phone } from "lucide-react";
+import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check, Phone, Globe } from "lucide-react";
 
 interface Inquiry {
   id: number;
@@ -201,6 +202,14 @@ export default function AdminDashboardPage() {
             <p className="text-xs text-slate-500 mt-0.5">{adminUser.email}</p>
           </div>
           <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
+            <Link
+              href="/"
+              className="px-4 py-3 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-100 rounded-2xl flex items-center justify-center gap-2 transition-all font-bold text-sm shadow-sm"
+              title="Go to website"
+            >
+              <Globe className="w-4 h-4 text-sky-500" />
+              View Website
+            </Link>
             <button
               onClick={triggerRefresh}
               className="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-2xl flex items-center justify-center transition-all text-slate-600 shadow-sm"

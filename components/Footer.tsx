@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   MapPin,
   Phone,
@@ -11,6 +12,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Footer() {
+  const pathname = usePathname();
+
   const footerLinks = {
     company: [
       { label: "About Us", href: "/about" },
@@ -25,6 +28,8 @@ export default function Footer() {
       { label: "AI & Data Science", href: "/services#ai-machine-learning" },
     ],
   };
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <footer className="relative bg-slate-950 border-t border-slate-900 pt-12 md:pt-20 pb-8 md:pb-10 overflow-hidden">

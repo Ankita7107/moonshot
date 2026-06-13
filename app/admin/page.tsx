@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lock, Mail, AlertCircle, Loader2, ShieldAlert, Eye, EyeOff } from "lucide-react";
 
@@ -178,6 +179,12 @@ export default function AdminLoginPage() {
             )}
           </motion.button>
         </form>
+
+        <div className="mt-6 text-center">
+          <Link href="/" className="text-xs font-bold text-sky-500 hover:text-sky-600 transition-colors tracking-wider uppercase">
+            ← Back to Main Website
+          </Link>
+        </div>
       </motion.div>
     </div>
   );

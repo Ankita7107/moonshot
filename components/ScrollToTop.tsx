@@ -1,9 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 
 export default function ScrollToTop() {
+  const pathname = usePathname();
+
   const [isVisible, setIsVisible] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -34,6 +37,8 @@ export default function ScrollToTop() {
       behavior: "smooth",
     });
   };
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <AnimatePresence>
