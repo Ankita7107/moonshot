@@ -52,29 +52,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["Blockchain", "Digital Payments", "Trading Systems"],
     challenges: [
       {
-        title: "High-Latency Transaction Bottlenecks",
+        title: "Speed Up Transaction Processing",
         desc: "Processing millions of transactions per second requires microsecond-level precision and minimal network congestion.",
       },
       {
-        title: "Rigid Regulatory Compliance (PCI-DSS, GDPR)",
+        title: "Meet Financial Security Standards",
         desc: "Failing to secure financial ledgers and sensitive user metadata can lead to massive penalties and brand damage.",
       },
       {
-        title: "Sophisticated Fraud & Sybil Vectors",
+        title: "Detect & Prevent Transaction Fraud",
         desc: "Cyber threats continuously adapt, requiring immediate AI threat modeling at transaction validation time.",
       },
     ],
     solutions: [
       {
-        title: "High-Frequency Ledger Consensus Layers",
+        title: "Ultra-Fast Ledger Clearing (<15ms)",
         desc: "We design distributed ledger transaction pools executing atomic processing in under 15ms.",
       },
       {
-        title: "Real-Time AI Fraud Scoring Engine",
+        title: "Intelligent AI Fraud Shield",
         desc: "Intelligent scoring pipelines integrated directly into verification middleware to flag malicious operations instantly.",
       },
       {
-        title: "Isolated Cryptographic Sandbox Architecture",
+        title: "Secure Compliance Sandboxing",
         desc: "Fully secure sandbox structures adhering to stringent compliance standards without slowing down deployment speeds.",
       },
     ],
@@ -99,29 +99,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["HIPAA", "Telemedicine", "EHR Systems"],
     challenges: [
       {
-        title: "Fragmented EHR System Interoperability",
+        title: "Connect Fragmented Medical Records",
         desc: "Doctors and clinics operate on isolated databases, causing dangerous delay times in emergency patient care.",
       },
       {
-        title: "Strict Privacy Safeguards (HIPAA/HITECH)",
+        title: "Secure Patient Health Privacy",
         desc: "Strict compliance standards necessitate end-to-end data encryption in transit and at rest.",
       },
       {
-        title: "Unstable Telehealth Communication Channels",
+        title: "Reliable Telehealth Video Calling",
         desc: "Low network conditions routinely drop patient-doctor consultation calls in crucial clinical times.",
       },
     ],
     solutions: [
       {
-        title: "HL7/FHIR Compliant API Gateways",
+        title: "Unified Medical Database Integrators",
         desc: "Secure translation engines unifying disparate databases into standard, rapid electronic schemas.",
       },
       {
-        title: "Zero-Trust Encrypted Cloud Data Vaults",
+        title: "Secure Encrypted Patient Record Vaults",
         desc: "Advanced cryptographic data locks ensuring all EHR queries are traced, fully validated, and encrypted.",
       },
       {
-        title: "Adaptive Rate WebRTC Telehealth Pipelines",
+        title: "Smart Low-Bandwidth Video Pipelines",
         desc: "Robust WebRTC audio/video feeds adjusting dynamically to low-bandwidth states to preserve connection quality.",
       },
     ],
@@ -146,29 +146,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["Omnichannel", "AI Personalization", "Inventory"],
     challenges: [
       {
-        title: "Traffic Spikes and Storefront Crashes",
+        title: "Handle Sudden Holiday Traffic Spikes",
         desc: "Sudden seasonal flash sales overwhelm traditional hosting, causing downtime and lost revenue.",
       },
       {
-        title: "Mismatched Omnichannel Inventories",
+        title: "Sync Store & Online Inventories",
         desc: "Siloed retail databases cause product overselling and critical supply chain friction.",
       },
       {
-        title: "Poor User Catalog Discovery",
+        title: "Personalize Product Recommendations",
         desc: "Static retail grids fail to personalize results, reducing average order values and buyer engagement.",
       },
     ],
     solutions: [
       {
-        title: "Dynamic Autoscaling Edge Storefronts",
+        title: "Auto-Scaling Global Storefronts",
         desc: "Serverless global edge networks designed to scale seamlessly during massive consumer spikes.",
       },
       {
-        title: "Event-Sourced Global Inventory Hubs",
+        title: "Real-Time Catalog Sync Engines",
         desc: "Automated, real-time message streams keeping physical, web, and distributor catalogs in absolute sync.",
       },
       {
-        title: "Elasticsearch Personalization Pipelines",
+        title: "AI-Driven Smart Recommendation Engines",
         desc: "AI recommendation systems analyzing client history to surface hyper-personalized product lists.",
       },
     ],
@@ -193,29 +193,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["Supply Chain", "Fleet MGMT", "Warehouse AI"],
     challenges: [
       {
-        title: "Suboptimal Routing Routines",
+        title: "Optimize Delivery Fleet Routes",
         desc: "Inefficient fleet routes waste fuel, increase transit times, and cause scheduling friction.",
       },
       {
-        title: "High-Volume Fleet Ingestion Latency",
+        title: "Handle Real-Time IoT GPS Data",
         desc: "Handling real-time tracking signals from thousands of IoT trackers causes dashboard lag.",
       },
       {
-        title: "Unsynchronized Warehouse Desks",
+        title: "Automate Sorting & Packing Workflows",
         desc: "Manual inventory audits slow sorting speeds and cause bottlenecks at delivery stations.",
       },
     ],
     solutions: [
       {
-        title: "GIS-Driven Dynamic Routing Engines",
+        title: "Smart Traffic & Weather Routing",
         desc: "Intelligent routing pipelines computing live updates based on weather, traffic, and vehicle load.",
       },
       {
-        title: "AWS Kinesis IoT Ingestion Pipelines",
+        title: "High-Speed Live Fleet Dashboards",
         desc: "High-throughput data pipelines parsing telemetry streams instantly for real-time dashboards.",
       },
       {
-        title: "Dynamic Smart-Bin Warehouse Managers",
+        title: "AI-Guided Warehouse Picker Systems",
         desc: "Automated picking dashboards showing exact item placements, reducing packing times.",
       },
     ],
@@ -240,29 +240,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["PropTech", "Smart Buildings", "CRM"],
     challenges: [
       {
-        title: "Stale Multi-Listing Syncs",
+        title: "Keep Property Listings Updated",
         desc: "Outdated property boards cause buyer frustration and waste precious sales outreach resources.",
       },
       {
-        title: "Manual Agent Lead Qualification",
+        title: "Automate Buyer Lead Filtering",
         desc: "Agents spend hours sorting cold leads, slowing down high-value negotiation closures.",
       },
       {
-        title: "Static Property Visualization",
+        title: "Show Property Walkthroughs Online",
         desc: "Traditional flat images fail to engage distant premium clients or show spatial layouts.",
       },
     ],
     solutions: [
       {
-        title: "RESO-Compliant Real-Time Feeds",
+        title: "Real-Time MLS Sync Engines",
         desc: "Advanced sync engines standardizing property schemas and updating boards in real time.",
       },
       {
-        title: "Automated Qualification CRMs",
+        title: "AI Agent Qualification Assistants",
         desc: "AI bots qualifying buyers on listing pages and instantly scheduling priority viewings.",
       },
       {
-        title: "3D WebGL Property Visualizers",
+        title: "Interactive 3D Spatial Property Tours",
         desc: "Stunning browser-based spatial viewers offering seamless digital walkthroughs.",
       },
     ],
@@ -287,29 +287,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["LMS", "Virtual Classroom", "EdTech"],
     challenges: [
       {
-        title: "Fragmented Learning Hub Standards",
+        title: "Centralize Student Grades & Work",
         desc: "Siloed content channels cause classroom communication drops and grade tracking errors.",
       },
       {
-        title: "Laggy Virtual Classrooms",
+        title: "Ensure Low-Lag Virtual Classrooms",
         desc: "Unstable media connections during large-scale lectures disrupt lessons and impact learning.",
       },
       {
-        title: "Static One-Size Learning Speed",
+        title: "Personalize Learning Speeds for Students",
         desc: "Uniform teaching formats leave struggling students behind and bore advanced learners.",
       },
     ],
     solutions: [
       {
-        title: "SCORM/LTI Standard LMS Core",
+        title: "Unified Course Management System",
         desc: "Robust architecture unifying course objects, progress analytics, and class registries.",
       },
       {
-        title: "Low-Latency WebSockets Classrooms",
+        title: "Instant Whiteboard & Chat Networks",
         desc: "Real-time communication engines ensuring fluid group chats, whiteboards, and screensharing.",
       },
       {
-        title: "AI Adaptive Progress Builders",
+        title: "Smart Learning Roadmap Generators",
         desc: "Intelligent analytics modules serving customized learning tracks based on quiz scores.",
       },
     ],
@@ -334,29 +334,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["Industry 4.0", "IoT", "Automation"],
     challenges: [
       {
-        title: "Isolated Factory SCADA Networks",
+        title: "Connect Factory Floor Data to Cloud",
         desc: "Industrial networks trap vital operating metrics inside physical devices, preventing unified reporting.",
       },
       {
-        title: "High Costs of Sudden Machine Failure",
+        title: "Predict & Prevent Equipment Failures",
         desc: "Unexpected breakdowns halt assembly lines, costing thousands of dollars in lost productivity.",
       },
       {
-        title: "Opaque Supply Chains",
+        title: "Track Raw Material Shipments Live",
         desc: "Opaque delivery pipelines make raw material tracking and production forecasting difficult.",
       },
     ],
     solutions: [
       {
-        title: "Unified IoT Protocol Gateways",
+        title: "SCADA-to-Cloud Translation Hubs",
         desc: "Secure software translators converting SCADA/Modbus streams into secure cloud signals.",
       },
       {
-        title: "Predictive AI Failure Forecasters",
+        title: "AI Machinery Vibration Forecasters",
         desc: "Machine learning engines monitoring temperature and vibration to trigger predictive maintenance tasks.",
       },
       {
-        title: "Supply Chain Tracking Maps",
+        title: "Live Parts Location Dashboards",
         desc: "Comprehensive tracking systems giving real-time visibility into parts location and transit states.",
       },
     ],
@@ -381,29 +381,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["Booking Engines", "SaaS", "Hospitality AI"],
     challenges: [
       {
-        title: "Slow GDS Connection Pipelines",
-        desc: "Outdated booking syncs cause double-bookings and display inaccurate pricing.",
+        title: "Sync Hotel & Flight Availability Live",
+        desc: "Slow GDS booking syncs cause double-bookings and display inaccurate pricing.",
       },
       {
-        title: "Lost Revenue Due to Rigid Pricing",
+        title: "Maximize Profit via Dynamic Rates",
         desc: "Inflexible pricing structures miss out on high-demand windows and occupancy optimization.",
       },
       {
-        title: "Siloed Guest Profiles",
+        title: "Personalize Guest Support & Stays",
         desc: "Disconnected guest histories make it difficult to offer personalized stays and rewards.",
       },
     ],
     solutions: [
       {
-        title: "Sabre & Amadeus Direct APIs",
+        title: "Direct Reservation Booking Interfaces",
         desc: "Direct integration channels providing instant reservation syncs across global networks.",
       },
       {
-        title: "Dynamic Revenue Optimization Systems",
+        title: "AI-Driven Smart Room Rate Adjusters",
         desc: "AI pricing models adjusting rates automatically based on local demand, occupancy, and season.",
       },
       {
-        title: "Unified Guest Experience Hubs",
+        title: "Central Guest Profile & Support Desks",
         desc: "Centralized client profiles organizing booking history, room preferences, and support tickets.",
       },
     ],
@@ -428,29 +428,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["InsurTech", "Risk Analysis", "Banking"],
     challenges: [
       {
-        title: "Fragmented Core Banking Systems",
+        title: "Speed Up Core Banking Operations",
         desc: "Legacy ledger databases delay payment validations and make real-time financial tracking difficult.",
       },
       {
-        title: "Slow and Manual Claims Validation",
+        title: "Speed Up Insurance Claims Checking",
         desc: "Manual claims verification processes frustrate policyholders and increase operational costs.",
       },
       {
-        title: "Inaccurate Financial Risk Scoring",
+        title: "Improve Loan Risk Evaluations",
         desc: "Static risk scoring models fail to predict modern default patterns and portfolio threats.",
       },
     ],
     solutions: [
       {
-        title: "Distributed Core Ledger Hubs",
+        title: "Atomic Double-Entry Banking Ledgers",
         desc: "Atomic ledgers designed to handle complex transactions with zero risk of processing mismatch.",
       },
       {
-        title: "Automated Insurance Verification Flows",
+        title: "Auto-Processed Claim Workflows (90%)",
         desc: "Intelligent processing pipelines automating up to 90% of simple claims validation checks.",
       },
       {
-        title: "Dynamic AI Portfolio Risk Evaluators",
+        title: "AI-Driven Instant Credit Scoring",
         desc: "Advanced data models analyzing financial patterns to score credit applicants instantly.",
       },
     ],
@@ -475,29 +475,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["SOC", "Identity MGMT", "Threat Detection"],
     challenges: [
       {
-        title: "Telemetry Noise in Threat Databases",
+        title: "Filter Out False Security Alarms",
         desc: "Security teams are overwhelmed by thousands of false alerts, delaying response to real threats.",
       },
       {
-        title: "Slow Threat Mitigation Speeds",
+        title: "Isolate Cyber Attacks Automatically",
         desc: "Manual threat isolation steps give attackers precious time to move through sensitive corporate networks.",
       },
       {
-        title: "Vulnerable Access Points",
+        title: "Replace Weak Password Access Systems",
         desc: "Traditional password systems leave enterprise gates vulnerable to social engineering and phishing.",
       },
     ],
     solutions: [
       {
-        title: "Intelligent Endpoint Telemetry Filters",
+        title: "Real-Time SIEM Anomaly Scoring",
         desc: "Real-time anomaly scoring systems weeding out noise and highlighting critical system threats.",
       },
       {
-        title: "Automated Incident Containment Engine",
+        title: "Automated Device Isolation Playbooks",
         desc: "Automated playbooks isolating compromised endpoints and resetting credentials in seconds.",
       },
       {
-        title: "Zero-Trust Identity Access Controllers",
+        title: "Zero-Trust Biometric Access Gateways",
         desc: "Secure single sign-on modules using contextual biometrics and device verification.",
       },
     ],
@@ -522,29 +522,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["5G", "Network Infra", "Automation"],
     challenges: [
       {
-        title: "Complex Multi-Tenant Billing Systems",
+        title: "Fix Customer Billing Discrepancies",
         desc: "Slow database pipelines cause billing mismatches and delay monthly revenue reconciliation.",
       },
       {
-        title: "High Latency in 5G Traffic Routing",
+        title: "Optimize 5G Data Traffic Speeds",
         desc: "Inefficient traffic controllers delay connections in high-density consumer neighborhoods.",
       },
       {
-        title: "Difficult Network Configuration Updates",
+        title: "Deploy Network Updates Safely",
         desc: "Manual network updates require service windows and risk causing massive outages.",
       },
     ],
     solutions: [
       {
-        title: "High-Throughput Billing Engines",
+        title: "Real-Time Stream Billing Software",
         desc: "Real-time data streaming engines calculating data usage and processing payments instantly.",
       },
       {
-        title: "Low-Latency traffic Optimization",
+        title: "Smart Low-Latency Signal Routers",
         desc: "Low-latency microservices ensuring steady connections for real-time applications.",
       },
       {
-        title: "Automated Network Configuration Controllers",
+        title: "Zero-Downtime Safe Deploy Pipelines",
         desc: "Automated verification pipelines testing and deploying network updates without service downtime.",
       },
     ],
@@ -569,29 +569,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["EV Systems", "Connected Cars", "Mobility"],
     challenges: [
       {
-        title: "Processing High-Density CAN Bus Signals",
+        title: "Process Connected Car Diagnostics",
         desc: "Connected car systems must process massive amounts of raw sensor data with zero latency.",
       },
       {
-        title: "Untracked EV Battery Degradation",
+        title: "Predict EV Battery Health & Lifespan",
         desc: "Without battery health tracking, fleet managers face sudden vehicle breakdowns.",
       },
       {
-        title: "High-Latency Vehicle Telematics",
+        title: "Sync GPS & Safety Signals Live",
         desc: "Delayed GPS and safety telemetry updates slow down fleet operations and crash response times.",
       },
     ],
     solutions: [
       {
-        title: "Low-Latency CAN Bus Parsers",
+        title: "Optimized On-Vehicle Edge Parsers",
         desc: "Highly-optimized edge software designed to filter and parse vehicle diagnostic signals.",
       },
       {
-        title: "AI Battery Health Estimators",
+        title: "AI Predictive Cell-Degradation Models",
         desc: "Predictive models monitoring cell voltage and temperature to forecast battery life.",
       },
       {
-        title: "Real-Time Vehicle Tracking Gateways",
+        title: "High-Speed Connected Vehicle Ingress",
         desc: "High-frequency tracking pipelines feeding instant telematics data to central fleet systems.",
       },
     ],
@@ -616,29 +616,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["OTT", "Streaming", "Content AI"],
     challenges: [
       {
-        title: "Slow Stream Start Times",
+        title: "Reduce Video Buffering & Lag",
         desc: "Laggy buffering spikes during peak hours frustrate viewers, increasing user unsubscribe rates.",
       },
       {
-        title: "High Global Transcoding Costs",
+        title: "Reduce High Video Encoding Costs",
         desc: "Encoding high-resolution video streams across multiple codecs strains backend server resources.",
       },
       {
-        title: "Rigid Content Recommendations",
+        title: "Increase Viewer Platform Watch-Times",
         desc: "Static video grids fail to engage viewers, reducing watch times and platform subscription retention.",
       },
     ],
     solutions: [
       {
-        title: "HLS/DASH Adaptive Streamers",
+        title: "Adaptive Multi-Bitrate Video Players",
         desc: "Adaptive video players dynamically adjusting streaming quality to preserve playback.",
       },
       {
-        title: "Distributed Video Transcoding Queues",
+        title: "Auto-Scaling Video Encoding Clusters",
         desc: "Autoscaling cloud queues processing video files across multiple formats efficiently.",
       },
       {
-        title: "Dynamic User Interest Parsers",
+        title: "AI Platform Recommendation Algorithms",
         desc: "Intelligent analytics systems tracking viewer history to recommend high-match content.",
       },
     ],
@@ -663,29 +663,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["Food Delivery", "POS", "Inventory"],
     challenges: [
       {
-        title: "Order Consolidation Bottlenecks",
+        title: "Combine Orders from Multiple Delivery Apps",
         desc: "Managing orders from multiple delivery apps on separate tablets slows down busy kitchens.",
       },
       {
-        title: "Slow Delivery Dispatch Routing",
+        title: "Match Drivers with Delivery Orders Faster",
         desc: "Inefficient driver matching delays dispatches, causing orders to arrive cold.",
       },
       {
-        title: "Unreliable Network Connections",
+        title: "Keep Kitchen Screens Working Offline",
         desc: "System drops during busy dinner rushes cause lost orders and database updates to fail.",
       },
     ],
     solutions: [
       {
-        title: "Unified Restaurant POS Gateways",
+        title: "Single-Screen Unified POS Dashboards",
         desc: "Central software endpoints combining orders from all delivery services into one kitchen screen.",
       },
       {
-        title: "Real-Time Driver Dispatch Engine",
+        title: "Smart Kitchen-to-Driver Matching Engine",
         desc: "Intelligent matching engines coordinating dispatches based on driver location and kitchen prep speeds.",
       },
       {
-        title: "Offline-First Kitchen Dashboards",
+        title: "Resilient Offline Syncing Kitchen Screens",
         desc: "Resilient local software keeping ordering screens running and syncing data once connection returns.",
       },
     ],
@@ -710,29 +710,29 @@ const industryContent: Record<string, IndustryData> = {
     tags: ["e-Governance", "Digital ID", "Public Services"],
     challenges: [
       {
-        title: "Inaccessible Web Layout Designs",
+        title: "Optimize Web Layouts for Disabled Citizens",
         desc: "Outdated, complex web designs block disabled citizens from accessing essential services.",
       },
       {
-        title: "Vulnerable Access Points",
+        title: "Secure Citizen Tax & ID Records",
         desc: "Traditional logins risk compromise, exposing sensitive citizen tax and health records.",
       },
       {
-        title: "Opaque Public Service Tracking",
+        title: "Track Citizen Service Status Live",
         desc: "Clunky processing queues leave citizens in the dark about the status of applications.",
       },
     ],
     solutions: [
       {
-        title: "WCAG 2.1 AA Compliant Layouts",
+        title: "WCAG 2.1 Screen-Reader Compliant Portals",
         desc: "Highly-accessible web structures optimized for screen readers and keyboard navigation.",
       },
       {
-        title: "Federated Secure Digital ID Hubs",
+        title: "Zero-Trust Centralized ID Verifiers",
         desc: "Zero-trust verification protocols protecting user data and verifying logins securely.",
       },
       {
-        title: "Unified Citizen Service Portals",
+        title: "Central Citizen Application Tracker Dashboards",
         desc: "Centralized tracking portals offering real-time progress updates on all applications.",
       },
     ],
@@ -1286,7 +1286,6 @@ export default function IndustryDetailsPage() {
       </section>
 
       {/* ══════════════════ INTERACTIVE SWITCHER TERMINAL (CHALLENGES VS SOLUTIONS) ══════════════════ */}
-      {false && (
       <section className="py-24 bg-slate-50/60 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[140px] pointer-events-none"
              style={{ background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)` }} />
@@ -1299,14 +1298,14 @@ export default function IndustryDetailsPage() {
               <Workflow className={`w-3.5 h-3.5 ${styles.text}`} />
               <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Interactive Guide</span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Industry Challenges & Our Solutions</h3>
-            <p className="text-slate-500 text-sm mt-3">Click on any core challenge below to see how Moonshot's custom technology solves the problem.</p>
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Business Goals & Custom Solutions</h3>
+            <p className="text-slate-500 text-sm mt-3">Select a key business objective below to see how our custom technology drives efficiency and security.</p>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             {/* Left Column: Challenges selector */}
             <div className="lg:col-span-5 flex flex-col gap-4">
-              <span className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1 px-1">Industry Challenges</span>
+              <span className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1 px-1">Select an Objective</span>
               {data.challenges.map((challenge, idx) => {
                 const isActive = activeTab === idx;
                 return (
@@ -1317,7 +1316,7 @@ export default function IndustryDetailsPage() {
                     whileTap={{ scale: 0.98 }}
                     className={`text-left p-6 rounded-[2rem] border transition-all duration-300 flex items-start gap-4 shadow-sm hover:shadow-md relative overflow-hidden ${
                       isActive 
-                        ? `bg-white border-${styles.text.split("-")[1]}-300 ring-2 ring-${styles.text.split("-")[1]}-100` 
+                        ? `bg-white border-sky-300 ring-2 ring-sky-100` 
                         : "bg-white/80 border-slate-100/80 hover:bg-white hover:border-slate-200"
                     }`}
                   >
@@ -1332,13 +1331,13 @@ export default function IndustryDetailsPage() {
                     <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
                       isActive 
                         ? `${styles.bg} text-white` 
-                        : "bg-rose-50 text-rose-500"
+                        : "bg-sky-50 text-sky-500 group-hover:bg-sky-500 group-hover:text-white"
                     }`}>
-                      <AlertCircle size={20} />
+                      <Zap size={18} />
                     </div>
                     <div>
                       <h4 className="font-bold text-slate-800 text-sm md:text-base leading-snug">{challenge.title}</h4>
-                      <p className="text-slate-400 text-xs mt-1 leading-normal font-semibold">Challenge {idx + 1}</p>
+                      <p className="text-slate-400 text-xs mt-1 leading-normal font-semibold">Use Case {idx + 1}</p>
                     </div>
                   </motion.button>
                 );
@@ -1363,8 +1362,8 @@ export default function IndustryDetailsPage() {
                     <div>
                       {/* Active tag info */}
                       <div className="flex items-center gap-3 mb-6">
-                        <span className="text-[10px] font-black text-rose-500 bg-rose-50 border border-rose-100 px-3 py-1 rounded-full uppercase tracking-wider">
-                          Challenge: {data.challenges[activeTab].title}
+                        <span className="text-[10px] font-black text-sky-600 bg-sky-50 border border-sky-100 px-3 py-1 rounded-full uppercase tracking-wider">
+                          Use Case: {data.challenges[activeTab].title}
                         </span>
                         <ArrowRightLeft className="w-4 h-4 text-slate-300" />
                         <span className={`text-[10px] font-black ${styles.text} ${styles.bgLight} border ${styles.border} px-3 py-1 rounded-full uppercase tracking-wider`}>
@@ -1383,7 +1382,7 @@ export default function IndustryDetailsPage() {
                       </p>
 
                       <div className="bg-slate-50 rounded-2xl border border-slate-100 p-5 mt-6">
-                        <span className="text-slate-400 text-xs font-bold uppercase tracking-widest block mb-2">Understanding the Challenge</span>
+                        <span className="text-slate-400 text-xs font-bold uppercase tracking-widest block mb-2">Why This Matters</span>
                         <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
                           {data.challenges[activeTab].desc}
                         </p>
@@ -1409,7 +1408,6 @@ export default function IndustryDetailsPage() {
           </div>
         </div>
       </section>
-      )}
 
       {/* ══════════════════ SIMULATED ARCHITECTURE FLOW (BLUEPRINT DESIGN) ══════════════════ */}
       <section className="py-24 bg-white relative overflow-hidden">
