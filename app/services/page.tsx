@@ -55,7 +55,7 @@ const services = [
     tagline: "Protect your digital assets.",
     desc: "Enterprise-grade security audits, penetration testing, and compliance monitoring for digital assets.",
     features: ["Vulnerability Audits", "Penetration Testing", "Compliance"],
-    detail: "Our red team engineers simulate real-world attacks before hackers do. VAPT reports, OWASP compliance, GDPR/SOC2 readiness — complete security posture.",
+    detail: "Our security engineers simulate real-world cyberattacks to find weaknesses before hackers do. We provide VAPT reports and help ensure compliance with standards like OWASP, GDPR, and SOC2.",
   },
   {
     id: "mobile-app-development", category: "Mobile",
@@ -64,7 +64,7 @@ const services = [
     tagline: "iOS & Android apps users love.",
     desc: "Native and cross-platform mobile experiences that engage users and drive business growth.",
     features: ["iOS & Android", "React Native / Flutter", "High Performance"],
-    detail: "60fps animations, offline-first architecture, deep OS integrations. We build apps that get 5-star reviews — from MVP to millions of daily users.",
+    detail: "We build scalable, high-quality apps with smooth performance, offline capability, and strong system integration—designed to earn great user reviews.",
   },
   {
     id: "api-development-integration", category: "Web",
@@ -82,7 +82,7 @@ const services = [
     tagline: "From code to production, automatically.",
     desc: "Automated deployment pipelines using Docker, Kubernetes, Jenkins, and GitHub Actions for faster delivery.",
     features: ["Docker / K8s", "Jenkins / Actions", "Terraform"],
-    detail: "Full GitOps workflows with environment promotion, automated rollbacks, and infra drift detection. Every commit goes from code to production with confidence.",
+    detail: "We build automated GitOps pipelines that move code from development to production safely, with built-in rollback and infrastructure drift detection.",
   },
   {
     id: "ui-ux-design", category: "Design",
@@ -91,7 +91,7 @@ const services = [
     tagline: "Beautiful designs that convert.",
     desc: "Modern, user-centric UI/UX design with wireframing, prototyping, and Figma-based design systems.",
     features: ["User Research", "Wireframing", "Prototyping"],
-    detail: "We run user research, heatmaps, A/B tests, and usability studies to back every design decision. Figma design systems that scale across your entire product suite.",
+    detail: "We design using real user data—research, heatmaps, A/B tests, and usability studies—and build scalable Figma systems across your products.",
   },
   {
     id: "ai-chatbots-automation", category: "AI",
