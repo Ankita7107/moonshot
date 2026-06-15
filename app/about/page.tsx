@@ -294,9 +294,7 @@ export default function AboutPage() {
               Our Mission
             </h3>
             <p className="text-slate-500 text-sm sm:text-lg leading-relaxed">
-              To empower organizations with robust digital infrastructure and
-              innovative software that fosters sustainable growth and solves
-              complex global challenges through engineering rigor.
+              To provide robust digital infrastructure and innovative software that support sustainable growth and solve complex challenges through engineering excellence.
             </p>
           </motion.div>
 
@@ -315,9 +313,7 @@ export default function AboutPage() {
               Our Vision
             </h3>
             <p className="text-slate-500 text-sm sm:text-lg leading-relaxed">
-              To be the world&apos;s most trusted partner for engineering
-              digital transformations, recognized for our commitment to quality,
-              integrity, and future-proof architectural innovation.
+              To be the world's most trusted digital transformation partner, recognized for quality, integrity, and future-ready innovation
             </p>
           </motion.div>
         </div>
