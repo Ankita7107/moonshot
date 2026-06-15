@@ -69,8 +69,7 @@ export default function WhyUsPage() {
               Why Partners Choose Us
             </h1>
             <p className="text-slate-600 text-sm sm:text-lg text-center md:text-left">
-              We go beyond coding. We become your strategic technology partner,
-              ensuring every decision supports your long-term business goals.
+             We don’t just write code. We work as your technology partner to ensure every decision aligns with your long-term goals.
             </p>
           </motion.div>
           <div className="relative">
