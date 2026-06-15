@@ -102,7 +102,7 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative overflow-hidden text-white p-10 md:p-12 lg:w-[380px] shrink-0 flex flex-col gap-10 rounded-3xl shadow-[0_24px_80px_rgba(14,165,233,0.35)] z-20 lg:-mr-14 lg:my-8 w-full"
+              className="relative overflow-hidden text-white p-10 md:p-12 lg:w-[380px] shrink-0 flex flex-col gap-10 rounded-3xl shadow-[0_24px_80px_rgba(14,165,233,0.35)] z-20 lg:-mr-14 lg:my-8 w-full lg:self-center"
               style={{
                 background: "linear-gradient(145deg, #0ea5e9 0%, #0284c7 60%, #0369a1 100%)",
               }}
