@@ -1285,30 +1285,6 @@ export default function IndustryDetailsPage() {
         </div>
       </section>
 
-      {/* ══════════════════ CORE METRICS ══════════════════ */}
-      <section className="py-24 bg-white relative z-20 shadow-sm border-b border-slate-100/50">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-          {data.metrics.map((metric, idx) => (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: idx * 0.1, type: "spring", stiffness: 100 }}
-              whileHover={{ y: -6 }}
-              key={metric.label}
-              className="group p-8 rounded-[2rem] hover:bg-slate-50/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.02)] transition-all duration-300 border border-transparent hover:border-slate-100"
-            >
-              <h3 className={`text-4xl md:text-5xl font-black ${styles.text} mb-3 group-hover:scale-105 transition-transform duration-300 flex justify-center items-center gap-1`}>
-                <CountUpMetric value={metric.value} />
-              </h3>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest group-hover:text-slate-600 transition-colors">
-                {metric.label}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
       {/* ══════════════════ INTERACTIVE SWITCHER TERMINAL (CHALLENGES VS SOLUTIONS) ══════════════════ */}
       {false && (
       <section className="py-24 bg-slate-50/60 relative overflow-hidden">
