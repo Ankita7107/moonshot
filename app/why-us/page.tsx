@@ -150,7 +150,10 @@ export default function WhyUsPage() {
             >
               {securityPoints.map((p, i) => (
                 <motion.li
-                  variants={fadeIn}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.15 }}
                   key={p}
                   className="flex items-center gap-4 text-slate-700 bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow cursor-default"
                 >
@@ -270,9 +273,12 @@ export default function WhyUsPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              {partnerPoints.map((p) => (
+              {partnerPoints.map((p, i) => (
                 <motion.li
-                  variants={fadeIn}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.15 }}
                   key={p}
                   className="flex items-center gap-4 text-slate-700 bg-sky-50/50 p-4 rounded-xl border border-sky-100 hover:bg-sky-50 transition-colors cursor-default"
                 >
