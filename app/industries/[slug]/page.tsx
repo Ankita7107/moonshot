@@ -773,7 +773,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-sky-300",
     ring: "focus:ring-sky-500",
     glow: "rgba(14,165,233,0.18)",
-    gradientText: "from-sky-600 via-blue-600 to-indigo-600"
+    gradientText: "from-slate-900 to-sky-500"
   },
   cyan: {
     text: "text-cyan-500",
