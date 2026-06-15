@@ -473,7 +473,7 @@ export default function AboutPage() {
               </h2>
               <p className="text-slate-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed font-medium">
                 Whether you&apos;re a high-growth startup or an established
-                enterprise, we provide the architectural rigor and engineering
+                enterprise, we provide the architectural Excellence and engineering
                 talent to bring your vision to life.
               </p>
 
