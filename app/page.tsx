@@ -88,6 +88,7 @@ const caseStudies = [
     desc: "A comprehensive financial advisory platform offering seamless solutions across loans, insurance, and wealth management.",
     color: "from-blue-500 to-indigo-600",
     image: "/infinityfront.png",
+    link: "https://www.infinityarthvishva.com/",
   },
   {
     title: "Infinity HRMS",
@@ -96,6 +97,7 @@ const caseStudies = [
     desc: "A powerful HR Management System designed to streamline HR operations, payroll, and employee lifecycle management.",
     color: "from-emerald-400 to-teal-600",
     image: "/moonshot_images/infinityhrms.png",
+    link: "https://hrmsv2.infinityarthvishva.com/login",
   },
   {
     title: "Raja-ji",
@@ -120,6 +122,7 @@ const caseStudies = [
     desc: "A powerful recruitment portal featuring AI-based calling workflows, verified candidate profiles, and seamless talent match capabilities.",
     color: "from-indigo-600 to-blue-700",
     image: "/talentconnectindia.PNG",
+    link: "https://talentconnectindia.com/",
   },
 ];
 
@@ -1003,7 +1006,9 @@ export default function HomePage() {
               </p>
               <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
                 <Link
-                  href="/contact"
+                  href={study.link || "/contact"}
+                  target={study.link ? "_blank" : undefined}
+                  rel={study.link ? "noopener noreferrer" : undefined}
                   className="inline-flex items-center gap-2 text-slate-900 font-bold text-sm group/btn"
                 >
                   View Case Study
