@@ -1216,10 +1216,21 @@ export default function IndustryDetailsPage() {
         {/* Full-width dynamic background image integrated very lightly */}
         {bgImage && (
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-[0.06] mix-blend-multiply">
-            <img
+            <motion.img
+              initial={{ scale: 1.05, x: 0, y: 0 }}
+              animate={{ 
+                scale: [1.05, 1.15, 1.05],
+                x: [0, 15, -15, 0],
+                y: [0, -10, 10, 0]
+              }}
+              transition={{
+                duration: 30,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
               src={bgImage}
               alt={data.title}
-              className="w-full h-full object-cover scale-105 select-none pointer-events-none filter saturate-50"
+              className="w-full h-full object-cover select-none pointer-events-none filter saturate-50"
             />
           </div>
         )}
