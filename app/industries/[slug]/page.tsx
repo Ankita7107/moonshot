@@ -1277,9 +1277,9 @@ export default function IndustryDetailsPage() {
           >
             <Link
               href="/industries"
-              className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-sky-500 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-sky-300 hover:text-sky-600 text-xs font-bold text-slate-600 shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <ArrowLeft size={16} /> Back to Sectors
+              <ArrowLeft size={14} /> Back to Sectors
             </Link>
           </motion.div>
         </div>
