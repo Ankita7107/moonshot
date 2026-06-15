@@ -764,7 +764,7 @@ export default function HomePage() {
                 icon: <Rocket className="w-6 h-6" />,
               },
               {
-                role: "For CTOs",
+                role: "For CTOs (Chief Technology Officers)",
                 desc: "Enterprise-grade security, code quality audits, and automated DevOps pipelines.",
                 icon: <Cpu className="w-6 h-6" />,
               },
