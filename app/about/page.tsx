@@ -114,7 +114,7 @@ const values = [
     iconColor: "text-violet-500",
     bgClass: "bg-violet-50 group-hover:bg-violet-500",
     rotateClass: "group-hover:-rotate-6",
-    title: "Radical Candor",
+    title: "Transparency",
     desc: "Honest communication at every stage.",
   },
 ];
