@@ -17,6 +17,7 @@ import {
   Plug,
   ShieldCheck,
   BrainCircuit,
+  Sparkles,
   Smartphone,
   Bot,
   Network,
@@ -94,7 +95,7 @@ const techCategories: {
   },
   {
     title: "AI / Data",
-    Icon: BrainCircuit,
+    Icon: Sparkles,
     tags: ["OpenAI", "TensorFlow", "PyTorch", "Pandas", "Hugging Face"],
     color: "from-fuchsia-400 to-purple-500",
     glow: "rgba(232,121,249,0.35)",
