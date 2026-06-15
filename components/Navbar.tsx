@@ -42,21 +42,21 @@ const servicesMenu = {
 };
 
 const industriesMenu = [
-  { icon: Landmark,     label: "FinTech",               href: "/industries#fintech" },
-  { icon: HeartPulse,   label: "Healthcare",             href: "/industries#healthcare" },
-  { icon: ShoppingCart, label: "E-Commerce",             href: "/industries#e-commerce" },
-  { icon: Truck,        label: "Logistics",              href: "/industries#logistics" },
-  { icon: Home,         label: "Real Estate",            href: "/industries#real-estate" },
-  { icon: GraduationCap,label: "Education",              href: "/industries#education" },
-  { icon: Factory,      label: "Manufacturing",          href: "/industries#manufacturing" },
-  { icon: Plane,        label: "Travel & Hospitality",   href: "/industries#travel-hospitality" },
-  { icon: Building2,    label: "Banking & Insurance",    href: "/industries#banking-insurance" },
-  { icon: Shield,       label: "Cybersecurity",          href: "/industries#cybersecurity" },
-  { icon: Smartphone,   label: "Telecom",                href: "/industries#telecom" },
-  { icon: Rocket,       label: "Automotive",             href: "/industries#automotive" },
-  { icon: Layers,       label: "Media & Entertainment",  href: "/industries#media-entertainment" },
-  { icon: ShoppingCart, label: "Food Tech",              href: "/industries#food-restaurant-tech" },
-  { icon: Building2,    label: "Public Sector",          href: "/industries#government-public-sector" },
+  { icon: Landmark,     label: "FinTech",               href: "/industries/fintech" },
+  { icon: HeartPulse,   label: "Healthcare",             href: "/industries/healthcare" },
+  { icon: ShoppingCart, label: "E-Commerce",             href: "/industries/e-commerce" },
+  { icon: Truck,        label: "Logistics",              href: "/industries/logistics" },
+  { icon: Home,         label: "Real Estate",            href: "/industries/real-estate" },
+  { icon: GraduationCap,label: "Education",              href: "/industries/education" },
+  { icon: Factory,      label: "Manufacturing",          href: "/industries/manufacturing" },
+  { icon: Plane,        label: "Travel & Hospitality",   href: "/industries/travel-hospitality" },
+  { icon: Building2,    label: "Banking & Insurance",    href: "/industries/banking-insurance" },
+  { icon: Shield,       label: "Cybersecurity",          href: "/industries/cybersecurity" },
+  { icon: Smartphone,   label: "Telecom",                href: "/industries/telecom" },
+  { icon: Rocket,       label: "Automotive",             href: "/industries/automotive" },
+  { icon: Layers,       label: "Media & Entertainment",  href: "/industries/media-entertainment" },
+  { icon: ShoppingCart, label: "Food Tech",              href: "/industries/food-restaurant-tech" },
+  { icon: Building2,    label: "Public Sector",          href: "/industries/government-public-sector" },
 ];
 
 /* ─── HoverMenu ──────────────────────────────────────────── */
