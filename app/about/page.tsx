@@ -284,6 +284,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, type: "spring" }}
+            whileHover={{ y: -10, scale: 1.03 }}
             className="card card-hover group p-10 bg-white border-slate-100 shadow-sm"
           >
             <div className="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500 group-hover:rotate-6">
@@ -304,6 +305,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, type: "spring" }}
+            whileHover={{ y: -10, scale: 1.03 }}
             className="card card-hover group p-10 bg-white border-slate-100 shadow-sm"
           >
             <div className="w-16 h-16 bg-sky-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-500 group-hover:text-white transition-all duration-500 group-hover:-rotate-6">
@@ -414,6 +416,7 @@ export default function AboutPage() {
               <motion.div
                 key={step.title}
                 variants={fadeIn}
+                whileHover={{ y: -8, scale: 1.03 }}
                 className="relative p-8 rounded-3xl bg-white border border-slate-100 shadow-sm group hover:shadow-xl hover:border-sky-200 transition-all duration-500"
               >
                 <div className="relative z-10">
@@ -432,7 +435,7 @@ export default function AboutPage() {
                 </div>
                 {/* Connecting arrow/line for desktop */}
                 {idx < 3 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 translate-y-[-50%] text-slate-200 group-hover:text-sky-200 transition-colors z-20">
+                  <div className="hidden md:block absolute top-1/2 -right-4 translate-y-[-50%] text-slate-400 group-hover:text-sky-500 transition-colors z-20">
                     <ArrowRight size={24} />
                   </div>
                 )}
