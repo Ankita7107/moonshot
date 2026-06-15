@@ -124,6 +124,14 @@ const caseStudies = [
     image: "/talentconnectindia.PNG",
     link: "https://talentconnectindia.com/",
   },
+  {
+    title: "ELARC Interiors",
+    category: "Architecture & Design",
+    result: "Corporate Spaces",
+    desc: "An award-winning interior design and turnkey contracting platform delivering cost-capped, high-precision luxury corporate experience centers.",
+    color: "from-slate-700 to-slate-900",
+    image: "/moonshot_images/interiorwebsite.jpeg",
+  },
 ];
 
 const workProcess = [
@@ -310,6 +318,31 @@ export default function HomePage() {
       });
     }
   };
+
+  const [isCaseStudiesHovered, setIsCaseStudiesHovered] = useState(false);
+
+  useEffect(() => {
+    if (isCaseStudiesHovered) return;
+
+    const timer = setInterval(() => {
+      if (caseStudiesRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = caseStudiesRef.current;
+        // If we are near the end, loop back to the start
+        if (scrollLeft + clientWidth >= scrollWidth - 15) {
+          caseStudiesRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          // Scroll by one card width increment
+          const cardWidth = clientWidth * 0.35 || 380;
+          caseStudiesRef.current.scrollTo({
+            left: scrollLeft + cardWidth,
+            behavior: "smooth",
+          });
+        }
+      }
+    }, 1600);
+
+    return () => clearInterval(timer);
+  }, [isCaseStudiesHovered]);
 
   const nextCaseStudy = () => {
     setCurrentCaseStudy((prev) => (prev + 1) % caseStudies.length);
@@ -934,7 +967,11 @@ export default function HomePage() {
     </div>
 
     {/* Scroll Container with overlay arrows */}
-    <div className="relative">
+    <div 
+      className="relative"
+      onMouseEnter={() => setIsCaseStudiesHovered(true)}
+      onMouseLeave={() => setIsCaseStudiesHovered(false)}
+    >
       {/* Left Arrow - overlaid on scroll container */}
       <button
         onClick={() => scrollCaseStudies("left")}
@@ -978,6 +1015,7 @@ export default function HomePage() {
                   src={study.image}
                   alt={study.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
                 />
               ) : (
