@@ -575,15 +575,18 @@ export default function TechnologiesPage() {
               { label: "Categories", value: 16, suffix: "" },
               { label: "Cloud Partners", value: 4, suffix: "" },
             ].map(({ label, value, suffix }) => (
-              <div
+              <motion.div
                 key={label}
-                className="px-5 py-3 rounded-2xl bg-white/80 backdrop-blur border border-sky-100 shadow-sm text-center"
+                whileHover={{ scale: 1.12, y: -8 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className="px-6 py-4 rounded-2xl bg-white/80 backdrop-blur border border-sky-100 shadow-sm text-center cursor-pointer hover:border-sky-300 hover:shadow-[0_20px_40px_rgba(14,165,233,0.18)] transition-all duration-300"
               >
                 <div className="text-2xl font-extrabold text-sky-600">
                   <CountUp to={value} suffix={suffix} />
                 </div>
                 <div className="text-xs text-slate-500 mt-0.5">{label}</div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </motion.div>
