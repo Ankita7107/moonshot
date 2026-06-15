@@ -318,11 +318,35 @@ export default function HomePage() {
 
   return (
     <div className="overflow-hidden">
-      {/* Hero */}
-      <motion.section className="relative bg-gradient-to-br from-slate-50 via-white to-sky-50 py-32 text-center overflow-hidden">
-        {/* Enhanced floating particles with tech icons */}
-        <div className="absolute top-24 left-[12%] h-24 w-24 rounded-full bg-sky-300/20 blur-2xl animate-float-slow" />
-        <div className="absolute bottom-24 right-[12%] h-28 w-28 rounded-full bg-sky-200/20 blur-2xl animate-float-delay" />
+        {/* Hero */}
+        <motion.section className="relative bg-gradient-to-br from-slate-50 via-white to-sky-50 py-32 text-center overflow-hidden">
+          {/* Enhanced floating particles with tech icons */}
+          <motion.div
+            animate={{
+              x: [0, 30, -30, 0],
+              y: [0, 40, -20, 0],
+              scale: [1, 1.1, 0.9, 1],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-24 left-[12%] h-48 w-48 rounded-full bg-sky-300/15 blur-3xl pointer-events-none"
+          />
+          <motion.div
+            animate={{
+              x: [0, -40, 20, 0],
+              y: [0, -30, 40, 0],
+              scale: [1, 0.9, 1.1, 1],
+            }}
+            transition={{
+              duration: 18,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-24 right-[12%] h-56 w-56 rounded-full bg-sky-200/15 blur-3xl pointer-events-none"
+          />
 
         {/* More floating elements with enhanced animations */}
         <motion.div
@@ -729,7 +753,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 perspective-1000">
             {[
               {
                 role: "For Founders",
@@ -749,7 +773,11 @@ export default function HomePage() {
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ y: -10 }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.03,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
                 className="bg-white p-8 rounded-3xl border border-slate-100 hover:border-sky-200 transition-all shadow-sm hover:shadow-xl group"
               >
                 <div className="w-14 h-14 bg-slate-50 group-hover:bg-sky-500 group-hover:text-white rounded-2xl flex items-center justify-center mb-6 transition-colors duration-300">
@@ -805,7 +833,7 @@ export default function HomePage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid md:grid-cols-3 gap-8"
+            className="grid md:grid-cols-3 gap-8 perspective-1000"
           >
             {services.map((s, idx) => (
               <motion.div
@@ -814,7 +842,11 @@ export default function HomePage() {
                 className="card card-hover bg-white/80 backdrop-blur-sm border border-white/50 relative overflow-hidden group"
                 onHoverStart={() => setHoveredService(idx)}
                 onHoverEnd={() => setHoveredService(null)}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                whileHover={{
+                  y: -8,
+                  scale: 1.03,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
               >
                 {/* Animated gradient background on hover */}
                 <motion.div
@@ -920,7 +952,7 @@ export default function HomePage() {
 
       <div
         ref={caseStudiesRef}
-        className="flex gap-8 overflow-x-auto no-scrollbar pb-8 snap-x snap-mandatory scroll-smooth px-1"
+        className="flex gap-8 overflow-x-auto no-scrollbar pb-8 snap-x snap-mandatory scroll-smooth px-1 perspective-1000"
       >
         {caseStudies.map((study, idx) => (
           <motion.div
@@ -929,7 +961,11 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ delay: idx * 0.1 }}
-            whileHover={{ y: -10 }}
+            whileHover={{
+              y: -10,
+              scale: 1.03,
+              transition: { duration: 0.3, ease: "easeOut" }
+            }}
             className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col w-full md:w-[calc(50%-16px)] lg:w-[calc((100%-64px)/3)] flex-shrink-0 snap-start"
           >
             {/* Image Section */}
