@@ -284,45 +284,46 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
   const service = services.find(s => s.id === params.id);
   if (!service) notFound();
 
-  const c = colorMap[service.color] ?? colorMap["sky"];
+  const c = colorMap["sky"];
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-slate-50/50">
 
       {/* ── HERO ── */}
-      <section className={`relative ${c.light} border-b ${c.border} py-20 overflow-hidden`}>
-        {/* Background grid */}
-        <div className="absolute inset-0 opacity-[0.04]"
-          style={{ backgroundImage: "linear-gradient(#0ea5e9 1px,transparent 1px),linear-gradient(90deg,#0ea5e9 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
+      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/70 via-sky-50/20 to-transparent pt-24 pb-16 border-b border-slate-100">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{ backgroundImage: "linear-gradient(#0ea5e9 1px,transparent 1px),linear-gradient(90deg,#0ea5e9 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
+        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-72 h-72 rounded-full bg-sky-200/20 blur-3xl pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Back button */}
-          <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
+          <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
             <Link href="/services"
-              className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 text-sm font-semibold mb-10 transition-colors group">
+              className="inline-flex items-center gap-2 text-slate-500 hover:text-sky-600 text-sm font-semibold mb-8 transition-colors group">
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               Back to Services
             </Link>
           </motion.div>
 
           <div className="flex flex-col md:flex-row md:items-center gap-8">
-            {/* Icon */}
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
-              className={`w-24 h-24 rounded-3xl ${c.bg} text-white flex items-center justify-center shadow-lg flex-shrink-0`}>
+            {/* Glassmorphic Icon Wrapper */}
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4 }}
+              className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-sky-500 to-sky-600 text-white flex items-center justify-center shadow-lg shadow-sky-500/20 flex-shrink-0">
               {service.icon}
             </motion.div>
 
             <div>
               <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-                className={`text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full ${c.badge} mb-3 inline-block`}>
+                className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-600 mb-3.5 inline-block">
                 {service.category}
               </motion.span>
-              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.5 }}
-                className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-2 leading-tight">
+              <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.4 }}
+                className="text-3xl md:text-5xl font-black text-slate-900 mb-2.5 tracking-tight leading-tight">
                 {service.title}
               </motion.h1>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
-                className={`${c.text} font-semibold italic text-lg`}>
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+                className="text-sky-500 font-semibold italic text-base md:text-lg">
                 "{service.tagline}"
               </motion.p>
             </div>
@@ -332,92 +333,107 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
 
       {/* ── BODY ── */}
       <section className="py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-10">
 
             {/* Left: main content */}
-            <div className="lg:col-span-2 space-y-10">
+            <div className="lg:col-span-2 space-y-12">
 
-              {/* About */}
-              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-                <h2 className="text-2xl font-extrabold text-slate-900 mb-4">About This Service</h2>
-                <p className="text-slate-600 leading-relaxed text-base">{service.detail}</p>
+              {/* About section card */}
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm relative overflow-hidden group">
+                <div className="absolute top-0 left-0 w-1.5 h-full bg-sky-500" />
+                <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <span>About This Service</span>
+                </h2>
+                <p className="text-slate-600 leading-relaxed text-base font-medium whitespace-pre-line">{service.detail}</p>
               </motion.div>
 
               {/* Key Benefits */}
-              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-                <h2 className="text-2xl font-extrabold text-slate-900 mb-5">Key Benefits</h2>
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+                className="space-y-6">
+                <h2 className="text-xl font-bold text-slate-900 px-1">Key Benefits & Outcomes</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {service.benefits.map((b, i) => (
-                    <div key={i} className={`flex items-start gap-3 p-4 rounded-2xl ${c.light} border ${c.border}`}>
-                      <CheckCircle size={18} className={`${c.text} flex-shrink-0 mt-0.5`} />
-                      <span className="text-slate-700 text-sm font-medium leading-snug">{b}</span>
+                    <div key={i} className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-sky-200 hover:shadow-md hover:shadow-sky-500/[0.02] transition-all duration-300">
+                      <div className="w-6 h-6 rounded-full bg-sky-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle size={14} className="text-sky-500" />
+                      </div>
+                      <span className="text-slate-700 text-sm font-semibold leading-relaxed">{b}</span>
                     </div>
                   ))}
                 </div>
               </motion.div>
 
-              {/* Core Features */}
-              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-                <h2 className="text-2xl font-extrabold text-slate-900 mb-5">Core Features</h2>
-                <div className="flex flex-wrap gap-3">
-                  {service.features.map(f => (
-                    <span key={f} className={`text-sm font-bold px-4 py-2 rounded-full ${c.badge} border ${c.border}`}>
-                      {f}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+              {/* Core Features & Tech Stack Row */}
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Core Features */}
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+                  className="bg-white p-7 rounded-3xl border border-slate-100 shadow-sm space-y-5">
+                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Core Features</h3>
+                  <div className="flex flex-wrap gap-2.5">
+                    {service.features.map(f => (
+                      <span key={f} className="text-xs font-bold px-3.5 py-2 rounded-full bg-sky-50/50 border border-sky-100/60 text-sky-600">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
 
-              {/* Tech Stack */}
-              <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-                <h2 className="text-2xl font-extrabold text-slate-900 mb-5">Tech Stack</h2>
-                <div className="flex flex-wrap gap-3">
-                  {service.techStack.map(t => (
-                    <span key={t} className="text-sm font-semibold px-4 py-2 rounded-xl bg-slate-100 text-slate-600 border border-slate-200">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+                {/* Tech Stack */}
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}
+                  className="bg-white p-7 rounded-3xl border border-slate-100 shadow-sm space-y-5">
+                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Technologies Leveraged</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {service.techStack.map(t => (
+                      <span key={t} className="text-xs font-semibold px-3 py-2 rounded-xl bg-slate-50 text-slate-600 border border-slate-200/60">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
             </div>
 
             {/* Right: sticky CTA card */}
             <div className="lg:col-span-1">
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
-                className={`sticky top-24 bg-white rounded-3xl border ${c.border} shadow-xl p-7`}>
-                <div className={`w-12 h-12 rounded-2xl ${c.bg} text-white flex items-center justify-center mb-5`}>
-                  <Sparkles size={22} />
+              <motion.div initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
+                className="sticky top-24 bg-white rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 p-8 space-y-6">
+                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-500 shadow-inner">
+                  <Sparkles size={20} className="animate-pulse" />
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 mb-2">Ready to get started?</h3>
-                <p className="text-slate-500 text-sm mb-6 leading-relaxed">
-                  Talk to our experts and get a free consultation and project estimate.
-                </p>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">Ready to get started?</h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    Build secure, scalable solutions configured for your business workflows. Let's discuss your roadmap.
+                  </p>
+                </div>
 
-                <Link href="/contact"
-                  className={`w-full flex items-center justify-center gap-2 ${c.btn} text-white font-bold py-3.5 rounded-2xl transition-colors mb-3`}>
-                  Start a Project <ArrowRight size={16} />
-                </Link>
+                <div className="space-y-3">
+                  <Link href="/contact"
+                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-bold py-3.5 rounded-2xl transition-all shadow-md shadow-sky-500/20 active:scale-[0.98]">
+                    Start a Project <ArrowRight size={15} />
+                  </Link>
 
-                <Link href="/services"
-                  className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 font-semibold py-3 rounded-2xl transition-colors text-sm">
-                  <ArrowLeft size={14} /> All Services
-                </Link>
+                  <Link href="/services"
+                    className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold py-3 rounded-2xl transition-colors text-xs">
+                    <ArrowLeft size={14} /> All Services
+                  </Link>
+                </div>
 
-                {/* Quick info */}
-                <div className={`mt-6 pt-6 border-t ${c.border} space-y-3`}>
-                  <div className="flex items-center gap-2 text-xs text-slate-500">
-                    <CheckCircle size={13} className={c.text} /> Free initial consultation
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-slate-500">
-                    <CheckCircle size={13} className={c.text} /> NDA on request
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-slate-500">
-                    <CheckCircle size={13} className={c.text} /> Fixed-price or T&M contracts
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-slate-500">
-                    <CheckCircle size={13} className={c.text} /> Dedicated project manager
-                  </div>
+                {/* Trust list with fine styling */}
+                <div className="pt-5 border-t border-slate-100 space-y-3">
+                  {[
+                    "Free discovery consultation",
+                    "Mutual NDA signed on request",
+                    "Predictable milestones & delivery",
+                    "Post-launch technical support"
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-xs text-slate-500">
+                      <CheckCircle size={14} className="text-sky-500 flex-shrink-0" />
+                      <span className="font-medium">{item}</span>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             </div>
@@ -426,21 +442,26 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
       </section>
 
       {/* ── RELATED SERVICES ── */}
-      <section className="py-16 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-extrabold text-slate-900 mb-8">Related Services</h2>
-          <div className="grid sm:grid-cols-3 gap-5">
+      <section className="py-20 bg-white border-t border-slate-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-black text-slate-900 mb-8 tracking-tight">Other Capabilities</h2>
+          <div className="grid sm:grid-cols-3 gap-6">
             {services
               .filter(s => s.id !== service.id && s.category === service.category)
               .slice(0, 3)
               .map(s => (
                 <Link key={s.id} href={`/services/${s.id}`}
-                  className="bg-white rounded-2xl border border-slate-100 hover:border-sky-200 hover:shadow-lg p-6 transition-all group">
-                  <div className="w-10 h-10 bg-sky-50 rounded-xl flex items-center justify-center text-sky-500 mb-4 group-hover:bg-sky-500 group-hover:text-white transition-all">
-                    {s.icon}
+                  className="bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-sky-300 hover:shadow-lg p-6 transition-all group flex flex-col justify-between">
+                  <div>
+                    <div className="w-10 h-10 bg-white shadow-sm rounded-xl flex items-center justify-center text-sky-500 mb-4 group-hover:bg-sky-500 group-hover:text-white transition-all flex-shrink-0">
+                      {s.icon}
+                    </div>
+                    <h4 className="font-bold text-slate-900 mb-1 text-sm group-hover:text-sky-600 transition-colors leading-snug">{s.title}</h4>
+                    <p className="text-slate-400 text-xs line-clamp-2 leading-relaxed">{s.tagline}</p>
                   </div>
-                  <h4 className="font-extrabold text-slate-900 mb-1 text-sm group-hover:text-sky-600 transition-colors">{s.title}</h4>
-                  <p className="text-slate-400 text-xs line-clamp-2">{s.tagline}</p>
+                  <div className="mt-4 flex items-center gap-1 text-[10px] font-bold text-sky-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                    View Service <ArrowRight size={10} />
+                  </div>
                 </Link>
               ))}
           </div>
