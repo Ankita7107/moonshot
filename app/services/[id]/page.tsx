@@ -1,13 +1,14 @@
 "use client";
+import { useState } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import {
   Globe, Settings, Cloud, Zap, Shield, Smartphone,
   CheckCircle, ArrowRight, Code, Database, Layout,
   MessageSquare, BarChart, RefreshCcw, ArrowLeft,
-  Sparkles
+  Sparkles, ChevronDown, HelpCircle
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ─── SERVICE DATA (same as services page) ──────────────────── */
 const services = [
@@ -269,32 +270,54 @@ const services = [
   },
 ];
 
-const colorMap: Record<string, { bg: string; text: string; border: string; badge: string; btn: string; light: string }> = {
-  sky:    { bg: "bg-sky-500",    text: "text-sky-600",    border: "border-sky-200",    badge: "bg-sky-50 text-sky-600",    btn: "bg-sky-500 hover:bg-sky-600",   light: "bg-sky-50" },
-  violet: { bg: "bg-violet-500", text: "text-violet-600", border: "border-violet-200", badge: "bg-violet-50 text-violet-600", btn: "bg-violet-500 hover:bg-violet-600", light: "bg-violet-50" },
-  blue:   { bg: "bg-blue-500",   text: "text-blue-600",   border: "border-blue-200",   badge: "bg-blue-50 text-blue-600",   btn: "bg-blue-500 hover:bg-blue-600",  light: "bg-blue-50" },
-  amber:  { bg: "bg-amber-500",  text: "text-amber-600",  border: "border-amber-200",  badge: "bg-amber-50 text-amber-600",  btn: "bg-amber-500 hover:bg-amber-600", light: "bg-amber-50" },
-  red:    { bg: "bg-red-500",    text: "text-red-600",    border: "border-red-200",    badge: "bg-red-50 text-red-600",    btn: "bg-red-500 hover:bg-red-600",   light: "bg-red-50" },
-  green:  { bg: "bg-green-500",  text: "text-green-600",  border: "border-green-200",  badge: "bg-green-50 text-green-600",  btn: "bg-green-500 hover:bg-green-600", light: "bg-green-50" },
-  pink:   { bg: "bg-pink-500",   text: "text-pink-600",   border: "border-pink-200",   badge: "bg-pink-50 text-pink-600",   btn: "bg-pink-500 hover:bg-pink-600",  light: "bg-pink-50" },
-  indigo: { bg: "bg-indigo-500", text: "text-indigo-600", border: "border-indigo-200", badge: "bg-indigo-50 text-indigo-600", btn: "bg-indigo-500 hover:bg-indigo-600", light: "bg-indigo-50" },
+const c = { bg: "bg-sky-500", text: "text-sky-600", border: "border-sky-200", badge: "bg-sky-50 text-sky-600", btn: "bg-sky-500 hover:bg-sky-600", light: "bg-sky-50" };
+
+const serviceFaqs: Record<string, { q: string; a: string }[]> = {
+  "custom-web-solutions": [
+    { q: "Which programming frameworks do you use for web development?", a: "We build modern web projects using React, Next.js, and TypeScript, backed by robust Node.js, Python, or Go backend servers depending on scalability requirements." },
+    { q: "Will the web application be mobile-friendly?", a: "Yes, 100% of our code uses mobile-first styling principles with Tailwind CSS, ensuring that your application renders beautifully on smartphones, tablets, and desktops alike." },
+    { q: "How do you optimize performance and SEO?", a: "We leverage Next.js Server-Side Rendering (SSR) and Static Site Generation (SSG) alongside advanced caching (Redis) and image optimization to deliver sub-second page loads." }
+  ],
+  "erp-crm-systems": [
+    { q: "Can we migrate our existing database records safely?", a: "Absolutely. We specialize in end-to-end data migrations from legacy systems, including data cleaning, validation, and schema mapping with zero downtime." },
+    { q: "Can it integrate with third-party software tools?", a: "Yes. We design custom REST/GraphQL integrations for payment gateways, WhatsApp Business APIs, HubSpot, QuickBooks, and internal logistics services." },
+    { q: "Is Role-Based Access Control (RBAC) supported?", a: "Yes, security is our priority. Every ERP/CRM module is built with fine-grained permission control to restrict data access based on user hierarchy." }
+  ],
+  "cloud-devops": [
+    { q: "Which cloud service providers do you support?", a: "We design, deploy, and monitor infrastructures across Amazon Web Services (AWS), Google Cloud Platform (GCP), and Microsoft Azure." },
+    { q: "How do you automate project delivery and scale?", a: "We construct GitOps-driven CI/CD pipelines using GitHub Actions, Docker, Kubernetes, and Terraform, enabling automatic rollbacks and seamless autoscaling." }
+  ],
+  "ai-machine-learning": [
+    { q: "What models and LLMs do you work with?", a: "We work with Google Gemini, OpenAI GPT models, Anthropic Claude, and open-source options like LLaMA using frameworks like LangChain." },
+    { q: "Is our proprietary data secure during AI processing?", a: "Yes, your training data is stored securely in virtual private clouds (VPC). We do not train public models on your proprietary business datasets." }
+  ]
 };
+
+const defaultFaqs = [
+  { q: "What is your typical project timeline?", a: "Depending on scope, small to medium applications require 4 to 8 weeks, while complex enterprise systems can take 3 to 6 months of agile iterations." },
+  { q: "Do you sign Non-Disclosure Agreements (NDAs)?", a: "Yes, we sign mutual NDAs before any sensitive project details, database structures, or design assets are shared." },
+  { q: "What post-launch support plans do you offer?", a: "We provide comprehensive post-launch support packages, including server health monitoring, security audits, dependency updates, and feature enhancements." }
+];
 
 export default function ServiceDetailPage({ params }: { params: { id: string } }) {
   const service = services.find(s => s.id === params.id);
   if (!service) notFound();
 
-  const c = colorMap["sky"];
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const faqs = serviceFaqs[service.id] || defaultFaqs;
 
   return (
     <main className="min-h-screen bg-slate-50/50">
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sky-50/70 via-sky-50/20 to-transparent pt-24 pb-16 border-b border-slate-100">
-        {/* Background decorative elements */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-sky-100/40 via-sky-50/20 to-transparent pt-24 pb-20 border-b border-slate-100/80">
+        {/* Blur spheres for premium high-end SaaS feel */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-br from-sky-300/20 to-sky-200/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-10 left-10 w-72 h-72 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
+        
+        {/* Background decorative grid */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{ backgroundImage: "linear-gradient(#0ea5e9 1px,transparent 1px),linear-gradient(90deg,#0ea5e9 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
-        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-72 h-72 rounded-full bg-sky-200/20 blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Back button */}
@@ -308,9 +331,11 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
 
           <div className="flex flex-col md:flex-row md:items-center gap-8">
             {/* Glassmorphic Icon Wrapper */}
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.4 }}
-              className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-sky-500 to-sky-600 text-white flex items-center justify-center shadow-lg shadow-sky-500/20 flex-shrink-0">
-              {service.icon}
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 100 }}
+              whileHover={{ scale: 1.05 }}
+              className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-sky-500 to-sky-600 text-white flex items-center justify-center shadow-xl shadow-sky-500/30 flex-shrink-0 relative group">
+              <div className="absolute inset-0 bg-sky-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity" />
+              <div className="relative z-10">{service.icon}</div>
             </motion.div>
 
             <div>
@@ -393,14 +418,55 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                   </div>
                 </motion.div>
               </div>
+
+              {/* FAQ Accordion Section */}
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+                className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+                <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
+                  <div className="w-9 h-9 rounded-xl bg-sky-50 flex items-center justify-center text-sky-500">
+                    <HelpCircle size={18} />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900">Frequently Asked Questions</h3>
+                </div>
+                <div className="space-y-4">
+                  {faqs.map((faq, idx) => {
+                    const isOpen = openFaq === idx;
+                    return (
+                      <div key={idx} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                        <button
+                          onClick={() => setOpenFaq(isOpen ? null : idx)}
+                          className="w-full flex items-center justify-between text-left font-bold text-slate-800 hover:text-sky-500 transition-colors py-2"
+                        >
+                          <span className="text-sm leading-snug">{faq.q}</span>
+                          <ChevronDown size={16} className={`text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-sky-500" : ""}`} />
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {isOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden"
+                            >
+                              <p className="text-slate-500 text-xs leading-relaxed pt-2 pl-1 font-medium">
+                                {faq.a}
+                              </p>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })}
+                </div>
+              </motion.div>
             </div>
 
             {/* Right: sticky CTA card */}
             <div className="lg:col-span-1">
               <motion.div initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
-                className="sticky top-24 bg-white rounded-3xl border border-slate-100 shadow-lg shadow-slate-200/50 p-8 space-y-6">
-                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-500 shadow-inner">
-                  <Sparkles size={20} className="animate-pulse" />
+                className="sticky top-24 bg-white/90 backdrop-blur-md rounded-3xl border border-sky-100/60 shadow-xl shadow-sky-900/[0.02] p-8 space-y-6 hover:shadow-2xl hover:shadow-sky-500/[0.05] transition-all duration-500">
+                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-500 shadow-inner relative overflow-hidden group">
+                  <Sparkles size={20} className="animate-pulse relative z-10" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 mb-1">Ready to get started?</h3>
@@ -411,12 +477,12 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
 
                 <div className="space-y-3">
                   <Link href="/contact"
-                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-bold py-3.5 rounded-2xl transition-all shadow-md shadow-sky-500/20 active:scale-[0.98]">
+                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-bold py-3.5 rounded-2xl shadow-md shadow-sky-500/20 active:scale-[0.98] transition-all duration-300 hover:shadow-lg hover:shadow-sky-500/30 hover:-translate-y-0.5 transform">
                     Start a Project <ArrowRight size={15} />
                   </Link>
 
                   <Link href="/services"
-                    className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold py-3 rounded-2xl transition-colors text-xs">
+                    className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold py-3 rounded-2xl transition-all text-xs hover:border-slate-300 active:scale-[0.99] duration-300">
                     <ArrowLeft size={14} /> All Services
                   </Link>
                 </div>
