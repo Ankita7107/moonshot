@@ -174,7 +174,7 @@ const financeServices = [
     ],
     faqs: [
       { q: "Is the platform RBI compliant?", a: "Yes. All data is stored in India-based AWS regions. The platform includes audit logging, data encryption at rest and in transit, and access controls aligned with RBI IT framework guidelines." },
-      { q: "Which credit bureaus do you integrate with?", a: "We integrate with CIBIL TransUnion, Equifax, CRIF High Mark, and Experian for bureau pulls and credit score decisioning." },
+      { q: "Which credit agencies are supported for integration?", a: "Our APIs seamlessly connect with all major credit agencies, including CIBIL TransUnion, Equifax, CRIF High Mark, and Experian, to automate credit checks and pull scores instantly." },
       { q: "Can the APIs be used for co-lending models?", a: "Yes. Our multi-lender disbursement rails support co-lending structures compliant with RBI's co-lending model (CLM) guidelines." },
     ],
   },
