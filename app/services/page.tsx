@@ -405,14 +405,15 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
                 <TiltCard className="h-full">
-                  <div className="h-full bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-sky-50 hover:border-sky-100 transition-all duration-300 group flex flex-col">
+                  <Link href={`/services/finance/${f.id}`}
+                    className="h-full bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 group flex flex-col">
                     <div className={`w-12 h-12 ${f.iconBg} rounded-2xl flex items-center justify-center mb-5 ${f.iconColor} group-hover:scale-110 transition-transform`}>
                       {f.icon}
                     </div>
                     <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${f.badgeStyle} mb-4 inline-block uppercase tracking-wider w-fit`}>
                       {f.badge}
                     </span>
-                    <h3 className="text-xl font-extrabold text-slate-900 mb-3">{f.title}</h3>
+                    <h3 className="text-xl font-extrabold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">{f.title}</h3>
                     <p className="text-slate-500 text-sm mb-6 leading-relaxed flex-grow">{f.desc}</p>
 
                     <div className="flex flex-wrap gap-2 mb-6">
@@ -423,10 +424,10 @@ export default function ServicesPage() {
                       ))}
                     </div>
 
-                   <Link href={`/services/finance/${f.id}`} className="text-sky-500 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all mt-auto">
-  Explore <ArrowRight size={15} />
-</Link>
-                  </div>
+                    <div className="text-sky-500 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all mt-auto">
+                      Explore <ArrowRight size={15} />
+                    </div>
+                  </Link>
                 </TiltCard>
               </motion.div>
             ))}
