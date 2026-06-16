@@ -300,6 +300,92 @@ export default function FinanceDetailPage({ params }: { params: { id: string } }
                 </motion.div>
               </div>
 
+              {/* TIMELINES & METRICS TABLE */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 90, delay: 0.38 }}
+                whileHover={{ y: -4, scale: 1.01 }}
+                className="bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default space-y-6"
+              >
+                <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                  <span>Standard Delivery Timelines</span>
+                </h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b border-slate-100">
+                        <th className="pb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Phase</th>
+                        <th className="pb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Duration</th>
+                        <th className="pb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Key Deliverable</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100/50">
+                      {[
+                        { p: "Discovery & Strategy", d: "5 - 7 Days", o: "Scope Roadmap & System Architecture" },
+                        { p: "UI/UX Prototyping", d: "2 Weeks", o: "Interactive Figma Wireframes & Flows" },
+                        { p: "Agile Development Sprints", d: "4 - 8 Weeks", o: "Functional Beta & Database Integration" },
+                        { p: "Security Audit & Launch", d: "1 Week", o: "VAPT Security Logs & Live Production Setup" },
+                      ].map((item, i) => (
+                        <tr key={i} className="hover:bg-slate-50/50 transition-colors">
+                          <td className="py-3.5 text-sm font-bold text-slate-800">{item.p}</td>
+                          <td className="py-3.5 text-sm font-semibold text-sky-600">{item.d}</td>
+                          <td className="py-3.5 text-xs font-medium text-slate-500">{item.o}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </motion.div>
+
+              {/* ROADMAP TIMELINE */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 90, delay: 0.4 }}
+                whileHover={{ y: -4, scale: 1.01 }}
+                className="bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default space-y-6"
+              >
+                <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Our Delivery Process</h3>
+                <div className="relative border-l border-sky-100 ml-3 pl-6 space-y-8 py-2">
+                  {[
+                    { title: "1. Discover & Map", desc: "Collaborative workshops to freeze wireframes, define API integrations, and finalize the database architecture." },
+                    { title: "2. Design & Prototype", desc: "Crafting modern design systems in Figma matching your brand identity with clickable prototype handoffs." },
+                    { title: "3. Build & QA Sprints", desc: "Milestone-driven agile development with weekly builds, unit testing, and sandbox API validation." },
+                    { title: "4. Deploy & Scale", desc: "Production release with zero-downtime strategy, server health monitoring, and documentation handover." }
+                  ].map((step, idx) => (
+                    <div key={idx} className="relative">
+                      <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-sky-500 shadow-sm" />
+                      <h4 className="text-sm font-bold text-slate-900 mb-1">{step.title}</h4>
+                      <p className="text-slate-500 text-xs leading-relaxed font-medium">{step.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* ENGAGEMENT MODELS */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ type: "spring", stiffness: 90, delay: 0.42 }}
+                whileHover={{ y: -4, scale: 1.01 }}
+                className="bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default space-y-6"
+              >
+                <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Flexible Engagement Models</h3>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {[
+                    { title: "Fixed Scope", desc: "Best for structured projects with concrete specifications and set timelines." },
+                    { title: "Dedicated Team", desc: "A custom team of developers, designers, and QA working exclusively on your product backlog." },
+                    { title: "Time & Material", desc: "Pay for active resources and hours logged, allowing complete flexibility to pivot." }
+                  ].map((model, idx) => (
+                    <div key={idx} className="p-4 rounded-2xl bg-slate-50/50 border border-slate-100 space-y-2 hover:border-sky-200 transition-colors">
+                      <h4 className="text-xs font-extrabold text-slate-800 uppercase tracking-wide">{model.title}</h4>
+                      <p className="text-slate-500 text-[11px] leading-relaxed font-medium">{model.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
               {/* FAQ */}
               <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ type: "spring", stiffness: 90, delay: 0.4 }}
