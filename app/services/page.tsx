@@ -183,6 +183,14 @@ const financeServices = [
     desc: "Automated payroll system managing compliant salaries, direct deposits, tax withholdings, and employee self-service dashboards.",
     features: ["Direct Deposits", "Automated Taxes", "Employee Portal"],
   },
+  {
+    id: "nbfc-api", icon: <Code className="w-6 h-6" />,
+    iconColor: "text-sky-600", iconBg: "bg-sky-100",
+    badge: "Core NBFC APIs", badgeStyle: "bg-sky-100 text-sky-700",
+    title: "NBFC APIs & Solutions",
+    desc: "Robust API suites designed for Non-Banking Financial Companies (NBFCs) to automate loan disbursements, credit scoring, e-KYC, and secure collections.",
+    features: ["e-KYC & Onboarding", "Credit Scoring APIs", "Disbursement Rails"],
+  },
 ];
 
 const steps = [
