@@ -32,12 +32,13 @@ const servicesMenu = {
     { icon: Zap,          label: "SaaS Product Development",     desc: "Build your SaaS from idea to launch",    href: "/services/saas-product-development" },
   ],
   finance: [
-    { icon: Banknote,     label: "Accounting Software",   href: "/services#ledger",   color: "text-sky-500" },
-    { icon: ShieldCheck,  label: "Invoicing & Billing",   href: "/services#invoice",  color: "text-green-500" },
-    { icon: TrendingUp,   label: "Expense Management",    href: "/services#expense",  color: "text-yellow-500" },
-    { icon: IndianRupee,  label: "Inventory Management",  href: "/services#stock",    color: "text-violet-500" },
-    { icon: Home,         label: "Subscription Billing",  href: "/services#billing",  color: "text-orange-500" },
-    { icon: BarChart2,    label: "Payroll Management",    href: "/services#payroll",  color: "text-fuchsia-500" },
+    { icon: Banknote,     label: "Accounting Software",   href: "/services/finance/ledger",   color: "text-sky-500" },
+    { icon: ShieldCheck,  label: "Invoicing & Billing",   href: "/services/finance/invoice",  color: "text-green-500" },
+    { icon: TrendingUp,   label: "Expense Management",    href: "/services/finance/expense",  color: "text-yellow-500" },
+    { icon: IndianRupee,  label: "Inventory Management",  href: "/services/finance/stock",    color: "text-violet-500" },
+    { icon: Home,         label: "Subscription Billing",  href: "/services/finance/billing",  color: "text-orange-500" },
+    { icon: BarChart2,    label: "Payroll Management",    href: "/services/finance/payroll",  color: "text-fuchsia-500" },
+    { icon: Code2,        label: "NBFC APIs & Solutions", href: "/services/finance/nbfc-api", color: "text-sky-500" },
   ],
 };
 

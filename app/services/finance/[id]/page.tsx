@@ -168,7 +168,7 @@ const financeServices = [
     techStack: ["Node.js", "Python", "PostgreSQL", "AWS", "Kafka", "Redis"],
     benefits: [
       "End-to-end digital onboarding with Aadhaar e-KYC",
-      "Credit bureau integration: CIBIL, Equifax, CRIF",
+      "Instant Credit Score Verification (CIBIL, Equifax & CRIF)",
       "Loan disbursement via NEFT, IMPS, and UPI",
       "RBI-compliant audit trail and data localisation",
     ],
