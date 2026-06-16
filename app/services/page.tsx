@@ -423,9 +423,9 @@ export default function ServicesPage() {
                       ))}
                     </div>
 
-                    <Link href="/contact" className="text-sky-500 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all mt-auto">
-                      Consult Experts <ArrowRight size={15} />
-                    </Link>
+                   <Link href={`/services/finance/${f.id}`} className="text-sky-500 text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all mt-auto">
+  Explore <ArrowRight size={15} />
+</Link>
                   </div>
                 </TiltCard>
               </motion.div>
