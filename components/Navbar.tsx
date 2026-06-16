@@ -137,6 +137,12 @@ export default function Navbar() {
     }, 200);
   };
 
+  const closeDropdowns = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(null);
+    setMobileOpen(false);
+  };
+
   useEffect(() => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -204,7 +210,10 @@ export default function Navbar() {
                 <div className="grid grid-cols-3 gap-1.5">
                   {servicesMenu.tech.map((i) => (
                     <Link key={i.label} href={i.href}
-                      onClick={(e) => handleSamePageHashClick(e, i.href)}
+                      onClick={(e) => {
+                        handleSamePageHashClick(e, i.href);
+                        closeDropdowns();
+                      }}
                       className="flex items-start gap-3 p-3 rounded-2xl hover:bg-sky-50 group/item transition-all">
                       <div className="w-9 h-9 rounded-xl bg-white shadow-sm flex items-center justify-center text-sky-500 group-hover/item:bg-sky-500 group-hover/item:text-white transition-all flex-shrink-0">
                         <i.icon size={17} />
@@ -225,7 +234,10 @@ export default function Navbar() {
                   <div className="space-y-1 mb-6">
                     {servicesMenu.finance.map((i) => (
                       <Link key={i.label} href={i.href}
-                        onClick={(e) => handleSamePageHashClick(e, i.href)}
+                        onClick={(e) => {
+                          handleSamePageHashClick(e, i.href);
+                          closeDropdowns();
+                        }}
                         className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white hover:shadow-sm transition-all group/f">
                         <i.icon size={15} className={i.color} />
                         <span className="text-xs font-bold text-slate-700 group-hover/f:text-sky-600 transition-colors">{i.label}</span>
@@ -242,6 +254,7 @@ export default function Navbar() {
                     Build something amazing with our expert engineering team.
                   </p>
                   <Link href="/contact"
+                    onClick={closeDropdowns}
                     className="flex items-center justify-center gap-2 text-[10px] font-bold bg-white/20 hover:bg-white/30 px-3 py-2 rounded-xl transition-all">
                     Get in Touch <ArrowRight size={11} />
                   </Link>
@@ -262,7 +275,10 @@ export default function Navbar() {
             <div className="w-[450px] p-4 grid grid-cols-2 gap-2">
               {industriesMenu.map((i) => (
                 <Link key={i.label} href={i.href}
-                  onClick={(e) => handleSamePageHashClick(e, i.href)}
+                  onClick={(e) => {
+                    handleSamePageHashClick(e, i.href);
+                    closeDropdowns();
+                  }}
                   className="flex items-center gap-3 p-3 rounded-xl hover:bg-sky-50 group/i transition-all">
                   <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-sky-400 group-hover/i:text-sky-600 shadow-sm transition-all">
                     <i.icon size={16} />
