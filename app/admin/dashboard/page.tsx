@@ -304,7 +304,7 @@ export default function AdminDashboardPage() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3, delay: idx * 0.05 }}
                           key={inq.id}
-                          className="hover:bg-slate-50/30 transition-colors align-top"
+                          className="hover:bg-slate-50/30 transition-colors align-middle"
                         >
                           <td className="py-6 px-6">
                             <p className="font-extrabold text-slate-800 text-sm">
