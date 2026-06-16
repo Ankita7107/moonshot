@@ -365,8 +365,9 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
             <div className="lg:col-span-2 space-y-12">
 
               {/* About section card */}
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm relative overflow-hidden group">
+              <motion.div initial={{ opacity: 0, scale: 0.96, y: 25 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.1 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 relative overflow-hidden group cursor-default">
                 <div className="absolute top-0 left-0 w-1.5 h-full bg-sky-500" />
                 <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                   <span>About This Service</span>
@@ -375,17 +376,22 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
               </motion.div>
 
               {/* Key Benefits */}
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
                 className="space-y-6">
                 <h2 className="text-xl font-bold text-slate-900 px-1">Key Benefits & Outcomes</h2>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {service.benefits.map((b, i) => (
-                    <div key={i} className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 shadow-sm hover:border-sky-200 hover:shadow-md hover:shadow-sky-500/[0.02] transition-all duration-300">
+                    <motion.div key={i}
+                      initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ type: "spring", stiffness: 90, delay: 0.2 + i * 0.05 }}
+                      whileHover={{ y: -6, scale: 1.03 }}
+                      className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 shadow-md hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/[0.06] transition-all duration-300 cursor-default">
                       <div className="w-6 h-6 rounded-full bg-sky-50 flex items-center justify-center flex-shrink-0 mt-0.5">
                         <CheckCircle size={14} className="text-sky-500" />
                       </div>
                       <span className="text-slate-700 text-sm font-semibold leading-relaxed">{b}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -393,8 +399,9 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
               {/* Core Features & Tech Stack Row */}
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Core Features */}
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
-                  className="bg-white p-7 rounded-3xl border border-slate-100 shadow-sm space-y-5">
+                <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.3 }}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  className="bg-white p-7 rounded-3xl border border-slate-100 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default">
                   <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Core Features</h3>
                   <div className="flex flex-wrap gap-2.5">
                     {service.features.map(f => (
@@ -406,8 +413,9 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                 </motion.div>
 
                 {/* Tech Stack */}
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}
-                  className="bg-white p-7 rounded-3xl border border-slate-100 shadow-sm space-y-5">
+                <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.35 }}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  className="bg-white p-7 rounded-3xl border border-slate-100 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default">
                   <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Technologies Leveraged</h3>
                   <div className="flex flex-wrap gap-2">
                     {service.techStack.map(t => (
@@ -420,8 +428,9 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
               </div>
 
               {/* FAQ Accordion Section */}
-              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-                className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+              <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.4 }}
+                whileHover={{ y: -4, scale: 1.01 }}
+                className="bg-white p-8 rounded-3xl border border-slate-100 shadow-md hover:shadow-2xl hover:border-sky-200/60 transition-all duration-300">
                 <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
                   <div className="w-9 h-9 rounded-xl bg-sky-50 flex items-center justify-center text-sky-500">
                     <HelpCircle size={18} />
