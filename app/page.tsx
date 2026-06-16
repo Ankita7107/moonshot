@@ -1252,51 +1252,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Client Success Marquee (Zoho Inspired) */}
-      <section className="py-20 border-y border-slate-100 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 text-center">
-            TRUSTED BY INDUSTRY DISRUPTORS
-          </p>
-        </div>
-        <div className="flex relative group hover-pause-group">
-          <div className="flex gap-12 items-center whitespace-nowrap animate-marquee hover-pause">
-            {[
-              { name: "FinFlow", metric: "+45% Efficiency" },
-              { name: "HealthSync", metric: "2M+ Users" },
-              { name: "CloudScale", metric: "99.9% Uptime" },
-              { name: "EduGrow", metric: "3x Growth" },
-              { name: "SecureNet", metric: "Zero Breaches" },
-              { name: "LogiSmart", metric: "30% Cost Save" },
-              // Duplicate for infinite scroll
-              { name: "FinFlow", metric: "+45% Efficiency" },
-              { name: "HealthSync", metric: "2M+ Users" },
-              { name: "CloudScale", metric: "99.9% Uptime" },
-              { name: "EduGrow", metric: "3x Growth" },
-              { name: "SecureNet", metric: "Zero Breaches" },
-              { name: "LogiSmart", metric: "30% Cost Save" },
-            ].map((client, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -4 }}
-                className="relative px-8 py-5 bg-white rounded-xl border border-slate-100 group/client cursor-default min-w-[220px] text-center transition-all duration-300 hover:shadow-md hover:border-sky-100"
-              >
-                <span className="text-xl font-bold text-slate-800 group-hover/client:text-sky-600 transition-colors uppercase tracking-wider">
-                  {client.name}
-                </span>
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  className="absolute -top-12 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap shadow-xl pointer-events-none"
-                >
-                  {client.metric}
-                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45" />
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA Banner */}
       <section className="py-20">
