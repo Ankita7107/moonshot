@@ -270,152 +270,21 @@ const services = [
   },
 ];
 
-interface ThemeConfig {
-  primary: string;
-  text: string;
-  textDark: string;
-  bg: string;
-  bgLight: string;
-  bgGradient: string;
-  bgGradientLight: string;
-  border: string;
-  borderHover: string;
-  borderBottom: string;
-  shadow: string;
-  shadowHover: string;
-  badge: string;
-  glow: string;
-}
-
-const colorThemes: Record<string, ThemeConfig> = {
-  sky: {
-    primary: "sky",
-    text: "text-sky-600",
-    textDark: "text-sky-950",
-    bg: "bg-sky-500",
-    bgLight: "bg-sky-50",
-    bgGradient: "from-sky-500 to-sky-600",
-    bgGradientLight: "from-sky-100/40 via-sky-50/20 to-transparent",
-    border: "border-sky-100",
-    borderHover: "hover:border-sky-300",
-    borderBottom: "hover:border-b-sky-500",
-    shadow: "shadow-sky-500/20",
-    shadowHover: "hover:shadow-sky-500/[0.04]",
-    badge: "bg-sky-50/70 border-sky-100/60 text-sky-600",
-    glow: "bg-sky-400/20",
-  },
-  violet: {
-    primary: "violet",
-    text: "text-violet-600",
-    textDark: "text-violet-950",
-    bg: "bg-violet-500",
-    bgLight: "bg-violet-50",
-    bgGradient: "from-violet-500 to-violet-600",
-    bgGradientLight: "from-violet-100/40 via-violet-50/20 to-transparent",
-    border: "border-violet-100",
-    borderHover: "hover:border-violet-300",
-    borderBottom: "hover:border-b-violet-500",
-    shadow: "shadow-violet-500/20",
-    shadowHover: "hover:shadow-violet-500/[0.04]",
-    badge: "bg-violet-50/70 border-violet-100/60 text-violet-600",
-    glow: "bg-violet-400/20",
-  },
-  blue: {
-    primary: "blue",
-    text: "text-blue-600",
-    textDark: "text-blue-950",
-    bg: "bg-blue-500",
-    bgLight: "bg-blue-50",
-    bgGradient: "from-blue-500 to-blue-600",
-    bgGradientLight: "from-blue-100/40 via-blue-50/20 to-transparent",
-    border: "border-blue-100",
-    borderHover: "hover:border-blue-300",
-    borderBottom: "hover:border-b-blue-500",
-    shadow: "shadow-blue-500/20",
-    shadowHover: "hover:shadow-blue-500/[0.04]",
-    badge: "bg-blue-50/70 border-blue-100/60 text-blue-600",
-    glow: "bg-blue-400/20",
-  },
-  amber: {
-    primary: "amber",
-    text: "text-amber-600",
-    textDark: "text-amber-950",
-    bg: "bg-amber-500",
-    bgLight: "bg-amber-50",
-    bgGradient: "from-amber-500 to-amber-600",
-    bgGradientLight: "from-amber-100/40 via-amber-50/20 to-transparent",
-    border: "border-amber-100",
-    borderHover: "hover:border-amber-300",
-    borderBottom: "hover:border-b-amber-500",
-    shadow: "shadow-amber-500/20",
-    shadowHover: "hover:shadow-amber-500/[0.04]",
-    badge: "bg-amber-50/70 border-amber-100/60 text-amber-600",
-    glow: "bg-amber-400/20",
-  },
-  red: {
-    primary: "red",
-    text: "text-red-600",
-    textDark: "text-red-950",
-    bg: "bg-red-500",
-    bgLight: "bg-red-50",
-    bgGradient: "from-red-500 to-red-600",
-    bgGradientLight: "from-red-100/40 via-red-50/20 to-transparent",
-    border: "border-red-100",
-    borderHover: "hover:border-red-300",
-    borderBottom: "hover:border-b-red-500",
-    shadow: "shadow-red-500/20",
-    shadowHover: "hover:shadow-red-500/[0.04]",
-    badge: "bg-red-50/70 border-red-100/60 text-red-600",
-    glow: "bg-red-400/20",
-  },
-  green: {
-    primary: "green",
-    text: "text-green-600",
-    textDark: "text-green-950",
-    bg: "bg-green-500",
-    bgLight: "bg-green-50",
-    bgGradient: "from-green-500 to-green-600",
-    bgGradientLight: "from-green-100/40 via-green-50/20 to-transparent",
-    border: "border-green-100",
-    borderHover: "hover:border-green-300",
-    borderBottom: "hover:border-b-green-500",
-    shadow: "shadow-green-500/20",
-    shadowHover: "hover:shadow-green-500/[0.04]",
-    badge: "bg-green-50/70 border-green-100/60 text-green-600",
-    glow: "bg-green-400/20",
-  },
-  pink: {
-    primary: "pink",
-    text: "text-pink-600",
-    textDark: "text-pink-950",
-    bg: "bg-pink-500",
-    bgLight: "bg-pink-50",
-    bgGradient: "from-pink-500 to-pink-600",
-    bgGradientLight: "from-pink-100/40 via-pink-50/20 to-transparent",
-    border: "border-pink-100",
-    borderHover: "hover:border-pink-300",
-    borderBottom: "hover:border-b-pink-500",
-    shadow: "shadow-pink-500/20",
-    shadowHover: "hover:shadow-pink-500/[0.04]",
-    badge: "bg-pink-50/70 border-pink-100/60 text-pink-600",
-    glow: "bg-pink-400/20",
-  },
-  indigo: {
-    primary: "indigo",
-    text: "text-indigo-600",
-    textDark: "text-indigo-950",
-    bg: "bg-indigo-500",
-    bgLight: "bg-indigo-50",
-    bgGradient: "from-indigo-500 to-indigo-600",
-    bgGradientLight: "from-indigo-100/40 via-indigo-50/20 to-transparent",
-    border: "border-indigo-100",
-    borderHover: "hover:border-indigo-300",
-    borderBottom: "hover:border-b-indigo-500",
-    shadow: "shadow-indigo-500/20",
-    shadowHover: "hover:shadow-indigo-500/[0.04]",
-    badge: "bg-indigo-50/70 border-indigo-100/60 text-indigo-600",
-    glow: "bg-indigo-400/20",
-  }
+const theme = {
+  primary: "sky",
+  text: "text-sky-600",
+  textDark: "text-sky-950",
+  bg: "bg-sky-500",
+  bgLight: "bg-sky-50",
+  bgGradient: "from-sky-500 to-sky-600",
+  bgGradientLight: "from-sky-100/40 via-sky-50/20 to-transparent",
+  border: "border-sky-100",
+  borderHover: "hover:border-sky-300",
+  borderBottom: "hover:border-b-sky-500",
+  shadow: "shadow-sky-500/20",
+  shadowHover: "hover:shadow-sky-500/[0.04]",
+  badge: "bg-sky-50/70 border-sky-100/60 text-sky-600",
+  glow: "bg-sky-400/20",
 };
 
 const serviceFaqs: Record<string, { q: string; a: string }[]> = {
@@ -449,7 +318,6 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
   const service = services.find(s => s.id === params.id);
   if (!service) notFound();
 
-  const theme = colorThemes.sky;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const faqs = serviceFaqs[service.id] || defaultFaqs;
 
