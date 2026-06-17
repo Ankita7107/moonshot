@@ -621,18 +621,12 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
               
               {/* Left Column: Heading & Pill Badges */}
               <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                {/* Active Availability Indicator */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-xs font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                  <span>Available for New Projects</span>
-                </div>
-
                 <div className="space-y-3">
                   <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-slate-900">
-                    Ready to build something legendary?
+                    Ready to get started?
                   </h3>
                   <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-xl">
-                    Build secure, scalable solutions configured for your business workflows. Let's discuss your product roadmap and strategic targets.
+                    Build secure, scalable solutions configured for your business workflows. Let's discuss your roadmap.
                   </p>
                 </div>
 
@@ -641,7 +635,7 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                   {[
                     "Free discovery consultation",
                     "Mutual NDA signed on request",
-                    "Predictable milestones",
+                    "Predictable milestones & delivery",
                     "Post-launch technical support"
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-sky-100/60 text-slate-600 text-[11px] font-bold shadow-sm hover:border-sky-300 transition-colors">
@@ -655,7 +649,6 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
               {/* Right Column: Premium Action Panel */}
               <div className="lg:col-span-5 flex flex-col items-center justify-center">
                 <div className="w-full max-w-sm p-6 rounded-3xl bg-white border border-sky-100/60 space-y-4 shadow-lg relative">
-                  {/* Floating abstract graphic glow behind icon */}
                   <div className="absolute top-4 right-4 w-12 h-12 bg-sky-500/10 rounded-full blur-xl animate-pulse" />
 
                   <div className="flex items-center gap-3">
@@ -663,8 +656,7 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                       <Sparkles size={18} />
                     </div>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">Project Consultation</h4>
-                      <p className="text-[10px] text-slate-400 font-bold">Response within 24 hours</p>
+                      <h4 className="text-sm font-bold text-slate-900">Get Started</h4>
                     </div>
                   </div>
 
@@ -676,7 +668,7 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                     
                     <Link href="/services"
                       className="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 font-bold py-3 rounded-2xl border border-slate-200 transition-all duration-300 active:scale-[0.98] text-xs">
-                      Explore All Services
+                      <ArrowLeft size={14} /> All Services
                     </Link>
                   </div>
                 </div>
