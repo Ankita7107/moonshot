@@ -270,7 +270,153 @@ const services = [
   },
 ];
 
-const c = { bg: "bg-sky-500", text: "text-sky-600", border: "border-sky-200", badge: "bg-sky-50 text-sky-600", btn: "bg-sky-500 hover:bg-sky-600", light: "bg-sky-50" };
+interface ThemeConfig {
+  primary: string;
+  text: string;
+  textDark: string;
+  bg: string;
+  bgLight: string;
+  bgGradient: string;
+  bgGradientLight: string;
+  border: string;
+  borderHover: string;
+  borderBottom: string;
+  shadow: string;
+  shadowHover: string;
+  badge: string;
+  glow: string;
+}
+
+const colorThemes: Record<string, ThemeConfig> = {
+  sky: {
+    primary: "sky",
+    text: "text-sky-600",
+    textDark: "text-sky-950",
+    bg: "bg-sky-500",
+    bgLight: "bg-sky-50",
+    bgGradient: "from-sky-500 to-sky-600",
+    bgGradientLight: "from-sky-100/40 via-sky-50/20 to-transparent",
+    border: "border-sky-100",
+    borderHover: "hover:border-sky-300",
+    borderBottom: "hover:border-b-sky-500",
+    shadow: "shadow-sky-500/20",
+    shadowHover: "hover:shadow-sky-500/[0.04]",
+    badge: "bg-sky-50/70 border-sky-100/60 text-sky-600",
+    glow: "bg-sky-400/20",
+  },
+  violet: {
+    primary: "violet",
+    text: "text-violet-600",
+    textDark: "text-violet-950",
+    bg: "bg-violet-500",
+    bgLight: "bg-violet-50",
+    bgGradient: "from-violet-500 to-violet-600",
+    bgGradientLight: "from-violet-100/40 via-violet-50/20 to-transparent",
+    border: "border-violet-100",
+    borderHover: "hover:border-violet-300",
+    borderBottom: "hover:border-b-violet-500",
+    shadow: "shadow-violet-500/20",
+    shadowHover: "hover:shadow-violet-500/[0.04]",
+    badge: "bg-violet-50/70 border-violet-100/60 text-violet-600",
+    glow: "bg-violet-400/20",
+  },
+  blue: {
+    primary: "blue",
+    text: "text-blue-600",
+    textDark: "text-blue-950",
+    bg: "bg-blue-500",
+    bgLight: "bg-blue-50",
+    bgGradient: "from-blue-500 to-blue-600",
+    bgGradientLight: "from-blue-100/40 via-blue-50/20 to-transparent",
+    border: "border-blue-100",
+    borderHover: "hover:border-blue-300",
+    borderBottom: "hover:border-b-blue-500",
+    shadow: "shadow-blue-500/20",
+    shadowHover: "hover:shadow-blue-500/[0.04]",
+    badge: "bg-blue-50/70 border-blue-100/60 text-blue-600",
+    glow: "bg-blue-400/20",
+  },
+  amber: {
+    primary: "amber",
+    text: "text-amber-600",
+    textDark: "text-amber-950",
+    bg: "bg-amber-500",
+    bgLight: "bg-amber-50",
+    bgGradient: "from-amber-500 to-amber-600",
+    bgGradientLight: "from-amber-100/40 via-amber-50/20 to-transparent",
+    border: "border-amber-100",
+    borderHover: "hover:border-amber-300",
+    borderBottom: "hover:border-b-amber-500",
+    shadow: "shadow-amber-500/20",
+    shadowHover: "hover:shadow-amber-500/[0.04]",
+    badge: "bg-amber-50/70 border-amber-100/60 text-amber-600",
+    glow: "bg-amber-400/20",
+  },
+  red: {
+    primary: "red",
+    text: "text-red-600",
+    textDark: "text-red-950",
+    bg: "bg-red-500",
+    bgLight: "bg-red-50",
+    bgGradient: "from-red-500 to-red-600",
+    bgGradientLight: "from-red-100/40 via-red-50/20 to-transparent",
+    border: "border-red-100",
+    borderHover: "hover:border-red-300",
+    borderBottom: "hover:border-b-red-500",
+    shadow: "shadow-red-500/20",
+    shadowHover: "hover:shadow-red-500/[0.04]",
+    badge: "bg-red-50/70 border-red-100/60 text-red-600",
+    glow: "bg-red-400/20",
+  },
+  green: {
+    primary: "green",
+    text: "text-green-600",
+    textDark: "text-green-950",
+    bg: "bg-green-500",
+    bgLight: "bg-green-50",
+    bgGradient: "from-green-500 to-green-600",
+    bgGradientLight: "from-green-100/40 via-green-50/20 to-transparent",
+    border: "border-green-100",
+    borderHover: "hover:border-green-300",
+    borderBottom: "hover:border-b-green-500",
+    shadow: "shadow-green-500/20",
+    shadowHover: "hover:shadow-green-500/[0.04]",
+    badge: "bg-green-50/70 border-green-100/60 text-green-600",
+    glow: "bg-green-400/20",
+  },
+  pink: {
+    primary: "pink",
+    text: "text-pink-600",
+    textDark: "text-pink-950",
+    bg: "bg-pink-500",
+    bgLight: "bg-pink-50",
+    bgGradient: "from-pink-500 to-pink-600",
+    bgGradientLight: "from-pink-100/40 via-pink-50/20 to-transparent",
+    border: "border-pink-100",
+    borderHover: "hover:border-pink-300",
+    borderBottom: "hover:border-b-pink-500",
+    shadow: "shadow-pink-500/20",
+    shadowHover: "hover:shadow-pink-500/[0.04]",
+    badge: "bg-pink-50/70 border-pink-100/60 text-pink-600",
+    glow: "bg-pink-400/20",
+  },
+  indigo: {
+    primary: "indigo",
+    text: "text-indigo-600",
+    textDark: "text-indigo-950",
+    bg: "bg-indigo-500",
+    bgLight: "bg-indigo-50",
+    bgGradient: "from-indigo-500 to-indigo-600",
+    bgGradientLight: "from-indigo-100/40 via-indigo-50/20 to-transparent",
+    border: "border-indigo-100",
+    borderHover: "hover:border-indigo-300",
+    borderBottom: "hover:border-b-indigo-500",
+    shadow: "shadow-indigo-500/20",
+    shadowHover: "hover:shadow-indigo-500/[0.04]",
+    badge: "bg-indigo-50/70 border-indigo-100/60 text-indigo-600",
+    glow: "bg-indigo-400/20",
+  }
+};
 
 const serviceFaqs: Record<string, { q: string; a: string }[]> = {
   "custom-web-solutions": [
@@ -303,44 +449,43 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
   const service = services.find(s => s.id === params.id);
   if (!service) notFound();
 
+  const theme = colorThemes.sky;
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const faqs = serviceFaqs[service.id] || defaultFaqs;
 
   return (
-    <main className="min-h-screen bg-slate-50/50">
+    <main className="min-h-screen bg-slate-50/50 pb-16">
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-sky-100/40 via-sky-50/20 to-transparent pt-24 pb-20 border-b border-slate-100/80">
-        {/* Blur spheres for premium high-end SaaS feel */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-to-br from-sky-300/20 to-sky-200/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-10 left-10 w-72 h-72 bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
+      <section className={`relative overflow-hidden bg-gradient-to-b ${theme.bgGradientLight} pt-24 pb-20 border-b border-slate-100/80`}>
+        {/* Blur spheres matching the service theme */}
+        <div className={`absolute top-0 right-1/4 w-96 h-96 ${theme.glow} rounded-full blur-3xl pointer-events-none`} />
+        <div className={`absolute -bottom-10 left-10 w-72 h-72 ${theme.glow} rounded-full blur-3xl pointer-events-none`} />
         
-        {/* Background decorative grid */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{ backgroundImage: "linear-gradient(#0ea5e9 1px,transparent 1px),linear-gradient(90deg,#0ea5e9 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
+        {/* Decorative Grid */}
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Back button */}
           <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
             <Link href="/services"
-              className="inline-flex items-center gap-2 text-slate-500 hover:text-sky-600 text-sm font-semibold mb-8 transition-colors group">
+              className={`inline-flex items-center gap-2 text-slate-500 hover:${theme.text} text-sm font-semibold mb-8 transition-colors group`}>
               <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
               Back to Services
             </Link>
           </motion.div>
 
           <div className="flex flex-col md:flex-row md:items-center gap-8">
-            {/* Glassmorphic Icon Wrapper */}
             <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 100 }}
               whileHover={{ scale: 1.05 }}
-              className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-sky-500 to-sky-600 text-white flex items-center justify-center shadow-xl shadow-sky-500/30 flex-shrink-0 relative group">
-              <div className="absolute inset-0 bg-sky-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity" />
+              className={`w-20 h-20 rounded-2xl bg-gradient-to-tr ${theme.bgGradient} text-white flex items-center justify-center shadow-xl ${theme.shadow} flex-shrink-0 relative group`}>
+              <div className={`absolute inset-0 ${theme.bg} rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity`} />
               <div className="relative z-10">{service.icon}</div>
             </motion.div>
 
             <div>
               <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-                className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-600 mb-3.5 inline-block">
+                className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${theme.badge} border mb-3.5 inline-block`}>
                 {service.category}
               </motion.span>
               <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.4 }}
@@ -348,7 +493,7 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                 {service.title}
               </motion.h1>
               <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-                className="text-sky-500 font-semibold italic text-base md:text-lg">
+                className={`${theme.text} font-semibold italic text-base md:text-lg`}>
                 "{service.tagline}"
               </motion.p>
             </div>
@@ -356,95 +501,118 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
         </div>
       </section>
 
-      {/* ── BODY ── */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-10">
+      {/* ── MAIN CASCADING CONTENT ── */}
+      <section className="py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          {/* About, Features, Tech Stack in unified grid */}
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            
+            {/* About Card */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ delay: 0.1 }}
+              whileHover={{ y: -4 }}
+              className={`md:col-span-2 bg-white rounded-3xl p-8 border border-slate-100 shadow-md ${theme.borderBottom} border-b-[5px] transition-all duration-300 relative overflow-hidden`}
+            >
+              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <span>About This Service</span>
+              </h2>
+              <p className="text-slate-600 leading-relaxed text-base font-medium whitespace-pre-line">
+                {service.detail}
+              </p>
+            </motion.div>
 
-            {/* Left: main content */}
-            <div className="lg:col-span-2 space-y-12">
-
-              {/* About section card */}
-              <motion.div initial={{ opacity: 0, scale: 0.96, y: 25 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.1 }}
-                whileHover={{ y: -8, scale: 1.02 }}
-                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 relative overflow-hidden group cursor-default">
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-sky-500" />
-                <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <span>About This Service</span>
-                </h2>
-                <p className="text-slate-600 leading-relaxed text-base font-medium whitespace-pre-line">{service.detail}</p>
-              </motion.div>
-
-              {/* Key Benefits */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                className="space-y-6">
-                <h2 className="text-xl font-bold text-slate-900 px-1">Key Benefits & Outcomes</h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {service.benefits.map((b, i) => (
-                    <motion.div key={i}
-                      initial={{ opacity: 0, scale: 0.96, y: 20 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      transition={{ type: "spring", stiffness: 90, delay: 0.2 + i * 0.05 }}
-                      whileHover={{ y: -6, scale: 1.03 }}
-                      className="flex items-start gap-4 p-5 rounded-2xl bg-white border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:border-sky-300 hover:shadow-2xl hover:shadow-sky-500/[0.06] transition-all duration-300 cursor-default">
-                      <div className="w-6 h-6 rounded-full bg-sky-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <CheckCircle size={14} className="text-sky-500" />
-                      </div>
-                      <span className="text-slate-700 text-sm font-semibold leading-relaxed">{b}</span>
-                    </motion.div>
+            {/* Features & Tech Stack in combined layout */}
+            <div className="flex flex-col gap-6 justify-between">
+              {/* Features */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ delay: 0.15 }}
+                whileHover={{ y: -4 }}
+                className={`bg-white p-6 rounded-3xl border border-slate-100 ${theme.borderBottom} border-b-[5px] shadow-md transition-all duration-300 flex-1 flex flex-col justify-center`}
+              >
+                <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-3">Core Features</h3>
+                <div className="flex flex-wrap gap-2">
+                  {service.features.map(f => (
+                    <span key={f} className={`text-[11px] font-bold px-3 py-1.5 rounded-full ${theme.badge} border`}>
+                      {f}
+                    </span>
                   ))}
                 </div>
               </motion.div>
 
-              {/* Core Features & Tech Stack Row */}
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Core Features */}
-                <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.3 }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="bg-white p-7 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default">
-                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Core Features</h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    {service.features.map(f => (
-                      <span key={f} className="text-xs font-bold px-3.5 py-2 rounded-full bg-sky-50/50 border border-sky-100/60 text-sky-600">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Tech Stack */}
-                <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.35 }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="bg-white p-7 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default">
-                  <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Technologies Leveraged</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {service.techStack.map(t => (
-                      <span key={t} className="text-xs font-semibold px-3 py-2 rounded-xl bg-slate-50 text-slate-600 border border-slate-200/60">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* TIMELINES & METRICS TABLE */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 90, delay: 0.38 }}
-                whileHover={{ y: -4, scale: 1.01 }}
-                className="bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default space-y-6"
+              {/* Technologies */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ delay: 0.2 }}
+                whileHover={{ y: -4 }}
+                className={`bg-white p-6 rounded-3xl border border-slate-100 ${theme.borderBottom} border-b-[5px] shadow-md transition-all duration-300 flex-1 flex flex-col justify-center`}
               >
-                <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-3">Technologies Leveraged</h3>
+                <div className="flex flex-wrap gap-2">
+                  {service.techStack.map(t => (
+                    <span key={t} className="text-[11px] font-semibold px-2.5 py-1.5 rounded-xl bg-slate-50 text-slate-600 border border-slate-200/60">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+          </div>
+
+          {/* Key Benefits (Full Width Section) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.25 }}
+            className="space-y-6"
+          >
+            <h2 className="text-2xl font-black text-slate-900 tracking-tight">Key Benefits & Outcomes</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {service.benefits.map((b, i) => (
+                <motion.div key={i}
+                  initial={{ opacity: 0, scale: 0.96, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ type: "spring", stiffness: 90, delay: 0.25 + i * 0.05 }}
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  className={`flex flex-col gap-3 p-6 rounded-3xl bg-white border border-slate-100 border-b-[5px] border-b-transparent ${theme.borderBottom} shadow-md ${theme.borderHover} hover:shadow-xl transition-all duration-300 cursor-default`}
+                >
+                  <div className={`w-8 h-8 rounded-full ${theme.bgLight} flex items-center justify-center flex-shrink-0`}>
+                    <CheckCircle size={16} className={theme.text} />
+                  </div>
+                  <span className="text-slate-700 text-sm font-bold leading-relaxed">{b}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Process & Delivery Timelines (Side by Side Grid for Balanced Spacing) */}
+          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+            
+            {/* TIMELINES & METRICS TABLE */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              whileHover={{ y: -4 }}
+              className={`bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent ${theme.borderBottom} shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between`}
+            >
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-4 flex items-center gap-2">
                   <span>Standard Delivery Timelines</span>
                 </h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="border-b border-slate-100">
-                        <th className="pb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Phase</th>
-                        <th className="pb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Duration</th>
-                        <th className="pb-3 text-xs font-bold uppercase tracking-wider text-slate-400">Key Deliverable</th>
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-400">Phase</th>
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-400">Duration</th>
+                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-400">Key Deliverable</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100/50">
@@ -455,179 +623,231 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                         { p: "Security Audit & Launch", d: "1 Week", o: "VAPT Security Logs & Live Production Setup" },
                       ].map((item, i) => (
                         <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                          <td className="py-3.5 text-sm font-bold text-slate-800">{item.p}</td>
-                          <td className="py-3.5 text-sm font-semibold text-sky-600">{item.d}</td>
-                          <td className="py-3.5 text-xs font-medium text-slate-500">{item.o}</td>
+                          <td className="py-4 text-sm font-bold text-slate-800">{item.p}</td>
+                          <td className={`py-4 text-sm font-bold ${theme.text}`}>{item.d}</td>
+                          <td className="py-4 text-xs font-medium text-slate-500">{item.o}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-              </motion.div>
+              </div>
+            </motion.div>
 
-              {/* ROADMAP TIMELINE */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 90, delay: 0.4 }}
-                whileHover={{ y: -4, scale: 1.01 }}
-                className="bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default space-y-6"
-              >
-                <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Our Delivery Process</h3>
-                <div className="relative border-l border-sky-100 ml-3 pl-6 space-y-8 py-2">
-                  {[
-                    { title: "1. Discover & Map", desc: "Collaborative workshops to freeze wireframes, define API integrations, and finalize the database architecture." },
-                    { title: "2. Design & Prototype", desc: "Crafting modern design systems in Figma matching your brand identity with clickable prototype handoffs." },
-                    { title: "3. Build & QA Sprints", desc: "Milestone-driven agile development with weekly builds, unit testing, and sandbox API validation." },
-                    { title: "4. Deploy & Scale", desc: "Production release with zero-downtime strategy, server health monitoring, and documentation handover." }
-                  ].map((step, idx) => (
-                    <div key={idx} className="relative">
-                      <div className="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-sky-500 shadow-sm" />
-                      <h4 className="text-sm font-bold text-slate-900 mb-1">{step.title}</h4>
-                      <p className="text-slate-500 text-xs leading-relaxed font-medium">{step.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* ENGAGEMENT MODELS */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 90, delay: 0.42 }}
-                whileHover={{ y: -4, scale: 1.01 }}
-                className="bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-300/80 transition-all duration-300 cursor-default space-y-6"
-              >
-                <h3 className="text-lg font-bold text-slate-900 border-b border-slate-100 pb-3">Flexible Engagement Models</h3>
-                <div className="grid sm:grid-cols-3 gap-4">
-                  {[
-                    { title: "Fixed Scope", desc: "Best for structured projects with concrete specifications and set timelines." },
-                    { title: "Dedicated Team", desc: "A custom team of developers, designers, and QA working exclusively on your product backlog." },
-                    { title: "Time & Material", desc: "Pay for active resources and hours logged, allowing complete flexibility to pivot." }
-                  ].map((model, idx) => (
-                    <div key={idx} className="p-4 rounded-2xl bg-slate-50/50 border border-slate-100 space-y-2 hover:border-sky-200 transition-colors">
-                      <h4 className="text-xs font-extrabold text-slate-800 uppercase tracking-wide">{model.title}</h4>
-                      <p className="text-slate-500 text-[11px] leading-relaxed font-medium">{model.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* FAQ Accordion Section */}
-              <motion.div initial={{ opacity: 0, scale: 0.96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 90, delay: 0.4 }}
-                whileHover={{ y: -4, scale: 1.01 }}
-                className="bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-2xl hover:border-sky-200/60 transition-all duration-300">
-                <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-                  <div className="w-9 h-9 rounded-xl bg-sky-50 flex items-center justify-center text-sky-500">
-                    <HelpCircle size={18} />
+            {/* ROADMAP TIMELINE */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 }}
+              whileHover={{ y: -4 }}
+              className={`bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent ${theme.borderBottom} shadow-md hover:shadow-xl transition-all duration-300`}
+            >
+              <h3 className="text-xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-4">Our Delivery Process</h3>
+              <div className={`relative border-l ${theme.border} ml-3 pl-6 space-y-6 py-2`}>
+                {[
+                  { title: "1. Discover & Map", desc: "Collaborative workshops to freeze wireframes, define API integrations, and finalize the database architecture." },
+                  { title: "2. Design & Prototype", desc: "Crafting modern design systems in Figma matching your brand identity with clickable prototype handoffs." },
+                  { title: "3. Build & QA Sprints", desc: "Milestone-driven agile development with weekly builds, unit testing, and sandbox API validation." },
+                  { title: "4. Deploy & Scale", desc: "Production release with zero-downtime strategy, server health monitoring, and documentation handover." }
+                ].map((step, idx) => (
+                  <div key={idx} className="relative">
+                    <div className={`absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-white border-4 ${theme.bg === "bg-sky-500" ? "border-sky-500" : theme.bg === "bg-violet-500" ? "border-violet-500" : theme.bg === "bg-blue-500" ? "border-blue-500" : theme.bg === "bg-amber-500" ? "border-amber-500" : theme.bg === "bg-red-500" ? "border-red-500" : theme.bg === "bg-green-500" ? "border-green-500" : theme.bg === "bg-pink-500" ? "border-pink-500" : "border-indigo-500"} shadow-sm`} />
+                    <h4 className="text-sm font-extrabold text-slate-900 mb-1">{step.title}</h4>
+                    <p className="text-slate-500 text-xs leading-relaxed font-medium">{step.desc}</p>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900">Frequently Asked Questions</h3>
-                </div>
-                <div className="space-y-4">
-                  {faqs.map((faq, idx) => {
-                    const isOpen = openFaq === idx;
-                    return (
-                      <div key={idx} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-                        <button
-                          onClick={() => setOpenFaq(isOpen ? null : idx)}
-                          className="w-full flex items-center justify-between text-left font-bold text-slate-800 hover:text-sky-500 transition-colors py-2"
-                        >
-                          <span className="text-sm leading-snug">{faq.q}</span>
-                          <ChevronDown size={16} className={`text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-sky-500" : ""}`} />
-                        </button>
-                        <AnimatePresence initial={false}>
-                          {isOpen && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden"
-                            >
-                              <p className="text-slate-500 text-xs leading-relaxed pt-2 pl-1 font-medium">
-                                {faq.a}
-                              </p>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            </div>
+                ))}
+              </div>
+            </motion.div>
 
-            {/* Right: sticky CTA card */}
-            <div className="lg:col-span-1">
-              <motion.div initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
-                className="sticky top-24 bg-white/90 backdrop-blur-md rounded-3xl border border-sky-100/60 shadow-xl shadow-sky-900/[0.02] p-8 space-y-6 hover:shadow-2xl hover:shadow-sky-500/[0.05] transition-all duration-500">
-                <div className="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-sky-500 shadow-inner relative overflow-hidden group">
-                  <Sparkles size={20} className="animate-pulse relative z-10" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">Ready to get started?</h3>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    Build secure, scalable solutions configured for your business workflows. Let's discuss your roadmap.
-                  </p>
+          </div>
+
+          {/* ENGAGEMENT MODELS */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="space-y-6"
+          >
+            <h3 className="text-2xl font-black text-slate-900 tracking-tight">Flexible Engagement Models</h3>
+            <div className="grid sm:grid-cols-3 gap-6">
+              {[
+                { title: "Fixed Scope", desc: "Best for structured projects with concrete specifications and set timelines." },
+                { title: "Dedicated Team", desc: "A custom team of developers, designers, and QA working exclusively on your product backlog." },
+                { title: "Time & Material", desc: "Pay for active resources and hours logged, allowing complete flexibility to pivot." }
+              ].map((model, idx) => (
+                <motion.div 
+                  key={idx} 
+                  whileHover={{ y: -4 }}
+                  className={`p-6 rounded-3xl bg-white border border-slate-100 shadow-md ${theme.borderHover} transition-all duration-300 space-y-3`}
+                >
+                  <h4 className={`text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full ${theme.badge} inline-block`}>
+                    {model.title}
+                  </h4>
+                  <p className="text-slate-600 text-xs leading-relaxed font-medium">{model.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* FAQ Accordion Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.45 }}
+            className="bg-white p-8 rounded-3xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 max-w-4xl mx-auto"
+          >
+            <div className="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
+              <div className={`w-9 h-9 rounded-xl ${theme.bgLight} flex items-center justify-center ${theme.text}`}>
+                <HelpCircle size={18} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900">Frequently Asked Questions</h3>
+            </div>
+            <div className="space-y-4">
+              {faqs.map((faq, idx) => {
+                const isOpen = openFaq === idx;
+                return (
+                  <div key={idx} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? null : idx)}
+                      className={`w-full flex items-center justify-between text-left font-bold text-slate-800 hover:${theme.text} transition-colors py-2`}
+                    >
+                      <span className="text-sm leading-snug">{faq.q}</span>
+                      <ChevronDown size={16} className={`text-slate-400 transition-transform duration-300 ${isOpen ? `rotate-180 ${theme.text}` : ""}`} />
+                    </button>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-slate-500 text-xs leading-relaxed pt-2 pl-1 font-medium">
+                            {faq.a}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* HIGH-IMPACT BOTTOM CTA BANNER (Unified Full-Width Design) */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ type: "spring", stiffness: 80, delay: 0.5 }}
+            className={`relative overflow-hidden bg-gradient-to-br from-sky-50/40 via-white to-sky-100/30 text-slate-800 rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-sky-100/80 group`}
+          >
+            {/* Holographic Glowing Orbs */}
+            <div className={`absolute -right-20 -top-20 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000`} />
+            <div className={`absolute -left-20 -bottom-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000`} />
+            
+            {/* Interactive Grid Overlay */}
+            <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none"
+              style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0ea5e9 1px, transparent 0)", backgroundSize: "24px 24px" }} />
+
+            <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
+              
+              {/* Left Column: Heading & Pill Badges */}
+              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+                {/* Active Availability Indicator */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 text-xs font-bold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                  <span>Available for New Projects</span>
                 </div>
 
                 <div className="space-y-3">
-                  <Link href="/contact"
-                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-bold py-3.5 rounded-2xl shadow-md shadow-sky-500/20 active:scale-[0.98] transition-all duration-300 hover:shadow-lg hover:shadow-sky-500/30 hover:-translate-y-0.5 transform">
-                    Start a Project <ArrowRight size={15} />
-                  </Link>
-
-                  <Link href="/services"
-                    className="w-full flex items-center justify-center gap-2 border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 font-semibold py-3 rounded-2xl transition-all text-xs hover:border-slate-300 active:scale-[0.99] duration-300">
-                    <ArrowLeft size={14} /> All Services
-                  </Link>
+                  <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-slate-900">
+                    Ready to build something legendary?
+                  </h3>
+                  <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-xl">
+                    Build secure, scalable solutions configured for your business workflows. Let's discuss your product roadmap and strategic targets.
+                  </p>
                 </div>
 
-                {/* Trust list with fine styling */}
-                <div className="pt-5 border-t border-slate-100 space-y-3">
+                {/* Floating Pill Badges in light theme */}
+                <div className="flex flex-wrap gap-2.5 justify-center lg:justify-start pt-2">
                   {[
                     "Free discovery consultation",
                     "Mutual NDA signed on request",
-                    "Predictable milestones & delivery",
+                    "Predictable milestones",
                     "Post-launch technical support"
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2.5 text-xs text-slate-500">
-                      <CheckCircle size={14} className="text-sky-500 flex-shrink-0" />
-                      <span className="font-medium">{item}</span>
+                    <div key={idx} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-sky-100/60 text-slate-600 text-[11px] font-bold shadow-sm hover:border-sky-300 transition-colors">
+                      <CheckCircle size={12} className="text-sky-500 flex-shrink-0" />
+                      <span>{item}</span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
+
+              {/* Right Column: Premium Action Panel */}
+              <div className="lg:col-span-5 flex flex-col items-center justify-center">
+                <div className="w-full max-w-sm p-6 rounded-3xl bg-white border border-sky-100/60 space-y-4 shadow-lg relative">
+                  {/* Floating abstract graphic glow behind icon */}
+                  <div className="absolute top-4 right-4 w-12 h-12 bg-sky-500/10 rounded-full blur-xl animate-pulse" />
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-500">
+                      <Sparkles size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900">Project Consultation</h4>
+                      <p className="text-[10px] text-slate-400 font-bold">Response within 24 hours</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2.5 pt-2">
+                    <Link href="/contact"
+                      className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-extrabold py-3.5 rounded-2xl shadow-md shadow-sky-500/10 hover:shadow-sky-500/25 transition-all duration-300 active:scale-[0.98] text-sm">
+                      Start a Project <ArrowRight size={15} />
+                    </Link>
+                    
+                    <Link href="/services"
+                      className="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 font-bold py-3 rounded-2xl border border-slate-200 transition-all duration-300 active:scale-[0.98] text-xs">
+                      Explore All Services
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
             </div>
-          </div>
+          </motion.div>
+
         </div>
       </section>
 
       {/* ── RELATED SERVICES ── */}
-      <section className="py-20 bg-white border-t border-slate-100">
+      <section className="py-16 bg-white border-t border-slate-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-black text-slate-900 mb-8 tracking-tight">Other Capabilities</h2>
           <div className="grid sm:grid-cols-3 gap-6">
             {services
               .filter(s => s.id !== service.id && s.category === service.category)
               .slice(0, 3)
-              .map(s => (
-                <Link key={s.id} href={`/services/${s.id}`}
-                  className="bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-sky-300 hover:shadow-lg p-6 transition-all group flex flex-col justify-between">
-                  <div>
-                    <div className="w-10 h-10 bg-white shadow-sm rounded-xl flex items-center justify-center text-sky-500 mb-4 group-hover:bg-sky-500 group-hover:text-white transition-all flex-shrink-0">
-                      {s.icon}
+              .map(s => {
+                return (
+                  <Link key={s.id} href={`/services/${s.id}`}
+                    className={`bg-slate-50/50 rounded-3xl border border-slate-100 ${theme.borderHover} hover:shadow-lg p-6 transition-all group flex flex-col justify-between`}>
+                    <div>
+                      <div className={`w-10 h-10 bg-white shadow-sm rounded-xl flex items-center justify-center ${theme.text} mb-4 group-hover:bg-slate-950 group-hover:text-white transition-all flex-shrink-0`}>
+                        {s.icon}
+                      </div>
+                      <h4 className={`font-bold text-slate-900 mb-1 text-sm group-hover:${theme.text} transition-colors leading-snug`}>{s.title}</h4>
+                      <p className="text-slate-400 text-xs line-clamp-2 leading-relaxed">{s.tagline}</p>
                     </div>
-                    <h4 className="font-bold text-slate-900 mb-1 text-sm group-hover:text-sky-600 transition-colors leading-snug">{s.title}</h4>
-                    <p className="text-slate-400 text-xs line-clamp-2 leading-relaxed">{s.tagline}</p>
-                  </div>
-                  <div className="mt-4 flex items-center gap-1 text-[10px] font-bold text-sky-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
-                    View Service <ArrowRight size={10} />
-                  </div>
-                </Link>
-              ))}
+                    <div className={`mt-4 flex items-center gap-1 text-[10px] font-bold ${theme.text} opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all`}>
+                      View Service <ArrowRight size={10} />
+                    </div>
+                  </Link>
+                );
+              })}
           </div>
         </div>
       </section>
     </main>
   );
-}
+}
