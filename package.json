@@ -1,5 +1,4 @@
 {
-  "$schema": "./schema.json",
   "name": "moonshot-minds",
   "version": "0.1.0",
   "private": true,
