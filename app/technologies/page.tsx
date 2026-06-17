@@ -158,7 +158,7 @@ const techCategories: {
   },
 ];
 
-const partners = ["AWS", "GOOGLE CLOUD", "MICROSOFT AZURE", "DIGITALOCEAN"];
+
 
 /* ─── particles canvas ──────────────────────────────────────── */
 function ParticleCanvas() {
@@ -602,43 +602,7 @@ export default function TechnologiesPage() {
         </div>
       </section>
 
-      {/* ── PARTNERS TICKER ── */}
-      <section className="py-16 border-y border-slate-100 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 text-center mb-10">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-xs font-semibold tracking-[0.2em] text-slate-400 uppercase"
-          >
-            Certified Cloud Partners
-          </motion.p>
-        </div>
-        <div className="relative flex overflow-x-hidden group hover-pause-group">
-          {/* fade masks */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-white to-transparent z-10" />
 
-          {[0, 1].map((track) => (
-            <div
-              key={track}
-                className="flex items-center gap-10 min-w-max pr-10 animate-marquee"
-            >
-              {[...partners, ...partners].map((p, i) => (
-                <motion.div
-                  key={`${p}-${i}`}
-                  whileHover={{ y: -4 }}
-                  className="px-10 py-5 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md hover:border-sky-100 transition-all duration-300 min-w-[220px] text-center cursor-default group/partner"
-                >
-                  <span className="text-lg font-extrabold text-slate-800 tracking-wider group-hover/partner:text-sky-600 transition-colors uppercase">
-                    {p}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* ── CTA ── */}
       <section className="py-24">
