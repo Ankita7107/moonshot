@@ -960,6 +960,24 @@ export default function HomePage() {
         >
           Engineering Excellence
         </motion.h2>
+
+        {/* Mobile-only Scroll Arrows (directly below title) */}
+        <div className="flex gap-4 mt-6 md:hidden">
+          <button
+            onClick={() => scrollCaseStudies("left")}
+            className="w-10 h-10 rounded-full border border-slate-200 text-slate-600 bg-white flex items-center justify-center shadow-md active:scale-95"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            onClick={() => scrollCaseStudies("right")}
+            className="w-10 h-10 rounded-full border border-slate-200 text-slate-600 bg-white flex items-center justify-center shadow-md active:scale-95"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={18} />
+          </button>
+        </div>
       </div>
       <div className="flex items-center gap-4 justify-between md:justify-end w-full md:w-auto">
      
@@ -1059,6 +1077,8 @@ export default function HomePage() {
           </motion.div>
         ))}
       </div>
+
+
     </div>
   </div>
 </section>
