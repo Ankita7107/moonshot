@@ -1814,31 +1814,39 @@ export default function IndustryDetailsPage() {
           ))}
         </div>
       </section>
-      <section className="py-24 bg-white">
-  <div className="max-w-7xl mx-auto px-4">
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <h2 className="text-4xl font-black text-center mb-12 tracking-tight text-slate-900">
+            Key Features
+          </h2>
 
-    <h2 className="text-4xl font-black text-center mb-12">
-      Key Features
-    </h2>
-
-    <div className="grid md:grid-cols-3 gap-6">
-
-      {data.features.map((feature, index) => (
-        <div
-          key={index}
-          className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-lg transition"
-        >
-          <CheckCircle2 className="w-8 h-8 text-sky-500 mb-4" />
-
-          <h3 className="font-bold text-lg text-slate-900">
-            {feature}
-          </h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            {data.features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.08 * index, duration: 0.4 }}
+                whileHover={{ y: -6 }}
+                className="group h-full"
+              >
+                <SpotlightCard
+                  glowColor="rgba(14,165,233,0.18)"
+                  className="h-full flex items-center gap-4 p-5 rounded-3xl bg-white border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-xl transition-all duration-300 cursor-default"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-sky-500 flex-shrink-0">
+                    <CheckCircle2 size={20} />
+                  </div>
+                  <h3 className="font-bold text-base md:text-lg text-slate-800 leading-tight">
+                    {feature}
+                  </h3>
+                </SpotlightCard>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      ))}
-
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* ══════════════════ INTERACTIVE SWITCHER TERMINAL (CHALLENGES VS SOLUTIONS) ══════════════════ */}
       <section className="py-24 bg-slate-50/60 relative overflow-hidden">
@@ -1963,30 +1971,37 @@ export default function IndustryDetailsPage() {
           </div>
         </div>
       </section>
-      <section className="py-24 bg-slate-50">
+      <section className="py-24 bg-slate-50/50 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[130px] pointer-events-none"
+             style={{ background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)` }} />
 
-  <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <h2 className="text-4xl font-black text-center mb-12 tracking-tight text-slate-900">
+            Technology Stack
+          </h2>
 
-    <h2 className="text-4xl font-black text-center mb-12">
-      Technology Stack
-    </h2>
-
-    <div className="grid md:grid-cols-4 gap-5">
-
-      {data.technologies.map((tech,index)=>(
-        <div
-          key={index}
-          className="bg-white border border-slate-200 rounded-2xl p-5 text-center font-bold"
-        >
-          {tech}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {data.technologies.map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.05 * index, duration: 0.3 }}
+                whileHover={{ y: -4, scale: 1.03 }}
+                className="group"
+              >
+                <SpotlightCard
+                  glowColor="rgba(14,165,233,0.18)"
+                  className="bg-white border border-slate-100/90 rounded-2xl p-5 text-center font-bold text-slate-700 shadow-sm hover:shadow-md hover:border-sky-300 hover:text-sky-600 transition-all duration-300 cursor-default"
+                >
+                  {tech}
+                </SpotlightCard>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      ))}
-
-    </div>
-
-  </div>
-
-</section>
+      </section>
 
       {/* ══════════════════ SIMULATED ARCHITECTURE FLOW (BLUEPRINT DESIGN) ══════════════════ */}
       <section className="py-24 bg-white relative overflow-hidden">
