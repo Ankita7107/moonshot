@@ -793,10 +793,11 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
             viewport={{ once: true }}
             className="grid sm:grid-cols-3 gap-6"
           >
-            {services
-              .filter(s => s.id !== service.id && s.category === service.category)
-              .slice(0, 3)
-              .map(s => (
+            {(() => {
+              const sameCategory = services.filter(s => s.id !== service.id && s.category === service.category);
+              const otherCategories = services.filter(s => s.id !== service.id && s.category !== service.category);
+              const related = [...sameCategory, ...otherCategories].slice(0, 3);
+              return related.map(s => (
                 <motion.div key={s.id} variants={fadeUp}>
                   <Link
                     href={`/services/${s.id}`}
@@ -812,7 +813,8 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                     </div>
                   </Link>
                 </motion.div>
-              ))}
+              ));
+            })()}
           </motion.div>
         </div>
       </section>
