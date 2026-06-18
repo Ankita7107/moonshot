@@ -2178,9 +2178,13 @@ export default function IndustryDetailsPage() {
             initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-[2.5rem] overflow-hidden bg-white border border-slate-100/80 p-12 md:p-16 text-center shadow-md hover:shadow-xl hover:border-slate-200 transition-all duration-500 group"
+            className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-sky-50/40 via-white to-sky-100/30 text-slate-800 border border-sky-100/80 p-12 md:p-16 text-center shadow-xl hover:shadow-2xl transition-all duration-500 group"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-sky-50/5 via-transparent to-sky-50/5 animate-shimmer opacity-20 pointer-events-none" />
+            <div className="absolute -right-20 -top-20 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
+            <div className="absolute -left-20 -bottom-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
+            
+            <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none"
+              style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0ea5e9 1px, transparent 0)", backgroundSize: "24px 24px" }} />
 
             <div className="relative z-10">
               <motion.div
