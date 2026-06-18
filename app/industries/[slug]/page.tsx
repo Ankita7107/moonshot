@@ -21,7 +21,9 @@ import {
   ArrowRightLeft,
   Radio,
   FileCode,
-  Workflow
+  Workflow,
+  HelpCircle,
+  ChevronDown
 } from "lucide-react";
 
 interface IndustryData {
@@ -40,7 +42,14 @@ interface IndustryData {
     target: string;
     description: string;
   };
+  faqs?: { q: string; a: string }[];
 }
+
+const defaultIndustryFaqs = [
+  { q: "What is the typical deployment timeline for an industry solution?", a: "Depending on system complexity and compliance requirements, development ranges from 6 to 12 weeks of agile sprints." },
+  { q: "Do you sign NDAs before discussing proprietary workflows?", a: "Yes, we sign mutual NDAs before analyzing databases, internal workflows, or API structures." },
+  { q: "How do you handle ongoing maintenance post-launch?", a: "We provide SLA-backed maintenance plans including regular security updates, cloud optimization, and feature upgrades." }
+];
 
 const industryContent: Record<string, IndustryData> = {
   fintech: {
@@ -136,6 +145,16 @@ const industryContent: Record<string, IndustryData> = {
       target: "Secure FHIR EHR Databases",
       description: "Consultation portals request dynamic access tokens, authorize records through HL7 middleware, and store telemetry logs securely.",
     },
+    faqs: [
+      {
+        q: "How is patient data security maintained to prevent leaks?",
+        a: "We implement robust 256-bit AES encryption in accordance with HIPAA and HITECH laws. All telemetry and records are protected in-transit and at-rest, and validated via regular security audit logs."
+      },
+      {
+        q: "Can your telemetry modules integrate with legacy EHR systems?",
+        a: "Yes, our HL7 middleware maps dynamic patient records directly to traditional SQL systems without schema modifications."
+      }
+    ],
   },
   "e-commerce": {
     title: "E-Commerce",
@@ -1025,12 +1044,117 @@ function SpotlightCard({
   );
 }
 
+const industrySpecificFaqs: Record<string, { q: string; a: string }[]> = {
+  fintech: [
+    { q: "How are financial records protected from tampering?", a: "We implement immutable audit logging, end-to-end data encryption, and PCI-DSS Level 1 compliant gateway authentication protocols." },
+    { q: "What database solutions are used for high-frequency trading?", a: "We use hybrid storage topologies, coupling ultra-low latency Redis cache layers with acid-compliant PostgreSQL databases." }
+  ],
+  healthcare: [
+    { q: "How is patient data security maintained to prevent leaks?", a: "We implement robust 256-bit AES encryption in accordance with HIPAA and HITECH laws. All telemetry and records are protected in-transit and at-rest, and validated via regular security audit logs." },
+    { q: "Can your telemetry modules integrate with legacy EHR systems?", a: "Yes, our HL7 middleware maps dynamic patient records directly to traditional SQL systems without schema modifications." }
+  ],
+  "e-commerce": [
+    { q: "How does the storefront handle sudden flash sales traffic spikes?", a: "We construct serverless global edge networks that automatically scale computing resources instantly to support million-plus active carts." },
+    { q: "How is real-time catalog and inventory synchronization achieved?", a: "We deploy event-sourced Kafka stream clusters to keep physical storefronts, web systems, and supplier inventories in absolute sync." }
+  ],
+  logistics: [
+    { q: "How do you achieve real-time tracking dashboard updates under 2 seconds?", a: "We leverage high-throughput AWS Kinesis data ingest streams to process live GPS signals from thousands of fleet IoT devices simultaneously." },
+    { q: "Can the routing engine account for weather and active road traffic?", a: "Yes, our route optimization algorithms calculate real-time dispatches using traffic forecasting APIs and historical weather datasets." }
+  ],
+  "real-estate": [
+    { q: "How do you sync properties with multiple listing services (MLS) automatically?", a: "We build RESO-compliant sync engines that standardize data schemas and refresh listings across property platforms in real-time." },
+    { q: "Can virtual 3D tour embeds work seamlessly on mobile browsers?", a: "Yes, we implement highly optimized spatial viewing frames that adapt viewport rendering for smooth performance on any mobile device." }
+  ],
+  education: [
+    { q: "Are the virtual classroom streams fully private?", a: "Yes, WebRTC streaming sessions are token-authorized and encrypted peer-to-peer to protect student privacy." },
+    { q: "Can the LMS integrate with external learning tools (LTI compliant)?", a: "Yes, our learning management systems adhere to LTI standards to plug in external course materials and grading books." }
+  ],
+  manufacturing: [
+    { q: "How is machine telemetry data extracted from the factory floor?", a: "We deploy secure IoT hardware translators that convert legacy Modbus/SCADA industrial protocol signals into secure cloud-ready data feeds." },
+    { q: "How does the machine learning engine forecast equipment failures?", a: "Our anomaly models analyze telemetry feeds like temperature and vibration thresholds to warn maintenance teams before failures happen." }
+  ],
+  "travel-hospitality": [
+    { q: "How do you prevent double-bookings across different flight and hotel channels?", a: "We establish direct connections to Global Distribution Systems (GDS) with atomic synchronization locks during transaction checkout." },
+    { q: "How does the dynamic room pricing matrix work?", a: "It computes occupant demand, historical seasons, and competitor pricing indexes to optimize yields dynamically." }
+  ],
+  "banking-insurance": [
+    { q: "How do you automate up to 90% of insurance claims processing?", a: "We deploy smart decision matrices that validate claim credentials against policy definitions automatically." },
+    { q: "Are transaction ledger audits automated?", a: "Yes, our double-entry banking ledgers feature immutable audit trails that generate compliance logs with zero human intervention." }
+  ],
+  cybersecurity: [
+    { q: "How do you differentiate actual threats from false alarms?", a: "Our SIEM anomaly engines score inbound network signals dynamically, prioritizing high-risk alerts and filtering normal network noise." },
+    { q: "How fast does the containment system isolate compromised machines?", a: "Our automated playbooks isolate infected endpoints and revoke access credentials across active directories within 5 seconds." }
+  ],
+  telecom: [
+    { q: "How do you handle real-time billing calculations for millions of active users?", a: "We use high-throughput stream processing engines like Apache Flink to calculate data usage and apply rates in real-time." },
+    { q: "How does 5G traffic optimization work?", a: "We build elastic load balancers that dynamically route bandwidth queues to active cell sectors based on immediate network usage." }
+  ],
+  automotive: [
+    { q: "Can vehicle telemetry diagnostic data be processed on-board?", a: "Yes, we write optimized lightweight CAN bus edge parsers that filter non-critical data before sending highlights to the cloud." },
+    { q: "How accurate are EV battery degradation models?", a: "By tracking voltage cycles, operating temperature, and discharge speeds, our ML models predict cell lifespan with up to 95% accuracy." }
+  ],
+  "media-entertainment": [
+    { q: "How do you eliminate streaming buffer lag during peak usage?", a: "We implement multi-bitrate HLS players coupled with global CDN routing to adjust quality dynamically based on network bandwidth." },
+    { q: "How is digital rights management (DRM) enforced?", a: "We integrate standard Widevine, FairPlay, and PlayReady decryptions directly into secure media playback players." }
+  ],
+  "food-restaurant-tech": [
+    { q: "Can the kitchen display screens work during internet outages?", a: "Yes, the POS runs on a local offline-first database framework that caches order lists and syncs automatically when the connection is restored." },
+    { q: "How is driver dispatch coordinated?", a: "Our dispatch algorithms match drivers based on geo-locations, prep speed history, and active cooking times." }
+  ],
+  "government-public-sector": [
+    { q: "Are the citizen portals accessible to disabled users?", a: "Yes, all layouts conform to WCAG 2.1 AA accessibility standards, supporting screen readers and full keyboard navigability." },
+    { q: "How is user identity verification secured on government portals?", a: "We implement federated identity integrations backed by multi-factor authentication (MFA) and biometric verifications." }
+  ]
+};
+
+const getSplitTitle = (title: string) => {
+  switch (title) {
+    case "FinTech":
+      return { part1: "Fin", part2: "Tech" };
+    case "Healthcare":
+      return { part1: "Health", part2: "care" };
+    case "E-Commerce":
+      return { part1: "E-Com", part2: "merce" };
+    case "Logistics":
+      return { part1: "Logi", part2: "stics" };
+    case "Real Estate":
+      return { part1: "Real", part2: " Estate" };
+    case "Education":
+      return { part1: "Edu", part2: "cation" };
+    case "Manufacturing":
+      return { part1: "Manufac", part2: "turing" };
+    case "Travel & Hospitality":
+      return { part1: "Travel & ", part2: "Hospitality" };
+    case "Banking & Insurance":
+      return { part1: "Banking & ", part2: "Insurance" };
+    case "Cybersecurity":
+      return { part1: "Cyber", part2: "security" };
+    case "Telecom":
+      return { part1: "Tele", part2: "com" };
+    case "Automotive":
+      return { part1: "Auto", part2: "motive" };
+    case "Media & Entertainment":
+      return { part1: "Media & ", part2: "Entertainment" };
+    case "Food & Restaurant Tech":
+      return { part1: "Food & Restaurant ", part2: "Tech" };
+    case "Government & Public Sector":
+      return { part1: "Government & ", part2: "Public Sector" };
+    default:
+      const mid = Math.ceil(title.length / 2);
+      return { part1: title.substring(0, mid), part2: title.substring(mid) };
+  }
+};
+
 export default function IndustryDetailsPage() {
   const { slug } = useParams() as { slug: string };
   const data = industryContent[slug];
 
   // Active challenge selected inside the tab terminal
   const [activeTab, setActiveTab] = useState(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const faqs = data?.faqs || industrySpecificFaqs[slug] || defaultIndustryFaqs;
+  const { part1, part2 } = getSplitTitle(data?.title || "");
 
   const bgImageMap: Record<string, string> = {
     fintech: "/moonshot_images/Fintech.jpg",
@@ -1067,54 +1191,54 @@ export default function IndustryDetailsPage() {
     );
   }
 
-  // Always use the logo's primary brand theme (Sky Blue & Deep Navy) to ensure consistent brand identity
+  // Enforce the Moonshot logo brand theme (Sky Blue & Deep Navy) universally for consistent colors
   const styles = themeStylesMap.sky;
 
   const leftIconMap: Record<string, React.ReactNode> = {
-    fintech: <Database className="w-6 h-6 text-sky-500" />,
-    healthcare: <Activity className="w-6 h-6 text-cyan-500" />,
-    "e-commerce": <Zap className="w-6 h-6 text-indigo-500" />,
-    logistics: <Cpu className="w-6 h-6 text-sky-500" />,
-    "real-estate": <Globe2 className="w-6 h-6 text-orange-500" />,
-    education: <Layers className="w-6 h-6 text-emerald-500" />,
-    manufacturing: <Cpu className="w-6 h-6 text-zinc-500" />,
-    "travel-hospitality": <Globe2 className="w-6 h-6 text-sky-500" />,
-    "banking-insurance": <ShieldCheck className="w-6 h-6 text-indigo-500" />,
-    cybersecurity: <ShieldCheck className="w-6 h-6 text-red-500" />,
-    telecom: <Activity className="w-6 h-6 text-purple-500" />,
-    automotive: <Cpu className="w-6 h-6 text-slate-500" />,
-    "media-entertainment": <Layers className="w-6 h-6 text-pink-500" />,
-    "food-restaurant-tech": <Zap className="w-6 h-6 text-orange-500" />,
-    "government-public-sector": <Database className="w-6 h-6 text-green-500" />,
+    fintech: <Database className={`w-6 h-6 ${styles.text}`} />,
+    healthcare: <Activity className={`w-6 h-6 ${styles.text}`} />,
+    "e-commerce": <Zap className={`w-6 h-6 ${styles.text}`} />,
+    logistics: <Cpu className={`w-6 h-6 ${styles.text}`} />,
+    "real-estate": <Globe2 className={`w-6 h-6 ${styles.text}`} />,
+    education: <Layers className={`w-6 h-6 ${styles.text}`} />,
+    manufacturing: <Cpu className={`w-6 h-6 ${styles.text}`} />,
+    "travel-hospitality": <Globe2 className={`w-6 h-6 ${styles.text}`} />,
+    "banking-insurance": <ShieldCheck className={`w-6 h-6 ${styles.text}`} />,
+    cybersecurity: <ShieldCheck className={`w-6 h-6 ${styles.text}`} />,
+    telecom: <Activity className={`w-6 h-6 ${styles.text}`} />,
+    automotive: <Cpu className={`w-6 h-6 ${styles.text}`} />,
+    "media-entertainment": <Layers className={`w-6 h-6 ${styles.text}`} />,
+    "food-restaurant-tech": <Zap className={`w-6 h-6 ${styles.text}`} />,
+    "government-public-sector": <Database className={`w-6 h-6 ${styles.text}`} />,
   };
 
   const rightIconMap: Record<string, React.ReactNode> = {
-    fintech: <ShieldCheck className="w-6 h-6 text-sky-400" />,
-    healthcare: <ShieldCheck className="w-6 h-6 text-cyan-400" />,
-    "e-commerce": <Layers className="w-6 h-6 text-indigo-400" />,
-    logistics: <Globe2 className="w-6 h-6 text-sky-400" />,
-    "real-estate": <Layers className="w-6 h-6 text-orange-400" />,
-    education: <Globe2 className="w-6 h-6 text-emerald-400" />,
-    manufacturing: <Database className="w-6 h-6 text-zinc-400" />,
-    "travel-hospitality": <Layers className="w-6 h-6 text-sky-400" />,
-    "banking-insurance": <Database className="w-6 h-6 text-indigo-400" />,
-    cybersecurity: <Terminal className="w-6 h-6 text-red-400" />,
-    telecom: <Globe2 className="w-6 h-6 text-purple-400" />,
-    automotive: <Zap className="w-6 h-6 text-slate-400" />,
-    "media-entertainment": <Sparkles className="w-6 h-6 text-pink-400" />,
-    "food-restaurant-tech": <Database className="w-6 h-6 text-orange-400" />,
-    "government-public-sector": <ShieldCheck className="w-6 h-6 text-green-400" />,
+    fintech: <ShieldCheck className={`w-6 h-6 ${styles.text}`} />,
+    healthcare: <ShieldCheck className={`w-6 h-6 ${styles.text}`} />,
+    "e-commerce": <Layers className={`w-6 h-6 ${styles.text}`} />,
+    logistics: <Globe2 className={`w-6 h-6 ${styles.text}`} />,
+    "real-estate": <Layers className={`w-6 h-6 ${styles.text}`} />,
+    education: <Globe2 className={`w-6 h-6 ${styles.text}`} />,
+    manufacturing: <Database className={`w-6 h-6 ${styles.text}`} />,
+    "travel-hospitality": <Layers className={`w-6 h-6 ${styles.text}`} />,
+    "banking-insurance": <Database className={`w-6 h-6 ${styles.text}`} />,
+    cybersecurity: <Terminal className={`w-6 h-6 ${styles.text}`} />,
+    telecom: <Globe2 className={`w-6 h-6 ${styles.text}`} />,
+    automotive: <Zap className={`w-6 h-6 ${styles.text}`} />,
+    "media-entertainment": <Sparkles className={`w-6 h-6 ${styles.text}`} />,
+    "food-restaurant-tech": <Database className={`w-6 h-6 ${styles.text}`} />,
+    "government-public-sector": <ShieldCheck className={`w-6 h-6 ${styles.text}`} />,
   };
 
-  const leftIconRaw = leftIconMap[slug] || <Cpu className="w-6 h-6 text-sky-500" />;
-  const rightIconRaw = rightIconMap[slug] || <Globe2 className="w-6 h-6 text-sky-400" />;
+  const leftIconRaw = leftIconMap[slug] || <Cpu className={`w-6 h-6 ${styles.text}`} />;
+  const rightIconRaw = rightIconMap[slug] || <Globe2 className={`w-6 h-6 ${styles.text}`} />;
 
-  // Force logo brand colors (Sky Blue) for all industry icons
+  // Render industry-themed floating icons dynamically
   const leftIcon = React.cloneElement(leftIconRaw as React.ReactElement, {
-    className: "w-6 h-6 text-sky-500"
+    className: `w-6 h-6 ${styles.text}`
   });
   const rightIcon = React.cloneElement(rightIconRaw as React.ReactElement, {
-    className: "w-6 h-6 text-sky-400"
+    className: `w-6 h-6 ${styles.text}`
   });
 
   return (
@@ -1246,9 +1370,15 @@ export default function IndustryDetailsPage() {
             <span className={`text-xs font-black tracking-[0.2em] uppercase text-slate-500`}>Sector Intelligence Blueprint</span>
           </motion.div>
 
-          <h1 className={`text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none bg-gradient-to-r ${styles.gradientText} bg-clip-text text-transparent`}>
-            <StaggeredReveal text={data.title} />
-          </h1>
+          <motion.h1 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none"
+          >
+            <span className="text-slate-900">{part1}</span>
+            <span className="text-sky-500">{part2}</span>
+          </motion.h1>
 
           {/* Styled Underline Accent with Shimmering Laser effect */}
           <div className="relative mb-8">
@@ -1293,6 +1423,31 @@ export default function IndustryDetailsPage() {
               <ArrowLeft size={14} /> Back to Sectors
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ══════════════════ KEY PERFORMANCE METRICS (VIBRANT & COMPACT) ══════════════════ */}
+      <section className="relative z-20 -mt-12 mb-10 max-w-5xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {data.metrics.map((metric, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * idx, duration: 0.5 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="bg-white rounded-3xl p-6 border border-slate-100/90 shadow-[0_12px_36px_rgba(0,0,0,0.03)] flex flex-col items-center text-center relative overflow-hidden group hover:border-sky-300 transition-all duration-300"
+            >
+              {/* Logo Brand Color Top Ribbon */}
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-slate-900 to-sky-500" />
+              <span className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1.5 mt-1">
+                {metric.label}
+              </span>
+              <div className="text-4xl font-black bg-gradient-to-r from-slate-900 to-sky-500 bg-clip-text text-transparent">
+                <CountUpMetric value={metric.value} />
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -1513,6 +1668,66 @@ export default function IndustryDetailsPage() {
               <span className="font-bold text-slate-700 block mb-2 text-xs uppercase tracking-widest">Architectural Execution</span>
               <p className="text-slate-500 text-xs md:text-sm font-medium">{data.architecture.description}</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════ FAQ ACCORDION SECTION (MODERN MULTI-CARD) ══════════════════ */}
+      <section className="py-20 bg-slate-50/40 border-t border-slate-100/60 relative overflow-hidden">
+        <div className="max-w-4xl mx-auto px-4 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-100 shadow-sm mb-3`}>
+              <HelpCircle className={`w-3.5 h-3.5 ${styles.text}`} />
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">FAQ Desk</span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h3>
+            <p className="text-slate-500 text-xs md:text-sm mt-2">Find direct answers about compliance, data integrity, and custom systems integration.</p>
+          </div>
+
+          <div className="space-y-4 max-w-3xl mx-auto">
+            {faqs.map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <motion.div
+                  key={idx}
+                  layout
+                  className={`bg-white rounded-2xl border transition-all duration-300 ${
+                    isOpen 
+                      ? `border-sky-300 ring-2 ring-sky-100/50 shadow-md` 
+                      : "border-slate-100 hover:border-slate-200/90 shadow-sm hover:shadow-md"
+                  } overflow-hidden`}
+                >
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    className="w-full flex items-center justify-between text-left p-6 font-bold text-slate-800 transition-colors group"
+                  >
+                    <span className={`text-sm md:text-base leading-snug pr-4 transition-colors ${isOpen ? styles.text : "group-hover:text-slate-950"}`}>{faq.q}</span>
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25 }}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${isOpen ? styles.bgLight : "bg-slate-50"}`}
+                    >
+                      <ChevronDown size={16} className={isOpen ? styles.text : "text-slate-450"} />
+                    </motion.div>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: "easeInOut" }}
+                        className="border-t border-slate-50"
+                      >
+                        <p className="text-slate-500 text-xs md:text-sm leading-relaxed p-6 bg-slate-50/50 font-medium whitespace-pre-line">
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
