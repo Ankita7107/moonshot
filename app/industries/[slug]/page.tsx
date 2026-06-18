@@ -29,6 +29,9 @@ import {
 interface IndustryData {
   title: string;
   desc: string;
+   features: string[];
+  technologies: string[];
+  benefits: string[];
   bg: string;
   themeColor: string;
   glowColor: string;
@@ -42,6 +45,7 @@ interface IndustryData {
     target: string;
     description: string;
   };
+
   faqs?: { q: string; a: string }[];
 }
 
@@ -54,6 +58,30 @@ const defaultIndustryFaqs = [
 const industryContent: Record<string, IndustryData> = {
   fintech: {
     title: "FinTech",
+     features: [
+    "Digital Payments",
+    "Fraud Detection",
+    "Trading Platforms",
+    "KYC Verification",
+    "Banking APIs",
+    "Risk Analytics"
+  ],
+
+  technologies: [
+    "Next.js",
+    ".NET Core",
+    "PostgreSQL",
+    "Redis",
+    "Kafka",
+    "AWS"
+  ],
+
+  benefits: [
+    "Faster Transactions",
+    "Reduced Fraud",
+    "Regulatory Compliance",
+    "Enterprise Security"
+  ],
     desc: "Secure, compliant, and high-frequency trading platforms and digital banking solutions.",
     bg: "from-slate-900 via-blue-950 to-slate-950",
     themeColor: "sky",
@@ -101,6 +129,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   healthcare: {
     title: "Healthcare",
+    features: [
+  "Telemedicine Platform",
+  "Patient Portal",
+  "Appointment Scheduling",
+  "Electronic Health Records",
+  "Doctor Dashboard",
+  "Medical Analytics"
+],
+
+technologies: [
+  "Next.js",
+  ".NET Core",
+  "PostgreSQL",
+  "Redis",
+  "Docker",
+  "Azure"
+],
+
+benefits: [
+  "Better Patient Experience",
+  "Faster Diagnosis",
+  "Secure Medical Records",
+  "Reduced Administrative Work"
+],
     desc: "HIPAA-compliant patient portals, telemedicine apps, and electronic health records.",
     bg: "from-blue-950 via-cyan-950 to-slate-950",
     themeColor: "cyan",
@@ -158,6 +210,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   "e-commerce": {
     title: "E-Commerce",
+    features: [
+  "Multi Vendor Marketplace",
+  "Inventory Management",
+  "Order Tracking",
+  "Coupon Engine",
+  "Payment Gateway",
+  "Product Recommendations"
+],
+
+technologies: [
+  "Next.js",
+  "Node.js",
+  "MongoDB",
+  "Redis",
+  "AWS",
+  "Razorpay"
+],
+
+benefits: [
+  "Higher Conversions",
+  "Increased Revenue",
+  "Better Customer Experience",
+  "Automated Operations"
+],
     desc: "Omnichannel retail platforms with advanced inventory management and AI recommendations.",
     bg: "from-slate-950 via-indigo-950 to-slate-950",
     themeColor: "indigo",
@@ -205,6 +281,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   logistics: {
     title: "Logistics",
+    features: [
+  "Fleet Tracking",
+  "Route Optimization",
+  "Warehouse Management",
+  "GPS Monitoring",
+  "Delivery Analytics",
+  "Driver Management"
+],
+
+technologies: [
+  "React",
+  ".NET Core",
+  "PostgreSQL",
+  "Google Maps API",
+  "Redis",
+  "AWS"
+],
+
+benefits: [
+  "Reduced Fuel Costs",
+  "Faster Deliveries",
+  "Improved Visibility",
+  "Higher Operational Efficiency"
+],
     desc: "Real-time tracking, warehouse automation, and route optimization systems.",
     bg: "from-sky-950 via-slate-950 to-slate-950",
     themeColor: "sky",
@@ -252,6 +352,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   "real-estate": {
     title: "Real Estate",
+    features: [
+  "Property Listings",
+  "Lead Management",
+  "Virtual Tours",
+  "CRM Integration",
+  "Property Analytics",
+  "Agent Dashboard"
+],
+
+technologies: [
+  "Next.js",
+  ".NET Core",
+  "PostgreSQL",
+  "AWS",
+  "Redis",
+  "Mapbox"
+],
+
+benefits: [
+  "More Qualified Leads",
+  "Higher Sales Productivity",
+  "Faster Deal Closures",
+  "Better Customer Engagement"
+],
     desc: "End-to-end property management platforms, listing portals, and smart building automation solutions.",
     bg: "from-amber-950 via-orange-950 to-slate-950",
     themeColor: "orange",
@@ -299,6 +423,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   education: {
     title: "Education",
+    features: [
+  "Learning Management System",
+  "Online Classes",
+  "Student Portal",
+  "Assessment Engine",
+  "Course Analytics",
+  "Attendance Tracking"
+],
+
+technologies: [
+  "Next.js",
+  "Node.js",
+  "PostgreSQL",
+  "WebRTC",
+  "AWS",
+  "Redis"
+],
+
+benefits: [
+  "Improved Learning Outcomes",
+  "Higher Student Engagement",
+  "Scalable Education Delivery",
+  "Reduced Administration Costs"
+],
     desc: "Interactive LMS platforms, virtual classrooms, and AI-powered personalized learning experiences.",
     bg: "from-emerald-950 via-teal-950 to-slate-950",
     themeColor: "emerald",
@@ -346,6 +494,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   manufacturing: {
     title: "Manufacturing",
+    features: [
+  "Production Monitoring",
+  "Inventory Tracking",
+  "Asset Management",
+  "Predictive Maintenance",
+  "Quality Control",
+  "IoT Integration"
+],
+
+technologies: [
+  ".NET Core",
+  "PostgreSQL",
+  "Docker",
+  "Azure",
+  "Redis",
+  "Power BI"
+],
+
+benefits: [
+  "Reduced Downtime",
+  "Higher Productivity",
+  "Improved Product Quality",
+  "Lower Operational Costs"
+],
     desc: "IoT-enabled factory automation, predictive maintenance, and supply chain visibility systems.",
     bg: "from-zinc-900 via-slate-950 to-slate-950",
     themeColor: "zinc",
@@ -393,6 +565,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   "travel-hospitality": {
     title: "Travel & Hospitality",
+features: [
+  "Online Booking System",
+  "Hotel Reservation Management",
+  "Tour Package Management",
+  "Flight & Transport Booking",
+  "Customer Reviews & Ratings",
+  "Loyalty & Rewards Programs"
+],
+
+technologies: [
+  "Next.js",
+  ".NET Core",
+  "PostgreSQL",
+  "Redis",
+  "AWS",
+  "Google Maps API"
+],
+
+benefits: [
+  "Increased Direct Bookings",
+  "Enhanced Guest Experience",
+  "Higher Customer Retention",
+  "Streamlined Operations"
+],
     desc: "Booking engines, dynamic pricing tools, and guest experience platforms for hotels and airlines.",
     bg: "from-sky-950 via-cyan-950 to-slate-950",
     themeColor: "sky",
@@ -440,6 +636,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   "banking-insurance": {
     title: "Banking & Insurance",
+    features: [
+  "Claims Automation",
+  "Policy Management",
+  "Customer Onboarding",
+  "Risk Assessment",
+  "Fraud Detection",
+  "Digital Banking"
+],
+
+technologies: [
+  ".NET Core",
+  "PostgreSQL",
+  "Kafka",
+  "Redis",
+  "AWS",
+  "Docker"
+],
+
+benefits: [
+  "Faster Claim Processing",
+  "Improved Compliance",
+  "Enhanced Security",
+  "Reduced Manual Work"
+],
     desc: "Core banking systems, insurance automation, fraud detection, and financial risk platforms.",
     bg: "from-indigo-950 via-slate-950 to-slate-950",
     themeColor: "indigo",
@@ -487,6 +707,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   cybersecurity: {
     title: "Cybersecurity",
+    features: [
+  "Threat Detection",
+  "SIEM Dashboard",
+  "Access Management",
+  "Security Monitoring",
+  "Incident Response",
+  "Compliance Reporting"
+],
+
+technologies: [
+  "Python",
+  ".NET Core",
+  "ElasticSearch",
+  "Kibana",
+  "AWS",
+  "Azure"
+],
+
+benefits: [
+  "Enhanced Security",
+  "Faster Threat Response",
+  "Reduced Risk",
+  "Improved Compliance"
+],
     desc: "Threat detection systems, identity management, SOC dashboards, and data protection solutions.",
     bg: "from-red-950 via-slate-950 to-slate-950",
     themeColor: "red",
@@ -534,6 +778,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   telecom: {
     title: "Telecom",
+    features: [
+  "Network Monitoring",
+  "Billing Systems",
+  "Subscriber Management",
+  "Service Provisioning",
+  "Usage Analytics",
+  "Customer Support Tools"
+],
+
+technologies: [
+  "Next.js",
+  ".NET Core",
+  "Kafka",
+  "Redis",
+  "AWS",
+  "PostgreSQL"
+],
+
+benefits: [
+  "Improved Service Quality",
+  "Reduced Downtime",
+  "Faster Billing Operations",
+  "Higher Customer Satisfaction"
+],
     desc: "Network management, 5G systems, billing platforms, and customer support automation.",
     bg: "from-purple-950 via-slate-950 to-slate-950",
     themeColor: "purple",
@@ -581,6 +849,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   automotive: {
     title: "Automotive",
+    features: [
+  "Fleet Management",
+  "Vehicle Diagnostics",
+  "Telemetry Tracking",
+  "Predictive Maintenance",
+  "Driver Analytics",
+  "Route Planning"
+],
+
+technologies: [
+  "React",
+  ".NET Core",
+  "PostgreSQL",
+  "AWS",
+  "Redis",
+  "Kafka"
+],
+
+benefits: [
+  "Reduced Maintenance Costs",
+  "Improved Fleet Performance",
+  "Higher Productivity",
+  "Better Asset Utilization"
+],
     desc: "EV systems, connected car platforms, fleet management, and smart mobility solutions.",
     bg: "from-gray-900 via-slate-950 to-slate-950",
     themeColor: "slate",
@@ -628,6 +920,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   "media-entertainment": {
     title: "Media & Entertainment",
+    features: [
+  "Video Streaming",
+  "Content Management",
+  "Live Broadcasting",
+  "Audience Analytics",
+  "Recommendation Engine",
+  "Subscription Management"
+],
+
+technologies: [
+  "Next.js",
+  "Node.js",
+  "MongoDB",
+  "AWS Media Services",
+  "Redis",
+  "CDN"
+],
+
+benefits: [
+  "Higher Viewer Engagement",
+  "Improved Streaming Quality",
+  "Increased Revenue",
+  "Better Audience Insights"
+],
     desc: "OTT platforms, streaming systems, content delivery networks, and recommendation engines.",
     bg: "from-pink-950 via-slate-950 to-slate-950",
     themeColor: "pink",
@@ -675,6 +991,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   "food-restaurant-tech": {
     title: "Food & Restaurant Tech",
+    features: [
+  "Online Ordering",
+  "POS Integration",
+  "Kitchen Management",
+  "Delivery Tracking",
+  "Table Reservations",
+  "Customer Loyalty Programs"
+],
+
+technologies: [
+  "Next.js",
+  ".NET Core",
+  "PostgreSQL",
+  "Redis",
+  "AWS",
+  "Razorpay"
+],
+
+benefits: [
+  "Faster Order Processing",
+  "Improved Customer Experience",
+  "Higher Revenue",
+  "Reduced Wait Times"
+],
     desc: "Food delivery apps, POS systems, restaurant management, and inventory tracking solutions.",
     bg: "from-orange-950 via-slate-950 to-slate-950",
     themeColor: "orange",
@@ -722,6 +1062,30 @@ const industryContent: Record<string, IndustryData> = {
   },
   "government-public-sector": {
     title: "Government & Public Sector",
+    features: [
+  "Citizen Services Portal",
+  "Document Management",
+  "Identity Verification",
+  "Workflow Automation",
+  "Public Records Access",
+  "Analytics Dashboard"
+],
+
+technologies: [
+  "Next.js",
+  ".NET Core",
+  "PostgreSQL",
+  "Azure",
+  "Redis",
+  "Power BI"
+],
+
+benefits: [
+  "Improved Citizen Experience",
+  "Faster Service Delivery",
+  "Enhanced Transparency",
+  "Reduced Administrative Costs"
+],
     desc: "e-Governance systems, digital identity platforms, tax portals, and citizen services.",
     bg: "from-green-950 via-slate-950 to-slate-950",
     themeColor: "green",
@@ -1450,6 +1814,31 @@ export default function IndustryDetailsPage() {
           ))}
         </div>
       </section>
+      <section className="py-24 bg-white">
+  <div className="max-w-7xl mx-auto px-4">
+
+    <h2 className="text-4xl font-black text-center mb-12">
+      Key Features
+    </h2>
+
+    <div className="grid md:grid-cols-3 gap-6">
+
+      {data.features.map((feature, index) => (
+        <div
+          key={index}
+          className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-lg transition"
+        >
+          <CheckCircle2 className="w-8 h-8 text-sky-500 mb-4" />
+
+          <h3 className="font-bold text-lg text-slate-900">
+            {feature}
+          </h3>
+        </div>
+      ))}
+
+    </div>
+  </div>
+</section>
 
       {/* ══════════════════ INTERACTIVE SWITCHER TERMINAL (CHALLENGES VS SOLUTIONS) ══════════════════ */}
       <section className="py-24 bg-slate-50/60 relative overflow-hidden">
@@ -1574,6 +1963,30 @@ export default function IndustryDetailsPage() {
           </div>
         </div>
       </section>
+      <section className="py-24 bg-slate-50">
+
+  <div className="max-w-7xl mx-auto px-4">
+
+    <h2 className="text-4xl font-black text-center mb-12">
+      Technology Stack
+    </h2>
+
+    <div className="grid md:grid-cols-4 gap-5">
+
+      {data.technologies.map((tech,index)=>(
+        <div
+          key={index}
+          className="bg-white border border-slate-200 rounded-2xl p-5 text-center font-bold"
+        >
+          {tech}
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
 
       {/* ══════════════════ SIMULATED ARCHITECTURE FLOW (BLUEPRINT DESIGN) ══════════════════ */}
       <section className="py-24 bg-white relative overflow-hidden">
@@ -1671,6 +2084,32 @@ export default function IndustryDetailsPage() {
           </div>
         </div>
       </section>
+      <section className="py-24 bg-white">
+
+  <div className="max-w-7xl mx-auto px-4">
+
+    <h2 className="text-4xl font-black text-center mb-12">
+      Business Benefits
+    </h2>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      {data.benefits.map((benefit,index)=>(
+        <div
+          key={index}
+          className="p-6 rounded-3xl bg-sky-50 border border-sky-100"
+        >
+          <h3 className="font-bold text-slate-900">
+            {benefit}
+          </h3>
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+
+</section>
 
       {/* ══════════════════ FAQ ACCORDION SECTION (MODERN MULTI-CARD) ══════════════════ */}
       <section className="py-20 bg-slate-50/40 border-t border-slate-100/60 relative overflow-hidden">
