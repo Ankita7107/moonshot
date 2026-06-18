@@ -326,6 +326,14 @@ export default function Navbar() {
 
               <MobileAccordion label="Services">
                 <div className="pl-2">
+                  <Link 
+                    href="/services" 
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between py-3 px-3 mb-4 mt-2 rounded-2xl bg-sky-50 text-sky-600 font-bold text-sm border border-sky-100 hover:bg-sky-100 transition-colors"
+                  >
+                    <span>View All Services</span>
+                    <ArrowRight size={16} />
+                  </Link>
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pt-2 pb-1">Tech</p>
                   <div className="grid grid-cols-1 gap-1">
                     {servicesMenu.tech.map(i => (
@@ -352,7 +360,16 @@ export default function Navbar() {
               </MobileAccordion>
 
               <MobileAccordion label="Industries">
-                <div className="pl-2 pt-2 grid grid-cols-2 gap-1">
+                <div className="pl-2">
+                  <Link 
+                    href="/industries" 
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between py-3 px-3 mb-4 mt-2 rounded-2xl bg-sky-50 text-sky-600 font-bold text-sm border border-sky-100 hover:bg-sky-100 transition-colors"
+                  >
+                    <span>View All Industries</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                  <div className="pt-2 grid grid-cols-2 gap-1">
                   {industriesMenu.map(i => (
                     <Link key={i.label} href={i.href}
                       onClick={(e) => { setMobileOpen(false); handleSamePageHashClick(e, i.href); }}
@@ -362,7 +379,8 @@ export default function Navbar() {
                     </Link>
                   ))}
                 </div>
-              </MobileAccordion>
+              </div>
+            </MobileAccordion>
 
               <Link href="/why-us" onClick={() => setMobileOpen(false)} className="border-b border-slate-100 py-4 text-lg font-bold text-slate-900 block transition-colors hover:text-sky-500">Why Us</Link>
               <Link href="/technologies" onClick={() => setMobileOpen(false)} className="border-b border-slate-100 py-4 text-lg font-bold text-slate-900 block transition-colors hover:text-sky-500">Technologies</Link>
