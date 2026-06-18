@@ -194,7 +194,7 @@ const industryContent: Record<string, IndustryData> = {
     metrics: [
       { value: "2.4s", label: "Faster Page Interactive" },
       { value: "+35%", label: "Average Order Value Increase" },
-      { value: "100%", label: "Inventory Synchronization" },
+      { value: "99.9%", label: "Inventory Synchronization" },
     ],
     architecture: {
       source: "Global Edge Storefront Cart",
@@ -522,7 +522,7 @@ const industryContent: Record<string, IndustryData> = {
     ],
     metrics: [
       { value: "<5m", label: "Threat Response Time" },
-      { value: "99.99%", label: "Threat Interception Rate" },
+      { value: "99%", label: "Threat Detection Accuracy" },
       { value: "100%", label: "Authorized Device Verification" },
     ],
     architecture: {
@@ -758,7 +758,7 @@ const industryContent: Record<string, IndustryData> = {
     metrics: [
       { value: "100%", label: "WCAG 2.1 AA Compliance" },
       { value: "10x", label: "Service Request Processing" },
-      { value: "100%", label: "Identity Data Security" },
+      { value: "100%", label: "Enterprise-Grade Identity Security" },
     ],
     architecture: {
       source: "Citizen Web Portal Interface",
