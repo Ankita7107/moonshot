@@ -2084,32 +2084,39 @@ export default function IndustryDetailsPage() {
           </div>
         </div>
       </section>
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <h2 className="text-4xl font-black text-center mb-12 tracking-tight text-slate-900">
+            Business Benefits
+          </h2>
 
-  <div className="max-w-7xl mx-auto px-4">
-
-    <h2 className="text-4xl font-black text-center mb-12">
-      Business Benefits
-    </h2>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-      {data.benefits.map((benefit,index)=>(
-        <div
-          key={index}
-          className="p-6 rounded-3xl bg-sky-50 border border-sky-100"
-        >
-          <h3 className="font-bold text-slate-900">
-            {benefit}
-          </h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {data.benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.08 * index, duration: 0.4 }}
+                whileHover={{ y: -6 }}
+                className="group h-full"
+              >
+                <SpotlightCard
+                  glowColor="rgba(14,165,233,0.18)"
+                  className="h-full flex flex-col gap-4 p-6 rounded-3xl bg-white border border-slate-100 border-b-[5px] border-b-transparent hover:border-b-sky-500 shadow-md hover:shadow-xl transition-all duration-300 cursor-default"
+                >
+                  <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 size={18} className="text-sky-500" />
+                  </div>
+                  <h3 className="font-bold text-slate-800 text-sm md:text-base leading-snug">
+                    {benefit}
+                  </h3>
+                </SpotlightCard>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      ))}
-
-    </div>
-
-  </div>
-
-</section>
+      </section>
 
       {/* ══════════════════ FAQ ACCORDION SECTION (MODERN MULTI-CARD) ══════════════════ */}
       <section className="py-20 bg-slate-50/40 border-t border-slate-100/60 relative overflow-hidden">
