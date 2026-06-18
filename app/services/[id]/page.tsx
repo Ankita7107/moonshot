@@ -6,7 +6,7 @@ import {
   Globe, Settings, Cloud, Zap, Shield, Smartphone,
   CheckCircle, ArrowRight, Code, Database, Layout,
   MessageSquare, BarChart, RefreshCcw, ArrowLeft,
-  Sparkles, ChevronDown, HelpCircle
+  Sparkles, ChevronDown, HelpCircle, Ruler, Users, Clock
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -620,9 +620,10 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
               className="grid sm:grid-cols-3 gap-6"
             >
               {[
-                { title: "Fixed Scope", desc: "Best for structured projects with concrete specifications and set timelines.", icon: "📐" },
-                { title: "Dedicated Team", desc: "A custom team of developers, designers, and QA working exclusively on your product backlog.", icon: "👥" },
-                { title: "Time & Material", desc: "Pay for active resources and hours logged, allowing complete flexibility to pivot.", icon: "⏱️" },
+                { title: "Fixed Scope", desc: "Best for structured projects with concrete specifications and set timelines.", icon: <Ruler className="w-6 h-6 text-sky-500" /> },
+                { title: "Dedicated Team", desc: "A custom team of developers, designers, and QA working exclusively on your product backlog.", icon: <Users className="w-6 h-6 text-sky-500" /> },
+                { title: "Time & Material", desc: "Pay for active resources and hours logged, allowing complete flexibility to pivot.", icon: <Clock className="w-6 h-6 text-sky-500" /> },
+               
               ].map((model, idx) => (
                 <motion.div
                   key={idx}
@@ -632,7 +633,7 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                   className="p-7 rounded-3xl bg-white border border-sky-100/70 shadow-sm transition-all duration-300 space-y-3 group relative overflow-hidden"
                 >
                   <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 to-blue-400 rounded-t-3xl" />
-                  <div className="text-2xl mt-1">{model.icon}</div>
+                  <div className="mt-1">{model.icon}</div>
                   <span className="block text-xs font-black uppercase tracking-widest text-sky-600">{model.title}</span>
                   <p className="text-slate-500 text-xs leading-relaxed font-medium">{model.desc}</p>
                 </motion.div>
@@ -699,7 +700,7 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 80, damping: 18 }}
-            className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-sky-500 to-blue-600 rounded-[2.5rem] p-10 md:p-14 shadow-2xl shadow-sky-500/25"
+            className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-sky-500 to-sky-500 rounded-[2.5rem] p-10 md:p-14 shadow-2xl shadow-sky-500/25"
           >
             {/* Animated orbs inside CTA */}
             <motion.div
