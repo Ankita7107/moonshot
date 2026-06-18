@@ -23,13 +23,13 @@ import {
   FileCode,
   Workflow,
   HelpCircle,
-  ChevronDown
+  ChevronDown,
 } from "lucide-react";
 
 interface IndustryData {
   title: string;
   desc: string;
-   features: string[];
+  features: string[];
   technologies: string[];
   benefits: string[];
   bg: string;
@@ -50,38 +50,47 @@ interface IndustryData {
 }
 
 const defaultIndustryFaqs = [
-  { q: "What is the typical deployment timeline for an industry solution?", a: "Depending on system complexity and compliance requirements, development ranges from 6 to 12 weeks of agile sprints." },
-  { q: "Do you sign NDAs before discussing proprietary workflows?", a: "Yes, we sign mutual NDAs before analyzing databases, internal workflows, or API structures." },
-  { q: "How do you handle ongoing maintenance post-launch?", a: "We provide SLA-backed maintenance plans including regular security updates, cloud optimization, and feature upgrades." }
+  {
+    q: "What is the typical deployment timeline for an industry solution?",
+    a: "Depending on system complexity and compliance requirements, development ranges from 6 to 12 weeks of agile sprints.",
+  },
+  {
+    q: "Do you sign NDAs before discussing proprietary workflows?",
+    a: "Yes, we sign mutual NDAs before analyzing databases, internal workflows, or API structures.",
+  },
+  {
+    q: "How do you handle ongoing maintenance post-launch?",
+    a: "We provide SLA-backed maintenance plans including regular security updates, cloud optimization, and feature upgrades.",
+  },
 ];
 
 const industryContent: Record<string, IndustryData> = {
   fintech: {
     title: "FinTech",
-     features: [
-    "Digital Payments",
-    "Fraud Detection",
-    "Trading Platforms",
-    "KYC Verification",
-    "Banking APIs",
-    "Risk Analytics"
-  ],
+    features: [
+      "Digital Payments",
+      "Fraud Detection",
+      "Trading Platforms",
+      "KYC Verification",
+      "Banking APIs",
+      "Risk Analytics",
+    ],
 
-  technologies: [
-    "Next.js",
-    ".NET Core",
-    "PostgreSQL",
-    "Redis",
-    "Kafka",
-    "AWS"
-  ],
+    technologies: [
+      "Next.js",
+      ".NET Core",
+      "PostgreSQL",
+      "Redis",
+      "Kafka",
+      "AWS",
+    ],
 
-  benefits: [
-    "Faster Transactions",
-    "Reduced Fraud",
-    "Regulatory Compliance",
-    "Enterprise Security"
-  ],
+    benefits: [
+      "Faster Transactions",
+      "Reduced Fraud",
+      "Regulatory Compliance",
+      "Enterprise Security",
+    ],
     desc: "Secure, compliant, and high-frequency trading platforms and digital banking solutions.",
     bg: "from-slate-900 via-blue-950 to-slate-950",
     themeColor: "sky",
@@ -124,35 +133,36 @@ const industryContent: Record<string, IndustryData> = {
       source: "Client POS / API Gateway",
       process: "Distributed Kafka Streams & AI Fraud Middleware",
       target: "PCI-Compliant Atomic Ledgers",
-      description: "Secure ingress filters incoming card operations, passes them through sub-10ms risk models, and registers final states on zero-trust transactional DBs.",
+      description:
+        "Secure ingress filters incoming card operations, passes them through sub-10ms risk models, and registers final states on zero-trust transactional DBs.",
     },
   },
   healthcare: {
     title: "Healthcare",
     features: [
-  "Telemedicine Platform",
-  "Patient Portal",
-  "Appointment Scheduling",
-  "Electronic Health Records",
-  "Doctor Dashboard",
-  "Medical Analytics"
-],
+      "Telemedicine Platform",
+      "Patient Portal",
+      "Appointment Scheduling",
+      "Electronic Health Records",
+      "Doctor Dashboard",
+      "Medical Analytics",
+    ],
 
-technologies: [
-  "Next.js",
-  ".NET Core",
-  "PostgreSQL",
-  "Redis",
-  "Docker",
-  "Azure"
-],
+    technologies: [
+      "Next.js",
+      ".NET Core",
+      "PostgreSQL",
+      "Redis",
+      "Docker",
+      "Azure",
+    ],
 
-benefits: [
-  "Better Patient Experience",
-  "Faster Diagnosis",
-  "Secure Medical Records",
-  "Reduced Administrative Work"
-],
+    benefits: [
+      "Better Patient Experience",
+      "Faster Diagnosis",
+      "Secure Medical Records",
+      "Reduced Administrative Work",
+    ],
     desc: "HIPAA-compliant patient portals, telemedicine apps, and electronic health records.",
     bg: "from-blue-950 via-cyan-950 to-slate-950",
     themeColor: "cyan",
@@ -195,45 +205,39 @@ benefits: [
       source: "WebRTC Telehealth Client",
       process: "Token-Authenticated HL7 Translation Layer",
       target: "Secure FHIR EHR Databases",
-      description: "Consultation portals request dynamic access tokens, authorize records through HL7 middleware, and store telemetry logs securely.",
+      description:
+        "Consultation portals request dynamic access tokens, authorize records through HL7 middleware, and store telemetry logs securely.",
     },
     faqs: [
       {
         q: "How is patient data security maintained to prevent leaks?",
-        a: "We implement robust 256-bit AES encryption in accordance with HIPAA and HITECH laws. All telemetry and records are protected in-transit and at-rest, and validated via regular security audit logs."
+        a: "We implement robust 256-bit AES encryption in accordance with HIPAA and HITECH laws. All telemetry and records are protected in-transit and at-rest, and validated via regular security audit logs.",
       },
       {
         q: "Can your telemetry modules integrate with legacy EHR systems?",
-        a: "Yes, our HL7 middleware maps dynamic patient records directly to traditional SQL systems without schema modifications."
-      }
+        a: "Yes, our HL7 middleware maps dynamic patient records directly to traditional SQL systems without schema modifications.",
+      },
     ],
   },
   "e-commerce": {
     title: "E-Commerce",
     features: [
-  "Multi Vendor Marketplace",
-  "Inventory Management",
-  "Order Tracking",
-  "Coupon Engine",
-  "Payment Gateway",
-  "Product Recommendations"
-],
+      "Multi Vendor Marketplace",
+      "Inventory Management",
+      "Order Tracking",
+      "Coupon Engine",
+      "Payment Gateway",
+      "Product Recommendations",
+    ],
 
-technologies: [
-  "Next.js",
-  "Node.js",
-  "MongoDB",
-  "Redis",
-  "AWS",
-  "Razorpay"
-],
+    technologies: ["Next.js", "Node.js", "MongoDB", "Redis", "AWS", "Razorpay"],
 
-benefits: [
-  "Higher Conversions",
-  "Increased Revenue",
-  "Better Customer Experience",
-  "Automated Operations"
-],
+    benefits: [
+      "Higher Conversions",
+      "Increased Revenue",
+      "Better Customer Experience",
+      "Automated Operations",
+    ],
     desc: "Omnichannel retail platforms with advanced inventory management and AI recommendations.",
     bg: "from-slate-950 via-indigo-950 to-slate-950",
     themeColor: "indigo",
@@ -276,35 +280,36 @@ benefits: [
       source: "Global Edge Storefront Cart",
       process: "Redis Cache Sync & Recommendation Engine",
       target: "Elastic Inventory & Payment Gateway",
-      description: "Distributed frontends process transactions through elastic caching channels and trigger instant localized delivery sequences.",
+      description:
+        "Distributed frontends process transactions through elastic caching channels and trigger instant localized delivery sequences.",
     },
   },
   logistics: {
     title: "Logistics",
     features: [
-  "Fleet Tracking",
-  "Route Optimization",
-  "Warehouse Management",
-  "GPS Monitoring",
-  "Delivery Analytics",
-  "Driver Management"
-],
+      "Fleet Tracking",
+      "Route Optimization",
+      "Warehouse Management",
+      "GPS Monitoring",
+      "Delivery Analytics",
+      "Driver Management",
+    ],
 
-technologies: [
-  "React",
-  ".NET Core",
-  "PostgreSQL",
-  "Google Maps API",
-  "Redis",
-  "AWS"
-],
+    technologies: [
+      "React",
+      ".NET Core",
+      "PostgreSQL",
+      "Google Maps API",
+      "Redis",
+      "AWS",
+    ],
 
-benefits: [
-  "Reduced Fuel Costs",
-  "Faster Deliveries",
-  "Improved Visibility",
-  "Higher Operational Efficiency"
-],
+    benefits: [
+      "Reduced Fuel Costs",
+      "Faster Deliveries",
+      "Improved Visibility",
+      "Higher Operational Efficiency",
+    ],
     desc: "Real-time tracking, warehouse automation, and route optimization systems.",
     bg: "from-sky-950 via-slate-950 to-slate-950",
     themeColor: "sky",
@@ -347,35 +352,36 @@ benefits: [
       source: "GPS Fleet IoT Sensors",
       process: "AWS Kinesis Streams & Routing Engines",
       target: "Live Fleet Optimization Dashboard",
-      description: "Raw GPS payloads feed into streaming engines, recalculate route dispatches, and trigger real-time warehouse sync warnings.",
+      description:
+        "Raw GPS payloads feed into streaming engines, recalculate route dispatches, and trigger real-time warehouse sync warnings.",
     },
   },
   "real-estate": {
     title: "Real Estate",
     features: [
-  "Property Listings",
-  "Lead Management",
-  "Virtual Tours",
-  "CRM Integration",
-  "Property Analytics",
-  "Agent Dashboard"
-],
+      "Property Listings",
+      "Lead Management",
+      "Virtual Tours",
+      "CRM Integration",
+      "Property Analytics",
+      "Agent Dashboard",
+    ],
 
-technologies: [
-  "Next.js",
-  ".NET Core",
-  "PostgreSQL",
-  "AWS",
-  "Redis",
-  "Mapbox"
-],
+    technologies: [
+      "Next.js",
+      ".NET Core",
+      "PostgreSQL",
+      "AWS",
+      "Redis",
+      "Mapbox",
+    ],
 
-benefits: [
-  "More Qualified Leads",
-  "Higher Sales Productivity",
-  "Faster Deal Closures",
-  "Better Customer Engagement"
-],
+    benefits: [
+      "More Qualified Leads",
+      "Higher Sales Productivity",
+      "Faster Deal Closures",
+      "Better Customer Engagement",
+    ],
     desc: "End-to-end property management platforms, listing portals, and smart building automation solutions.",
     bg: "from-amber-950 via-orange-950 to-slate-950",
     themeColor: "orange",
@@ -418,35 +424,36 @@ benefits: [
       source: "Spatial Listing Client",
       process: "RESO-Sync Middleware & CRM Scorer",
       target: "Unified Property & CRM Database",
-      description: "Interactive visitors query dynamic visual assets, triggering live MLS synchronization and automated high-priority agent alerts.",
+      description:
+        "Interactive visitors query dynamic visual assets, triggering live MLS synchronization and automated high-priority agent alerts.",
     },
   },
   education: {
     title: "Education",
     features: [
-  "Learning Management System",
-  "Online Classes",
-  "Student Portal",
-  "Assessment Engine",
-  "Course Analytics",
-  "Attendance Tracking"
-],
+      "Learning Management System",
+      "Online Classes",
+      "Student Portal",
+      "Assessment Engine",
+      "Course Analytics",
+      "Attendance Tracking",
+    ],
 
-technologies: [
-  "Next.js",
-  "Node.js",
-  "PostgreSQL",
-  "WebRTC",
-  "AWS",
-  "Redis"
-],
+    technologies: [
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "WebRTC",
+      "AWS",
+      "Redis",
+    ],
 
-benefits: [
-  "Improved Learning Outcomes",
-  "Higher Student Engagement",
-  "Scalable Education Delivery",
-  "Reduced Administration Costs"
-],
+    benefits: [
+      "Improved Learning Outcomes",
+      "Higher Student Engagement",
+      "Scalable Education Delivery",
+      "Reduced Administration Costs",
+    ],
     desc: "Interactive LMS platforms, virtual classrooms, and AI-powered personalized learning experiences.",
     bg: "from-emerald-950 via-teal-950 to-slate-950",
     themeColor: "emerald",
@@ -489,35 +496,36 @@ benefits: [
       source: "Student Web Portal",
       process: "WebSocket Hub & Progress Scorer",
       target: "Adaptive LMS Analytics Core",
-      description: "Classrooms run on instant signaling hubs, recording engagement signals to customize the next learning module.",
+      description:
+        "Classrooms run on instant signaling hubs, recording engagement signals to customize the next learning module.",
     },
   },
   manufacturing: {
     title: "Manufacturing",
     features: [
-  "Production Monitoring",
-  "Inventory Tracking",
-  "Asset Management",
-  "Predictive Maintenance",
-  "Quality Control",
-  "IoT Integration"
-],
+      "Production Monitoring",
+      "Inventory Tracking",
+      "Asset Management",
+      "Predictive Maintenance",
+      "Quality Control",
+      "IoT Integration",
+    ],
 
-technologies: [
-  ".NET Core",
-  "PostgreSQL",
-  "Docker",
-  "Azure",
-  "Redis",
-  "Power BI"
-],
+    technologies: [
+      ".NET Core",
+      "PostgreSQL",
+      "Docker",
+      "Azure",
+      "Redis",
+      "Power BI",
+    ],
 
-benefits: [
-  "Reduced Downtime",
-  "Higher Productivity",
-  "Improved Product Quality",
-  "Lower Operational Costs"
-],
+    benefits: [
+      "Reduced Downtime",
+      "Higher Productivity",
+      "Improved Product Quality",
+      "Lower Operational Costs",
+    ],
     desc: "IoT-enabled factory automation, predictive maintenance, and supply chain visibility systems.",
     bg: "from-zinc-900 via-slate-950 to-slate-950",
     themeColor: "zinc",
@@ -560,35 +568,36 @@ benefits: [
       source: "SCADA Hardware Gateways",
       process: "IoT Anomaly Stream Translators",
       target: "Predictive Assembly Dashboards",
-      description: "Factory floor telemetry is securely extracted, analyzed for anomalies by cloud models, and displayed on operational dashboards.",
+      description:
+        "Factory floor telemetry is securely extracted, analyzed for anomalies by cloud models, and displayed on operational dashboards.",
     },
   },
   "travel-hospitality": {
     title: "Travel & Hospitality",
-features: [
-  "Online Booking System",
-  "Hotel Reservation Management",
-  "Tour Package Management",
-  "Flight & Transport Booking",
-  "Customer Reviews & Ratings",
-  "Loyalty & Rewards Programs"
-],
+    features: [
+      "Online Booking System",
+      "Hotel Reservation Management",
+      "Tour Package Management",
+      "Flight & Transport Booking",
+      "Customer Reviews & Ratings",
+      "Loyalty & Rewards Programs",
+    ],
 
-technologies: [
-  "Next.js",
-  ".NET Core",
-  "PostgreSQL",
-  "Redis",
-  "AWS",
-  "Google Maps API"
-],
+    technologies: [
+      "Next.js",
+      ".NET Core",
+      "PostgreSQL",
+      "Redis",
+      "AWS",
+      "Google Maps API",
+    ],
 
-benefits: [
-  "Increased Direct Bookings",
-  "Enhanced Guest Experience",
-  "Higher Customer Retention",
-  "Streamlined Operations"
-],
+    benefits: [
+      "Increased Direct Bookings",
+      "Enhanced Guest Experience",
+      "Higher Customer Retention",
+      "Streamlined Operations",
+    ],
     desc: "Booking engines, dynamic pricing tools, and guest experience platforms for hotels and airlines.",
     bg: "from-sky-950 via-cyan-950 to-slate-950",
     themeColor: "sky",
@@ -631,35 +640,36 @@ benefits: [
       source: "Guest Direct Portals",
       process: "Amadeus API Sync & Pricing Matrices",
       target: "Unified Reservations Database",
-      description: "Portals pull live room rates, process instant transactions, and update global GDS channels to prevent double-bookings.",
+      description:
+        "Portals pull live room rates, process instant transactions, and update global GDS channels to prevent double-bookings.",
     },
   },
   "banking-insurance": {
     title: "Banking & Insurance",
     features: [
-  "Claims Automation",
-  "Policy Management",
-  "Customer Onboarding",
-  "Risk Assessment",
-  "Fraud Detection",
-  "Digital Banking"
-],
+      "Claims Automation",
+      "Policy Management",
+      "Customer Onboarding",
+      "Risk Assessment",
+      "Fraud Detection",
+      "Digital Banking",
+    ],
 
-technologies: [
-  ".NET Core",
-  "PostgreSQL",
-  "Kafka",
-  "Redis",
-  "AWS",
-  "Docker"
-],
+    technologies: [
+      ".NET Core",
+      "PostgreSQL",
+      "Kafka",
+      "Redis",
+      "AWS",
+      "Docker",
+    ],
 
-benefits: [
-  "Faster Claim Processing",
-  "Improved Compliance",
-  "Enhanced Security",
-  "Reduced Manual Work"
-],
+    benefits: [
+      "Faster Claim Processing",
+      "Improved Compliance",
+      "Enhanced Security",
+      "Reduced Manual Work",
+    ],
     desc: "Core banking systems, insurance automation, fraud detection, and financial risk platforms.",
     bg: "from-indigo-950 via-slate-950 to-slate-950",
     themeColor: "indigo",
@@ -702,35 +712,36 @@ benefits: [
       source: "Consumer Banking Interface",
       process: "Verification Ledgers & Risk Models",
       target: "Secure Core Financial Database",
-      description: "Direct customer transactions are routed through validation pipelines and instantly logged in secure, audit-ready databases.",
+      description:
+        "Direct customer transactions are routed through validation pipelines and instantly logged in secure, audit-ready databases.",
     },
   },
   cybersecurity: {
     title: "Cybersecurity",
     features: [
-  "Threat Detection",
-  "SIEM Dashboard",
-  "Access Management",
-  "Security Monitoring",
-  "Incident Response",
-  "Compliance Reporting"
-],
+      "Threat Detection",
+      "SIEM Dashboard",
+      "Access Management",
+      "Security Monitoring",
+      "Incident Response",
+      "Compliance Reporting",
+    ],
 
-technologies: [
-  "Python",
-  ".NET Core",
-  "ElasticSearch",
-  "Kibana",
-  "AWS",
-  "Azure"
-],
+    technologies: [
+      "Python",
+      ".NET Core",
+      "ElasticSearch",
+      "Kibana",
+      "AWS",
+      "Azure",
+    ],
 
-benefits: [
-  "Enhanced Security",
-  "Faster Threat Response",
-  "Reduced Risk",
-  "Improved Compliance"
-],
+    benefits: [
+      "Enhanced Security",
+      "Faster Threat Response",
+      "Reduced Risk",
+      "Improved Compliance",
+    ],
     desc: "Threat detection systems, identity management, SOC dashboards, and data protection solutions.",
     bg: "from-red-950 via-slate-950 to-slate-950",
     themeColor: "red",
@@ -773,35 +784,36 @@ benefits: [
       source: "Endpoint Security Telemetry",
       process: "SIEM Threat Analysis Engine",
       target: "Zero-Trust Containment Gateways",
-      description: "System telemetry is continuously checked for threats, triggers automated containment systems, and updates security team screens.",
+      description:
+        "System telemetry is continuously checked for threats, triggers automated containment systems, and updates security team screens.",
     },
   },
   telecom: {
     title: "Telecom",
     features: [
-  "Network Monitoring",
-  "Billing Systems",
-  "Subscriber Management",
-  "Service Provisioning",
-  "Usage Analytics",
-  "Customer Support Tools"
-],
+      "Network Monitoring",
+      "Billing Systems",
+      "Subscriber Management",
+      "Service Provisioning",
+      "Usage Analytics",
+      "Customer Support Tools",
+    ],
 
-technologies: [
-  "Next.js",
-  ".NET Core",
-  "Kafka",
-  "Redis",
-  "AWS",
-  "PostgreSQL"
-],
+    technologies: [
+      "Next.js",
+      ".NET Core",
+      "Kafka",
+      "Redis",
+      "AWS",
+      "PostgreSQL",
+    ],
 
-benefits: [
-  "Improved Service Quality",
-  "Reduced Downtime",
-  "Faster Billing Operations",
-  "Higher Customer Satisfaction"
-],
+    benefits: [
+      "Improved Service Quality",
+      "Reduced Downtime",
+      "Faster Billing Operations",
+      "Higher Customer Satisfaction",
+    ],
     desc: "Network management, 5G systems, billing platforms, and customer support automation.",
     bg: "from-purple-950 via-slate-950 to-slate-950",
     themeColor: "purple",
@@ -844,35 +856,29 @@ benefits: [
       source: "End-User 5G Devices",
       process: "Low-Latency Traffic Routers",
       target: "Billing & OSS/BSS Databases",
-      description: "User network data flows through intelligent routers, recalculates signal priorities, and updates billing databases.",
+      description:
+        "User network data flows through intelligent routers, recalculates signal priorities, and updates billing databases.",
     },
   },
   automotive: {
     title: "Automotive",
     features: [
-  "Fleet Management",
-  "Vehicle Diagnostics",
-  "Telemetry Tracking",
-  "Predictive Maintenance",
-  "Driver Analytics",
-  "Route Planning"
-],
+      "Fleet Management",
+      "Vehicle Diagnostics",
+      "Telemetry Tracking",
+      "Predictive Maintenance",
+      "Driver Analytics",
+      "Route Planning",
+    ],
 
-technologies: [
-  "React",
-  ".NET Core",
-  "PostgreSQL",
-  "AWS",
-  "Redis",
-  "Kafka"
-],
+    technologies: ["React", ".NET Core", "PostgreSQL", "AWS", "Redis", "Kafka"],
 
-benefits: [
-  "Reduced Maintenance Costs",
-  "Improved Fleet Performance",
-  "Higher Productivity",
-  "Better Asset Utilization"
-],
+    benefits: [
+      "Reduced Maintenance Costs",
+      "Improved Fleet Performance",
+      "Higher Productivity",
+      "Better Asset Utilization",
+    ],
     desc: "EV systems, connected car platforms, fleet management, and smart mobility solutions.",
     bg: "from-gray-900 via-slate-950 to-slate-950",
     themeColor: "slate",
@@ -915,35 +921,36 @@ benefits: [
       source: "Vehicle CAN Bus Sensors",
       process: "Edge Ingestion & Battery Scorer",
       target: "Central Fleet Telematics Hub",
-      description: "Sensor data is captured at the vehicle edge, checked for safety anomalies, and streamed to central tracking dashboards.",
+      description:
+        "Sensor data is captured at the vehicle edge, checked for safety anomalies, and streamed to central tracking dashboards.",
     },
   },
   "media-entertainment": {
     title: "Media & Entertainment",
     features: [
-  "Video Streaming",
-  "Content Management",
-  "Live Broadcasting",
-  "Audience Analytics",
-  "Recommendation Engine",
-  "Subscription Management"
-],
+      "Video Streaming",
+      "Content Management",
+      "Live Broadcasting",
+      "Audience Analytics",
+      "Recommendation Engine",
+      "Subscription Management",
+    ],
 
-technologies: [
-  "Next.js",
-  "Node.js",
-  "MongoDB",
-  "AWS Media Services",
-  "Redis",
-  "CDN"
-],
+    technologies: [
+      "Next.js",
+      "Node.js",
+      "MongoDB",
+      "AWS Media Services",
+      "Redis",
+      "CDN",
+    ],
 
-benefits: [
-  "Higher Viewer Engagement",
-  "Improved Streaming Quality",
-  "Increased Revenue",
-  "Better Audience Insights"
-],
+    benefits: [
+      "Higher Viewer Engagement",
+      "Improved Streaming Quality",
+      "Increased Revenue",
+      "Better Audience Insights",
+    ],
     desc: "OTT platforms, streaming systems, content delivery networks, and recommendation engines.",
     bg: "from-pink-950 via-slate-950 to-slate-950",
     themeColor: "pink",
@@ -986,35 +993,36 @@ benefits: [
       source: "Viewer Web/App Client",
       process: "CDN Edges & Transcoder Queues",
       target: "Dynamic Video Storage System",
-      description: "Stream requests are matched to nearby edge servers, served using adaptive codecs, and log usage details to content engines.",
+      description:
+        "Stream requests are matched to nearby edge servers, served using adaptive codecs, and log usage details to content engines.",
     },
   },
   "food-restaurant-tech": {
     title: "Food & Restaurant Tech",
     features: [
-  "Online Ordering",
-  "POS Integration",
-  "Kitchen Management",
-  "Delivery Tracking",
-  "Table Reservations",
-  "Customer Loyalty Programs"
-],
+      "Online Ordering",
+      "POS Integration",
+      "Kitchen Management",
+      "Delivery Tracking",
+      "Table Reservations",
+      "Customer Loyalty Programs",
+    ],
 
-technologies: [
-  "Next.js",
-  ".NET Core",
-  "PostgreSQL",
-  "Redis",
-  "AWS",
-  "Razorpay"
-],
+    technologies: [
+      "Next.js",
+      ".NET Core",
+      "PostgreSQL",
+      "Redis",
+      "AWS",
+      "Razorpay",
+    ],
 
-benefits: [
-  "Faster Order Processing",
-  "Improved Customer Experience",
-  "Higher Revenue",
-  "Reduced Wait Times"
-],
+    benefits: [
+      "Faster Order Processing",
+      "Improved Customer Experience",
+      "Higher Revenue",
+      "Reduced Wait Times",
+    ],
     desc: "Food delivery apps, POS systems, restaurant management, and inventory tracking solutions.",
     bg: "from-orange-950 via-slate-950 to-slate-950",
     themeColor: "orange",
@@ -1057,35 +1065,36 @@ benefits: [
       source: "Customer Ordering App",
       process: "Unified POS Gateway & Driver Dispatch",
       target: "Kitchen Dashboard Database",
-      description: "Orders are unified at POS gateways, routed to kitchen screens, and match drivers based on live cooking speeds.",
+      description:
+        "Orders are unified at POS gateways, routed to kitchen screens, and match drivers based on live cooking speeds.",
     },
   },
   "government-public-sector": {
     title: "Government & Public Sector",
     features: [
-  "Citizen Services Portal",
-  "Document Management",
-  "Identity Verification",
-  "Workflow Automation",
-  "Public Records Access",
-  "Analytics Dashboard"
-],
+      "Citizen Services Portal",
+      "Document Management",
+      "Identity Verification",
+      "Workflow Automation",
+      "Public Records Access",
+      "Analytics Dashboard",
+    ],
 
-technologies: [
-  "Next.js",
-  ".NET Core",
-  "PostgreSQL",
-  "Azure",
-  "Redis",
-  "Power BI"
-],
+    technologies: [
+      "Next.js",
+      ".NET Core",
+      "PostgreSQL",
+      "Azure",
+      "Redis",
+      "Power BI",
+    ],
 
-benefits: [
-  "Improved Citizen Experience",
-  "Faster Service Delivery",
-  "Enhanced Transparency",
-  "Reduced Administrative Costs"
-],
+    benefits: [
+      "Improved Citizen Experience",
+      "Faster Service Delivery",
+      "Enhanced Transparency",
+      "Reduced Administrative Costs",
+    ],
     desc: "e-Governance systems, digital identity platforms, tax portals, and citizen services.",
     bg: "from-green-950 via-slate-950 to-slate-950",
     themeColor: "green",
@@ -1128,7 +1137,8 @@ benefits: [
       source: "Citizen Web Portal Interface",
       process: "Federated Digital Identity Gateways",
       target: "Protected Citizen Records DB",
-      description: "Citizens log in securely using dynamic ID protocols, access accessible service portals, and track applications.",
+      description:
+        "Citizens log in securely using dynamic ID protocols, access accessible service portals, and track applications.",
     },
   },
 };
@@ -1156,7 +1166,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-sky-300",
     ring: "focus:ring-sky-500",
     glow: "rgba(14,165,233,0.18)",
-    gradientText: "from-slate-900 to-sky-500"
+    gradientText: "from-slate-900 to-sky-500",
   },
   cyan: {
     text: "text-cyan-500",
@@ -1167,7 +1177,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-cyan-300",
     ring: "focus:ring-cyan-500",
     glow: "rgba(6,182,212,0.18)",
-    gradientText: "from-cyan-600 via-teal-600 to-emerald-600"
+    gradientText: "from-cyan-600 via-teal-600 to-emerald-600",
   },
   indigo: {
     text: "text-indigo-500",
@@ -1178,7 +1188,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-indigo-300",
     ring: "focus:ring-indigo-500",
     glow: "rgba(99,102,241,0.18)",
-    gradientText: "from-indigo-600 via-purple-600 to-pink-600"
+    gradientText: "from-indigo-600 via-purple-600 to-pink-600",
   },
   orange: {
     text: "text-orange-500",
@@ -1189,7 +1199,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-orange-300",
     ring: "focus:ring-orange-500",
     glow: "rgba(249,115,22,0.18)",
-    gradientText: "from-orange-600 via-amber-600 to-yellow-500"
+    gradientText: "from-orange-600 via-amber-600 to-yellow-500",
   },
   emerald: {
     text: "text-emerald-500",
@@ -1200,7 +1210,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-emerald-300",
     ring: "focus:ring-emerald-500",
     glow: "rgba(16,185,129,0.18)",
-    gradientText: "from-emerald-600 via-teal-600 to-cyan-600"
+    gradientText: "from-emerald-600 via-teal-600 to-cyan-600",
   },
   zinc: {
     text: "text-zinc-500",
@@ -1211,7 +1221,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-zinc-400",
     ring: "focus:ring-zinc-500",
     glow: "rgba(113,113,122,0.18)",
-    gradientText: "from-slate-800 via-zinc-700 to-slate-600"
+    gradientText: "from-slate-800 via-zinc-700 to-slate-600",
   },
   red: {
     text: "text-red-500",
@@ -1222,7 +1232,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-red-300",
     ring: "focus:ring-red-500",
     glow: "rgba(239,68,68,0.18)",
-    gradientText: "from-red-600 via-rose-600 to-orange-500"
+    gradientText: "from-red-600 via-rose-600 to-orange-500",
   },
   purple: {
     text: "text-purple-500",
@@ -1233,7 +1243,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-purple-300",
     ring: "focus:ring-purple-500",
     glow: "rgba(168,85,247,0.18)",
-    gradientText: "from-purple-600 via-violet-600 to-indigo-600"
+    gradientText: "from-purple-600 via-violet-600 to-indigo-600",
   },
   slate: {
     text: "text-slate-500",
@@ -1244,7 +1254,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-slate-400",
     ring: "focus:ring-slate-500",
     glow: "rgba(100,116,139,0.18)",
-    gradientText: "from-slate-800 via-slate-600 to-zinc-500"
+    gradientText: "from-slate-800 via-slate-600 to-zinc-500",
   },
   pink: {
     text: "text-pink-500",
@@ -1255,7 +1265,7 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-pink-300",
     ring: "focus:ring-pink-500",
     glow: "rgba(236,72,153,0.18)",
-    gradientText: "from-pink-600 via-rose-500 to-red-500"
+    gradientText: "from-pink-600 via-rose-500 to-red-500",
   },
   green: {
     text: "text-green-500",
@@ -1266,8 +1276,8 @@ const themeStylesMap: Record<string, ThemeStyles> = {
     borderHover: "group-hover:border-green-300",
     ring: "focus:ring-green-500",
     glow: "rgba(34,197,94,0.18)",
-    gradientText: "from-green-600 via-emerald-600 to-teal-500"
-  }
+    gradientText: "from-green-600 via-emerald-600 to-teal-500",
+  },
 };
 
 // CountUpMetric component for interactive statistics
@@ -1313,14 +1323,15 @@ const CountUpMetric = ({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [numericValue]);
 
-  const displayValue = decimalPlaces > 0 ? count.toFixed(decimalPlaces) : Math.floor(count);
+  const displayValue =
+    decimalPlaces > 0 ? count.toFixed(decimalPlaces) : Math.floor(count);
 
   return (
     <span ref={ref} className={className}>
@@ -1410,65 +1421,155 @@ function SpotlightCard({
 
 const industrySpecificFaqs: Record<string, { q: string; a: string }[]> = {
   fintech: [
-    { q: "How are financial records protected from tampering?", a: "We implement immutable audit logging, end-to-end data encryption, and PCI-DSS Level 1 compliant gateway authentication protocols." },
-    { q: "What database solutions are used for high-frequency trading?", a: "We use hybrid storage topologies, coupling ultra-low latency Redis cache layers with acid-compliant PostgreSQL databases." }
+    {
+      q: "How are financial records protected from tampering?",
+      a: "We implement immutable audit logging, end-to-end data encryption, and PCI-DSS Level 1 compliant gateway authentication protocols.",
+    },
+    {
+      q: "What database solutions are used for high-frequency trading?",
+      a: "We use hybrid storage topologies, coupling ultra-low latency Redis cache layers with acid-compliant PostgreSQL databases.",
+    },
   ],
   healthcare: [
-    { q: "How is patient data security maintained to prevent leaks?", a: "We implement robust 256-bit AES encryption in accordance with HIPAA and HITECH laws. All telemetry and records are protected in-transit and at-rest, and validated via regular security audit logs." },
-    { q: "Can your telemetry modules integrate with legacy EHR systems?", a: "Yes, our HL7 middleware maps dynamic patient records directly to traditional SQL systems without schema modifications." }
+    {
+      q: "How is patient data security maintained to prevent leaks?",
+      a: "We implement robust 256-bit AES encryption in accordance with HIPAA and HITECH laws. All telemetry and records are protected in-transit and at-rest, and validated via regular security audit logs.",
+    },
+    {
+      q: "Can your telemetry modules integrate with legacy EHR systems?",
+      a: "Yes, our HL7 middleware maps dynamic patient records directly to traditional SQL systems without schema modifications.",
+    },
   ],
   "e-commerce": [
-    { q: "How does the storefront handle sudden flash sales traffic spikes?", a: "We construct serverless global edge networks that automatically scale computing resources instantly to support million-plus active carts." },
-    { q: "How is real-time catalog and inventory synchronization achieved?", a: "We deploy event-sourced Kafka stream clusters to keep physical storefronts, web systems, and supplier inventories in absolute sync." }
+    {
+      q: "How does the storefront handle sudden flash sales traffic spikes?",
+      a: "We construct serverless global edge networks that automatically scale computing resources instantly to support million-plus active carts.",
+    },
+    {
+      q: "How is real-time catalog and inventory synchronization achieved?",
+      a: "We deploy event-sourced Kafka stream clusters to keep physical storefronts, web systems, and supplier inventories in absolute sync.",
+    },
   ],
   logistics: [
-    { q: "How do you achieve real-time tracking dashboard updates under 2 seconds?", a: "We leverage high-throughput AWS Kinesis data ingest streams to process live GPS signals from thousands of fleet IoT devices simultaneously." },
-    { q: "Can the routing engine account for weather and active road traffic?", a: "Yes, our route optimization algorithms calculate real-time dispatches using traffic forecasting APIs and historical weather datasets." }
+    {
+      q: "How do you achieve real-time tracking dashboard updates under 2 seconds?",
+      a: "We leverage high-throughput AWS Kinesis data ingest streams to process live GPS signals from thousands of fleet IoT devices simultaneously.",
+    },
+    {
+      q: "Can the routing engine account for weather and active road traffic?",
+      a: "Yes, our route optimization algorithms calculate real-time dispatches using traffic forecasting APIs and historical weather datasets.",
+    },
   ],
   "real-estate": [
-    { q: "How do you sync properties with multiple listing services (MLS) automatically?", a: "We build RESO-compliant sync engines that standardize data schemas and refresh listings across property platforms in real-time." },
-    { q: "Can virtual 3D tour embeds work seamlessly on mobile browsers?", a: "Yes, we implement highly optimized spatial viewing frames that adapt viewport rendering for smooth performance on any mobile device." }
+    {
+      q: "How do you sync properties with multiple listing services (MLS) automatically?",
+      a: "We build RESO-compliant sync engines that standardize data schemas and refresh listings across property platforms in real-time.",
+    },
+    {
+      q: "Can virtual 3D tour embeds work seamlessly on mobile browsers?",
+      a: "Yes, we implement highly optimized spatial viewing frames that adapt viewport rendering for smooth performance on any mobile device.",
+    },
   ],
   education: [
-    { q: "Are the virtual classroom streams fully private?", a: "Yes, WebRTC streaming sessions are token-authorized and encrypted peer-to-peer to protect student privacy." },
-    { q: "Can the LMS integrate with external learning tools (LTI compliant)?", a: "Yes, our learning management systems adhere to LTI standards to plug in external course materials and grading books." }
+    {
+      q: "Are the virtual classroom streams fully private?",
+      a: "Yes, WebRTC streaming sessions are token-authorized and encrypted peer-to-peer to protect student privacy.",
+    },
+    {
+      q: "Can the LMS integrate with external learning tools (LTI compliant)?",
+      a: "Yes, our learning management systems adhere to LTI standards to plug in external course materials and grading books.",
+    },
   ],
   manufacturing: [
-    { q: "How is machine telemetry data extracted from the factory floor?", a: "We deploy secure IoT hardware translators that convert legacy Modbus/SCADA industrial protocol signals into secure cloud-ready data feeds." },
-    { q: "How does the machine learning engine forecast equipment failures?", a: "Our anomaly models analyze telemetry feeds like temperature and vibration thresholds to warn maintenance teams before failures happen." }
+    {
+      q: "How is machine telemetry data extracted from the factory floor?",
+      a: "We deploy secure IoT hardware translators that convert legacy Modbus/SCADA industrial protocol signals into secure cloud-ready data feeds.",
+    },
+    {
+      q: "How does the machine learning engine forecast equipment failures?",
+      a: "Our anomaly models analyze telemetry feeds like temperature and vibration thresholds to warn maintenance teams before failures happen.",
+    },
   ],
   "travel-hospitality": [
-    { q: "How do you prevent double-bookings across different flight and hotel channels?", a: "We establish direct connections to Global Distribution Systems (GDS) with atomic synchronization locks during transaction checkout." },
-    { q: "How does the dynamic room pricing matrix work?", a: "It computes occupant demand, historical seasons, and competitor pricing indexes to optimize yields dynamically." }
+    {
+      q: "How do you prevent double-bookings across different flight and hotel channels?",
+      a: "We establish direct connections to Global Distribution Systems (GDS) with atomic synchronization locks during transaction checkout.",
+    },
+    {
+      q: "How does the dynamic room pricing matrix work?",
+      a: "It computes occupant demand, historical seasons, and competitor pricing indexes to optimize yields dynamically.",
+    },
   ],
   "banking-insurance": [
-    { q: "How do you automate up to 90% of insurance claims processing?", a: "We deploy smart decision matrices that validate claim credentials against policy definitions automatically." },
-    { q: "Are transaction ledger audits automated?", a: "Yes, our double-entry banking ledgers feature immutable audit trails that generate compliance logs with zero human intervention." }
+    {
+      q: "How do you automate up to 90% of insurance claims processing?",
+      a: "We deploy smart decision matrices that validate claim credentials against policy definitions automatically.",
+    },
+    {
+      q: "Are transaction ledger audits automated?",
+      a: "Yes, our double-entry banking ledgers feature immutable audit trails that generate compliance logs with zero human intervention.",
+    },
   ],
   cybersecurity: [
-    { q: "How do you differentiate actual threats from false alarms?", a: "Our SIEM anomaly engines score inbound network signals dynamically, prioritizing high-risk alerts and filtering normal network noise." },
-    { q: "How fast does the containment system isolate compromised machines?", a: "Our automated playbooks isolate infected endpoints and revoke access credentials across active directories within 5 seconds." }
+    {
+      q: "How do you differentiate actual threats from false alarms?",
+      a: "Our SIEM anomaly engines score inbound network signals dynamically, prioritizing high-risk alerts and filtering normal network noise.",
+    },
+    {
+      q: "How fast does the containment system isolate compromised machines?",
+      a: "Our automated playbooks isolate infected endpoints and revoke access credentials across active directories within 5 seconds.",
+    },
   ],
   telecom: [
-    { q: "How do you handle real-time billing calculations for millions of active users?", a: "We use high-throughput stream processing engines like Apache Flink to calculate data usage and apply rates in real-time." },
-    { q: "How does 5G traffic optimization work?", a: "We build elastic load balancers that dynamically route bandwidth queues to active cell sectors based on immediate network usage." }
+    {
+      q: "How do you handle real-time billing calculations for millions of active users?",
+      a: "We use high-throughput stream processing engines like Apache Flink to calculate data usage and apply rates in real-time.",
+    },
+    {
+      q: "How does 5G traffic optimization work?",
+      a: "We build elastic load balancers that dynamically route bandwidth queues to active cell sectors based on immediate network usage.",
+    },
   ],
   automotive: [
-    { q: "Can vehicle telemetry diagnostic data be processed on-board?", a: "Yes, we write optimized lightweight CAN bus edge parsers that filter non-critical data before sending highlights to the cloud." },
-    { q: "How accurate are EV battery degradation models?", a: "By tracking voltage cycles, operating temperature, and discharge speeds, our ML models predict cell lifespan with up to 95% accuracy." }
+    {
+      q: "Can vehicle telemetry diagnostic data be processed on-board?",
+      a: "Yes, we write optimized lightweight CAN bus edge parsers that filter non-critical data before sending highlights to the cloud.",
+    },
+    {
+      q: "How accurate are EV battery degradation models?",
+      a: "By tracking voltage cycles, operating temperature, and discharge speeds, our ML models predict cell lifespan with up to 95% accuracy.",
+    },
   ],
   "media-entertainment": [
-    { q: "How do you eliminate streaming buffer lag during peak usage?", a: "We implement multi-bitrate HLS players coupled with global CDN routing to adjust quality dynamically based on network bandwidth." },
-    { q: "How is digital rights management (DRM) enforced?", a: "We integrate standard Widevine, FairPlay, and PlayReady decryptions directly into secure media playback players." }
+    {
+      q: "How do you eliminate streaming buffer lag during peak usage?",
+      a: "We implement multi-bitrate HLS players coupled with global CDN routing to adjust quality dynamically based on network bandwidth.",
+    },
+    {
+      q: "How is digital rights management (DRM) enforced?",
+      a: "We integrate standard Widevine, FairPlay, and PlayReady decryptions directly into secure media playback players.",
+    },
   ],
   "food-restaurant-tech": [
-    { q: "Can the kitchen display screens work during internet outages?", a: "Yes, the POS runs on a local offline-first database framework that caches order lists and syncs automatically when the connection is restored." },
-    { q: "How is driver dispatch coordinated?", a: "Our dispatch algorithms match drivers based on geo-locations, prep speed history, and active cooking times." }
+    {
+      q: "Can the kitchen display screens work during internet outages?",
+      a: "Yes, the POS runs on a local offline-first database framework that caches order lists and syncs automatically when the connection is restored.",
+    },
+    {
+      q: "How is driver dispatch coordinated?",
+      a: "Our dispatch algorithms match drivers based on geo-locations, prep speed history, and active cooking times.",
+    },
   ],
   "government-public-sector": [
-    { q: "Are the citizen portals accessible to disabled users?", a: "Yes, all layouts conform to WCAG 2.1 AA accessibility standards, supporting screen readers and full keyboard navigability." },
-    { q: "How is user identity verification secured on government portals?", a: "We implement federated identity integrations backed by multi-factor authentication (MFA) and biometric verifications." }
-  ]
+    {
+      q: "Are the citizen portals accessible to disabled users?",
+      a: "Yes, all layouts conform to WCAG 2.1 AA accessibility standards, supporting screen readers and full keyboard navigability.",
+    },
+    {
+      q: "How is user identity verification secured on government portals?",
+      a: "We implement federated identity integrations backed by multi-factor authentication (MFA) and biometric verifications.",
+    },
+  ],
 };
 
 const getSplitTitle = (title: string) => {
@@ -1537,14 +1638,20 @@ export default function IndustryDetailsPage() {
     "food-restaurant-tech": "/moonshot_images/food-restaurant-tech.jpg",
     "government-public-sector": "/moonshot_images/government-public-sector.jpg",
   };
-  const bgImage = bgImageMap[slug] ? encodeURI(bgImageMap[slug]).replace(/&/g, "%26") : undefined;
+  const bgImage = bgImageMap[slug]
+    ? encodeURI(bgImageMap[slug]).replace(/&/g, "%26")
+    : undefined;
 
   if (!data) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-8">
         <AlertCircle className="w-16 h-16 text-rose-500 mb-4 animate-bounce" />
-        <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Sector Not Found</h1>
-        <p className="text-slate-500 mb-6">The requested industry sector information path does not exist.</p>
+        <h1 className="text-3xl font-extrabold text-slate-900 mb-2">
+          Sector Not Found
+        </h1>
+        <p className="text-slate-500 mb-6">
+          The requested industry sector information path does not exist.
+        </p>
         <Link
           href="/industries"
           className="btn-primary inline-flex items-center gap-2"
@@ -1573,7 +1680,9 @@ export default function IndustryDetailsPage() {
     automotive: <Cpu className={`w-6 h-6 ${styles.text}`} />,
     "media-entertainment": <Layers className={`w-6 h-6 ${styles.text}`} />,
     "food-restaurant-tech": <Zap className={`w-6 h-6 ${styles.text}`} />,
-    "government-public-sector": <Database className={`w-6 h-6 ${styles.text}`} />,
+    "government-public-sector": (
+      <Database className={`w-6 h-6 ${styles.text}`} />
+    ),
   };
 
   const rightIconMap: Record<string, React.ReactNode> = {
@@ -1591,27 +1700,39 @@ export default function IndustryDetailsPage() {
     automotive: <Zap className={`w-6 h-6 ${styles.text}`} />,
     "media-entertainment": <Sparkles className={`w-6 h-6 ${styles.text}`} />,
     "food-restaurant-tech": <Database className={`w-6 h-6 ${styles.text}`} />,
-    "government-public-sector": <ShieldCheck className={`w-6 h-6 ${styles.text}`} />,
+    "government-public-sector": (
+      <ShieldCheck className={`w-6 h-6 ${styles.text}`} />
+    ),
   };
 
-  const leftIconRaw = leftIconMap[slug] || <Cpu className={`w-6 h-6 ${styles.text}`} />;
-  const rightIconRaw = rightIconMap[slug] || <Globe2 className={`w-6 h-6 ${styles.text}`} />;
+  const leftIconRaw = leftIconMap[slug] || (
+    <Cpu className={`w-6 h-6 ${styles.text}`} />
+  );
+  const rightIconRaw = rightIconMap[slug] || (
+    <Globe2 className={`w-6 h-6 ${styles.text}`} />
+  );
 
   // Render industry-themed floating icons dynamically
   const leftIcon = React.cloneElement(leftIconRaw as React.ReactElement, {
-    className: `w-6 h-6 ${styles.text}`
+    className: `w-6 h-6 ${styles.text}`,
   });
   const rightIcon = React.cloneElement(rightIconRaw as React.ReactElement, {
-    className: `w-6 h-6 ${styles.text}`
+    className: `w-6 h-6 ${styles.text}`,
   });
 
   return (
     <div className="bg-slate-50/30 min-h-screen overflow-hidden">
       {/* ══════════════════ HERO SECTION (PREMIUM LIGHT THEME) ══════════════════ */}
-      <section className={`relative bg-gradient-to-br ${styles.bgSuperLight} py-28 md:py-36 overflow-hidden border-b border-slate-100/80`}>
+      <section
+        className={`relative bg-gradient-to-br ${styles.bgSuperLight} py-28 md:py-36 overflow-hidden border-b border-slate-100/80`}
+      >
         {/* Soft background glow orbs */}
-        <div className={`absolute top-1/4 left-[5%] w-96 h-96 rounded-full blur-[100px] pointer-events-none`}
-             style={{ background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)` }} />
+        <div
+          className={`absolute top-1/4 left-[5%] w-96 h-96 rounded-full blur-[100px] pointer-events-none`}
+          style={{
+            background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)`,
+          }}
+        />
         <div className="absolute bottom-1/4 right-[5%] w-[450px] h-[450px] bg-slate-200/40 rounded-full blur-[100px] pointer-events-none" />
 
         {/* Animated background tech matrix grid */}
@@ -1694,7 +1815,12 @@ export default function IndustryDetailsPage() {
         >
           <motion.div
             animate={{ y: [0, 15, 0], rotate: [0, -5, 5, 0] }}
-            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            transition={{
+              duration: 6.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5,
+            }}
             className={`w-16 h-16 bg-white rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.06)] border border-slate-100 flex items-center justify-center hover:scale-110 hover:border-slate-200 transition-all duration-300 cursor-pointer`}
           >
             {rightIcon}
@@ -1706,15 +1832,15 @@ export default function IndustryDetailsPage() {
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-[0.06] mix-blend-multiply">
             <motion.img
               initial={{ scale: 1.05, x: 0, y: 0 }}
-              animate={{ 
+              animate={{
                 scale: [1.05, 1.15, 1.05],
                 x: [0, 15, -15, 0],
-                y: [0, -10, 10, 0]
+                y: [0, -10, 10, 0],
               }}
               transition={{
                 duration: 30,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               src={bgImage}
               alt={data.title}
@@ -1731,10 +1857,14 @@ export default function IndustryDetailsPage() {
             className={`inline-flex items-center gap-2 bg-white border border-slate-100 shadow-[0_5px_15px_rgba(0,0,0,0.02)] rounded-full px-5 py-2.5 mb-8`}
           >
             <Sparkles className={`w-4 h-4 ${styles.text} animate-pulse`} />
-            <span className={`text-xs font-black tracking-[0.2em] uppercase text-slate-500`}>Sector Intelligence Blueprint</span>
+            <span
+              className={`text-xs font-black tracking-[0.2em] uppercase text-slate-500`}
+            >
+              Sector Intelligence Blueprint
+            </span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -1746,10 +1876,16 @@ export default function IndustryDetailsPage() {
 
           {/* Styled Underline Accent with Shimmering Laser effect */}
           <div className="relative mb-8">
-            <div className={`w-32 h-1.5 bg-gradient-to-r ${styles.gradientText} rounded-full`} />
+            <div
+              className={`w-32 h-1.5 bg-gradient-to-r ${styles.gradientText} rounded-full`}
+            />
             <motion.div
               animate={{ x: [-64, 64] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 3.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-12 h-full bg-gradient-to-r from-transparent via-white/70 to-transparent blur-[1px] pointer-events-none"
             />
           </div>
@@ -1850,8 +1986,12 @@ export default function IndustryDetailsPage() {
 
       {/* ══════════════════ INTERACTIVE SWITCHER TERMINAL (CHALLENGES VS SOLUTIONS) ══════════════════ */}
       <section className="py-24 bg-slate-50/60 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[140px] pointer-events-none"
-             style={{ background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)` }} />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-[140px] pointer-events-none"
+          style={{
+            background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)`,
+          }}
+        />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -1859,16 +1999,25 @@ export default function IndustryDetailsPage() {
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-100 shadow-sm mb-3`}
             >
               <Workflow className={`w-3.5 h-3.5 ${styles.text}`} />
-              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Interactive Guide</span>
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                Interactive Guide
+              </span>
             </div>
-            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Business Goals & Custom Solutions</h3>
-            <p className="text-slate-500 text-sm mt-3">Select a key business objective below to see how our custom technology drives efficiency and security.</p>
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Business Goals & Custom Solutions
+            </h3>
+            <p className="text-slate-500 text-sm mt-3">
+              Select a key business objective below to see how our custom
+              technology drives efficiency and security.
+            </p>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 items-stretch">
             {/* Left Column: Challenges selector */}
             <div className="lg:col-span-5 flex flex-col gap-4">
-              <span className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1 px-1">Select an Objective</span>
+              <span className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1 px-1">
+                Select an Objective
+              </span>
               {data.challenges.map((challenge, idx) => {
                 const isActive = activeTab === idx;
                 return (
@@ -1878,29 +2027,35 @@ export default function IndustryDetailsPage() {
                     whileHover={{ x: isActive ? 0 : 5 }}
                     whileTap={{ scale: 0.98 }}
                     className={`text-left p-6 rounded-[2rem] border transition-all duration-300 flex items-start gap-4 shadow-sm hover:shadow-md relative overflow-hidden ${
-                      isActive 
-                        ? `bg-white border-sky-300 ring-2 ring-sky-100` 
+                      isActive
+                        ? `bg-white border-sky-300 ring-2 ring-sky-100`
                         : "bg-white/80 border-slate-100/80 hover:bg-white hover:border-slate-200"
                     }`}
                   >
                     {/* Active accent side strip */}
                     {isActive && (
-                      <motion.div 
+                      <motion.div
                         layoutId="activeSideStrip"
                         className={`absolute left-0 inset-y-0 w-1.5 ${styles.bg}`}
                       />
                     )}
-                    
-                    <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
-                      isActive 
-                        ? `${styles.bg} text-white` 
-                        : "bg-sky-50 text-sky-500 group-hover:bg-sky-500 group-hover:text-white"
-                    }`}>
+
+                    <div
+                      className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
+                        isActive
+                          ? `${styles.bg} text-white`
+                          : "bg-sky-50 text-sky-500 group-hover:bg-sky-500 group-hover:text-white"
+                      }`}
+                    >
                       <Zap size={18} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-800 text-sm md:text-base leading-snug">{challenge.title}</h4>
-                      <p className="text-slate-400 text-xs mt-1 leading-normal font-semibold">Use Case {idx + 1}</p>
+                      <h4 className="font-bold text-slate-800 text-sm md:text-base leading-snug">
+                        {challenge.title}
+                      </h4>
+                      <p className="text-slate-400 text-xs mt-1 leading-normal font-semibold">
+                        Use Case {idx + 1}
+                      </p>
                     </div>
                   </motion.button>
                 );
@@ -1910,8 +2065,10 @@ export default function IndustryDetailsPage() {
             {/* Right Column: Dynamic Remedy detail card */}
             <div className="lg:col-span-7">
               <div className="h-full bg-white rounded-[2.5rem] border border-slate-100 p-8 md:p-12 shadow-md relative overflow-hidden flex flex-col justify-between">
-                <div className="absolute top-0 right-0 w-32 h-32 blur-3xl pointer-events-none rounded-bl-full"
-                     style={{ backgroundColor: `${styles.glow}` }} />
+                <div
+                  className="absolute top-0 right-0 w-32 h-32 blur-3xl pointer-events-none rounded-bl-full"
+                  style={{ backgroundColor: `${styles.glow}` }}
+                />
 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -1923,13 +2080,14 @@ export default function IndustryDetailsPage() {
                     className="flex flex-col h-full justify-between"
                   >
                     <div>
-                      {/* Active tag info */}
-                      <div className="flex items-center gap-3 mb-6">
-                        <span className="text-[10px] font-black text-sky-600 bg-sky-50 border border-sky-100 px-3 py-1 rounded-full uppercase tracking-wider">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 mb-6">
+                        <span className="text-[10px] font-black text-sky-600 bg-sky-50 border border-sky-100 px-3 py-1 rounded-full uppercase tracking-wider w-fit">
                           Use Case: {data.challenges[activeTab].title}
                         </span>
-                        <ArrowRightLeft className="w-4 h-4 text-slate-300" />
-                        <span className={`text-[10px] font-black ${styles.text} ${styles.bgLight} border ${styles.border} px-3 py-1 rounded-full uppercase tracking-wider`}>
+                        <ArrowRightLeft className="w-4 h-4 text-slate-300 rotate-90 sm:rotate-0 self-start sm:self-auto ml-4 sm:ml-0" />
+                        <span
+                          className={`text-[10px] font-black ${styles.text} ${styles.bgLight} border ${styles.border} px-3 py-1 rounded-full uppercase tracking-wider w-fit`}
+                        >
                           Our Solution Ready
                         </span>
                       </div>
@@ -1937,7 +2095,7 @@ export default function IndustryDetailsPage() {
                       <h4 className="text-2xl md:text-3xl font-extrabold text-slate-850 tracking-tight leading-snug mb-4">
                         {data.solutions[activeTab].title}
                       </h4>
-                      
+
                       <div className="w-12 h-1 bg-slate-100 rounded-full mb-6" />
 
                       <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-medium">
@@ -1945,7 +2103,9 @@ export default function IndustryDetailsPage() {
                       </p>
 
                       <div className="bg-slate-50 rounded-2xl border border-slate-100 p-5 mt-6">
-                        <span className="text-slate-400 text-xs font-bold uppercase tracking-widest block mb-2">Why This Matters</span>
+                        <span className="text-slate-400 text-xs font-bold uppercase tracking-widest block mb-2">
+                          Why This Matters
+                        </span>
                         <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
                           {data.challenges[activeTab].desc}
                         </p>
@@ -1954,8 +2114,12 @@ export default function IndustryDetailsPage() {
 
                     <div className="flex flex-wrap gap-3 items-center justify-between mt-8 pt-6 border-t border-slate-50 shrink-0">
                       <div className="flex items-center gap-2">
-                        <div className={`w-2.5 h-2.5 rounded-full ${styles.bg} animate-ping`} />
-                        <span className="text-xs font-bold text-slate-700">Solution Ready to Implement</span>
+                        <div
+                          className={`w-2.5 h-2.5 rounded-full ${styles.bg} animate-ping`}
+                        />
+                        <span className="text-xs font-bold text-slate-700">
+                          Solution Ready to Implement
+                        </span>
                       </div>
                       <Link
                         href="/contact"
@@ -1972,8 +2136,12 @@ export default function IndustryDetailsPage() {
         </div>
       </section>
       <section className="py-24 bg-slate-50/50 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[130px] pointer-events-none"
-             style={{ background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)` }} />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[130px] pointer-events-none"
+          style={{
+            background: `radial-gradient(circle, ${styles.glow} 0%, transparent 75%)`,
+          }}
+        />
 
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <h2 className="text-4xl font-black text-center mb-12 tracking-tight text-slate-900">
@@ -2014,15 +2182,24 @@ export default function IndustryDetailsPage() {
               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 shadow-sm mb-3`}
             >
               <FileCode className={`w-3.5 h-3.5 ${styles.text}`} />
-              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">System Topologies</span>
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                System Topologies
+              </span>
             </motion.div>
-            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Representative Data Pipeline</h3>
-            <p className="text-slate-500 text-sm mt-3">An engineering breakdown of component validation nodes as transaction signals ingest to database files.</p>
+            <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Representative Data Pipeline
+            </h3>
+            <p className="text-slate-500 text-sm mt-3">
+              An engineering breakdown of component validation nodes as
+              transaction signals ingest to database files.
+            </p>
           </div>
 
           <div className="max-w-4xl mx-auto bg-slate-50/40 rounded-[2.5rem] border border-slate-100/80 p-8 md:p-12 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 blur-3xl pointer-events-none rounded-bl-full"
-                 style={{ backgroundColor: `${styles.glow}` }} />
+            <div
+              className="absolute top-0 right-0 w-32 h-32 blur-3xl pointer-events-none rounded-bl-full"
+              style={{ backgroundColor: `${styles.glow}` }}
+            />
 
             <div className="grid md:grid-cols-3 gap-8 items-center text-center relative z-10">
               {/* Step 1 */}
@@ -2034,11 +2211,17 @@ export default function IndustryDetailsPage() {
                 whileHover={{ y: -5, scale: 1.02 }}
                 className={`flex flex-col items-center p-6 bg-white rounded-2xl border border-slate-100/80 group hover:border-${styles.text.split("-")[1]}-200 transition-all shadow-sm`}
               >
-                <div className={`w-10 h-10 rounded-full ${styles.bgLight} ${styles.text} flex items-center justify-center mb-4`}>
+                <div
+                  className={`w-10 h-10 rounded-full ${styles.bgLight} ${styles.text} flex items-center justify-center mb-4`}
+                >
                   <Globe2 size={20} className="animate-spin-slow" />
                 </div>
-                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Source Ingress</span>
-                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">{data.architecture.source}</h4>
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">
+                  Source Ingress
+                </span>
+                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">
+                  {data.architecture.source}
+                </h4>
               </motion.div>
 
               {/* Step 2 */}
@@ -2054,7 +2237,11 @@ export default function IndustryDetailsPage() {
                 <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-sky-400">
                   <motion.div
                     animate={{ x: [-8, 8, -8] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                   >
                     <ArrowRight size={14} />
                   </motion.div>
@@ -2062,7 +2249,12 @@ export default function IndustryDetailsPage() {
                 <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-4 h-4 hidden md:flex items-center justify-center text-sky-400">
                   <motion.div
                     animate={{ x: [-8, 8, -8] }}
-                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.9,
+                    }}
                   >
                     <ArrowRight size={14} />
                   </motion.div>
@@ -2071,8 +2263,12 @@ export default function IndustryDetailsPage() {
                 <div className="w-10 h-10 rounded-full bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
                   <Cpu size={20} className="animate-pulse" />
                 </div>
-                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Middleware Hub</span>
-                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">{data.architecture.process}</h4>
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">
+                  Middleware Hub
+                </span>
+                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">
+                  {data.architecture.process}
+                </h4>
               </motion.div>
 
               {/* Step 3 */}
@@ -2087,14 +2283,22 @@ export default function IndustryDetailsPage() {
                 <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center mb-4">
                   <Database size={20} />
                 </div>
-                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">Target Vault</span>
-                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">{data.architecture.target}</h4>
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mb-1.5">
+                  Target Vault
+                </span>
+                <h4 className="text-sm font-extrabold text-slate-800 leading-tight">
+                  {data.architecture.target}
+                </h4>
               </motion.div>
             </div>
 
             <div className="mt-8 pt-8 border-t border-slate-100 text-center text-slate-500 text-sm leading-relaxed max-w-2xl mx-auto relative z-10">
-              <span className="font-bold text-slate-700 block mb-2 text-xs uppercase tracking-widest">Architectural Execution</span>
-              <p className="text-slate-500 text-xs md:text-sm font-medium">{data.architecture.description}</p>
+              <span className="font-bold text-slate-700 block mb-2 text-xs uppercase tracking-widest">
+                Architectural Execution
+              </span>
+              <p className="text-slate-500 text-xs md:text-sm font-medium">
+                {data.architecture.description}
+              </p>
             </div>
           </div>
         </div>
@@ -2137,12 +2341,21 @@ export default function IndustryDetailsPage() {
       <section className="py-20 bg-slate-50/40 border-t border-slate-100/60 relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-100 shadow-sm mb-3`}>
+            <div
+              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-100 shadow-sm mb-3`}
+            >
               <HelpCircle className={`w-3.5 h-3.5 ${styles.text}`} />
-              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">FAQ Desk</span>
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                FAQ Desk
+              </span>
             </div>
-            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Frequently Asked Questions</h3>
-            <p className="text-slate-500 text-xs md:text-sm mt-2">Find direct answers about compliance, data integrity, and custom systems integration.</p>
+            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Frequently Asked Questions
+            </h3>
+            <p className="text-slate-500 text-xs md:text-sm mt-2">
+              Find direct answers about compliance, data integrity, and custom
+              systems integration.
+            </p>
           </div>
 
           <div className="space-y-4 max-w-3xl mx-auto">
@@ -2153,8 +2366,8 @@ export default function IndustryDetailsPage() {
                   key={idx}
                   layout
                   className={`bg-white rounded-2xl border transition-all duration-300 ${
-                    isOpen 
-                      ? `border-sky-300 ring-2 ring-sky-100/50 shadow-md` 
+                    isOpen
+                      ? `border-sky-300 ring-2 ring-sky-100/50 shadow-md`
                       : "border-slate-100 hover:border-slate-200/90 shadow-sm hover:shadow-md"
                   } overflow-hidden`}
                 >
@@ -2162,13 +2375,20 @@ export default function IndustryDetailsPage() {
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
                     className="w-full flex items-center justify-between text-left p-6 font-bold text-slate-800 transition-colors group"
                   >
-                    <span className={`text-sm md:text-base leading-snug pr-4 transition-colors ${isOpen ? styles.text : "group-hover:text-slate-950"}`}>{faq.q}</span>
+                    <span
+                      className={`text-sm md:text-base leading-snug pr-4 transition-colors ${isOpen ? styles.text : "group-hover:text-slate-950"}`}
+                    >
+                      {faq.q}
+                    </span>
                     <motion.div
                       animate={{ rotate: isOpen ? 180 : 0 }}
                       transition={{ duration: 0.25 }}
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${isOpen ? styles.bgLight : "bg-slate-50"}`}
                     >
-                      <ChevronDown size={16} className={isOpen ? styles.text : "text-slate-450"} />
+                      <ChevronDown
+                        size={16}
+                        className={isOpen ? styles.text : "text-slate-450"}
+                      />
                     </motion.div>
                   </button>
                   <AnimatePresence initial={false}>
@@ -2204,9 +2424,15 @@ export default function IndustryDetailsPage() {
           >
             <div className="absolute -right-20 -top-20 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
             <div className="absolute -left-20 -bottom-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000" />
-            
-            <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none"
-              style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0ea5e9 1px, transparent 0)", backgroundSize: "24px 24px" }} />
+
+            <div
+              className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none"
+              style={{
+                backgroundImage:
+                  "radial-gradient(circle at 1px 1px, #0ea5e9 1px, transparent 0)",
+                backgroundSize: "24px 24px",
+              }}
+            />
 
             <div className="relative z-10">
               <motion.div
@@ -2218,15 +2444,21 @@ export default function IndustryDetailsPage() {
               </motion.div>
 
               <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 leading-tight">
-                Engineering your custom <span className={styles.text}>{data.title}</span> solution
+                Engineering your custom{" "}
+                <span className={styles.text}>{data.title}</span> solution
               </h2>
-              
+
               <p className="text-slate-500 text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed font-semibold">
-                Our specialists coordinate with your key stakeholders to construct high-performance, compliant systems matching your exact scale targets.
+                Our specialists coordinate with your key stakeholders to
+                construct high-performance, compliant systems matching your
+                exact scale targets.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
                   <Link
                     href="/contact"
                     className={`btn-primary flex items-center justify-center gap-2 text-sm px-8 py-4 rounded-xl ${styles.bg} hover:brightness-105 shadow-sm text-white`}
@@ -2240,7 +2472,10 @@ export default function IndustryDetailsPage() {
                     </motion.span>
                   </Link>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <motion.div
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
                   <Link
                     href="/industries"
                     className="btn-outline flex items-center justify-center gap-2 text-sm px-8 py-4 rounded-xl bg-white border border-slate-150 hover:bg-slate-50 text-slate-600 font-bold"
