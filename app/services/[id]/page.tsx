@@ -266,7 +266,6 @@ const services = [
       "Built-in analytics for product metrics",
     ],
     color: "violet",
-  // Note: fixed missing closing bracket for services array element if there was one, let's keep it exact as it was
   },
 ];
 
@@ -314,6 +313,20 @@ const defaultFaqs = [
   { q: "What post-launch support plans do you offer?", a: "We provide comprehensive post-launch support packages, including server health monitoring, security audits, dependency updates, and feature enhancements." }
 ];
 
+/* ─── ANIMATION VARIANTS ──────────────────────────────────────── */
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+  }),
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07 } },
+};
+
 export default function ServiceDetailPage({ params }: { params: { id: string } }) {
   const service = services.find(s => s.id === params.id);
   if (!service) notFound();
@@ -322,46 +335,87 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
   const faqs = serviceFaqs[service.id] || defaultFaqs;
 
   return (
-    <main className="min-h-screen bg-slate-50/50 pb-16">
+    <main className="min-h-screen bg-[#f0f7ff] pb-20">
 
       {/* ── HERO ── */}
-      <section className={`relative overflow-hidden bg-gradient-to-b ${theme.bgGradientLight} pt-24 pb-20 border-b border-slate-100/80`}>
-        {/* Blur spheres matching the service theme */}
-        <div className={`absolute top-0 right-1/4 w-96 h-96 ${theme.glow} rounded-full blur-3xl pointer-events-none`} />
-        <div className={`absolute -bottom-10 left-10 w-72 h-72 ${theme.glow} rounded-full blur-3xl pointer-events-none`} />
-        
-        {/* Decorative Grid */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-          style={{ backgroundImage: "linear-gradient(#000 1px,transparent 1px),linear-gradient(90deg,#000 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#dbeeff] via-[#eaf4ff] to-[#f5f9ff] pt-24 pb-24 border-b border-sky-100/60">
+
+        {/* Decorative animated blobs */}
+        <motion.div
+          animate={{ scale: [1, 1.12, 1], opacity: [0.18, 0.28, 0.18] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-20 right-0 w-[520px] h-[520px] bg-sky-300/30 rounded-full blur-[80px] pointer-events-none"
+        />
+        <motion.div
+          animate={{ scale: [1, 1.08, 1], opacity: [0.12, 0.22, 0.12] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-0 -left-20 w-[380px] h-[380px] bg-blue-300/25 rounded-full blur-[70px] pointer-events-none"
+        />
+
+        {/* Subtle dot grid */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.035]"
+          style={{
+            backgroundImage: "radial-gradient(circle, #0ea5e9 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }}>
-            <Link href="/services"
-              className={`inline-flex items-center gap-2 text-slate-500 hover:${theme.text} text-sm font-semibold mb-8 transition-colors group`}>
-              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          {/* Back link */}
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 text-slate-500 hover:text-sky-600 text-sm font-semibold mb-10 transition-colors group"
+            >
+              <ArrowLeft size={15} className="group-hover:-translate-x-1 transition-transform duration-200" />
               Back to Services
             </Link>
           </motion.div>
 
           <div className="flex flex-col md:flex-row md:items-center gap-8">
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.05 }}
-              className={`w-20 h-20 rounded-2xl bg-gradient-to-tr ${theme.bgGradient} text-white flex items-center justify-center shadow-xl ${theme.shadow} flex-shrink-0 relative group`}>
-              <div className={`absolute inset-0 ${theme.bg} rounded-2xl blur opacity-30 group-hover:opacity-50 transition-opacity`} />
-              <div className="relative z-10">{service.icon}</div>
+            {/* Icon */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7, rotate: -8 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ type: "spring", stiffness: 130, damping: 14, delay: 0.05 }}
+              whileHover={{ scale: 1.08, rotate: 3 }}
+              className="relative flex-shrink-0"
+            >
+              <div className="w-[88px] h-[88px] rounded-[26px] bg-gradient-to-br from-sky-400 to-sky-600 text-white flex items-center justify-center shadow-2xl shadow-sky-400/35">
+                {service.icon}
+              </div>
+              {/* Glow ring */}
+              <div className="absolute inset-0 rounded-[26px] bg-sky-400/20 blur-xl scale-125 -z-10" />
             </motion.div>
 
-            <div>
-              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-                className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${theme.badge} border mb-3.5 inline-block`}>
+            <div className="space-y-2">
+              <motion.span
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.12 }}
+                className="inline-block text-[10px] font-black uppercase tracking-[0.14em] px-3.5 py-1.5 rounded-full bg-sky-100 border border-sky-200/80 text-sky-600"
+              >
                 {service.category}
               </motion.span>
-              <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.4 }}
-                className="text-3xl md:text-5xl font-black text-slate-900 mb-2.5 tracking-tight leading-tight">
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight"
+              >
                 {service.title}
               </motion.h1>
-              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-                className={`${theme.text} font-semibold italic text-base md:text-lg`}>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.25 }}
+                className="text-sky-500 font-semibold italic text-lg"
+              >
                 "{service.tagline}"
               </motion.p>
             </div>
@@ -369,218 +423,254 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
         </div>
       </section>
 
-      {/* ── MAIN CASCADING CONTENT ── */}
-      <section className="py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          {/* About, Features, Tech Stack in unified grid */}
-          <div className="grid md:grid-cols-3 gap-8 items-stretch">
-            
-            {/* About Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.1 }}
-              whileHover={{ y: -4 }}
-              className={`md:col-span-2 bg-white rounded-3xl p-8 border border-slate-100 shadow-md ${theme.borderBottom} border-b-[5px] transition-all duration-300 relative overflow-hidden`}
+      {/* ── MAIN CONTENT ── */}
+      <section className="py-14">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+
+          {/* ── About + Features + Tech ── */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid md:grid-cols-3 gap-7 items-stretch"
+          >
+            {/* About */}
+            <motion.div
+              variants={fadeUp}
+              whileHover={{ y: -5, boxShadow: "0 20px 48px 0 rgba(14,165,233,0.10)" }}
+              className="md:col-span-2 bg-white rounded-3xl p-8 border border-sky-100/70 shadow-sm transition-all duration-300 relative overflow-hidden"
             >
-              <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <span>About This Service</span>
+              {/* Top accent line */}
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 via-blue-400 to-sky-300 rounded-t-3xl" />
+              <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2 mt-1">
+                About This Service
               </h2>
-              <p className="text-slate-600 leading-relaxed text-base font-medium whitespace-pre-line">
+              <p className="text-slate-600 leading-relaxed text-[15px] font-medium">
                 {service.detail}
               </p>
             </motion.div>
 
-            {/* Features & Tech Stack in combined layout */}
-            <div className="flex flex-col gap-6 justify-between">
-              {/* Features */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ delay: 0.15 }}
-                whileHover={{ y: -4 }}
-                className={`bg-white p-6 rounded-3xl border border-slate-100 ${theme.borderBottom} border-b-[5px] shadow-md transition-all duration-300 flex-1 flex flex-col justify-center`}
+            {/* Features + Tech Stack */}
+            <div className="flex flex-col gap-5">
+              <motion.div
+                variants={fadeUp}
+                whileHover={{ y: -5, boxShadow: "0 20px 48px 0 rgba(14,165,233,0.10)" }}
+                className="bg-white p-6 rounded-3xl border border-sky-100/70 shadow-sm transition-all duration-300 relative overflow-hidden flex-1"
               >
-                <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-3">Core Features</h3>
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 to-blue-400 rounded-t-3xl" />
+                <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3.5 mt-1">Core Features</h3>
                 <div className="flex flex-wrap gap-2">
                   {service.features.map(f => (
-                    <span key={f} className={`text-[11px] font-bold px-3 py-1.5 rounded-full ${theme.badge} border`}>
+                    <span key={f} className="text-[11px] font-bold px-3 py-1.5 rounded-full bg-sky-50 border border-sky-200/70 text-sky-600">
                       {f}
                     </span>
                   ))}
                 </div>
               </motion.div>
 
-              {/* Technologies */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ delay: 0.2 }}
-                whileHover={{ y: -4 }}
-                className={`bg-white p-6 rounded-3xl border border-slate-100 ${theme.borderBottom} border-b-[5px] shadow-md transition-all duration-300 flex-1 flex flex-col justify-center`}
+              <motion.div
+                variants={fadeUp}
+                whileHover={{ y: -5, boxShadow: "0 20px 48px 0 rgba(14,165,233,0.10)" }}
+                className="bg-white p-6 rounded-3xl border border-sky-100/70 shadow-sm transition-all duration-300 relative overflow-hidden flex-1"
               >
-                <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider mb-3">Technologies Leveraged</h3>
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 to-blue-400 rounded-t-3xl" />
+                <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3.5 mt-1">Technologies</h3>
                 <div className="flex flex-wrap gap-2">
                   {service.techStack.map(t => (
-                    <span key={t} className="text-[11px] font-semibold px-2.5 py-1.5 rounded-xl bg-slate-50 text-slate-600 border border-slate-200/60">
+                    <span key={t} className="text-[11px] font-semibold px-2.5 py-1.5 rounded-xl bg-slate-50 text-slate-600 border border-slate-200/70 hover:border-sky-300 hover:text-sky-600 transition-colors duration-200">
                       {t}
                     </span>
                   ))}
                 </div>
               </motion.div>
             </div>
+          </motion.div>
 
-          </div>
-
-          {/* Key Benefits (Full Width Section) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ delay: 0.25 }}
-            className="space-y-6"
-          >
-            <h2 className="text-2xl font-black text-slate-900 tracking-tight">Key Benefits & Outcomes</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* ── Key Benefits ── */}
+          <div>
+            <motion.h2
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="text-2xl font-black text-slate-900 tracking-tight mb-7"
+            >
+              Key Benefits & Outcomes
+            </motion.h2>
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
+            >
               {service.benefits.map((b, i) => (
-                <motion.div key={i}
-                  initial={{ opacity: 0, scale: 0.96, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ type: "spring", stiffness: 90, delay: 0.25 + i * 0.05 }}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className={`flex flex-col gap-3 p-6 rounded-3xl bg-white border border-slate-100 border-b-[5px] border-b-transparent ${theme.borderBottom} shadow-md ${theme.borderHover} hover:shadow-xl transition-all duration-300 cursor-default`}
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  custom={i}
+                  whileHover={{ y: -7, scale: 1.02, boxShadow: "0 24px 48px 0 rgba(14,165,233,0.13)" }}
+                  className="flex flex-col gap-4 p-6 rounded-3xl bg-white border border-sky-100/70 shadow-sm transition-all duration-300 cursor-default group"
                 >
-                  <div className={`w-8 h-8 rounded-full ${theme.bgLight} flex items-center justify-center flex-shrink-0`}>
-                    <CheckCircle size={16} className={theme.text} />
+                  <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-sky-100 to-blue-100 flex items-center justify-center flex-shrink-0 group-hover:from-sky-200 group-hover:to-blue-200 transition-colors duration-300">
+                    <CheckCircle size={17} className="text-sky-500" />
                   </div>
                   <span className="text-slate-700 text-sm font-bold leading-relaxed">{b}</span>
                 </motion.div>
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Process & Delivery Timelines (Side by Side Grid for Balanced Spacing) */}
-          <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-            
-            {/* TIMELINES & METRICS TABLE */}
+          {/* ── Timeline + Process ── */}
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid lg:grid-cols-2 gap-7"
+          >
+            {/* Delivery Table */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              whileHover={{ y: -4 }}
-              className={`bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent ${theme.borderBottom} shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between`}
+              variants={fadeUp}
+              whileHover={{ y: -5, boxShadow: "0 20px 48px 0 rgba(14,165,233,0.10)" }}
+              className="bg-white p-8 rounded-3xl border border-sky-100/70 shadow-sm transition-all duration-300 relative overflow-hidden"
             >
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-4 flex items-center gap-2">
-                  <span>Standard Delivery Timelines</span>
-                </h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="border-b border-slate-100">
-                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-400">Phase</th>
-                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-400">Duration</th>
-                        <th className="pb-3 text-xs font-extrabold uppercase tracking-wider text-slate-400">Key Deliverable</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100/50">
-                      {[
-                        { p: "Discovery & Strategy", d: "5 - 7 Days", o: "Scope Roadmap & System Architecture" },
-                        { p: "UI/UX Prototyping", d: "2 Weeks", o: "Interactive Figma Wireframes & Flows" },
-                        { p: "Agile Development Sprints", d: "4 - 8 Weeks", o: "Functional Beta & Database Integration" },
-                        { p: "Security Audit & Launch", d: "1 Week", o: "VAPT Security Logs & Live Production Setup" },
-                      ].map((item, i) => (
-                        <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                          <td className="py-4 text-sm font-bold text-slate-800">{item.p}</td>
-                          <td className={`py-4 text-sm font-bold ${theme.text}`}>{item.d}</td>
-                          <td className="py-4 text-xs font-medium text-slate-500">{item.o}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 via-blue-400 to-sky-300 rounded-t-3xl" />
+              <h3 className="text-lg font-bold text-slate-900 mb-6 mt-1">Standard Delivery Timelines</h3>
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-slate-100">
+                    <th className="pb-3 text-[10px] font-black uppercase tracking-widest text-slate-400">Phase</th>
+                    <th className="pb-3 text-[10px] font-black uppercase tracking-widest text-slate-400">Duration</th>
+                    <th className="pb-3 text-[10px] font-black uppercase tracking-widest text-slate-400">Deliverable</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50">
+                  {[
+                    { p: "Discovery & Strategy", d: "5–7 Days", o: "Scope Roadmap & Architecture" },
+                    { p: "UI/UX Prototyping", d: "2 Weeks", o: "Figma Wireframes & Flows" },
+                    { p: "Agile Dev Sprints", d: "4–8 Weeks", o: "Beta & DB Integration" },
+                    { p: "Security Audit & Launch", d: "1 Week", o: "VAPT Logs & Production" },
+                  ].map((item, i) => (
+                    <motion.tr
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.07 }}
+                      className="hover:bg-sky-50/50 transition-colors group"
+                    >
+                      <td className="py-4 text-sm font-bold text-slate-800 group-hover:text-sky-700 transition-colors">{item.p}</td>
+                      <td className="py-4 text-sm font-black text-sky-500">{item.d}</td>
+                      <td className="py-4 text-xs font-medium text-slate-400">{item.o}</td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
             </motion.div>
 
-            {/* ROADMAP TIMELINE */}
+            {/* Process Timeline */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
-              whileHover={{ y: -4 }}
-              className={`bg-white p-8 rounded-3xl border border-slate-100 border-b-[5px] border-b-transparent ${theme.borderBottom} shadow-md hover:shadow-xl transition-all duration-300`}
+              variants={fadeUp}
+              whileHover={{ y: -5, boxShadow: "0 20px 48px 0 rgba(14,165,233,0.10)" }}
+              className="bg-white p-8 rounded-3xl border border-sky-100/70 shadow-sm transition-all duration-300 relative overflow-hidden"
             >
-              <h3 className="text-xl font-bold text-slate-900 border-b border-slate-100 pb-4 mb-4">Our Delivery Process</h3>
-              <div className={`relative border-l ${theme.border} ml-3 pl-6 space-y-6 py-2`}>
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 via-blue-400 to-sky-300 rounded-t-3xl" />
+              <h3 className="text-lg font-bold text-slate-900 mb-6 mt-1">Our Delivery Process</h3>
+              <div className="relative border-l-2 border-sky-100 ml-3 pl-7 space-y-7">
                 {[
                   { title: "1. Discover & Map", desc: "Collaborative workshops to freeze wireframes, define API integrations, and finalize the database architecture." },
                   { title: "2. Design & Prototype", desc: "Crafting modern design systems in Figma matching your brand identity with clickable prototype handoffs." },
                   { title: "3. Build & QA Sprints", desc: "Milestone-driven agile development with weekly builds, unit testing, and sandbox API validation." },
-                  { title: "4. Deploy & Scale", desc: "Production release with zero-downtime strategy, server health monitoring, and documentation handover." }
+                  { title: "4. Deploy & Scale", desc: "Production release with zero-downtime strategy, server health monitoring, and documentation handover." },
                 ].map((step, idx) => (
-                  <div key={idx} className="relative">
-                    <div className={`absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-white border-4 ${theme.bg === "bg-sky-500" ? "border-sky-500" : theme.bg === "bg-violet-500" ? "border-violet-500" : theme.bg === "bg-blue-500" ? "border-blue-500" : theme.bg === "bg-amber-500" ? "border-amber-500" : theme.bg === "bg-red-500" ? "border-red-500" : theme.bg === "bg-green-500" ? "border-green-500" : theme.bg === "bg-pink-500" ? "border-pink-500" : "border-indigo-500"} shadow-sm`} />
-                    <h4 className="text-sm font-extrabold text-slate-900 mb-1">{step.title}</h4>
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: -12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1, duration: 0.4 }}
+                    className="relative group"
+                  >
+                    <div className="absolute -left-[35px] top-1.5 w-4 h-4 rounded-full bg-white border-[3px] border-sky-400 shadow-sm group-hover:border-sky-500 group-hover:scale-110 transition-all duration-200" />
+                    <h4 className="text-sm font-extrabold text-slate-900 mb-1 group-hover:text-sky-600 transition-colors">{step.title}</h4>
                     <p className="text-slate-500 text-xs leading-relaxed font-medium">{step.desc}</p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
-
-          </div>
-
-          {/* ENGAGEMENT MODELS */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="space-y-6"
-          >
-            <h3 className="text-2xl font-black text-slate-900 tracking-tight">Flexible Engagement Models</h3>
-            <div className="grid sm:grid-cols-3 gap-6">
-              {[
-                { title: "Fixed Scope", desc: "Best for structured projects with concrete specifications and set timelines." },
-                { title: "Dedicated Team", desc: "A custom team of developers, designers, and QA working exclusively on your product backlog." },
-                { title: "Time & Material", desc: "Pay for active resources and hours logged, allowing complete flexibility to pivot." }
-              ].map((model, idx) => (
-                <motion.div 
-                  key={idx} 
-                  whileHover={{ y: -4 }}
-                  className={`p-6 rounded-3xl bg-white border border-slate-100 shadow-md ${theme.borderHover} transition-all duration-300 space-y-3`}
-                >
-                  <h4 className={`text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full ${theme.badge} inline-block`}>
-                    {model.title}
-                  </h4>
-                  <p className="text-slate-600 text-xs leading-relaxed font-medium">{model.desc}</p>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
 
-          {/* FAQ Accordion Section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ delay: 0.45 }}
-            className="bg-white p-8 rounded-3xl border border-slate-100 shadow-md hover:shadow-lg transition-all duration-300 max-w-4xl mx-auto"
+          {/* ── Engagement Models ── */}
+          <div>
+            <motion.h3
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-2xl font-black text-slate-900 tracking-tight mb-7"
+            >
+              Flexible Engagement Models
+            </motion.h3>
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid sm:grid-cols-3 gap-6"
+            >
+              {[
+                { title: "Fixed Scope", desc: "Best for structured projects with concrete specifications and set timelines.", icon: "📐" },
+                { title: "Dedicated Team", desc: "A custom team of developers, designers, and QA working exclusively on your product backlog.", icon: "👥" },
+                { title: "Time & Material", desc: "Pay for active resources and hours logged, allowing complete flexibility to pivot.", icon: "⏱️" },
+              ].map((model, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={fadeUp}
+                  custom={idx}
+                  whileHover={{ y: -6, boxShadow: "0 24px 48px 0 rgba(14,165,233,0.12)" }}
+                  className="p-7 rounded-3xl bg-white border border-sky-100/70 shadow-sm transition-all duration-300 space-y-3 group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 to-blue-400 rounded-t-3xl" />
+                  <div className="text-2xl mt-1">{model.icon}</div>
+                  <span className="block text-xs font-black uppercase tracking-widest text-sky-600">{model.title}</span>
+                  <p className="text-slate-500 text-xs leading-relaxed font-medium">{model.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* ── FAQ ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-white p-8 rounded-3xl border border-sky-100/70 shadow-sm max-w-4xl mx-auto relative overflow-hidden"
           >
-            <div className="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
-              <div className={`w-9 h-9 rounded-xl ${theme.bgLight} flex items-center justify-center ${theme.text}`}>
-                <HelpCircle size={18} />
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sky-400 via-blue-400 to-sky-300 rounded-t-3xl" />
+            <div className="flex items-center gap-3 mb-6 mt-1">
+              <div className="w-9 h-9 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-500">
+                <HelpCircle size={17} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900">Frequently Asked Questions</h3>
+              <h3 className="text-lg font-bold text-slate-900">Frequently Asked Questions</h3>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-1">
               {faqs.map((faq, idx) => {
                 const isOpen = openFaq === idx;
                 return (
-                  <div key={idx} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
+                  <div key={idx} className="border-b border-slate-100/80 last:border-0">
                     <button
                       onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className={`w-full flex items-center justify-between text-left font-bold text-slate-800 hover:${theme.text} transition-colors py-2`}
+                      className="w-full flex items-center justify-between text-left py-4 font-bold text-slate-800 hover:text-sky-600 transition-colors group"
                     >
-                      <span className="text-sm leading-snug">{faq.q}</span>
-                      <ChevronDown size={16} className={`text-slate-400 transition-transform duration-300 ${isOpen ? `rotate-180 ${theme.text}` : ""}`} />
+                      <span className="text-sm leading-snug pr-4">{faq.q}</span>
+                      <motion.div
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                        transition={{ duration: 0.25 }}
+                      >
+                        <ChevronDown size={16} className={`flex-shrink-0 transition-colors ${isOpen ? "text-sky-500" : "text-slate-400"}`} />
+                      </motion.div>
                     </button>
                     <AnimatePresence initial={false}>
                       {isOpen && (
@@ -588,9 +678,10 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.28, ease: "easeInOut" }}
                           className="overflow-hidden"
                         >
-                          <p className="text-slate-500 text-xs leading-relaxed pt-2 pl-1 font-medium">
+                          <p className="text-slate-500 text-xs leading-relaxed pb-4 pl-1 font-medium">
                             {faq.a}
                           </p>
                         </motion.div>
@@ -602,78 +693,82 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
             </div>
           </motion.div>
 
-          {/* HIGH-IMPACT BOTTOM CTA BANNER (Unified Full-Width Design) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ type: "spring", stiffness: 80, delay: 0.5 }}
-            className={`relative overflow-hidden bg-gradient-to-br from-sky-50/40 via-white to-sky-100/30 text-slate-800 rounded-[2.5rem] p-10 md:p-14 shadow-xl border border-sky-100/80 group`}
+          {/* ── CTA Banner ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 80, damping: 18 }}
+            className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-sky-500 to-blue-600 rounded-[2.5rem] p-10 md:p-14 shadow-2xl shadow-sky-500/25"
           >
-            {/* Holographic Glowing Orbs */}
-            <div className={`absolute -right-20 -top-20 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000`} />
-            <div className={`absolute -left-20 -bottom-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition-transform duration-1000`} />
-            
-            {/* Interactive Grid Overlay */}
-            <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none"
-              style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #0ea5e9 1px, transparent 0)", backgroundSize: "24px 24px" }} />
+            {/* Animated orbs inside CTA */}
+            <motion.div
+              animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.25, 0.15] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -right-16 -top-16 w-64 h-64 bg-white/20 rounded-full blur-3xl pointer-events-none"
+            />
+            <motion.div
+              animate={{ scale: [1, 1.1, 1], opacity: [0.10, 0.18, 0.10] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute -left-16 -bottom-16 w-64 h-64 bg-blue-300/30 rounded-full blur-3xl pointer-events-none"
+            />
+            <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              style={{ backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)", backgroundSize: "24px 24px" }} />
 
             <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-              
-              {/* Left Column: Heading & Pill Badges */}
-              <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div className="space-y-3">
-                  <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight text-slate-900">
+              <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
+                <div>
+                  <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
                     Ready to get started?
                   </h3>
-                  <p className="text-slate-500 text-sm md:text-base leading-relaxed font-semibold max-w-xl">
+                  <p className="text-sky-100 text-sm md:text-base leading-relaxed font-medium mt-2 max-w-lg">
                     Build secure, scalable solutions configured for your business workflows. Let's discuss your roadmap.
                   </p>
                 </div>
-
-                {/* Floating Pill Badges in light theme */}
-                <div className="flex flex-wrap gap-2.5 justify-center lg:justify-start pt-2">
+                <div className="flex flex-wrap gap-2.5 justify-center lg:justify-start">
                   {[
                     "Free discovery consultation",
                     "Mutual NDA signed on request",
-                    "Predictable milestones & delivery",
-                    "Post-launch technical support"
+                    "Predictable milestones",
+                    "Post-launch support",
                   ].map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-sky-100/60 text-slate-600 text-[11px] font-bold shadow-sm hover:border-sky-300 transition-colors">
-                      <CheckCircle size={12} className="text-sky-500 flex-shrink-0" />
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 + idx * 0.06 }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 border border-white/25 text-white text-[11px] font-bold backdrop-blur-sm"
+                    >
+                      <CheckCircle size={11} className="text-sky-200 flex-shrink-0" />
                       <span>{item}</span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
 
-              {/* Right Column: Premium Action Panel */}
-              <div className="lg:col-span-5 flex flex-col items-center justify-center">
-                <div className="w-full max-w-sm p-6 rounded-3xl bg-white border border-sky-100/60 space-y-4 shadow-lg relative">
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-sky-500/10 rounded-full blur-xl animate-pulse" />
-
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-500">
-                      <Sparkles size={18} />
+              <div className="lg:col-span-5 flex flex-col items-center">
+                <div className="w-full max-w-sm p-6 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-md space-y-3">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center text-white">
+                      <Sparkles size={17} />
                     </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-900">Get Started</h4>
-                    </div>
+                    <h4 className="text-sm font-bold text-white">Get Started Today</h4>
                   </div>
-
-                  <div className="space-y-2.5 pt-2">
-                    <Link href="/contact"
-                      className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white font-extrabold py-3.5 rounded-2xl shadow-md shadow-sky-500/10 hover:shadow-sky-500/25 transition-all duration-300 active:scale-[0.98] text-sm">
-                      Start a Project <ArrowRight size={15} />
-                    </Link>
-                    
-                    <Link href="/services"
-                      className="w-full flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 font-bold py-3 rounded-2xl border border-slate-200 transition-all duration-300 active:scale-[0.98] text-xs">
-                      <ArrowLeft size={14} /> All Services
-                    </Link>
-                  </div>
+                  <Link
+                    href="/contact"
+                    className="w-full flex items-center justify-center gap-2 bg-white text-sky-600 hover:bg-sky-50 font-extrabold py-3.5 rounded-2xl transition-all duration-200 active:scale-[0.97] text-sm shadow-lg hover:shadow-xl"
+                  >
+                    Start a Project <ArrowRight size={14} />
+                  </Link>
+                  <Link
+                    href="/services"
+                    className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold py-3 rounded-2xl transition-all duration-200 active:scale-[0.97] text-xs"
+                  >
+                    <ArrowLeft size={13} /> All Services
+                  </Link>
                 </div>
               </div>
-
             </div>
           </motion.div>
 
@@ -681,33 +776,46 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
       </section>
 
       {/* ── RELATED SERVICES ── */}
-      <section className="py-16 bg-white border-t border-slate-100">
+      <section className="py-16 bg-white border-t border-sky-100/60 mt-4">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-black text-slate-900 mb-8 tracking-tight">Other Capabilities</h2>
-          <div className="grid sm:grid-cols-3 gap-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl font-black text-slate-900 mb-8 tracking-tight"
+          >
+            Other Capabilities
+          </motion.h2>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-3 gap-6"
+          >
             {services
               .filter(s => s.id !== service.id && s.category === service.category)
               .slice(0, 3)
-              .map(s => {
-                return (
-                  <Link key={s.id} href={`/services/${s.id}`}
-                    className={`bg-slate-50/50 rounded-3xl border border-slate-100 ${theme.borderHover} hover:shadow-lg p-6 transition-all group flex flex-col justify-between`}>
-                    <div>
-                      <div className={`w-10 h-10 bg-white shadow-sm rounded-xl flex items-center justify-center ${theme.text} mb-4 group-hover:bg-slate-950 group-hover:text-white transition-all flex-shrink-0`}>
-                        {s.icon}
-                      </div>
-                      <h4 className={`font-bold text-slate-900 mb-1 text-sm group-hover:${theme.text} transition-colors leading-snug`}>{s.title}</h4>
-                      <p className="text-slate-400 text-xs line-clamp-2 leading-relaxed">{s.tagline}</p>
+              .map(s => (
+                <motion.div key={s.id} variants={fadeUp}>
+                  <Link
+                    href={`/services/${s.id}`}
+                    className="block bg-[#f8fbff] rounded-3xl border border-sky-100/70 hover:border-sky-300 hover:shadow-lg hover:shadow-sky-100 p-6 transition-all duration-300 group"
+                  >
+                    <div className="w-10 h-10 bg-white shadow-sm rounded-xl flex items-center justify-center text-sky-500 mb-4 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 border border-sky-100">
+                      {s.icon}
                     </div>
-                    <div className={`mt-4 flex items-center gap-1 text-[10px] font-bold ${theme.text} opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all`}>
+                    <h4 className="font-bold text-slate-900 mb-1 text-sm group-hover:text-sky-600 transition-colors leading-snug">{s.title}</h4>
+                    <p className="text-slate-400 text-xs line-clamp-2 leading-relaxed">{s.tagline}</p>
+                    <div className="mt-4 flex items-center gap-1 text-[11px] font-bold text-sky-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
                       View Service <ArrowRight size={10} />
                     </div>
                   </Link>
-                );
-              })}
-          </div>
+                </motion.div>
+              ))}
+          </motion.div>
         </div>
       </section>
     </main>
   );
-}
+}
