@@ -201,27 +201,27 @@ export default function AdminDashboardPage() {
             </h1>
             <p className="text-xs text-slate-500 mt-0.5">{adminUser.email}</p>
           </div>
-          <div className="flex items-center gap-3 w-full sm:w-auto justify-center sm:justify-start">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center sm:justify-start">
             <Link
               href="/"
-              className="px-4 py-3 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-100 rounded-2xl flex items-center justify-center gap-2 transition-all font-bold text-sm shadow-sm"
+              className="px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 transition-all font-bold text-xs sm:text-sm shadow-sm flex-1 sm:flex-none whitespace-nowrap"
               title="Go to website"
             >
-              <Globe className="w-4 h-4 text-sky-500" />
+              <Globe className="w-4 h-4 text-sky-500 shrink-0" />
               View Website
             </Link>
             <button
               onClick={triggerRefresh}
-              className="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-2xl flex items-center justify-center transition-all text-slate-600 shadow-sm"
+              className="p-2.5 sm:p-3 bg-slate-50 hover:bg-slate-100 border border-slate-100 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all text-slate-600 shadow-sm shrink-0"
               title="Refresh"
             >
-              <RefreshCw className={`w-5 h-5 ${isRefreshing ? "animate-spin text-sky-500" : ""}`} />
+              <RefreshCw className={`w-4 h-4 sm:w-5 sm:h-5 ${isRefreshing ? "animate-spin text-sky-500" : ""}`} />
             </button>
             <button
               onClick={() => handleLogout()}
-              className="px-5 py-3 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-100 rounded-2xl flex items-center justify-center gap-2 transition-all font-bold text-sm shadow-sm flex-1 sm:flex-none"
+              className="px-3.5 py-2.5 sm:px-5 sm:py-3 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-100 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2 transition-all font-bold text-xs sm:text-sm shadow-sm flex-1 sm:flex-none whitespace-nowrap"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-4 h-4 shrink-0" />
               Sign Out
             </button>
           </div>
