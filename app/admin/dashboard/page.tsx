@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check, Phone, Globe } from "lucide-react";
+import { LogOut, Calendar, Mail, Building, Tag, Search, Filter, RefreshCw, MessageSquare, Loader2, Copy, Check, Phone, Globe, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 
 interface Inquiry {
   id: number;
@@ -40,6 +40,8 @@ export default function AdminDashboardPage() {
   const [filterInterest, setFilterInterest] = useState("All");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
   const handleLogout = useCallback((expired = false) => {
     localStorage.removeItem("moonshot_admin_session");
@@ -144,7 +146,14 @@ export default function AdminDashboardPage() {
     }
 
     setFilteredInquiries(result);
+    setCurrentPage(1); // Reset page on filter/search
   }, [searchTerm, filterInterest, inquiries]);
+
+  // Calculate pagination details
+  const totalPages = Math.ceil(filteredInquiries.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedInquiries = filteredInquiries.slice(startIndex, endIndex);
 
   // handleLogout is now defined using useCallback above
 
@@ -228,7 +237,7 @@ export default function AdminDashboardPage() {
         </header>
 
         {/* Search & Filter dashboard controls */}
-        <div className="grid md:grid-cols-3 gap-4 mb-6 md:mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 md:mb-8">
           <div className="relative md:col-span-2">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
               <Search className="w-5 h-5" />
@@ -257,9 +266,29 @@ export default function AdminDashboardPage() {
               ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
-              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
+              <ChevronDown className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+              <span className="text-xs font-bold text-slate-400">Show:</span>
+            </div>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => {
+                setItemsPerPage(Number(e.target.value));
+                setCurrentPage(1);
+              }}
+              className="w-full bg-white/80 border border-slate-100 rounded-2xl pl-16 pr-10 py-3.5 text-sm text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all backdrop-blur-xl appearance-none shadow-sm focus:bg-white font-bold"
+            >
+              {[10, 20, 50].map((num) => (
+                <option key={num} value={num} className="bg-white text-slate-700">
+                  {num} Show
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+              <ChevronDown className="w-4 h-4" />
             </div>
           </div>
         </div>
@@ -297,8 +326,8 @@ export default function AdminDashboardPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
-                    <AnimatePresence>
-                      {filteredInquiries.map((inq, idx) => (
+                    <AnimatePresence mode="popLayout">
+                      {paginatedInquiries.map((inq, idx) => (
                         <motion.tr
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -380,8 +409,8 @@ export default function AdminDashboardPage() {
 
               {/* Mobile View (Cards) */}
               <div className="md:hidden divide-y divide-slate-100">
-                <AnimatePresence>
-                  {filteredInquiries.map((inq, idx) => (
+                <AnimatePresence mode="popLayout">
+                  {paginatedInquiries.map((inq, idx) => (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -460,6 +489,50 @@ export default function AdminDashboardPage() {
                   ))}
                 </AnimatePresence>
               </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 px-6 py-5 bg-slate-50/30">
+                  <p className="text-xs sm:text-sm font-semibold text-slate-500 text-center sm:text-left">
+                    Showing <span className="text-slate-800 font-bold">{startIndex + 1}</span> to{" "}
+                    <span className="text-slate-800 font-bold">
+                      {Math.min(endIndex, filteredInquiries.length)}
+                    </span>{" "}
+                    of <span className="text-slate-800 font-bold">{filteredInquiries.length}</span> inquiries
+                  </p>
+                  <div className="flex items-center gap-1">
+                    <button
+                      onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                      disabled={currentPage === 1}
+                      className="p-2 bg-white border border-slate-100 rounded-xl hover:bg-slate-50 disabled:opacity-50 disabled:hover:bg-white text-slate-600 transition-all shadow-sm flex items-center justify-center"
+                      title="Previous Page"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        className={`w-9 h-9 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center justify-center ${
+                          currentPage === page
+                            ? "bg-sky-500 text-white shadow-sky-100"
+                            : "bg-white border border-slate-100 text-slate-600 hover:bg-slate-50"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                    <button
+                      onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                      disabled={currentPage === totalPages}
+                      className="p-2 bg-white border border-slate-100 rounded-xl hover:bg-slate-50 disabled:opacity-50 disabled:hover:bg-white text-slate-600 transition-all shadow-sm flex items-center justify-center"
+                      title="Next Page"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              )}
             </>
           )}
         </div>
