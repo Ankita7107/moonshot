@@ -457,7 +457,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-sky-50/30 via-transparent to-sky-50/30 animate-shimmer opacity-20" />
 
             <div className="relative z-10">
-              <motion.div
+              {/* <motion.div
                 animate={{
                   scale: [1, 1.15, 1],
                   rotate: [0, 5, -5, 0],
@@ -466,7 +466,7 @@ export default function AboutPage() {
                 className="w-20 h-20 sm:w-24 sm:h-24 bg-sky-50 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-8 sm:mb-10 shadow-sm border border-sky-100"
               >
                 <RocketIcon className="w-10 h-10 sm:w-12 sm:h-12 text-sky-500" />
-              </motion.div>
+              </motion.div> */}
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight">
                 Ready to engineer your <span className="text-sky-600">moonshot?</span>
