@@ -207,7 +207,7 @@ const services = [
     desc: "Fully customized ERP and CRM solutions for sales, HR, inventory, and customer management systems.",
     features: ["Custom Modules", "Data Analytics", "Workflows"],
     detail: "We build CRMs that fit your actual sales process — not the other way around. Custom pipelines, automated follow-ups, inventory sync, and reporting in one unified system.",
-    techStack: ["Odoo", "Salesforce", "HubSpot", "PostgreSQL", "Redis", "Elasticsearch"],
+    techStack: [ "Salesforce", "HubSpot", "PostgreSQL", "Redis", "Elasticsearch"],
     benefits: [
       "Custom sales pipelines matching your process",
       "Automated follow-ups & lead scoring",
